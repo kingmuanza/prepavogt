@@ -2,6 +2,7 @@ package vogt.prepa.servlets;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import vogt.prepa.dao.EntreeDAO;
 import vogt.prepa.entities.Utilisateur;
 
+@WebServlet(name="EntreesServlet", urlPatterns={"/EntreesServlet"})
 public class EntreesServlet extends HttpServlet {
 
     EntreeDAO entreeDAO = new EntreeDAO();
