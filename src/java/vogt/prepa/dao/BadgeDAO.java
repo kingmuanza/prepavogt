@@ -10,6 +10,7 @@ import vogt.prepa.utils.HibernateUtil;
 public class BadgeDAO {
     
     public boolean enregistrer(Badge badge) {
+        
         boolean isGood = false;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
