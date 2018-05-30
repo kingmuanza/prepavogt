@@ -9,5 +9,6 @@
     </head>
 
     <body>
+        Logiciel de discipline
     </body>
 </html>
