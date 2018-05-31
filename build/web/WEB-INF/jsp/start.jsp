@@ -6,108 +6,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>PREPA VOGT</title>
+
         <!-- Fichiers CSS-->
         <link href="css/semantic.css" rel="stylesheet" type="text/css"/>
-        <!-- Fichiers JS-->
-        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
-        <script src="js/semantic.js" type="text/javascript"></script>
-        <script src="js/angular.min.js" type="text/javascript"></script>
-        <script src="js/angular-route.js" type="text/javascript"></script>
-        <script>
-            var app = angular.module("myApp", ["ngRoute"]);
-            app.config(function ($routeProvider) {
-                $routeProvider
-                        .when("/", {
-                            templateUrl: "index.htm"
-                        })
-                        .when("/muanza", {
-                            templateUrl: "newjsp.jsp"
-                        })
-                        .when("/menu", {
-                            templateUrl: "AnneeScolairesServlet"
-                        })
-            });
-        </script>
-        <script language='javascript'>
-            $(document).ready(function () {
-                $('.ui.accordion').accordion();
-
-                $('.section_muanza').hide();
-
-                $('#section_accueil').show();
-
-
-            });
-
-            function gestionnaireSections(id, elem) {
-                //id de la section à ouvrir
-                $('.section_muanza').hide();
-                $('.section_bouton').removeClass("active");
-                console.log(elem);
-                elem.classList.add("active");
-
-                $(id).show();
-
-            }
-        </script>
+        <link href="css/myapp.css" rel="stylesheet" type="text/css"/>
     </head>
-    <style>
-        .gris{
-            background-color: #004d6f;
-            color: white!important;
-        }
-
-        .rond{
-            border-radius: 50%;
-            border: 4px solid #00B5AD;
-        }
-
-        .moyen{
-            height: 100px!important;
-            width: 100px!important;
-        }
-
-        .fg-white{
-            color:white!important;
-        }
-
-        .espace_haut{
-            padding-top: 10px;
-        }
-
-        .noir{
-            background-color: #111;
-            color:white;
-        }
-
-        .title{
-            color:#fff!important;
-        }
-        .active.title{
-            color:#fff!important;
-        }
-
-        .gris .item{
-            color:#bbb!important; 
-        }
-
-        .section_bouton{
-            padding: 5px; 
-            width: 5vw; 
-            height: 4vw; 
-            color: white!important;
-            cursor: pointer;
-        }
-        .section_bouton.active{
-            background-color: #004d6f;
-        }
-
-        .section_muanza h1{
-            color: #efefef!important;
-        }
-
-
-    </style>
 
     <body ng-app="myApp" style="height: 100vh; overflow-y: hidden; ">
 
@@ -282,7 +185,7 @@
                                 <i class="dropdown icon"></i> <b>Gestions des utilisateurs</b>
                             </a>
                             <div class="active content menu">
-                                <a class="item active" href="#menu">Utilisateurs</a>
+                                <a class="item active" href="#!utilisateurs">Utilisateurs</a>
                                 <a class="item" href="#secondary-menu">Profils utilisateurs</a>
                             </div>
                         </div>
@@ -361,5 +264,17 @@
         </div>
 
 
+
+
+        <!-- Fichiers JS-->
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="js/semantic.js" type="text/javascript"></script>
+        <script src="particles/particles.min.js" type="text/javascript"></script>
+        <script src="js/angular.min.js" type="text/javascript"></script>
+        <script src="js/angular-route.js" type="text/javascript"></script>
+        <script src="js/myapp.js" type="text/javascript"></script>
+        <script src="js/routage.js" type="text/javascript"></script>
+        
+      
     </body>
 </html>

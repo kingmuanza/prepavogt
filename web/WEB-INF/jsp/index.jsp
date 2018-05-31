@@ -6,51 +6,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>PREPA VOGT</title>
+
         <!-- Fichiers CSS-->
         <link href="css/semantic.css" rel="stylesheet" type="text/css"/>
-        <!-- Fichiers JS-->
-        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
-        <script src="particles/particles.min.js" type="text/javascript"></script>
-        <script>
-            particlesJS.load('hero-wrapper', 'particles/particles.json', function () {});
-            function bouger() {
-                console.log("Je clique oh");
-                $('.image')
-                        .transition({
-                            debug: true,
-                            animation: 'jiggle',
-                            duration: 500,
-                            interval: 200
-                        })
-                        ;
-            }
-
-        </script>
-        <script src="js/semantic.js" type="text/javascript"></script>
+        <link href="css/myapp.css" rel="stylesheet" type="text/css"/> 
     </head>
-    <style>
-        .gris{
-            background-color: #004d6f;
-        }
 
-        .rond{
-            border-radius: 50%;
-            border: 4px solid #00B5AD;
-        }
-
-        .moyen{
-            height: 100px!important;
-            width: 100px!important;
-        }
-
-        .fg-white{
-            color:white!important;
-        }
-
-        .espace_haut{
-            padding-top: 10px;
-        }
-    </style>
 
     <body style="height: 100vh; overflow-y: hidden; color: white">
 
@@ -99,5 +60,11 @@
         </div>
 
 
+        <!-- Fichiers JS-->
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="particles/particles.min.js" type="text/javascript"></script>
+        <script src="js/semantic.js" type="text/javascript"></script>
+        <script src="js/myapp.js" type="text/javascript"></script>
+        
     </body>
 </html>
