@@ -1,13 +1,37 @@
 package vogt.prepa.dao;
 
 import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import vogt.prepa.entities.Utilisateur;
 import vogt.prepa.utils.HibernateUtil;
 
 public class UtilisateurDAO {
+    
+    public Utilisateur get(String login, String passe){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.getTransaction().begin();
+        
+        Utilisateur utilisateur = null;
+        
+        List<Utilisateur> utilisateurs = session.createCriteria(Utilisateur.class)
+                .add(Restrictions.eq("login", login))
+                .add(Restrictions.eq("passe", passe))
+                .list();
+        
+        if (!utilisateurs.isEmpty()) {
+            utilisateur = utilisateurs.get(0);  
+            initialiser(utilisateur);
+        }      
+        
+        session.getTransaction().commit();
+        session.close();
+        return utilisateur;
+    }
     
     public boolean enregistrer(Utilisateur utilisateur) {
         boolean isGood = false;
@@ -121,6 +145,6 @@ public class UtilisateurDAO {
     }
 
     public void initialiser(Utilisateur utilisateur) {
-        
+        Hibernate.initialize(utilisateur.getIndividu());
     }
 }

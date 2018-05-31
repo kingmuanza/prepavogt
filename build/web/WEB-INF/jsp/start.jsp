@@ -11,6 +11,23 @@
         <!-- Fichiers JS-->
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/semantic.js" type="text/javascript"></script>
+        <script src="js/angular.min.js" type="text/javascript"></script>
+        <script src="js/angular-route.js" type="text/javascript"></script>
+        <script>
+            var app = angular.module("myApp", ["ngRoute"]);
+            app.config(function ($routeProvider) {
+                $routeProvider
+                        .when("/", {
+                            templateUrl: "index.htm"
+                        })
+                        .when("/muanza", {
+                            templateUrl: "newjsp.jsp"
+                        })
+                        .when("/menu", {
+                            templateUrl: "AnneeScolairesServlet"
+                        })
+            });
+        </script>
         <script language='javascript'>
             $(document).ready(function () {
                 $('.ui.accordion').accordion();
@@ -84,7 +101,7 @@
         .section_bouton.active{
             background-color: #004d6f;
         }
-        
+
         .section_muanza h1{
             color: #efefef!important;
         }
@@ -92,7 +109,7 @@
 
     </style>
 
-    <body style="height: 100vh; overflow-y: hidden; ">
+    <body ng-app="myApp" style="height: 100vh; overflow-y: hidden; ">
 
         <div class="ui grid">
             <div class="noir" style="width: 5vw; height: 110vh; margin: 0px!important; padding: 0px;important">
@@ -148,7 +165,7 @@
                                 <i class="dropdown icon"></i> <b>Discpline</b>
                             </a>
                             <div class="active content menu">
-                                <a class="item active" href="#menu">Abscences</a>
+                                <a class="item active" href="#!menu">Abscences</a>
                                 <a class="item" href="#secondary-menu">Retards</a>
                             </div>
                         </div>
@@ -191,11 +208,11 @@
                 </div>
                 <div style="padding-left: 10px;" id="section_profil"  class="section_muanza">
                     <h1>Mon profil</h1>
-                    
+
                 </div>
                 <div style="padding-left: 10px;" id="section_stats"  class="section_muanza">
                     <h1>Statistiques</h1>
-                    
+
                     <div class="ui accordion vertical fluid following text menu">
                         <div class="item active">
                             <a class="active title">
@@ -226,7 +243,7 @@
                 </div>
                 <div style="padding-left: 10px;" id="section_visites"  class="section_muanza">
                     <h1>Visites</h1>
-                    
+
                     <div class="ui accordion vertical fluid following text menu">
                         <div class="item active">
                             <a class="active title">
@@ -312,7 +329,7 @@
             </div>
             <div style="width: 75vw; height: 100vh; overflow-x: hidden; overflow-y: hidden; padding-top: 20px; padding-right: 0px!important;margin-right: 10px!important;">
                 <div class="ui secondary  menu">
-                    <a class="item">
+                    <!--a class="item">
                         Imprimer
                     </a>
                     <a class="item">
@@ -320,7 +337,7 @@
                     </a>
                     <a class="item">
                         Exporter en PDF
-                    </a>
+                    </a-->
                     <div class="right menu">
                         <div class="item">
                             <div class="ui icon input">
@@ -329,12 +346,13 @@
                             </div>
                         </div>
                         <a class="ui item">
-                            Déconnexion
+                            ${sessionScope.utilisateur.individu.noms}
+                            ${sessionScope.utilisateur.individu.prenoms}
                         </a>
                     </div>
                 </div>
                 <div style="height: 90vh; overflow-y: scroll">
-                    <div style="height: 450vh;">
+                    <div  ng-view style="height: 450vh; margin-top: -20px;" >
 
                     </div>
                 </div>

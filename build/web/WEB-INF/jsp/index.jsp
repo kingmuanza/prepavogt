@@ -70,7 +70,7 @@
                         Ora et Labora
                     </div>
                     <div style="padding-top: 40px;">
-                        <form class="ui form" method="get" action="start">
+                        <form class="ui form" method="post" action="ConnexionServlet">
                             <div class="field">
                                 <label class="fg-white">Login</label>
                                 <input type="text" name="login" placeholder="Login">

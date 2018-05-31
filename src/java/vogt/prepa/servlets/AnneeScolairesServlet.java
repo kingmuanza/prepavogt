@@ -18,14 +18,14 @@ public class AnneeScolairesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HttpSession httpSession = request.getSession();
-        Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
-        if (utilisateur != null) {
-            request.setAttribute("anneeScolaires", anneeScolaireDAO.getall());
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/anneeScolaires.jsp").forward(request, response);
-        }else{
-            response.sendRedirect("index.htm");
-        }
+//        HttpSession httpSession = request.getSession();
+//        Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
+//        if (utilisateur != null) {
+//            request.setAttribute("anneeScolaires", anneeScolaireDAO.getall());
+//        }else{
+//            response.sendRedirect("index.htm");
+//        }
+            this.getServletContext().getRequestDispatcher("/newjsp.jsp").forward(request, response);
     } 
 
     @Override
