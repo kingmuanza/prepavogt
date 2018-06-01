@@ -11,7 +11,8 @@ import vogt.prepa.utils.HibernateUtil;
 
 public class UtilisateurDAO {
     
-    public Utilisateur get(String login, String passe){
+    public Utilisateur getUserLoginInformations(String login, String passe){
+        
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
         
@@ -19,8 +20,8 @@ public class UtilisateurDAO {
         
         List<Utilisateur> utilisateurs = session.createCriteria(Utilisateur.class)
                 .add(Restrictions.eq("login", login))
-                .add(Restrictions.eq("passe", passe))
-                .list();
+                    .add(Restrictions.eq("passe", passe))
+                        .list();
         
         if (!utilisateurs.isEmpty()) {
             utilisateur = utilisateurs.get(0);  
@@ -32,7 +33,7 @@ public class UtilisateurDAO {
         return utilisateur;
     }
     
-    public boolean enregistrer(Utilisateur utilisateur) {
+    public boolean addUser(Utilisateur utilisateur) {
         boolean isGood = false;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
@@ -47,7 +48,7 @@ public class UtilisateurDAO {
         return isGood;
     }
 
-    public boolean supprimer(Utilisateur utilisateur) {
+    public boolean deleteUser(Utilisateur utilisateur) {
         boolean isGood = false;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
@@ -134,7 +135,9 @@ public class UtilisateurDAO {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
-        Number n = (Number) session.createCriteria(Utilisateur.class).setProjection(Projections.rowCount()).uniqueResult() ;
+        Number n = (Number) session.createCriteria(Utilisateur.class)
+                                .setProjection(Projections.rowCount())
+                                    .uniqueResult() ;
         
         session.getTransaction().commit();
         session.close();
@@ -142,7 +145,8 @@ public class UtilisateurDAO {
         return n ;
 
     }
-
+    
+    //Recupérer tous les objets associés aux clés primaires 
     public void initialiser(Utilisateur utilisateur) {
         Hibernate.initialize(utilisateur.getIndividu());
     }

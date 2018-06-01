@@ -50,8 +50,8 @@
                     </div>
 
                 </div>
-
             </div>
+
             <div class="gris" style="width: 20vw; height: 110vh; padding-top: 25px;">
                 <div style="padding-left: 10px;" id="section_accueil" class="section_muanza">
                     <h1>Accueil</h1>
@@ -185,6 +185,7 @@
                                 <i class="dropdown icon"></i> <b>Gestions des utilisateurs</b>
                             </a>
                             <div class="active content menu">
+                                <!-- Routage utilisateur OK-->
                                 <a class="item active" href="#!utilisateurs">Utilisateurs</a>
                                 <a class="item" href="#secondary-menu">Profils utilisateurs</a>
                             </div>
@@ -255,7 +256,7 @@
                     </div>
                 </div>
                 <div style="height: 90vh; overflow-y: scroll">
-                    <div  ng-view style="height: 450vh; margin-top: -20px;" >
+                    <div  ng-view style="height: 450vh; margin-top: -20px;" class="espace_cotes">
 
                     </div>
                 </div>
@@ -275,6 +276,5 @@
         <script src="js/myapp.js" type="text/javascript"></script>
         <script src="js/routage.js" type="text/javascript"></script>
         
-      
     </body>
 </html>

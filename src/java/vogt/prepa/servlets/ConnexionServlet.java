@@ -7,9 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import vogt.prepa.dao.IndividuDAO;
 import vogt.prepa.dao.UtilisateurDAO;
-import vogt.prepa.entities.Individu;
 import vogt.prepa.entities.Utilisateur;
 
 @WebServlet(name = "ConnexionServlet", urlPatterns = {"/ConnexionServlet"})
@@ -32,7 +30,7 @@ public class ConnexionServlet extends HttpServlet {
 
         UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
 
-        Utilisateur utilisateur = utilisateurDAO.get(login, passe);
+        Utilisateur utilisateur = utilisateurDAO.getUserLoginInformations(login, passe);
         HttpSession httpSession = request.getSession();
         httpSession.setAttribute("utilisateur", utilisateur);
 

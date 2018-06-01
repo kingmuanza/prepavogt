@@ -50,6 +50,9 @@
             <div class="two wide column gris" style="">
 
             </div>
+            
+            
+            <!--Animation particles-->
             <div class="eight wide column" style="background-color: #fdfdff">
                 <div id="hero-wrapper" style="border : 0px solid #000; width: 100%; height: 100vh">
                     <div style="position: absolute; bottom: 0; right: 0; padding: 40px; color : #00B5AD!important; z-index: 159874">
@@ -65,6 +68,10 @@
         <script src="particles/particles.min.js" type="text/javascript"></script>
         <script src="js/semantic.js" type="text/javascript"></script>
         <script src="js/myapp.js" type="text/javascript"></script>
+        
+        <script>
+            particlesJS.load('hero-wrapper', 'particles/particles.json', function () {});
+        </script>
         
     </body>
 </html>

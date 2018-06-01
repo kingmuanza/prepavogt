@@ -18,11 +18,14 @@ public class UtilisateursServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        
         HttpSession httpSession = request.getSession();
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
+        
         if (utilisateur != null) {
             request.setAttribute("utilisateurs", utilisateurDAO.getall());
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/utilisateurs.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/utilisateurs.jsp")
+                    .forward(request, response);
         }else{
             response.sendRedirect("index.htm");
         }

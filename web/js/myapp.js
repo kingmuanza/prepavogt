@@ -7,7 +7,6 @@
 /*
  * ----Animation du logo de la page de connection au passage de la souris-------
  */
-particlesJS.load('hero-wrapper', 'particles/particles.json', function () {});
 function bouger() {
     console.log("Animation logo activée");
     $('.image')
@@ -44,7 +43,7 @@ function gestionnaireSections(id, elem) {
     $(id).show();
 
 }
-/*----------------------------------------------------------------------------*/
+
 
 
         

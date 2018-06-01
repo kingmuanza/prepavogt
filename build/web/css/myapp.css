@@ -3,9 +3,76 @@
     Author     : 12Lions
 */
 
+
 /*
 *----------------Menu connexion de la page principale (index.jsp)-------- 
 */
+
+/**/
+.espace_cotes{
+   padding-left: 20px!important;
+   padding-right: 40px!important;
+}
+
+.dataTables_length{
+    padding-top: 10px!important;
+}
+.dataTables_paginate.paging_simple_numbers{
+    padding-top: 10px!important;
+}
+a.paginate_button.current{
+    display: block;
+    background-color: #004d6f!important;
+    color:white!important;
+}
+.titre{
+    color : #004d6f!important ;
+}
+.dataTables_filter{
+    padding-bottom: 10px!important;
+}
+.espace_cotes{
+    padding-left: 20px!important;
+    padding-right: 40px!important;
+}
+
+.dataTables_length select {
+    font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    margin: 0em;
+    outline: none;
+    -webkit-appearance: none;
+    line-height: 1.21428571em;
+    padding: 0.67857143em 1em;
+    font-size: 1em;
+    background: #FFFFFF;
+    border: 1px solid rgba(34, 36, 38, 0.15);
+    color: rgba(0, 0, 0, 0.87);
+    border-radius: 0.28571429rem;
+    -webkit-box-shadow: 0em 0em 0em 0em transparent inset;
+    box-shadow: 0em 0em 0em 0em transparent inset;
+    -webkit-transition: color 0.1s ease, border-color 0.1s ease;
+    transition: color 0.1s ease, border-color 0.1s ease;
+}
+
+.dataTables_filter input {
+    font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    margin: 0em;
+    outline: none;
+    -webkit-appearance: none;
+    line-height: 1.21428571em;
+    padding: 0.67857143em 1em;
+    font-size: 0.78571429rem;
+    background: #FFFFFF;
+    border: 1px solid rgba(34, 36, 38, 0.15);
+    color: rgba(0, 0, 0, 0.87);
+    border-radius: 0.28571429rem;
+    -webkit-box-shadow: 0em 0em 0em 0em transparent inset;
+    box-shadow: 0em 0em 0em 0em transparent inset;
+    -webkit-transition: color 0.1s ease, border-color 0.1s ease;
+    transition: color 0.1s ease, border-color 0.1s ease;
+
+}
+/*----------------------------------------------------------------------------*/
 .gris{
     background-color: #004d6f;
 }
