@@ -22,7 +22,7 @@ public class VisitesServlet extends HttpServlet {
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
             request.setAttribute("visites", visiteDAO.getall());
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/VisitesServlet.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/visites.jsp").forward(request, response);
         }else{
             response.sendRedirect("index.htm");
         }

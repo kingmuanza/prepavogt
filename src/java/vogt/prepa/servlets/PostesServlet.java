@@ -22,7 +22,7 @@ public class PostesServlet extends HttpServlet {
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
             request.setAttribute("postes", posteDAO.getall());
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/PostesServlet.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/postes.jsp").forward(request, response);
         }else{
             response.sendRedirect("index.htm");
         }

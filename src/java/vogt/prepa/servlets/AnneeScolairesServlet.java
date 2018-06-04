@@ -25,7 +25,7 @@ public class AnneeScolairesServlet extends HttpServlet {
 //        }else{
 //            response.sendRedirect("index.htm");
 //        }
-            this.getServletContext().getRequestDispatcher("/newjsp.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/anneeacademique.jsp").forward(request, response);
     } 
 
     @Override

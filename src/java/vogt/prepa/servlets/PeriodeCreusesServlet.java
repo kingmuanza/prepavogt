@@ -22,7 +22,7 @@ public class PeriodeCreusesServlet extends HttpServlet {
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
             request.setAttribute("periodeCreuses", periodeCreuseDAO.getall());
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/PeriodeCreusesServlet.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/periodescreuses.jsp").forward(request, response);
         }else{
             response.sendRedirect("index.htm");
         }

@@ -22,7 +22,7 @@ public class MatieresServlet extends HttpServlet {
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
             request.setAttribute("matieres", matiereDAO.getall());
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/MatieresServlet.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/matieres.jsp").forward(request, response);
         }else{
             response.sendRedirect("index.htm");
         }

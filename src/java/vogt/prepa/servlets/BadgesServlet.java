@@ -22,7 +22,7 @@ public class BadgesServlet extends HttpServlet {
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
             request.setAttribute("badges", badgeDAO.getall());
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/BadgesServlet.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/badges.jsp").forward(request, response);
         }else{
             response.sendRedirect("index.htm");
         }

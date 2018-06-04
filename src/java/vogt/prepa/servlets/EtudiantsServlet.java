@@ -22,7 +22,7 @@ public class EtudiantsServlet extends HttpServlet {
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
             request.setAttribute("etudiants", etudiantDAO.getall());
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/EtudiantsServlet.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/etudiants.jsp").forward(request, response);
         }else{
             response.sendRedirect("index.htm");
         }

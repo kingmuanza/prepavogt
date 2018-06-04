@@ -22,7 +22,7 @@ public class NiveauEtudesServlet extends HttpServlet {
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
             request.setAttribute("niveauEtudes", niveauEtudeDAO.getall());
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/NiveauEtudesServlet.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/niveaux.jsp").forward(request, response);
         } else {
             response.sendRedirect("index.htm");
         }

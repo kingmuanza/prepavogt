@@ -1,9 +1,6 @@
-<%-- 
-    Document   : utilisateurs
-    Created on : 31 mai 2018, 15:10:19
-    Author     : 12Lions
---%>
-
+<%@page import="java.util.Date"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,14 +16,7 @@
 
     </head>
     <body>
-        <h1>Liste des utilisateurs</h1>
-        <hr>
-
-        <br /><br />
-        <div class="ui center floated small primary labeled icon button">
-            <i class="user icon"></i> Ajouter un utilisateur
-        </div>
-        <br /><br />        
+        <h1 class="titre">Liste des utilisateurs</h1>
 
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
@@ -37,36 +27,33 @@
                     <th>E-mail</th>
                     <th>Fonction</th>
                     <th>Tel Portable</th>                    
-                    <th>Résidence</th>
-                    <th>Désactiver</th>                    
+                    <th>Résidence</th>                    
                 </tr>
             </thead>
 
             <tbody>
+                <c:forEach items="${utilisateurs}" var="utilisateur">
+                    
                 <tr>
                     <td>
                         <h4 class="ui image header">
                             <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
                             <div class="content">
-                                12Lions
+                                ${utilisateur.login}
                                 <div class="sub header">
-                                    Administrateur
+                                    ${utilisateur.utilisateurProfil.libelle}
                                 </div>
                             </div>
                         </h4>
                     </td>
-                    <td>Tagne</td>
-                    <td>Edgar</td>
-                    <td>kenmegne.edgar99@gmail.com</td>
-                    <td>Administrateur</td>
-                    <td>+237695333841</td>
-                    <td>Etoa-Meki</td>
-                    <td class="collapsing">
-                        <div class="ui fitted slider checkbox">
-                            <input type="checkbox"> <label></label>
-                        </div>
-                    </td>
+                    <td>${utilisateur.individu.noms}</td>
+                    <td>${utilisateur.individu.prenoms}</td>
+                    <td>${utilisateur.individu.email}</td>
+                    <td>${utilisateur.utilisateurProfil.libelle}</td>
+                    <td>${utilisateur.individu.tel1}</td>
+                    <td>${utilisateur.individu.residence}</td>
                 </tr>
+                </c:forEach>
 
             </tbody>
         </table>
@@ -107,14 +94,14 @@
                             text: "Exporter en PDF",
                             title: titre,
                             message: '',
-                            className: 'impressionPDF ui teal basic mini button'
+                            className: 'impressionPDF ui gris basic mini button'
                         },
                         {
                             extend: 'print',
                             text: "Imprimer",
                             title: titre,
                             message: '',
-                            className: 'impression ui teal basic mini button'
+                            className: 'impression ui gris basic mini button'
                         }
                     ],
                     "language": {

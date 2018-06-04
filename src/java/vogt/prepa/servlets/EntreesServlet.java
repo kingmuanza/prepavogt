@@ -22,7 +22,7 @@ public class EntreesServlet extends HttpServlet {
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
             request.setAttribute("entrees", entreeDAO.getall());
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/EntreesServlet.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/entrees.jsp").forward(request, response);
         }else{
             response.sendRedirect("index.htm");
         }

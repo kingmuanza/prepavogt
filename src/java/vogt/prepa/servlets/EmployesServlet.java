@@ -22,7 +22,7 @@ public class EmployesServlet extends HttpServlet {
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
             request.setAttribute("employes", employeDAO.getall());
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/EmployesServlet.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/collaborateurs.jsp").forward(request, response);
         }else{
             response.sendRedirect("index.htm");
         }

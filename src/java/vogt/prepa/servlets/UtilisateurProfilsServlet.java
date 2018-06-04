@@ -22,7 +22,7 @@ public class UtilisateurProfilsServlet extends HttpServlet {
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
             request.setAttribute("utilisateurProfils", utilisateurProfilDAO.getall());
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/UtilisateurProfilsServlet.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/profils.jsp").forward(request, response);
         }else{
             response.sendRedirect("index.htm");
         }

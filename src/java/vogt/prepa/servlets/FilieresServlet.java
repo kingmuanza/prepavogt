@@ -22,7 +22,7 @@ public class FilieresServlet extends HttpServlet {
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
             request.setAttribute("filieres", filiereDAO.getall());
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/FilieresServlet.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/filieres.jsp").forward(request, response);
         }else{
             response.sendRedirect("index.htm");
         }
