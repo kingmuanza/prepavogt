@@ -16,42 +16,42 @@
 
     </head>
     <body>
-        <h1 class="titre">Liste des entrees</h1>
+        <h1 class="titre">Liste des etudiants</h1>
 
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Utilisateurs</th>
+                    <th>Etudiants</th>
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>E-mail</th>
-                    <th>Fonction</th>
-                    <th>Tel Portable</th>                    
-                    <th>Résidence</th>                    
+                    <th>Niveau</th>
+                    <th>Filiere</th>                    
+                    <th>Année Scolaire</th>                    
                 </tr>
             </thead>
 
             <tbody>
-                <c:forEach items="${utilisateurs}" var="utilisateur">
+                <c:forEach items="${etudiants}" var="etudiant">
                     
                 <tr>
                     <td>
                         <h4 class="ui image header">
                             <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
                             <div class="content">
-                                ${utilisateur.login}
+                                ${etudiant.getIdetudiant}
                                 <div class="sub header">
-                                    ${utilisateur.utilisateurProfil.libelle}
+                                    ${etudiant.getIdetudiant}
                                 </div>
                             </div>
                         </h4>
                     </td>
-                    <td>${utilisateur.individu.noms}</td>
-                    <td>${utilisateur.individu.prenoms}</td>
-                    <td>${utilisateur.individu.email}</td>
-                    <td>${utilisateur.utilisateurProfil.libelle}</td>
-                    <td>${utilisateur.individu.tel1}</td>
-                    <td>${utilisateur.individu.residence}</td>
+                    <td>${etudiant.getIndividu.noms}</td>
+                    <td>${etudiant.getIndividu.prenoms}</td>
+                    <td>${etudiant.getIndividu.email}</td>
+                    <td>${etudiant.getNiveau.libelle} </td>
+                    <td>${etudiant.getFiliere.libelle}</td>
+                    <td>${etudiant.getAnneeScolaire.getDate_debut} / ${etudiant.getAnneeScolaire.getDate_fin}</td>
                 </tr>
                 </c:forEach>
 

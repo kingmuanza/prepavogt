@@ -1,6 +1,7 @@
 package vogt.prepa.dao;
 
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
@@ -8,7 +9,7 @@ import vogt.prepa.entities.Etudiant;
 import vogt.prepa.utils.HibernateUtil;
 
 public class EtudiantDAO {
-    
+
     public boolean enregistrer(Etudiant etudiant) {
         boolean isGood = false;
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -55,7 +56,7 @@ public class EtudiantDAO {
 
         return etudiant;
     }
-    
+
     public Etudiant getLazy(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
@@ -64,7 +65,7 @@ public class EtudiantDAO {
         if (etudiant == null) {
             throw new RuntimeException();
         } else {
-            
+
         }
 
         session.getTransaction().commit();
@@ -72,9 +73,9 @@ public class EtudiantDAO {
 
         return etudiant;
     }
-    
+
     public List<Etudiant> getall() {
-        
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
@@ -89,8 +90,9 @@ public class EtudiantDAO {
         return etudiants;
 
     }
+
     public List<Etudiant> getAllLazy() {
-        
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
@@ -105,22 +107,25 @@ public class EtudiantDAO {
         return etudiants;
 
     }
-    
+
     public Number getNumber() {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
-        Number n = (Number) session.createCriteria(Etudiant.class).setProjection(Projections.rowCount()).uniqueResult() ;
-        
+        Number n = (Number) session.createCriteria(Etudiant.class).setProjection(Projections.rowCount()).uniqueResult();
+
         session.getTransaction().commit();
         session.close();
 
-        return n ;
+        return n;
 
     }
 
     public void initialiser(Etudiant etudiant) {
-        
+        Hibernate.initialize(etudiant.getIndividu());
+        Hibernate.initialize(etudiant.getAnneeScolaire());
+        Hibernate.initialize(etudiant.getFiliere());
+        Hibernate.initialize(etudiant.getNiveauEtude());
     }
 }
