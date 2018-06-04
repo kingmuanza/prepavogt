@@ -9,9 +9,19 @@
 */
 
 /**/
+thead tr th{
+    color : #004d6f!important ;
+}
+
+.ui.gris.button {
+  background-color: #004d6f;
+  color: #FFFFFF;
+  text-shadow: none;
+  background-image: none;
+}
 .espace_cotes{
-   padding-left: 10px!important;
-   padding-right: 10px!important;
+   padding-left: 15px!important;
+   padding-right: 15px!important;
 }
 
 .dataTables_length{
@@ -30,10 +40,6 @@ a.paginate_button.current{
 }
 .dataTables_filter{
     padding-bottom: 10px!important;
-}
-.espace_cotes{
-    padding-left: 20px!important;
-    padding-right: 40px!important;
 }
 
 .dataTables_length select {

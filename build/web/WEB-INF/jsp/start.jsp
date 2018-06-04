@@ -9,7 +9,7 @@
 
         <!-- Fichiers CSS-->
         <link href="css/semantic.css" rel="stylesheet" type="text/css"/>
-        <link href="css/myapp.css?id=00" rel="stylesheet" type="text/css"/>
+        <link href="css/myapp.css?id=23" rel="stylesheet" type="text/css"/>
     </head>
 
     <body ng-app="myApp" style="height: 100vh; overflow-y: hidden; ">
@@ -233,10 +233,11 @@
             </div>
             <div style="width: 75vw; height: 100vh; overflow-x: hidden; overflow-y: hidden; padding-top: 20px; padding-right: 0px!important;margin-right: 10px!important;">
                 <div class="ui secondary  menu">
-                    <!--a class="item">
-                        Imprimer
+                    <a class="item teal">
+                        <i class="circle loading icon titre"></i>
+                        Pointeuse biométrique activée
                     </a>
-                    <a class="item">
+                    <!--a class="item">
                         Exporter vers Excel
                     </a>
                     <a class="item">
@@ -250,6 +251,7 @@
                             </div>
                         </div>
                         <a class="ui item">
+                            ${empty sessionScope.utilisateur.individu.noms ? sessionScope.utilisateur.login:""}
                             ${sessionScope.utilisateur.individu.noms}
                             ${sessionScope.utilisateur.individu.prenoms}
                         </a>

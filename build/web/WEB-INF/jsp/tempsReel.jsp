@@ -17,9 +17,15 @@
 
     </head>
     <body>
-        <h1 class="titre" style="line-height: 1">Pointages en temps réel</h1>
+        <h1 class="titre" style="line-height: 1">
+            Pointages en temps réel 
+            <i style="float:right" class="spinner loading icon"></i>
+        </h1>
         <div style="padding-bottom: 20px; font-size: 1.2em; opacity: 0.8">
-            Dernière actualisation à <span id="derniereHeure"></span> 
+            Dernière actualisation à 
+            <span id="derniereHeure">
+                <i class="spinner loading icon"></i>
+            </span> 
         </div>
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
@@ -68,6 +74,8 @@
         <script src="js/pdfmake.min.js" type="text/javascript"></script>
         <script>
             var titre = 'Bonjour';
+            var audio = new Audio('audio/sms-alert-3-daniel_simon.wav');
+            
             var dernierIndex = 5;
             $(document).ready(function () {
                 var table = $('#dataTableUtilisateur').DataTable({
@@ -88,10 +96,11 @@
                         if (dernierIndex < dataIndex) {
                             $(row).addClass('positive ');
                             //$(row).addClass('active ');
-                            dernierIndex=dataIndex;
+                            dernierIndex = dataIndex;
+                            audio.play();
                         }
-                        console.log("dernierIndex : " + dernierIndex);
-                        console.log("dataIndex : " + dataIndex);
+                        //console.log("dernierIndex : " + dernierIndex);
+                        //console.log("dataIndex : " + dataIndex);
                     },
                     "order": [[0, "desc"]],
                     dom: '<"top"fB>rt<"bottom"lp><"clear">',
@@ -107,14 +116,14 @@
                             text: "Actualiser",
                             title: titre,
                             message: '',
-                            className: 'ui teal mini button'
+                            className: 'actualiser ui gris mini button'
                         },
                         {
                             extend: 'print',
                             text: "Imprimer",
                             title: titre,
                             message: '',
-                            className: 'impression ui teal basic mini button'
+                            className: 'impression ui gris basic mini button'
                         }
                     ],
                     "language": {
@@ -136,14 +145,21 @@
 
                 table.on('xhr', function () {
                     var json = table.ajax;
-                    console.log(json);
+                    //console.log(json);
                 });
 
                 setInterval(function () {
                     table.ajax.reload();
                     var d = new Date();
-                    $("#derniereHeure").html(d.getHours() + ":" + d.getMinutes())
-                }, 10000);
+                    $("#derniereHeure").html(d.toISOString().substr(11, 8));
+                }, 120000);
+                
+                $(".actualiser").on('click', function(){
+                    table.ajax.reload();
+                    var d = new Date();
+                    $("#derniereHeure").html(d.toISOString().substr(11, 8));
+                });
+                
             });
         </script>
 
