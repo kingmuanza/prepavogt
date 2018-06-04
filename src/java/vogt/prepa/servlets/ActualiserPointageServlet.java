@@ -29,7 +29,7 @@ public class ActualiserPointageServlet extends HttpServlet {
             String e = "{"
                     + "\"heure\":\"" + dateFormat.format(p.getHeure()) + "\","
                     + "\"matricule\":\"" + p.getMatricule() + "\","
-                    + "\"noms\":" + "\"Muanza Kangudie\"" + ","
+                    + "\"noms\":" + "\"Personne inconnue\"" + ","
                     + "\"entree\":" + "true"
                     + "}";
             if (paragraphe == "") {
