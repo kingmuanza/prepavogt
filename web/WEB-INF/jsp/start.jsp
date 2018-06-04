@@ -9,7 +9,7 @@
 
         <!-- Fichiers CSS-->
         <link href="css/semantic.css" rel="stylesheet" type="text/css"/>
-        <link href="css/myapp.css" rel="stylesheet" type="text/css"/>
+        <link href="css/myapp.css?id=00" rel="stylesheet" type="text/css"/>
     </head>
 
     <body ng-app="myApp" style="height: 100vh; overflow-y: hidden; ">

@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/12Lions/Documents/NetBeansProjects/Prepavogt/prepavogt/web/WEB-INF/jsp/index.jsp</file>
-            <file>file:/C:/Users/12Lions/Documents/NetBeansProjects/Prepavogt/prepavogt/web/css/myapp.css</file>
-            <file>file:/C:/Users/12Lions/Documents/NetBeansProjects/Prepavogt/prepavogt/src/java/vogt/prepa/dao/UtilisateurDAO.java</file>
-            <file>file:/C:/Users/12Lions/Documents/NetBeansProjects/Prepavogt/prepavogt/web/WEB-INF/jsp/start.jsp</file>
+            <file>file:/C:/Users/muanz/OneDrive/Documents/Bashenga/NetBeansProjects/prepavogt/web/WEB-INF/jsp/tempsReel.jsp</file>
+            <file>file:/C:/Users/muanz/OneDrive/Documents/Bashenga/NetBeansProjects/prepavogt/src/java/vogt/prepa/services/TempsReelService.java</file>
+            <file>file:/C:/Users/muanz/OneDrive/Documents/Bashenga/NetBeansProjects/prepavogt/src/java/vogt/prepa/servlets/ActualiserPointageServlet.java</file>
+            <file>file:/C:/Users/muanz/OneDrive/Documents/Bashenga/NetBeansProjects/prepavogt/src/java/vogt/prepa/servlets/TempsReelServlet.java</file>
         </group>
     </open-files>
 </project-private>

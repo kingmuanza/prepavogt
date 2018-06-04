@@ -5,7 +5,7 @@ var app = angular.module("myApp", ["ngRoute"]);
 app.config(function ($routeProvider) {
     $routeProvider
             .when("/", {
-                templateUrl: "test.jsp"
+                templateUrl: "TempsReelServlet"
             })
             .when("/menu", {
                 templateUrl: "test2.jsp"
