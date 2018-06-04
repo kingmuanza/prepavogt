@@ -1,9 +1,6 @@
-<%-- 
-    Document   : utilisateurs
-    Created on : 31 mai 2018, 15:10:19
-    Author     : 12Lions
---%>
-
+<%@page import="java.util.Date"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -35,25 +32,28 @@
             </thead>
 
             <tbody>
+                <c:forEach items="${utilisateurs}" var="utilisateur">
+                    
                 <tr>
                     <td>
                         <h4 class="ui image header">
                             <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
                             <div class="content">
-                                12Lions
+                                ${utilisateur.login}
                                 <div class="sub header">
-                                    Administrateur
+                                    ${utilisateur.utilisateurProfil.libelle}
                                 </div>
                             </div>
                         </h4>
                     </td>
-                    <td>Tagne</td>
-                    <td>Edgar</td>
-                    <td>kenmegne.edgar99@gmail.com</td>
-                    <td>Administrateur</td>
-                    <td>+237695333841</td>
-                    <td>Etoa-Meki</td>
+                    <td>${utilisateur.individu.noms}</td>
+                    <td>${utilisateur.individu.prenoms}</td>
+                    <td>${utilisateur.individu.email}</td>
+                    <td>${utilisateur.utilisateurProfil.libelle}</td>
+                    <td>${utilisateur.individu.tel1}</td>
+                    <td>${utilisateur.individu.residence}</td>
                 </tr>
+                </c:forEach>
 
             </tbody>
         </table>
