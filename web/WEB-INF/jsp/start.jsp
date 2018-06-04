@@ -71,8 +71,8 @@
                                 <i class="dropdown icon"></i> <b>Discpline</b>
                             </a>
                             <div class="active content menu">
-                                <a class="item active" href="#!menu">Abscences</a>
-                                <a class="item" href="#secondary-menu">Retards</a>
+                                <a class="item" href="#!pointage">Abscences</a>
+                                <a class="item" href="#!pointage">Retards</a>
                             </div>
                         </div>
                         <div class="item">
@@ -81,9 +81,9 @@
                                 <b>Arrivées</b>
                             </a>
                             <div class="content menu">
-                                <a class="item" href="#sub-menu">Elèves</a>
-                                <a class="item" href="#sub-menu">Enseignants</a>
-                                <a class="item" href="#sub-menu">Collaborateurs</a>
+                                <a class="item" href="#!pointage">Elèves</a>
+                                <a class="item" href="#!pointage">Enseignants</a>
+                                <a class="item" href="#!pointage">Collaborateurs</a>
                             </div>
                         </div>
                     </div>
@@ -126,9 +126,9 @@
                                 <b>Globales</b>
                             </a>
                             <div class="active content menu">
-                                <a class="item active" href="#menu">Collaborateurs </a>
-                                <a class="item active" href="#menu">Enseignants </a>
-                                <a class="item active" href="#menu">Etudiants </a>
+                                <a class="item active" href="#!statistiques">Collaborateurs </a>
+                                <a class="item active" href="#!statistiques">Enseignants </a>
+                                <a class="item active" href="#!statistiques">Etudiants </a>
                             </div>
                         </div>
                         <div class="item">
@@ -137,12 +137,12 @@
                                 <b>Classements</b>
                             </a>
                             <div class="content menu">
-                                <a class="item" href="#sub-menu">Moyenne d'arrivée par promotion</a>
-                                <a class="item active" href="#menu">Etudiants toujours à l'heure </a>
-                                <a class="item" href="#secondary-menu">Les premiers à arriver sur le campus</a>
-                                <a class="item" href="#sub-menu">Premiers arrivés par promotion</a>
-                                <a class="item" href="#sub-menu">Derniers arrivés par promotion</a>
-                                <a class="item" href="#sub-menu">Les plus retardataires par promotion</a>
+                                <a class="item" href="#!statistiques">Moyenne d'arrivée par promotion</a>
+                                <a class="item" href="#!statistiques">Etudiants toujours à l'heure </a>
+                                <a class="item" href="#!statistiques">Les premiers à arriver sur le campus</a>
+                                <a class="item" href="#!statistiques">Premiers arrivés par promotion</a>
+                                <a class="item" href="#!statistiques">Derniers arrivés par promotion</a>
+                                <a class="item" href="#!statistiques">Les plus retardataires par promotion</a>
                             </div>
                         </div>
                     </div>
@@ -156,8 +156,8 @@
                                 <i class="dropdown icon"></i> <b>Actuellement dans nos locaux</b>
                             </a>
                             <div class="active content menu">
-                                <a class="item active" href="#menu">Personne 1</a>
-                                <a class="item" href="#secondary-menu">Personne 2</a>
+                                <a class="item active" href="#!entrees">Personne 1</a>
+                                <a class="item" href="#!entrees">Personne 2</a>
                             </div>
                         </div>
                         <div class="item">
@@ -166,7 +166,7 @@
                                 <b>Personnes attendues</b>
                             </a>
                             <div class="content menu">
-                                <a class="item" href="#sub-menu">Personne 3</a>
+                                <a class="item" href="#!visites">Personne 3</a>
                             </div>
                         </div>
                         <div class="item">
@@ -175,7 +175,7 @@
                                 <b>Statistiques</b>
                             </a>
                             <div class="content menu">
-                                <a class="item" href="#sub-menu">Par personne</a>
+                                <a class="item" href="#!statistiques">Par personne</a>
                             </div>
                         </div>
                     </div>
@@ -190,7 +190,7 @@
                             <div class="active content menu">
                                 <!-- Routage utilisateur OK-->
                                 <a class="item active" href="#!utilisateurs">Utilisateurs</a>
-                                <a class="item" href="#secondary-menu">Profils utilisateurs</a>
+                                <a class="item" href="#!profils">Profils utilisateurs</a>
                             </div>
                         </div>
                         <div class="item">
@@ -199,11 +199,11 @@
                                 <b>Personnes et qualités</b>
                             </a>
                             <div class="content menu">
-                                <a class="item" href="#sub-menu">Individus</a>
-                                <a class="item" href="#sub-menu">Collaborateurs</a>
-                                <a class="item" href="#sub-menu">Postes</a>
-                                <a class="item" href="#sub-menu">Enseignants</a>
-                                <a class="item" href="#sub-menu">Elèves</a>
+                                <a class="item" href="#!individus">Individus</a>
+                                <a class="item" href="#!collaborateurs">Collaborateurs</a>
+                                <a class="item" href="#!postes">Postes</a>
+                                <a class="item" href="#!enseignants">Enseignants</a>
+                                <a class="item" href="#!etudiants">Etudiants</a>
                             </div>
                         </div>
                         <div class="item">
@@ -212,12 +212,12 @@
                                 <b>Paramètres académiques</b>
                             </a>
                             <div class="content menu">
-                                <a class="item" href="#sub-menu">Années académiques</a>
-                                <a class="item" href="#sub-menu">Filières</a>
-                                <a class="item" href="#sub-menu">Matières</a>
-                                <a class="item" href="#sub-menu">Cours</a>
-                                <a class="item" href="#sub-menu">Niveaux d'étude</a>
-                                <a class="item" href="#sub-menu">Périodes creuses</a>
+                                <a class="item" href="#!anneeacademique">Années académiques</a>
+                                <a class="item" href="#!filieres">Filières</a>
+                                <a class="item" href="#!matieres">Matières</a>
+                                <a class="item" href="#!coursall">Cours</a>
+                                <a class="item" href="#!niveaux">Niveaux d'étude</a>
+                                <a class="item" href="#!periodescreuses">Périodes creuses</a>
                             </div>
                         </div>
                         <div class="item">
@@ -226,7 +226,7 @@
                                 <b>Accueil</b>
                             </a>
                             <div class="content menu">
-                                <a class="item" href="#sub-menu">Bagdes pour visiteur</a>
+                                <a class="item" href="#!badges">Bagdes pour visiteur</a>
                             </div>
                         </div>
                     </div>

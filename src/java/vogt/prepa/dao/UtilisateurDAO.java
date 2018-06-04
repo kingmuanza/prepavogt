@@ -149,5 +149,6 @@ public class UtilisateurDAO {
     //Recupérer tous les objets associés aux clés primaires 
     public void initialiser(Utilisateur utilisateur) {
         Hibernate.initialize(utilisateur.getIndividu());
+        Hibernate.initialize(utilisateur.getUtilisateurProfil());
     }
 }
