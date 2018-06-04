@@ -24,11 +24,18 @@ function bouger() {
  *--------- Animation des sous-menus de menu de la page d'accueil---------------
  */
 $(document).ready(function () {
+    
+    $("#chargement").fadeOut("fast");
+    
     $('.ui.accordion').accordion();
 
     $('.section_muanza').hide();
 
     $('#section_accueil').show();
+    
+     $('.section_muanza').on('click', function(){
+         
+     });
 
 
 });

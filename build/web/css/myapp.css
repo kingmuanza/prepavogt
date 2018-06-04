@@ -9,6 +9,11 @@
 */
 
 /**/
+
+table td.center {
+   text-align: center!important;   
+}
+
 thead tr th{
     color : #004d6f!important ;
 }

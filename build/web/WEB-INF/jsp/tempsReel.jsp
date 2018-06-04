@@ -76,7 +76,7 @@
             var titre = 'Bonjour';
             var audio = new Audio('audio/sms-alert-3-daniel_simon.wav');
 
-            var dernierIndex = 5;
+            var dernierIndex = 0;
             $(document).ready(function () {
                 var table = $('#dataTableUtilisateur').DataTable({
                     ajax: {
@@ -93,18 +93,11 @@
                         {"data": "entree"}
                     ],
                     "createdRow": function (row, data, dataIndex) {
-                        if (data.heure > "08:00:00") {
-                            $(row).addClass('negative ');
-                        } else {
-                            $(row).addClass('positive ');
+                        if (dernierIndex < dataIndex) {
+                            $(row).addClass('positive');
+                            dernierIndex = dataIndex;
                         }
-                        console.log(data)
-                        //$(row).addClass('active ');
-                        dernierIndex = dataIndex;
-                        //audio.play();
-
-                        //console.log("dernierIndex : " + dernierIndex);
-                        //console.log("dataIndex : " + dataIndex);
+                        
                     },
                     "order": [[0, "desc"]],
                     dom: '<"top"fB>rt<"bottom"lp><"clear">',
@@ -156,7 +149,7 @@
                     table.ajax.reload();
                     var d = new Date();
                     $("#derniereHeure").html(d.toISOString().substr(11, 8));
-                }, 30000);
+                }, 3000);
 
                 $(".actualiser").on('click', function () {
                     table.ajax.reload();

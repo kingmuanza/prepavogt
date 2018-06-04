@@ -93,22 +93,13 @@
                     <div class="ui accordion vertical fluid following text menu">
                         <div class="item">
                             <a class="title">
-                                <b>Temps réel</b>
+                                <b>Communication</b>
                             </a>
-                        </div>
-                    </div>
-                    <div class="ui accordion vertical fluid following text menu">
-                        <div class="item">
-                            <a class="title">
-                                <b>Historique</b>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ui accordion vertical fluid following text menu">
-                        <div class="item">
-                            <a class="title">
-                                <b>Régularisation</b>
-                            </a>
+                            <div class="active content menu">
+                                <a class="item active" href="#!tempsreel">Suivre en temps réel </a>
+                                <a class="item active" href="#!tempsreel">Exporter les données </a>
+                                <a class="item active" href="#!tempsreel">Configuration </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -240,6 +231,10 @@
                         <i class="circle loading icon titre"></i>
                         Pointeuse biométrique activée
                     </a>
+                    <a id="chargement" class="item titre active ">
+                        <i style="float:right" class="titre spinner loading icon"></i>
+                        Chargement
+                    </a>
                     <!--a class="item">
                         Exporter vers Excel
                     </a>
@@ -280,6 +275,20 @@
         <script src="js/angular-route.js" type="text/javascript"></script>
         <script src="js/myapp.js" type="text/javascript"></script>
         <script src="js/routage.js" type="text/javascript"></script>
-        
+        <script>
+                        $(document).ajaxStart(function () {
+                            console.log("AJAX started")
+                        });
+
+                        $(document).ajaxStop(function () {
+                            console.log("AJAX stop")
+                        });
+                        $(window).bind('hashchange', function () {
+                            $("#chargement").fadeIn("slow", function(){
+                                $("#chargement").fadeOut("slow")
+                            });
+                        });
+        </script>
+
     </body>
 </html>

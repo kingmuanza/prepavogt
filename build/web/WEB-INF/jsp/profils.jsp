@@ -17,42 +17,37 @@
     </head>
     <body>
         <h1 class="titre">Liste des profils</h1>
+        <div class="ui message info">
+            <div class="header">
+                Important
+            </div>
+            <p>
+                Si la colonne <b>Employés</b> est cochée alors le profil aura accès aux informations des employés.
+                Si la colonne <b>Enseignants</b> est cochée alors le profil aura accès aux informations des enseignants
+            </p>
+        </div>
 
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Utilisateurs</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>E-mail</th>
-                    <th>Fonction</th>
-                    <th>Tel Portable</th>                    
-                    <th>Résidence</th>                    
+                    <th>Code</th>
+                    <th>Libelle</th>
+                    <th>Employés</th>
+                    <th>Enseignants</th>                  
                 </tr>
             </thead>
 
             <tbody>
-                <c:forEach items="${utilisateurs}" var="utilisateur">
-                    
-                <tr>
-                    <td>
-                        <h4 class="ui image header">
-                            <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
-                            <div class="content">
-                                ${utilisateur.login}
-                                <div class="sub header">
-                                    ${utilisateur.utilisateurProfil.libelle}
-                                </div>
-                            </div>
-                        </h4>
-                    </td>
-                    <td>${utilisateur.individu.noms}</td>
-                    <td>${utilisateur.individu.prenoms}</td>
-                    <td>${utilisateur.individu.email}</td>
-                    <td>${utilisateur.utilisateurProfil.libelle}</td>
-                    <td>${utilisateur.individu.tel1}</td>
-                    <td>${utilisateur.individu.residence}</td>
-                </tr>
+                <c:forEach items="${utilisateurProfils}" var="profil">
+
+                    <tr>
+                        <td>${profil.code}</td>
+                        <td>${profil.libelle}</td>
+                        <td class="center">
+                            ${profil.voirEmploye? "<i class='check titre icon'></i>":""}
+                        </td>
+                        <td class="center">${profil.voirEnseignant? "<i class='check titre icon'></i>":""}</td>
+                    </tr>
                 </c:forEach>
 
             </tbody>
@@ -67,7 +62,7 @@
         <script src="js/dataTables.responsive.min.js" type="text/javascript"></script>
         <script src="js/responsive.semanticui.min.js" type="text/javascript"></script>
 
-        <!-- Datatable utilisateur -->
+        <!-- Datatable profil -->
         <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
         <script src="js/dataTables.buttons.min.js" type="text/javascript"></script>
         <script src="js/buttons.flash.min.js" type="text/javascript"></script>
@@ -79,6 +74,13 @@
         <script>
             var titre = 'Bonjour';
             $(document).ready(function () {
+
+                $('.message .close').on('click', function () {
+                    $(this)
+                            .closest('.message')
+                            .transition('fade')
+                            ;
+                });
                 $('#dataTableUtilisateur').DataTable({
                     dom: '<"top"fB>rt<"bottom"lp><"clear">',
                     buttons: [
@@ -88,6 +90,13 @@
                             title: titre,
                             message: '',
                             className: 'impressionExcel'
+                        },
+                        {
+                            extend: 'pdfHtml5',
+                            text: "Nouveau",
+                            title: titre,
+                            message: '',
+                            className: 'impressionPDF ui gris mini button'
                         },
                         {
                             extend: 'pdfHtml5',

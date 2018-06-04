@@ -21,7 +21,7 @@ public class TempsReelService {
 
     public List<Pointage> getDerniersPointages() {
 
-        int n = randInt(1, 4);
+        int n = randInt(0, 2);
         for (int i = 0; i < n; i++) {
             pointages.add(new Pointage(randInt(1000, 9999) + "", "", randInt(10000, 99999) + "" + i, "", "", new Date()));
 
