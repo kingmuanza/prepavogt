@@ -19,14 +19,7 @@
 
     </head>
     <body>
-        <h1>Liste des utilisateurs</h1>
-        <hr>
-
-        <br /><br />
-        <div class="ui center floated small primary labeled icon button">
-            <i class="user icon"></i> Ajouter un utilisateur
-        </div>
-        <br /><br />        
+        <h1 class="titre">Liste des utilisateurs</h1>
 
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
@@ -37,8 +30,7 @@
                     <th>E-mail</th>
                     <th>Fonction</th>
                     <th>Tel Portable</th>                    
-                    <th>Résidence</th>
-                    <th>Désactiver</th>                    
+                    <th>Résidence</th>                    
                 </tr>
             </thead>
 
@@ -61,11 +53,6 @@
                     <td>Administrateur</td>
                     <td>+237695333841</td>
                     <td>Etoa-Meki</td>
-                    <td class="collapsing">
-                        <div class="ui fitted slider checkbox">
-                            <input type="checkbox"> <label></label>
-                        </div>
-                    </td>
                 </tr>
 
             </tbody>
@@ -107,14 +94,14 @@
                             text: "Exporter en PDF",
                             title: titre,
                             message: '',
-                            className: 'impressionPDF ui teal basic mini button'
+                            className: 'impressionPDF ui gris basic mini button'
                         },
                         {
                             extend: 'print',
                             text: "Imprimer",
                             title: titre,
                             message: '',
-                            className: 'impression ui teal basic mini button'
+                            className: 'impression ui gris basic mini button'
                         }
                     ],
                     "language": {
