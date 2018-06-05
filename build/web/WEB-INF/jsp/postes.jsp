@@ -21,38 +21,40 @@
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Utilisateurs</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>E-mail</th>
-                    <th>Fonction</th>
-                    <th>Tel Portable</th>                    
-                    <th>Résidence</th>                    
+                    <th>Code</th>
+                    <th>Occupé par</th>                    
                 </tr>
             </thead>
 
             <tbody>
-                <c:forEach items="${utilisateurs}" var="utilisateur">
-                    
-                <tr>
-                    <td>
-                        <h4 class="ui image header">
-                            <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
-                            <div class="content">
-                                ${utilisateur.login}
-                                <div class="sub header">
-                                    ${utilisateur.utilisateurProfil.libelle}
+                <c:forEach items="${postes}" var="poste">
+
+                    <tr>
+                        <td>
+                            <h4 class="ui image header">
+                                <div class="content">
+                                    ${poste.code}
+                                    <div class="sub header">
+                                        ${poste.libelle}
+                                    </div>
                                 </div>
-                            </div>
-                        </h4>
-                    </td>
-                    <td>${utilisateur.individu.noms}</td>
-                    <td>${utilisateur.individu.prenoms}</td>
-                    <td>${utilisateur.individu.email}</td>
-                    <td>${utilisateur.utilisateurProfil.libelle}</td>
-                    <td>${utilisateur.individu.tel1}</td>
-                    <td>${utilisateur.individu.residence}</td>
-                </tr>
+                            </h4>
+                        </td>
+                        <td>
+                            <h4 class="ui image header">
+                                <div class="content">
+                                    ${poste.employes.iterator().hasNext() ? poste.employes.iterator().next().individu.noms:""}
+                                    ${poste.employes.iterator().hasNext() ? poste.employes.iterator().next().individu.prenoms:""}
+                                    <div class="sub header">
+                                        <c:if test="${poste.employes.iterator().hasNext()}">
+                                            ${poste.employes.iterator().next().individu.genre ? "Femme":"Homme"}
+                                    
+                                        </c:if>
+                                    </div>
+                                </div>
+                            </h4>
+                        </td>
+                    </tr>
                 </c:forEach>
 
             </tbody>
@@ -67,7 +69,7 @@
         <script src="js/dataTables.responsive.min.js" type="text/javascript"></script>
         <script src="js/responsive.semanticui.min.js" type="text/javascript"></script>
 
-        <!-- Datatable utilisateur -->
+        <!-- Datatable poste -->
         <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
         <script src="js/dataTables.buttons.min.js" type="text/javascript"></script>
         <script src="js/buttons.flash.min.js" type="text/javascript"></script>

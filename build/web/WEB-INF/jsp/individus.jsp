@@ -105,6 +105,12 @@
                             className: 'impressionExcel'
                         },
                         {
+                            text: "Nouveau",
+                            title: titre,
+                            message: '',
+                            className: ' ui gris mini button'
+                        },
+                        {
                             extend: 'pdfHtml5',
                             text: "Exporter en PDF",
                             title: titre,

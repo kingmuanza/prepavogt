@@ -21,37 +21,61 @@
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Utilisateurs</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>E-mail</th>
-                    <th>Fonction</th>
-                    <th>Tel Portable</th>                    
+                    <th>Individu</th>
+                    <th>Poste</th>
+                    <th>Date et lieu naiss.</th>
+                    <th>Contacts</th>                    
                     <th>Résidence</th>                    
                 </tr>
             </thead>
 
             <tbody>
-                <c:forEach items="${utilisateurs}" var="utilisateur">
+                <c:forEach items="${employes}" var="employe">
                     
                 <tr>
+                    
                     <td>
                         <h4 class="ui image header">
                             <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
                             <div class="content">
-                                ${utilisateur.login}
+                                ${employe.individu.noms} ${employe.individu.prenoms}
                                 <div class="sub header">
-                                    ${utilisateur.utilisateurProfil.libelle}
+                                    ${employe.individu.genre ? "Femme":"Homme"}
                                 </div>
                             </div>
                         </h4>
                     </td>
-                    <td>${utilisateur.individu.noms}</td>
-                    <td>${utilisateur.individu.prenoms}</td>
-                    <td>${utilisateur.individu.email}</td>
-                    <td>${utilisateur.utilisateurProfil.libelle}</td>
-                    <td>${utilisateur.individu.tel1}</td>
-                    <td>${utilisateur.individu.residence}</td>
+                    <td>
+                        <h4 class="ui image header">
+                            <div class="content">
+                                ${employe.poste.libelle}
+                                <div class="sub header">
+                                    ${employe.poste.code}
+                                </div>
+                            </div>
+                        </h4>
+                    </td>
+                    <td>
+                        <h4 class="ui image header">
+                            <div class="content">
+                                ${employe.individu.datenaiss}
+                                <div class="sub header">
+                                    ${employe.individu.lieunaiss}
+                                </div>
+                            </div>
+                        </h4>
+                    </td>
+                    <td>
+                        <h4 class="ui image header">
+                            <div class="content">
+                                ${employe.individu.email}
+                                <div class="sub header">
+                                    ${employe.individu.tel1}
+                                </div>
+                            </div>
+                        </h4>
+                    </td>
+                    <td>${employe.individu.residence}</td>
                 </tr>
                 </c:forEach>
 
@@ -81,6 +105,7 @@
             $(document).ready(function () {
                 $('#dataTableUtilisateur').DataTable({
                     dom: '<"top"fB>rt<"bottom"lp><"clear">',
+                    "order": [[ 1, "asc" ]],
                     buttons: [
                         {
                             extend: 'excel',
@@ -88,6 +113,12 @@
                             title: titre,
                             message: '',
                             className: 'impressionExcel'
+                        },
+                        {
+                            text: "Nouveau",
+                            title: titre,
+                            message: '',
+                            className: ' ui gris mini button'
                         },
                         {
                             extend: 'pdfHtml5',
