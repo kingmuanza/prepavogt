@@ -76,6 +76,9 @@ app.config(function ($routeProvider) {
             .when("/utilisateurs", {
                 templateUrl: UrlExists("UtilisateursServlet")
             })
+            .when("/statistiques", {
+                templateUrl: UrlExists("StatistiquesServlet")
+            })
             .otherwise({
                 redirectTo: '/'
             });

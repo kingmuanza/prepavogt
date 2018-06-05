@@ -21,37 +21,51 @@
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Utilisateurs</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>E-mail</th>
-                    <th>Fonction</th>
-                    <th>Tel Portable</th>                    
+                    <th>Matricule</th>
+                    <th>Individu</th>
+                    <th>Date et lieu naiss.</th>
+                    <th>Contacts</th>                    
                     <th>Résidence</th>                    
                 </tr>
             </thead>
 
             <tbody>
-                <c:forEach items="${utilisateurs}" var="utilisateur">
+                <c:forEach items="${individus}" var="individu">
                     
                 <tr>
+                    <td>${individu.matricule}</td>
                     <td>
                         <h4 class="ui image header">
                             <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
                             <div class="content">
-                                ${utilisateur.login}
+                                ${individu.noms} ${individu.prenoms}
                                 <div class="sub header">
-                                    ${utilisateur.utilisateurProfil.libelle}
+                                    ${individu.genre ? "Femme":"Homme"}
                                 </div>
                             </div>
                         </h4>
                     </td>
-                    <td>${utilisateur.individu.noms}</td>
-                    <td>${utilisateur.individu.prenoms}</td>
-                    <td>${utilisateur.individu.email}</td>
-                    <td>${utilisateur.utilisateurProfil.libelle}</td>
-                    <td>${utilisateur.individu.tel1}</td>
-                    <td>${utilisateur.individu.residence}</td>
+                    <td>
+                        <h4 class="ui image header">
+                            <div class="content">
+                                ${individu.datenaiss}
+                                <div class="sub header">
+                                    ${individu.lieunaiss}
+                                </div>
+                            </div>
+                        </h4>
+                    </td>
+                    <td>
+                        <h4 class="ui image header">
+                            <div class="content">
+                                ${individu.email}
+                                <div class="sub header">
+                                    ${individu.tel1}
+                                </div>
+                            </div>
+                        </h4>
+                    </td>
+                    <td>${individu.residence}</td>
                 </tr>
                 </c:forEach>
 
@@ -81,6 +95,7 @@
             $(document).ready(function () {
                 $('#dataTableUtilisateur').DataTable({
                     dom: '<"top"fB>rt<"bottom"lp><"clear">',
+                    "order": [[ 1, "asc" ]],
                     buttons: [
                         {
                             extend: 'excel',

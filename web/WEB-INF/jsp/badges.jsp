@@ -22,36 +22,30 @@
             <thead>
                 <tr>
                     <th>Utilisateurs</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>E-mail</th>
-                    <th>Fonction</th>
-                    <th>Tel Portable</th>                    
-                    <th>Résidence</th>                    
+                    <th>Code</th>
+                    <th>Libelle</th>
+                    <th>Entrees</th>                   
                 </tr>
             </thead>
 
             <tbody>
-                <c:forEach items="${utilisateurs}" var="utilisateur">
+                <c:forEach items="${badges}" var="badge">
                     
                 <tr>
                     <td>
                         <h4 class="ui image header">
                             <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
                             <div class="content">
-                                ${utilisateur.login}
+                                ${badge.idbadge}
                                 <div class="sub header">
-                                    ${utilisateur.utilisateurProfil.libelle}
+                                    ${badge.code}
                                 </div>
                             </div>
                         </h4>
                     </td>
-                    <td>${utilisateur.individu.noms}</td>
-                    <td>${utilisateur.individu.prenoms}</td>
-                    <td>${utilisateur.individu.email}</td>
-                    <td>${utilisateur.utilisateurProfil.libelle}</td>
-                    <td>${utilisateur.individu.tel1}</td>
-                    <td>${utilisateur.individu.residence}</td>
+                    <td>${badge.code}</td>
+                    <td>${badge.libelle}</td>
+                    <td>${badge.entrees.nomComplet}</td>
                 </tr>
                 </c:forEach>
 

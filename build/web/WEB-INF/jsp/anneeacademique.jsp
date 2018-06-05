@@ -21,37 +21,35 @@
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Utilisateurs</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>E-mail</th>
-                    <th>Fonction</th>
-                    <th>Tel Portable</th>                    
-                    <th>Résidence</th>                    
+                    <th>Année Scolaire</th>
+                    <th>Code</th>
+                    <th>Libelle</th>
+                    <th>Date Debut</th>
+                    <th>Date Fin</th>                    
+                    <th>Etudiant</th>                    
                 </tr>
             </thead>
 
             <tbody>
-                <c:forEach items="${utilisateurs}" var="utilisateur">
+                <c:forEach items="${anneescolaires}" var="anneeScolaire">
                     
                 <tr>
                     <td>
                         <h4 class="ui image header">
                             <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
                             <div class="content">
-                                ${utilisateur.login}
+                                ${anneeScolaire.idanneeScolaire}
                                 <div class="sub header">
-                                    ${utilisateur.utilisateurProfil.libelle}
+                                    ${anneeScolaire.code}
                                 </div>
                             </div>
                         </h4>
                     </td>
-                    <td>${utilisateur.individu.noms}</td>
-                    <td>${utilisateur.individu.prenoms}</td>
-                    <td>${utilisateur.individu.email}</td>
-                    <td>${utilisateur.utilisateurProfil.libelle}</td>
-                    <td>${utilisateur.individu.tel1}</td>
-                    <td>${utilisateur.individu.residence}</td>
+                    <td>${anneeScolaire.code}</td>
+                    <td>${anneeScolaire.libelle}</td>
+                    <td>${anneeScolaire.dateDebut}</td>
+                    <td>${anneeScolaire.dateFin}</td>
+                    <td>${anneeScolaire.etudiants.individu.noms}</td>
                 </tr>
                 </c:forEach>
 
