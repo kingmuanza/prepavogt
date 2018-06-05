@@ -22,9 +22,6 @@
             <thead>
                 <tr>
                     <th>Etudiants</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>E-mail</th>
                     <th>Niveau</th>
                     <th>Filiere</th>                    
                     <th>Année Scolaire</th>                    
@@ -39,16 +36,13 @@
                         <h4 class="ui image header">
                             <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
                             <div class="content">
-                                ${etudiant.idetudiant}
+                                ${etudiant.individu.noms} ${etudiant.individu.prenoms}
                                 <div class="sub header">
-                                    ${etudiant.idetudiant}
+                                    ${etudiant.individu.genre ? "Femme":"Homme"}
                                 </div>
                             </div>
                         </h4>
                     </td>
-                    <td>${etudiant.individu.noms}</td>
-                    <td>${etudiant.individu.prenoms}</td>
-                    <td>${etudiant.individu.email}</td>
                     <td>${etudiant.niveauEtude.code}</td>
                     <td>${etudiant.filiere.code}</td>
                     <td>${etudiant.anneeScolaire.dateDebut}</td>
