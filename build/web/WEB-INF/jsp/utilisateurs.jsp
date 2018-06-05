@@ -91,6 +91,13 @@
                         },
                         {
                             extend: 'pdfHtml5',
+                            text: "Nouveau",
+                            title: titre,
+                            message: '',
+                            className: 'impressionPDF ui gris mini button'
+                        },
+                        {
+                            extend: 'pdfHtml5',
                             text: "Exporter en PDF",
                             title: titre,
                             message: '',

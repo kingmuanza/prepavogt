@@ -39,19 +39,19 @@
                         <h4 class="ui image header">
                             <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
                             <div class="content">
-                                ${etudiant.getIdetudiant}
+                                ${etudiant.idetudiant}
                                 <div class="sub header">
-                                    ${etudiant.getIdetudiant}
+                                    ${etudiant.idetudiant}
                                 </div>
                             </div>
                         </h4>
                     </td>
-                    <td>${etudiant.getIndividu.noms}</td>
-                    <td>${etudiant.getIndividu.prenoms}</td>
-                    <td>${etudiant.getIndividu.email}</td>
-                    <td>${etudiant.getNiveau.libelle} </td>
-                    <td>${etudiant.getFiliere.libelle}</td>
-                    <td>${etudiant.getAnneeScolaire.getDate_debut} / ${etudiant.getAnneeScolaire.getDate_fin}</td>
+                    <td>${etudiant.individu.noms}</td>
+                    <td>${etudiant.individu.prenoms}</td>
+                    <td>${etudiant.individu.email}</td>
+                    <td>${etudiant.niveauEtude.code}</td>
+                    <td>${etudiant.filiere.code}</td>
+                    <td>${etudiant.anneeScolaire.dateDebut}</td>
                 </tr>
                 </c:forEach>
 

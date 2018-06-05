@@ -1,11 +1,29 @@
 /*
  *---------------------- Routage de angular JS ---------------------------------
  */
+
+function UrlExists(url) {
+    var http = new XMLHttpRequest();
+    http.open('HEAD', url, false);
+    http.send();
+    if (http.status !== 404 && http.status !== 500){
+        return url;
+    }else{
+        return "notfound.jsp";
+    }
+        
+}
 var app = angular.module("myApp", ["ngRoute"]);
 app.config(function ($routeProvider) {
     $routeProvider
             .when("/", {
-                templateUrl: "TempsReelServlet"
+                templateUrl: UrlExists("TempsReelServlet")
+            })
+            .when("/tempsreel", {
+                templateUrl: UrlExists("TempsReelServlet")
+            })
+            .when("/test", {
+                templateUrl: UrlExists("TempsReelServlet")
             })
             .when("/pointage", {
                 templateUrl: "PointagesServlet"
@@ -58,6 +76,9 @@ app.config(function ($routeProvider) {
             .when("/utilisateurs", {
                 templateUrl: "UtilisateursServlet"
             })
+            .otherwise({
+                redirectTo: '/'
+            });
 });
 /*----------------------------------------------------------------------------*/
 

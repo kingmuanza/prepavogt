@@ -24,9 +24,9 @@ public class EtudiantsServlet extends HttpServlet {
         HttpSession httpSession = request.getSession();
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
-//            request.setAttribute("etudiants", etudiantDAO.getall());
-//            System.out.println("Etudiant : "+etudiantDAO.getall());
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/etudiants.jsp").forward(request, response);
+            request.setAttribute("etudiants", etudiantDAO.getall());
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/etudiants.jsp")
+                    .forward(request, response);
         } else {
             response.sendRedirect("index.htm");
         }
