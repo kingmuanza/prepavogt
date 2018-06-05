@@ -26,55 +26,55 @@ app.config(function ($routeProvider) {
                 templateUrl: UrlExists("TempsReelServlet")
             })
             .when("/pointage", {
-                templateUrl: "PointagesServlet"
+                templateUrl: UrlExists("PointagesServlet")
             })
             .when("/entrees", {
-                templateUrl: "EntreesServlet"
+                templateUrl: UrlExists("EntreesServlet")
             })
             .when("/visites", {
-                templateUrl: "VisitesServlet"
+                templateUrl: UrlExists("VisitesServlet")
             })
             .when("/profils", {
-                templateUrl: "UtilisateurProfilsServlet"
+                templateUrl: UrlExists("UtilisateurProfilsServlet")
             })
             .when("/individus", {
-                templateUrl: "IndividusServlet"
+                templateUrl: UrlExists("IndividusServlet")
             })
             .when("/collaborateurs", {
-                templateUrl: "EmployesServlet"
+                templateUrl: UrlExists("EmployesServlet")
             })
             .when("/postes", {
-                templateUrl: "PostesServlet"
+                templateUrl: UrlExists("PostesServlet")
             })
             .when("/enseignants", {
-                templateUrl: "EnseignantsServlet"
+                templateUrl: UrlExists("EnseignantsServlet")
             })
             .when("/etudiants", {
-                templateUrl: "EtudiantsServlet"
+                templateUrl: UrlExists("EtudiantsServlet")
             })
             .when("/anneeacademique", {
-                templateUrl: "AnneeScolairesServlet"
+                templateUrl: UrlExists("AnneeScolairesServlet")
             })
             .when("/filieres", {
-                templateUrl: "FilieresServlet"
+                templateUrl: UrlExists("FilieresServlet")
             })
             .when("/matieres", {
-                templateUrl: "MatieresServlet"
+                templateUrl: UrlExists("MatieresServlet")
             })
             .when("/coursall", {
-                templateUrl: "CourssServlet"
+                templateUrl: UrlExists("CourssServlet")
             })
             .when("/niveaux", {
-                templateUrl: "NiveauEtudesServlet"
+                templateUrl: UrlExists("NiveauEtudesServlet")
             })
             .when("/periodescreuses", {
-                templateUrl: "PeriodeCreusesServlet"
+                templateUrl: UrlExists("PeriodeCreusesServlet")
             })
             .when("/badges", {
-                templateUrl: "BadgesServlet"
+                templateUrl: UrlExists("BadgesServlet")
             })
             .when("/utilisateurs", {
-                templateUrl: "UtilisateursServlet"
+                templateUrl: UrlExists("UtilisateursServlet")
             })
             .otherwise({
                 redirectTo: '/'

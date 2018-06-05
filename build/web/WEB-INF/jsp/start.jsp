@@ -256,7 +256,7 @@
                     </div>
                 </div>
                 <div style="height: 90vh; overflow-y: scroll">
-                    <div  ng-view style="height: 450vh; margin-top: -20px;" class="espace_cotes">
+                    <div  ng-view style="min-height: 100vh; margin-top: -20px; padding-bottom: 40px;" class="espace_cotes">
 
                     </div>
                 </div>
