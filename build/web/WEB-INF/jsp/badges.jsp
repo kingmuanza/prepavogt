@@ -22,7 +22,6 @@
             <thead>
                 <tr>
                     <th>Utilisateurs</th>
-                    <th>Idbadge</th>
                     <th>Code</th>
                     <th>Libelle</th>
                     <th>Entrees</th>                   
@@ -46,7 +45,7 @@
                     </td>
                     <td>${badge.code}</td>
                     <td>${badge.libelle}</td>
-                    <td>David</td>
+                    <td>${badge.entrees.nomComplet}</td>
                 </tr>
                 </c:forEach>
 
