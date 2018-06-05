@@ -1,6 +1,7 @@
 package vogt.prepa.dao;
 
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
@@ -122,6 +123,6 @@ public class BadgeDAO {
     }
 
     public void initialiser(Badge badge) {
-        
+     Hibernate.initialize(badge.getEntrees());
     }
 }
