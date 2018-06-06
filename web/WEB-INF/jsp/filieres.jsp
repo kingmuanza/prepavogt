@@ -32,26 +32,57 @@
 
             <tbody>
                 <c:forEach items="${filieres}" var="filiere">
-                    
-                <tr>
-                    <td>
-                        <h4 class="ui image header">
-                            <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
-                            <div class="content">
-                                ${filiere.code}
-                                <div class="sub header">
-                                    ${filiere.libelle}
+
+                    <tr>
+                        <td>
+                            <h4 class="ui image header">
+                                <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
+                                <div class="content">
+                                    ${filiere.code}
+                                    <div class="sub header">
+                                        ${filiere.libelle}
+                                    </div>
                                 </div>
-                            </div>
-                        </h4>
-                    </td>
-                    <td>${filiere.code}</td>
-                    <td>${filiere.code}</td>
-                    <td>${filiere.code}</td>
-                    <td>${filiere.code}</td>
-                    <td>${filiere.code}</td>
-                    <td>${utilisateur.individu.residence}</td>
-                </tr>
+                            </h4>
+                        </td>
+                        <td>${filiere.code}</td>
+                        <td>${filiere.libelle}</td>
+                        <td>
+                            <h4 class="ui image header">
+                                <div class="content">
+                                    <c:forEach items="${filiere.etudiants}" var="etudiant">
+                                        ${etudiant.individu.noms}
+                                    </c:forEach>
+                                    <div class="sub header">
+                                        <c:forEach items="${filiere.etudiants}" var="etudiant">
+                                            ${etudiant.individu.prenoms}
+                                        </c:forEach>
+                                    </div>
+                                </div>
+                            </h4>
+                        </td>
+                        
+                        <td>
+                            <c:forEach items="${filiere.courses}" var="cour">
+                                ${cour.cours.matiere.libelle}
+                            </c:forEach>
+                        </td>
+                        <td>
+                            <h4 class="ui image header">
+                                <div class="content">
+                                    <c:forEach items="${filiere.utilisateurProfilFilieres}" var="utilProfile">
+                                        ${filiere.utilisateurProfilFilieres.utilisateurProfil.code}
+                                    </c:forEach>
+                                    <div class="sub header">
+                                        <c:forEach items="${filiere.utilisateurProfilFilieres}" var="utilProfile">
+                                            ${filiere.utilisateurProfilFilieres.utilisateurProfil.libelle}
+                                        </c:forEach>
+                                    </div>
+                                </div>
+                            </h4>
+
+                        </td>
+                    </tr>
                 </c:forEach>
 
             </tbody>

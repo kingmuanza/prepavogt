@@ -1,9 +1,12 @@
 package vogt.prepa.dao;
 
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
+import vogt.prepa.entities.Filiere;
+import vogt.prepa.entities.UtilisateurProfil;
 import vogt.prepa.entities.UtilisateurProfilFiliere;
 import vogt.prepa.utils.HibernateUtil;
 
@@ -121,6 +124,7 @@ public class UtilisateurProfilFiliereDAO {
     }
 
     public void initialiser(UtilisateurProfilFiliere utilisateurProfilFiliere) {
-        
+        Hibernate.initialize(utilisateurProfilFiliere.getFiliere());
+        Hibernate.initialize(utilisateurProfilFiliere.getUtilisateurProfil());
     }
 }

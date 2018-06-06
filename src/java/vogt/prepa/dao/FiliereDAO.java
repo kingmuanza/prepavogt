@@ -5,7 +5,10 @@ import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
+import vogt.prepa.entities.Cours;
+import vogt.prepa.entities.Etudiant;
 import vogt.prepa.entities.Filiere;
+import vogt.prepa.entities.UtilisateurProfilFiliere;
 import vogt.prepa.utils.HibernateUtil;
 
 public class FiliereDAO {
@@ -125,5 +128,20 @@ public class FiliereDAO {
         Hibernate.initialize(filiere.getEtudiants());
         Hibernate.initialize(filiere.getCourses());
         Hibernate.initialize(filiere.getUtilisateurProfilFilieres());
+        for (Etudiant etu : filiere.getEtudiants()) {
+            Hibernate.initialize(etu.getIndividu());
+            Hibernate.initialize(etu.getAnneeScolaire());
+            Hibernate.initialize(etu.getNiveauEtude());
+        }
+        for (Cours cou : filiere.getCourses()) {
+            Hibernate.initialize(cou.getMatiere());
+            Hibernate.initialize(cou.getFiliere());
+            Hibernate.initialize(cou.getNiveauEtude());
+            Hibernate.initialize(cou.getCoursEnseignants());
+        }
+        for (UtilisateurProfilFiliere upf : filiere.getUtilisateurProfilFilieres()) {
+            Hibernate.initialize(upf.getFiliere());
+            Hibernate.initialize(upf.getUtilisateurProfil());
+        }
     }
 }
