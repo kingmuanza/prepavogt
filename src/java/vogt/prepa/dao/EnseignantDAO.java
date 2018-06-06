@@ -124,7 +124,7 @@ public class EnseignantDAO {
     }
 
     public void initialiser(Enseignant enseignant) {
-        Hibernate.initialize(enseignant.getIdindividu());
+        Hibernate.initialize(enseignant.getIndividu());
         Hibernate.initialize(enseignant.getCoursEnseignants());
         for (CoursEnseignant ce : enseignant.getCoursEnseignants()) {
             Hibernate.initialize(ce.getCours());

@@ -1,5 +1,5 @@
 package vogt.prepa.entities;
-// Generated 23 mai 2018 16:30:47 by Hibernate Tools 4.3.1
+// Generated 6 juin 2018 13:00:00 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -46,11 +46,12 @@ public class Individu  implements java.io.Serializable {
      private Set<Entree> entrees = new HashSet<Entree>(0);
      private Set<Employe> employes = new HashSet<Employe>(0);
      private Set<Visite> visites = new HashSet<Visite>(0);
+     private Set<Enseignant> enseignants = new HashSet<Enseignant>(0);
 
     public Individu() {
     }
 
-    public Individu(IndividuPhoto individuPhoto, String noms, String prenoms, Boolean genre, String civilite, Date datenaiss, String lieunaiss, String tel1, String tel2, String email, String residence, String matricule, Set<Etudiant> etudiants, Set<Utilisateur> utilisateurs, Set<Entree> entrees, Set<Employe> employes, Set<Visite> visites) {
+    public Individu(IndividuPhoto individuPhoto, String noms, String prenoms, Boolean genre, String civilite, Date datenaiss, String lieunaiss, String tel1, String tel2, String email, String residence, String matricule, Set<Etudiant> etudiants, Set<Utilisateur> utilisateurs, Set<Entree> entrees, Set<Employe> employes, Set<Visite> visites, Set<Enseignant> enseignants) {
        this.individuPhoto = individuPhoto;
        this.noms = noms;
        this.prenoms = prenoms;
@@ -68,6 +69,7 @@ public class Individu  implements java.io.Serializable {
        this.entrees = entrees;
        this.employes = employes;
        this.visites = visites;
+       this.enseignants = enseignants;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -245,6 +247,15 @@ public class Individu  implements java.io.Serializable {
     
     public void setVisites(Set<Visite> visites) {
         this.visites = visites;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="individu")
+    public Set<Enseignant> getEnseignants() {
+        return this.enseignants;
+    }
+    
+    public void setEnseignants(Set<Enseignant> enseignants) {
+        this.enseignants = enseignants;
     }
 
 
