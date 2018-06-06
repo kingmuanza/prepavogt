@@ -1,6 +1,7 @@
 package vogt.prepa.dao;
 
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
@@ -121,6 +122,9 @@ public class CoursDAO {
     }
 
     public void initialiser(Cours cours) {
-        
+        Hibernate.initialize(cours.getFiliere());
+        Hibernate.initialize(cours.getMatiere());
+        Hibernate.initialize(cours.getNiveauEtude());
+        Hibernate.initialize(cours.getCoursEnseignants());
     }
 }

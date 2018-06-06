@@ -1,14 +1,16 @@
 package vogt.prepa.dao;
 
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
+import vogt.prepa.entities.CoursEnseignant;
 import vogt.prepa.entities.Enseignant;
 import vogt.prepa.utils.HibernateUtil;
 
 public class EnseignantDAO {
-    
+
     public boolean enregistrer(Enseignant enseignant) {
         boolean isGood = false;
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -55,7 +57,7 @@ public class EnseignantDAO {
 
         return enseignant;
     }
-    
+
     public Enseignant getLazy(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
@@ -64,7 +66,7 @@ public class EnseignantDAO {
         if (enseignant == null) {
             throw new RuntimeException();
         } else {
-            
+
         }
 
         session.getTransaction().commit();
@@ -72,9 +74,9 @@ public class EnseignantDAO {
 
         return enseignant;
     }
-    
+
     public List<Enseignant> getall() {
-        
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
@@ -89,8 +91,9 @@ public class EnseignantDAO {
         return enseignants;
 
     }
+
     public List<Enseignant> getAllLazy() {
-        
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
@@ -105,22 +108,31 @@ public class EnseignantDAO {
         return enseignants;
 
     }
-    
+
     public Number getNumber() {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
-        Number n = (Number) session.createCriteria(Enseignant.class).setProjection(Projections.rowCount()).uniqueResult() ;
-        
+        Number n = (Number) session.createCriteria(Enseignant.class).setProjection(Projections.rowCount()).uniqueResult();
+
         session.getTransaction().commit();
         session.close();
 
-        return n ;
+        return n;
 
     }
 
     public void initialiser(Enseignant enseignant) {
-        
+        Hibernate.initialize(enseignant.getIdindividu());
+        Hibernate.initialize(enseignant.getCoursEnseignants());
+        for (CoursEnseignant ce : enseignant.getCoursEnseignants()) {
+            Hibernate.initialize(ce.getCours());
+            if(ce.getCours()!=null){
+                 Hibernate.initialize(ce.getCours().getMatiere());
+                 Hibernate.initialize(ce.getCours().getFiliere());
+            }
+
+        }
     }
 }
