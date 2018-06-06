@@ -1,5 +1,5 @@
 package vogt.prepa.entities;
-// Generated 23 mai 2018 16:30:47 by Hibernate Tools 4.3.1
+// Generated 6 juin 2018 13:00:00 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,14 +26,14 @@ public class Enseignant  implements java.io.Serializable {
 
 
      private Integer idenseignant;
-     private Integer idindividu;
+     private Individu individu;
      private Set<CoursEnseignant> coursEnseignants = new HashSet<CoursEnseignant>(0);
 
     public Enseignant() {
     }
 
-    public Enseignant(Integer idindividu, Set<CoursEnseignant> coursEnseignants) {
-       this.idindividu = idindividu;
+    public Enseignant(Individu individu, Set<CoursEnseignant> coursEnseignants) {
+       this.individu = individu;
        this.coursEnseignants = coursEnseignants;
     }
    
@@ -47,14 +49,14 @@ public class Enseignant  implements java.io.Serializable {
         this.idenseignant = idenseignant;
     }
 
-    
-    @Column(name="idindividu")
-    public Integer getIdindividu() {
-        return this.idindividu;
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="idindividu")
+    public Individu getIndividu() {
+        return this.individu;
     }
     
-    public void setIdindividu(Integer idindividu) {
-        this.idindividu = idindividu;
+    public void setIndividu(Individu individu) {
+        this.individu = individu;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="enseignant")

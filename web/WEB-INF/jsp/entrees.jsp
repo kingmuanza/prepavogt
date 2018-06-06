@@ -21,41 +21,37 @@
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Entrees</th>
-                    <th>Badge</th>
-                    <th>Individu</th>
-                    <th>Visite</th>
-                    <th>Nom Complet</th>
-                    <th>Motif</th>
-                    <th>Commentaire</th>
-                    <th>Date Entree</th>                    
-                    <th>Date Sortie</th>                    
+                    <th>Utilisateurs</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>E-mail</th>
+                    <th>Fonction</th>
+                    <th>Tel Portable</th>                    
+                    <th>Résidence</th>                    
                 </tr>
             </thead>
 
             <tbody>
-                <c:forEach items="${entrees}" var="entree">
+                <c:forEach items="${utilisateurs}" var="utilisateur">
                     
                 <tr>
                     <td>
                         <h4 class="ui image header">
                             <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
                             <div class="content">
-                                ${entree.identree}
+                                ${utilisateur.login}
                                 <div class="sub header">
-                                    ${entree.dateEntree}
+                                    ${utilisateur.utilisateurProfil.libelle}
                                 </div>
                             </div>
                         </h4>
                     </td>
-                    <td>${entree.badge.code}</td>
-                    <td>${entree.individu.noms}</td>
-                    <td>${entree.visite.motif}</td>
-                    <td>${entree.nomComplet}</td>
-                    <td>${entree.motif}</td>
-                    <td>${entree.commentaire}</td>
-                    <td>${entree.dateEntree}</td>
-                    <td>${entree.dateSortie}</td>
+                    <td>${utilisateur.individu.noms}</td>
+                    <td>${utilisateur.individu.prenoms}</td>
+                    <td>${utilisateur.individu.email}</td>
+                    <td>${utilisateur.utilisateurProfil.libelle}</td>
+                    <td>${utilisateur.individu.tel1}</td>
+                    <td>${utilisateur.individu.residence}</td>
                 </tr>
                 </c:forEach>
 
