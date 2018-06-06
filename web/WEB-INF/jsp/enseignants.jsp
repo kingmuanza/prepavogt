@@ -24,9 +24,9 @@
                     <th>Enseignants</th>
                     <th>Nom</th>
                     <th>Prénom</th>
-                    <th>Tel Portable</th>                    
-                    <th>Cour Dispensé</th>
-                    <th>Résidence</th>                    
+                    <th>Tel Portable</th> 
+                    <th>Résidence</th>     
+                    <th>Cour Dispensé</th>                   
                 </tr>
             </thead>
 
@@ -38,7 +38,7 @@
                             <h4 class="ui image header">
                                 <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
                                 <div class="content">
-                                    ${enseignant.idindividu}
+                                    ${enseignant.individu.noms}
                                     <div class="sub header">
                                         <c:forEach items="${enseignant.coursEnseignants}" var="courEn">
                                             ${courEn.cours.matiere.libelle}
@@ -48,19 +48,16 @@
                             </h4>
                         </td>
                         <td>
-                            <c:forEach items="${enseignant.coursEnseignants}" var="courEn">
-                                ${courEn.cours.matiere.libelle}
-                            </c:forEach>
+                            ${enseignant.individu.noms}
                         </td>
                         <td>
-                            <c:forEach items="${enseignant.coursEnseignants}" var="courEn">
-                                ${courEn.cours.matiere.libelle}
-                            </c:forEach>
+                            ${enseignant.individu.prenoms}
                         </td>
                         <td>
-                            <c:forEach items="${enseignant.coursEnseignants}" var="courEn">
-                                ${courEn.cours.matiere.libelle}
-                            </c:forEach>
+                            ${enseignant.individu.matricule}
+                        </td>
+                        <td>
+                            ${enseignant.individu.residence}
                         </td>
                         <td>
                             <c:forEach items="${enseignant.coursEnseignants}" var="courEn">

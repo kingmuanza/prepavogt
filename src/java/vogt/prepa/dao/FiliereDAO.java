@@ -1,6 +1,7 @@
 package vogt.prepa.dao;
 
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
@@ -121,6 +122,8 @@ public class FiliereDAO {
     }
 
     public void initialiser(Filiere filiere) {
-        
+        Hibernate.initialize(filiere.getEtudiants());
+        Hibernate.initialize(filiere.getCourses());
+        Hibernate.initialize(filiere.getUtilisateurProfilFilieres());
     }
 }

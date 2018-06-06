@@ -79,6 +79,9 @@
         <script>
             var titre = 'Bonjour';
             $(document).ready(function () {
+                
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
+                
                 $('#dataTableUtilisateur').DataTable({
                     dom: '<"top"fB>rt<"bottom"lp><"clear">',
                     buttons: [
