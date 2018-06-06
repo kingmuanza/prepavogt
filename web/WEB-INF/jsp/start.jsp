@@ -20,33 +20,33 @@
         <div class="ui grid">
             <div class="noir" style="width: 5vw; height: 110vh; margin: 0px!important; padding: 0px;important">
                 <div style="padding-top: 5vw;">
-                    <div onclick="gestionnaireSections('#section_profil', this)" class="section_bouton">
+                    <div id="bouton_profil" onclick="gestionnaireSections('#section_profil', this)" class="section_bouton">
                         <div style="position: relative;top: 50%; left: 30%;transform: translateY(-50%);">
                             <i class="user outline big icon fg-white" style="z-index: 45177777;"></i>
                         </div>
                     </div>
-                    <div onclick="gestionnaireSections('#section_pointeuse', this)" class="section_bouton">
+                    <div id="bouton_pointeuse" onclick="gestionnaireSections('#section_pointeuse', this)" class="section_bouton">
                         <div style="position: relative;top: 50%; left: 30%;transform: translateY(-50%);">
                             <i class="stopwatch big icon fg-white" style="z-index: 45177777;"></i>
                         </div>
                     </div>
-                    <div onclick="gestionnaireSections('#section_accueil', this)" class="section_bouton active">
+                    <div id="bouton_accueil" onclick="gestionnaireSections('#section_accueil', this)" class="section_bouton active">
                         <div style="position: relative;top: 50%; left: 30%;transform: translateY(-50%);">
                             <i class="home big icon fg-white" style="z-index: 45177777;"></i>
                         </div>
                     </div>
-                    <div onclick="gestionnaireSections('#section_stats', this)" class="section_bouton">
+                    <div id="bouton_stats" onclick="gestionnaireSections('#section_stats', this)" class="section_bouton">
                         <div style="position: relative;top: 50%; left: 30%;transform: translateY(-50%);">
                             <i class="chart pie big icon fg-white" style="z-index: 45177777;"></i>
                         </div>
                     </div>
-                    <div onclick="gestionnaireSections('#section_visites', this)" class="section_bouton">
+                    <div id="bouton_visites" onclick="gestionnaireSections('#section_visites', this)" class="section_bouton">
                         <div style="position: relative;top: 50%; left: 30%;transform: translateY(-50%);">
                             <i class="street view big icon fg-white" style="z-index: 45177777;"></i>
                         </div>
                     </div>
 
-                    <div onclick="gestionnaireSections('#section_params', this)"  class="section_bouton">
+                    <div id="bouton_params" onclick="gestionnaireSections('#section_params', this)"  class="section_bouton">
                         <div style="position: relative;top: 50%; left: 30%;transform: translateY(-50%);">
                             <i class="whmcs big icon fg-white" style="z-index: 45177777;"></i>
                         </div>
@@ -175,10 +175,10 @@
                     <h1>Paramètres</h1>
                     <div class="ui accordion vertical fluid following text menu">
                         <div class="item active">
-                            <a class="active title">
+                            <a class="title">
                                 <i class="dropdown icon"></i> <b>Gestions des utilisateurs</b>
                             </a>
-                            <div class="active content menu">
+                            <div class="content menu">
                                 <!-- Routage utilisateur OK-->
                                 <a class="item active" href="#!utilisateurs">Utilisateurs</a>
                                 <a class="item" href="#!profils">Profils utilisateurs</a>

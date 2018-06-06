@@ -31,52 +31,52 @@
 
             <tbody>
                 <c:forEach items="${employes}" var="employe">
-                    
-                <tr>
-                    
-                    <td>
-                        <h4 class="ui image header">
-                            <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
-                            <div class="content">
-                                ${employe.individu.noms} ${employe.individu.prenoms}
-                                <div class="sub header">
-                                    ${employe.individu.genre ? "Femme":"Homme"}
+
+                    <tr>
+
+                        <td>
+                            <h4 class="ui image header">
+                                <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
+                                <div class="content">
+                                    ${employe.individu.noms} ${employe.individu.prenoms}
+                                    <div class="sub header">
+                                        ${employe.individu.genre ? "Femme":"Homme"}
+                                    </div>
                                 </div>
-                            </div>
-                        </h4>
-                    </td>
-                    <td>
-                        <h4 class="ui image header">
-                            <div class="content">
-                                ${employe.poste.libelle}
-                                <div class="sub header">
-                                    ${employe.poste.code}
+                            </h4>
+                        </td>
+                        <td>
+                            <h4 class="ui image header">
+                                <div class="content">
+                                    ${employe.poste.libelle}
+                                    <div class="sub header">
+                                        ${employe.poste.code}
+                                    </div>
                                 </div>
-                            </div>
-                        </h4>
-                    </td>
-                    <td>
-                        <h4 class="ui image header">
-                            <div class="content">
-                                ${employe.individu.datenaiss}
-                                <div class="sub header">
-                                    ${employe.individu.lieunaiss}
+                            </h4>
+                        </td>
+                        <td>
+                            <h4 class="ui image header">
+                                <div class="content">
+                                    ${employe.individu.datenaiss}
+                                    <div class="sub header">
+                                        ${employe.individu.lieunaiss}
+                                    </div>
                                 </div>
-                            </div>
-                        </h4>
-                    </td>
-                    <td>
-                        <h4 class="ui image header">
-                            <div class="content">
-                                ${employe.individu.email}
-                                <div class="sub header">
-                                    ${employe.individu.tel1}
+                            </h4>
+                        </td>
+                        <td>
+                            <h4 class="ui image header">
+                                <div class="content">
+                                    ${employe.individu.email}
+                                    <div class="sub header">
+                                        ${employe.individu.tel1}
+                                    </div>
                                 </div>
-                            </div>
-                        </h4>
-                    </td>
-                    <td>${employe.individu.residence}</td>
-                </tr>
+                            </h4>
+                        </td>
+                        <td>${employe.individu.residence}</td>
+                    </tr>
                 </c:forEach>
 
             </tbody>
@@ -103,9 +103,12 @@
         <script>
             var titre = 'Bonjour';
             $(document).ready(function () {
+
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "collaborateurs");
+
                 $('#dataTableUtilisateur').DataTable({
                     dom: '<"top"fB>rt<"bottom"lp><"clear">',
-                    "order": [[ 1, "asc" ]],
+                    "order": [[1, "asc"]],
                     buttons: [
                         {
                             extend: 'excel',

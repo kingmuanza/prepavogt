@@ -75,12 +75,8 @@
             var titre = 'Bonjour';
             $(document).ready(function () {
 
-                $('.message .close').on('click', function () {
-                    $(this)
-                            .closest('.message')
-                            .transition('fade')
-                            ;
-                });
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "profils");
+                
                 $('#dataTableUtilisateur').DataTable({
                     dom: '<"top"fB>rt<"bottom"lp><"clear">',
                     buttons: [

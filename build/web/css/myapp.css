@@ -9,7 +9,9 @@
 */
 
 /**/
-
+.section_muanza{
+    display:none;
+}
 table td.center {
    text-align: center!important;   
 }

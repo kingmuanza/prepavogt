@@ -31,42 +31,42 @@
 
             <tbody>
                 <c:forEach items="${individus}" var="individu">
-                    
-                <tr>
-                    <td>${individu.matricule}</td>
-                    <td>
-                        <h4 class="ui image header">
-                            <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
-                            <div class="content">
-                                ${individu.noms} ${individu.prenoms}
-                                <div class="sub header">
-                                    ${individu.genre ? "Femme":"Homme"}
+
+                    <tr>
+                        <td>${individu.matricule}</td>
+                        <td>
+                            <h4 class="ui image header">
+                                <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
+                                <div class="content">
+                                    ${individu.noms} ${individu.prenoms}
+                                    <div class="sub header">
+                                        ${individu.genre ? "Femme":"Homme"}
+                                    </div>
                                 </div>
-                            </div>
-                        </h4>
-                    </td>
-                    <td>
-                        <h4 class="ui image header">
-                            <div class="content">
-                                ${individu.datenaiss}
-                                <div class="sub header">
-                                    ${individu.lieunaiss}
+                            </h4>
+                        </td>
+                        <td>
+                            <h4 class="ui image header">
+                                <div class="content">
+                                    ${individu.datenaiss}
+                                    <div class="sub header">
+                                        ${individu.lieunaiss}
+                                    </div>
                                 </div>
-                            </div>
-                        </h4>
-                    </td>
-                    <td>
-                        <h4 class="ui image header">
-                            <div class="content">
-                                ${individu.email}
-                                <div class="sub header">
-                                    ${individu.tel1}
+                            </h4>
+                        </td>
+                        <td>
+                            <h4 class="ui image header">
+                                <div class="content">
+                                    ${individu.email}
+                                    <div class="sub header">
+                                        ${individu.tel1}
+                                    </div>
                                 </div>
-                            </div>
-                        </h4>
-                    </td>
-                    <td>${individu.residence}</td>
-                </tr>
+                            </h4>
+                        </td>
+                        <td>${individu.residence}</td>
+                    </tr>
                 </c:forEach>
 
             </tbody>
@@ -93,9 +93,12 @@
         <script>
             var titre = 'Bonjour';
             $(document).ready(function () {
+
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "individus");
+
                 $('#dataTableUtilisateur').DataTable({
                     dom: '<"top"fB>rt<"bottom"lp><"clear">',
-                    "order": [[ 1, "asc" ]],
+                    "order": [[1, "asc"]],
                     buttons: [
                         {
                             extend: 'excel',
