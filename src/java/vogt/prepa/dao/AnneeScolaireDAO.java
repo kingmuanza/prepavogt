@@ -6,6 +6,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import vogt.prepa.entities.AnneeScolaire;
+import vogt.prepa.entities.Etudiant;
 import vogt.prepa.utils.HibernateUtil;
 
 public class AnneeScolaireDAO {
@@ -124,5 +125,8 @@ public class AnneeScolaireDAO {
     //hjklkjhghjk
     public void initialiser(AnneeScolaire anneeScolaire) {
         Hibernate.initialize(anneeScolaire.getEtudiants());
+        for(Etudiant etu : anneeScolaire.getEtudiants()){
+            Hibernate.initialize(etu.getIndividu());
+        }
     }
 }

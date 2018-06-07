@@ -31,7 +31,7 @@
             </thead>
 
             <tbody>
-                <c:forEach items="${anneescolaires}" var="anneeScolaire">
+                <c:forEach items="${anneeScolaires}" var="anneeScolaire">
                     
                 <tr>
                     <td>
@@ -49,7 +49,10 @@
                     <td>${anneeScolaire.libelle}</td>
                     <td>${anneeScolaire.dateDebut}</td>
                     <td>${anneeScolaire.dateFin}</td>
-                    <td>${anneeScolaire.etudiants.individu.noms}</td>
+                    <td>
+                        <c:forEach items="${anneeScolaire.etudiants}" var="etu">
+                        ${etu.individu.noms}</td>
+                        </c:forEach>
                 </tr>
                 </c:forEach>
 
