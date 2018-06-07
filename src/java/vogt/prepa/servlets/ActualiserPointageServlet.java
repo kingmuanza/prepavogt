@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import vogt.prepa.entities.Pointage;
-import vogt.prepa.services.TempsReelService;
+import vogt.prepa.services.impl.TempsReelService;
 
 @WebServlet(name = "ActualiserPointageServlet", urlPatterns = {"/ActualiserPointageServlet"})
 public class ActualiserPointageServlet extends HttpServlet {

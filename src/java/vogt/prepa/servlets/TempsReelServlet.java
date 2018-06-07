@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import vogt.prepa.entities.Pointage;
 import vogt.prepa.entities.Utilisateur;
-import vogt.prepa.services.TempsReelService;
+import vogt.prepa.services.impl.TempsReelService;
 
 @WebServlet(name="TempsReelServlet", urlPatterns={"/TempsReelServlet"})
 public class TempsReelServlet extends HttpServlet {

@@ -1,4 +1,4 @@
-package vogt.prepa.services;
+package vogt.prepa.services.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
