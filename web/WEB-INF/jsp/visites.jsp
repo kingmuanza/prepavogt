@@ -21,37 +21,44 @@
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Utilisateurs</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>E-mail</th>
-                    <th>Fonction</th>
-                    <th>Tel Portable</th>                    
-                    <th>Résidence</th>                    
+                    <th>Visites</th>
+                    <th>Nom Complet</th>
+                    <th>Motif</th>
+                    <th>Commentaire</th>                   
+                    <th>Heure d'entree</th>
+                    <th>Heure de sortie</th>                   
                 </tr>
             </thead>
 
             <tbody>
-                <c:forEach items="${utilisateurs}" var="utilisateur">
+                <c:forEach items="${visites}" var="visite">
                     
                 <tr>
                     <td>
                         <h4 class="ui image header">
                             <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
                             <div class="content">
-                                ${utilisateur.login}
+                                ${visite.individu.noms}
                                 <div class="sub header">
-                                    ${utilisateur.utilisateurProfil.libelle}
+                                    ${visite.individu.prenoms}
                                 </div>
                             </div>
                         </h4>
                     </td>
-                    <td>${utilisateur.individu.noms}</td>
-                    <td>${utilisateur.individu.prenoms}</td>
-                    <td>${utilisateur.individu.email}</td>
-                    <td>${utilisateur.utilisateurProfil.libelle}</td>
-                    <td>${utilisateur.individu.tel1}</td>
-                    <td>${utilisateur.individu.residence}</td>
+                    <td>${visite.nomComplet}</td>
+                    <td>${visite.motif}</td>
+                    <td>${visite.commentaire}</td>
+                    <td>
+                        <c:forEach items="${visite.entrees}" var="visiteHeure">
+                            ${visiteHeure.dateEntree}
+                        </c:forEach>
+                        
+                    </td>
+                    <td>
+                        <c:forEach items="${visite.entrees}" var="visiteHeure">
+                            ${visiteHeure.dateSortie}
+                        </c:forEach>
+                    </td>
                 </tr>
                 </c:forEach>
 

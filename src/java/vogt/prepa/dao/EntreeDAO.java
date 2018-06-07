@@ -1,10 +1,12 @@
 package vogt.prepa.dao;
 
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import vogt.prepa.entities.Entree;
+import vogt.prepa.entities.Visite;
 import vogt.prepa.utils.HibernateUtil;
 
 public class EntreeDAO {
@@ -121,6 +123,8 @@ public class EntreeDAO {
     }
 
     public void initialiser(Entree entree) {
-        
+        Hibernate.initialize(entree.getIndividu());
+        Hibernate.initialize(entree.getVisite());
+        Hibernate.initialize(entree.getBadge());
     }
 }
