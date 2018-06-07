@@ -16,7 +16,7 @@
 
     </head>
     <body>
-        <h1 class="titre">Liste des cours par salles de classes</h1>
+        <h1 class="titre">Liste des cours</h1>
 
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>

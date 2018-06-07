@@ -12,7 +12,7 @@ import vogt.prepa.entities.UtilisateurProfilFiliere;
 import vogt.prepa.utils.HibernateUtil;
 
 public class FiliereDAO {
-    
+
     public boolean enregistrer(Filiere filiere) {
         boolean isGood = false;
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -59,7 +59,7 @@ public class FiliereDAO {
 
         return filiere;
     }
-    
+
     public Filiere getLazy(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
@@ -68,7 +68,7 @@ public class FiliereDAO {
         if (filiere == null) {
             throw new RuntimeException();
         } else {
-            
+
         }
 
         session.getTransaction().commit();
@@ -76,9 +76,9 @@ public class FiliereDAO {
 
         return filiere;
     }
-    
+
     public List<Filiere> getall() {
-        
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
@@ -93,8 +93,9 @@ public class FiliereDAO {
         return filieres;
 
     }
+
     public List<Filiere> getAllLazy() {
-        
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
@@ -109,18 +110,18 @@ public class FiliereDAO {
         return filieres;
 
     }
-    
+
     public Number getNumber() {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
-        Number n = (Number) session.createCriteria(Filiere.class).setProjection(Projections.rowCount()).uniqueResult() ;
-        
+        Number n = (Number) session.createCriteria(Filiere.class).setProjection(Projections.rowCount()).uniqueResult();
+
         session.getTransaction().commit();
         session.close();
 
-        return n ;
+        return n;
 
     }
 
@@ -139,9 +140,23 @@ public class FiliereDAO {
             Hibernate.initialize(cou.getNiveauEtude());
             Hibernate.initialize(cou.getCoursEnseignants());
         }
+        if (filiere.getUtilisateurProfilFilieres() != null) {
+            for (UtilisateurProfilFiliere upf : filiere.getUtilisateurProfilFilieres()) {
+                Hibernate.initialize(upf.getFiliere());
+                Hibernate.initialize(upf.getUtilisateurProfil());
+                if (upf.getUtilisateurProfil() != null) {
+                    Hibernate.initialize(upf.getUtilisateurProfil());
+                }
+            }
+        }
         for (UtilisateurProfilFiliere upf : filiere.getUtilisateurProfilFilieres()) {
             Hibernate.initialize(upf.getFiliere());
             Hibernate.initialize(upf.getUtilisateurProfil());
+            Hibernate.initialize(upf.getUtilisateurProfil().getCode());
+            if (upf.getUtilisateurProfil() != null) {
+                Hibernate.initialize(upf.getUtilisateurProfil().getCode());
+                Hibernate.initialize(upf.getUtilisateurProfil().getLibelle());
+            }
         }
     }
 }

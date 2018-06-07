@@ -61,26 +61,24 @@
                                 </div>
                             </h4>
                         </td>
-                        
                         <td>
                             <c:forEach items="${filiere.courses}" var="cour">
-                                ${cour.cours.matiere.libelle}
+                                ${cour.matiere.libelle}
                             </c:forEach>
                         </td>
                         <td>
                             <h4 class="ui image header">
                                 <div class="content">
                                     <c:forEach items="${filiere.utilisateurProfilFilieres}" var="utilProfile">
-                                        ${filiere.utilisateurProfilFilieres.utilisateurProfil.code}
+                                        ${utilProfile.utilisateurProfil.code}
                                     </c:forEach>
                                     <div class="sub header">
                                         <c:forEach items="${filiere.utilisateurProfilFilieres}" var="utilProfile">
-                                            ${filiere.utilisateurProfilFilieres.utilisateurProfil.libelle}
+                                            ${utilProfile.utilisateurProfil.libelle}
                                         </c:forEach>
                                     </div>
                                 </div>
                             </h4>
-
                         </td>
                     </tr>
                 </c:forEach>
