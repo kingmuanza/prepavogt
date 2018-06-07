@@ -26,7 +26,7 @@
                     <th>Libelle</th>
                     <th>Etudiant</th>
                     <th>Cours</th>
-                    <th>Cours Filieres</th>                 
+                    <th>Utilisateur Profil Filieres</th>                 
                 </tr>
             </thead>
 
