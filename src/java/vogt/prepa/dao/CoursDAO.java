@@ -6,10 +6,12 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import vogt.prepa.entities.Cours;
+import vogt.prepa.entities.CoursEnseignant;
+import vogt.prepa.entities.Enseignant;
 import vogt.prepa.utils.HibernateUtil;
 
 public class CoursDAO {
-    
+
     public boolean enregistrer(Cours cours) {
         boolean isGood = false;
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -56,7 +58,7 @@ public class CoursDAO {
 
         return cours;
     }
-    
+
     public Cours getLazy(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
@@ -65,7 +67,7 @@ public class CoursDAO {
         if (cours == null) {
             throw new RuntimeException();
         } else {
-            
+
         }
 
         session.getTransaction().commit();
@@ -73,9 +75,9 @@ public class CoursDAO {
 
         return cours;
     }
-    
+
     public List<Cours> getall() {
-        
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
@@ -90,8 +92,9 @@ public class CoursDAO {
         return courss;
 
     }
+
     public List<Cours> getAllLazy() {
-        
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
@@ -106,18 +109,18 @@ public class CoursDAO {
         return courss;
 
     }
-    
+
     public Number getNumber() {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
-        Number n = (Number) session.createCriteria(Cours.class).setProjection(Projections.rowCount()).uniqueResult() ;
-        
+        Number n = (Number) session.createCriteria(Cours.class).setProjection(Projections.rowCount()).uniqueResult();
+
         session.getTransaction().commit();
         session.close();
 
-        return n ;
+        return n;
 
     }
 
@@ -126,5 +129,14 @@ public class CoursDAO {
         Hibernate.initialize(cours.getMatiere());
         Hibernate.initialize(cours.getNiveauEtude());
         Hibernate.initialize(cours.getCoursEnseignants());
+        for (CoursEnseignant ce : cours.getCoursEnseignants()) {
+            Hibernate.initialize(ce.getCours());
+            Hibernate.initialize(ce.getEnseignant());
+            if(ce.getEnseignant()!=null){
+                Hibernate.initialize(ce.getEnseignant().getIndividu());
+            }
+            
+            
+        }
     }
 }

@@ -21,38 +21,38 @@
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Utilisateurs</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>E-mail</th>
-                    <th>Fonction</th>
-                    <th>Tel Portable</th>                    
-                    <th>Résidence</th>                    
+                    <th>Cours</th>
+                    <th>Matiere</th>
+                    <th>Filiere</th>
+                    <th>Niveau</th>
+                    <th>Enseignant</th>                   
                 </tr>
             </thead>
 
             <tbody>
-                <c:forEach items="${utilisateurs}" var="utilisateur">
-                    
-                <tr>
-                    <td>
-                        <h4 class="ui image header">
-                            <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
-                            <div class="content">
-                                ${utilisateur.login}
-                                <div class="sub header">
-                                    ${utilisateur.utilisateurProfil.libelle}
+                <c:forEach items="${courss}" var="cour">
+
+                    <tr>
+                        <td>
+                            <h4 class="ui image header">
+                                <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
+                                <div class="content">
+                                    ${cour.matiere.code}
+                                    <div class="sub header">
+                                        ${cour.matiere.libelle}
+                                    </div>
                                 </div>
-                            </div>
-                        </h4>
-                    </td>
-                    <td>${utilisateur.individu.noms}</td>
-                    <td>${utilisateur.individu.prenoms}</td>
-                    <td>${utilisateur.individu.email}</td>
-                    <td>${utilisateur.utilisateurProfil.libelle}</td>
-                    <td>${utilisateur.individu.tel1}</td>
-                    <td>${utilisateur.individu.residence}</td>
-                </tr>
+                            </h4>
+                        </td>
+                        <td>${cour.matiere.libelle}</td>
+                        <td>${cour.filiere.libelle}</td>
+                        <td>${cour.niveauEtude.libelle}</td>
+                        <td>
+                            <c:forEach items="${cour.coursEnseignants}" var="cce">
+                                ${cce.enseignant.individu.noms}
+                            </c:forEach>
+                        </td>
+                    </tr>
                 </c:forEach>
 
             </tbody>
