@@ -16,42 +16,36 @@
 
     </head>
     <body>
-        <h1 class="titre">Liste des niveaux</h1>
+        <h1 class="titre">Liste des niveaux d'études</h1>
 
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Utilisateurs</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>E-mail</th>
-                    <th>Fonction</th>
-                    <th>Tel Portable</th>                    
-                    <th>Résidence</th>                    
+                    <th>Niveau d'etude</th>
+                    <th>Code</th>
+                    <th>Libelle</th>
+                    <th>Valeur</th>            
                 </tr>
             </thead>
 
             <tbody>
-                <c:forEach items="${utilisateurs}" var="utilisateur">
+                <c:forEach items="${niveauEtudes}" var="niveauEtude">
                     
                 <tr>
                     <td>
                         <h4 class="ui image header">
                             <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
                             <div class="content">
-                                ${utilisateur.login}
+                                ${niveauEtude.code}
                                 <div class="sub header">
-                                    ${utilisateur.utilisateurProfil.libelle}
+                                    ${niveauEtude.libelle}
                                 </div>
                             </div>
                         </h4>
                     </td>
-                    <td>${utilisateur.individu.noms}</td>
-                    <td>${utilisateur.individu.prenoms}</td>
-                    <td>${utilisateur.individu.email}</td>
-                    <td>${utilisateur.utilisateurProfil.libelle}</td>
-                    <td>${utilisateur.individu.tel1}</td>
-                    <td>${utilisateur.individu.residence}</td>
+                    <td>${niveauEtude.code}</td>
+                    <td>${niveauEtude.libelle}</td>
+                    <td>${niveauEtude.valeur}</td>
                 </tr>
                 </c:forEach>
 
