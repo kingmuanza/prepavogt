@@ -128,9 +128,10 @@ public class EnseignantDAO {
         Hibernate.initialize(enseignant.getCoursEnseignants());
         for (CoursEnseignant ce : enseignant.getCoursEnseignants()) {
             Hibernate.initialize(ce.getCours());
-            if(ce.getCours()!=null){
-                 Hibernate.initialize(ce.getCours().getMatiere());
-                 Hibernate.initialize(ce.getCours().getFiliere());
+            if (ce.getCours() != null) {
+                Hibernate.initialize(ce.getCours().getMatiere());
+                Hibernate.initialize(ce.getCours().getFiliere());
+                Hibernate.initialize(ce.getCours().getNiveauEtude());
             }
 
         }

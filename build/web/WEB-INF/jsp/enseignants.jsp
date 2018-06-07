@@ -13,6 +13,15 @@
         <link href="css/responsive.semanticui.min.css" rel="stylesheet" type="text/css"/>        
         <link href="css/buttons.dataTables.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+        <style>
+            #muanza span {
+                display: inline-block;
+                width:150px;
+                overflow: hidden;
+                text-overflow: ellipsis; 
+                padding-right: 10px;
+            }
+        </style>
 
     </head>
     <body>
@@ -22,11 +31,7 @@
             <thead>
                 <tr>
                     <th>Enseignants</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Tel Portable</th> 
-                    <th>Résidence</th>     
-                    <th>Cour Dispensé</th>                   
+                    <th>Cours dispensés</th>                   
                 </tr>
             </thead>
 
@@ -38,31 +43,34 @@
                             <h4 class="ui image header">
                                 <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
                                 <div class="content">
-                                    ${enseignant.individu.noms}
+                                    ${enseignant.individu.noms} ${enseignant.individu.prenoms}
                                     <div class="sub header">
-                                        <c:forEach items="${enseignant.coursEnseignants}" var="courEn">
-                                            ${courEn.cours.matiere.libelle}
-                                        </c:forEach>
+                                        <b>${enseignant.individu.matricule}</b>
+                                        ${enseignant.individu.genre ? "Femme":"Homme"}
                                     </div>
                                 </div>
                             </h4>
                         </td>
+
                         <td>
-                            ${enseignant.individu.noms}
-                        </td>
-                        <td>
-                            ${enseignant.individu.prenoms}
-                        </td>
-                        <td>
-                            ${enseignant.individu.matricule}
-                        </td>
-                        <td>
-                            ${enseignant.individu.residence}
-                        </td>
-                        <td>
-                            <c:forEach items="${enseignant.coursEnseignants}" var="courEn">
-                                ${courEn.cours.matiere.libelle}
-                            </c:forEach>
+                            <h4 class="ui image header">
+                                <div class="content" id="muanza">
+                                    <c:forEach items="${enseignant.coursEnseignants}" var="courEn">
+                                        <span>
+                                            ${courEn.cours.matiere.libelle}&nbsp;
+                                        </span>
+                                    </c:forEach>
+                                    <div class="sub header">
+                                        <c:forEach items="${enseignant.coursEnseignants}" var="courEn">
+                                            <span>
+                                                ${courEn.cours.niveauEtude.code} ${courEn.cours.filiere.libelle}&nbsp;
+                                            </span>
+                                        </c:forEach>
+                                    </div>
+
+
+                                </div>
+                            </h4>
                         </td>
                     </tr>
                 </c:forEach>
