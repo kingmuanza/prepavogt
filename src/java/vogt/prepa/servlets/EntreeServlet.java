@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import vogt.prepa.dao.EntreeDAO;
+import vogt.prepa.entities.Entree;
 import vogt.prepa.entities.Utilisateur;
 
 /**
@@ -31,10 +32,16 @@ public class EntreeServlet extends HttpServlet {
         HttpSession httpSession = request.getSession();
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
-//            request.setAttribute("entrees", entreeDAO.getall());
-//            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/entrees.jsp").forward(request, response);
-        }else{
-//            response.sendRedirect("index.htm");
+            String id = request.getParameter("id");
+            if (id != null && !id.isEmpty()) {
+                int i = Integer.parseInt(id);
+                Entree entree = entreeDAO.get(i);
+                request.setAttribute("entree", entree);
+
+            }
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/entree.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("index.htm");
         }
     } 
 

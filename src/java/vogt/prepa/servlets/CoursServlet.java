@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import vogt.prepa.dao.CoursDAO;
+import vogt.prepa.entities.Cours;
 import vogt.prepa.entities.Utilisateur;
 
 /**
@@ -31,8 +32,14 @@ public class CoursServlet extends HttpServlet {
         HttpSession httpSession = request.getSession();
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
-//            request.setAttribute("courss", coursDAO.getall());
-//            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/coursall.jsp").forward(request, response);
+            String id = request.getParameter("id");
+            if (id != null && !id.isEmpty()) {
+                int i = Integer.parseInt(id);
+                Cours cours = coursDAO.get(i);
+                request.setAttribute("cours", cours);
+
+            }
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/cours.jsp").forward(request, response);
         }else{
             response.sendRedirect("index.htm");
         }

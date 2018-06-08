@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import vogt.prepa.dao.BadgeDAO;
+import vogt.prepa.entities.Badge;
 import vogt.prepa.entities.Utilisateur;
 
 /**
@@ -31,8 +32,14 @@ public class BadgeServlet extends HttpServlet {
         HttpSession httpSession = request.getSession();
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
-//            request.setAttribute("badges", badgeDAO.getall());
-//            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/badges.jsp").forward(request, response);
+            String id = request.getParameter("id");
+            if (id != null && !id.isEmpty()) {
+                int i = Integer.parseInt(id);
+                Badge badge = badgeDAO.get(i);
+                request.setAttribute("badge", badge);
+
+            }
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/badge.jsp").forward(request, response);
         }else{
             response.sendRedirect("index.htm");
         }

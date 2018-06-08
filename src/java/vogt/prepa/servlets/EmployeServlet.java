@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import vogt.prepa.dao.EmployeDAO;
+import vogt.prepa.entities.Employe;
 import vogt.prepa.entities.Utilisateur;
 
 /**
@@ -31,8 +32,14 @@ public class EmployeServlet extends HttpServlet {
         HttpSession httpSession = request.getSession();
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
-//            request.setAttribute("employes", employeDAO.getall());
-//            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/collaborateurs.jsp").forward(request, response);
+            String id = request.getParameter("id");
+            if (id != null && !id.isEmpty()) {
+                int i = Integer.parseInt(id);
+                Employe employe = employeDAO.get(i);
+                request.setAttribute("employe", employe);
+
+            }
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/employe.jsp").forward(request, response);
         }else{
 //            response.sendRedirect("index.htm");
         }
