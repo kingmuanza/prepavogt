@@ -33,26 +33,26 @@
 
             <tbody>
                 <c:forEach items="${utilisateurs}" var="utilisateur">
-                    
-                <tr>
-                    <td>
-                        <h4 class="ui image header">
-                            <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
-                            <div class="content">
-                                ${utilisateur.login}
-                                <div class="sub header">
-                                    ${utilisateur.utilisateurProfil.libelle}
+
+                    <tr>
+                        <td>
+                            <h4 class="ui image header">
+                                <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
+                                <div class="content">
+                                    ${utilisateur.login}
+                                    <div class="sub header">
+                                        ${utilisateur.utilisateurProfil.libelle}
+                                    </div>
                                 </div>
-                            </div>
-                        </h4>
-                    </td>
-                    <td>${utilisateur.individu.noms}</td>
-                    <td>${utilisateur.individu.prenoms}</td>
-                    <td>${utilisateur.individu.email}</td>
-                    <td>${utilisateur.utilisateurProfil.libelle}</td>
-                    <td>${utilisateur.individu.tel1}</td>
-                    <td>${utilisateur.individu.residence}</td>
-                </tr>
+                            </h4>
+                        </td>
+                        <td>${utilisateur.individu.noms}</td>
+                        <td>${utilisateur.individu.prenoms}</td>
+                        <td>${utilisateur.individu.email}</td>
+                        <td>${utilisateur.utilisateurProfil.libelle}</td>
+                        <td>${utilisateur.individu.tel1}</td>
+                        <td>${utilisateur.individu.residence}</td>
+                    </tr>
                 </c:forEach>
 
             </tbody>
@@ -61,43 +61,39 @@
 
 
 
-        <!-- Fichiers js pour le dataTable-->
+        <!-- Datatable -->
         <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
-        <script src="js/dataTables.semanticui.min.js" type="text/javascript"></script>
-        <script src="js/dataTables.responsive.min.js" type="text/javascript"></script>
-        <script src="js/responsive.semanticui.min.js" type="text/javascript"></script>
-
-        <!-- Datatable utilisateur -->
-        <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="js/jszip.js" type="text/javascript"></script>
+        <script src="js/pdf.js.js" type="text/javascript"></script>
         <script src="js/dataTables.buttons.min.js" type="text/javascript"></script>
         <script src="js/buttons.flash.min.js" type="text/javascript"></script>
         <script src="js/buttons.html5.min.js" type="text/javascript"></script>
         <script src="js/buttons.print.min.js" type="text/javascript"></script>
-        <script src="js/dataTables.buttons.min.js" type="text/javascript"></script>
-        <script src="js/pdf.js.js" type="text/javascript"></script>
         <script src="js/pdfmake.min.js" type="text/javascript"></script>
         <script>
-            var titre = 'Bonjour';
+            var titre = 'Liste des utilisateurs';
             $(document).ready(function () {
-                
+
                 ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
-                
+
                 $('#dataTableUtilisateur').DataTable({
                     dom: '<"top"fB>rt<"bottom"lp><"clear">',
                     buttons: [
                         {
-                            extend: 'excel',
-                            text: "Exporter vers Excel",
-                            title: titre,
-                            message: '',
-                            className: 'impressionExcel'
-                        },
-                        {
-                            extend: 'pdfHtml5',
                             text: "Nouveau",
                             title: titre,
                             message: '',
-                            className: 'impressionPDF ui gris mini button'
+                            className: 'ui gris mini button',
+                            action: function (e, dt, node, config) {
+                                window.location.href='start'
+                            }
+                        },
+                        {
+                            extend: 'excelHtml5',
+                            text: "Exporter vers Excel",
+                            title: titre,
+                            message: '',
+                            className: 'ui gris mini basic button'
                         },
                         {
                             extend: 'pdfHtml5',
