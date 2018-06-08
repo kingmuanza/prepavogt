@@ -55,9 +55,6 @@
                 </div>
             </div>
 
-
-            <!-- SECTION ACCUEIL-->    
-
             <div class="gris" style="width: 20vw; height: 110vh; padding-top: 25px;">
                 <div style="padding-left: 10px;" id="section_accueil" class="section_muanza">
                     <h1>Accueil</h1>
@@ -91,10 +88,6 @@
                         </div>
                     </div>
                 </div>
-                
-                
-                <!-- SECTION MON POINTEUSE-->
-                
                 <div style="padding-left: 10px;" id="section_pointeuse" class="section_muanza">
                     <h1>Pointeuse</h1>
                     <div class="ui accordion vertical fluid following text menu">
@@ -110,42 +103,10 @@
                         </div>
                     </div>
                 </div>
-
-
-                <!-- SECTION MON PROFIL-->
-
                 <div style="padding-left: 10px;" id="section_profil"  class="section_muanza">
                     <h1>Mon profil</h1>
-                    <div class="ui accordion vertical fluid following text menu">
-                        <div class="item">
-                            <a class="title">
-                                <a class="item" href="#!profil"><b>Mes Informations</b></a>
-                            </a>
-                        </div>
-                        <div class="item active">
-                            <a class="active title">
-                                <i class="dropdown icon"></i> <b>Modifications</b>
-                            </a>
-                            <div class="active content menu">
-                                <a class="item" href="#!profil">Modifier mes informations</a>
-                                <a class="item" href="#!profil">Changer de mot de passe</a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <a class="title">
-                                <i class="dropdown icon"></i> 
-                                <b>Paramètres</b>
-                            </a>
-                            <div class="content menu">
-                                <a class="item" href="#!profil">Déconnexion</a>       
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
-
-
-                <!-- SECTION STATISTIQUES-->
-
                 <div style="padding-left: 10px;" id="section_stats"  class="section_muanza">
                     <h1>Statistiques</h1>
 
@@ -177,10 +138,6 @@
                         </div>
                     </div>
                 </div>
-
-
-                <!-- SECTION VISITES-->
-
                 <div style="padding-left: 10px;" id="section_visites"  class="section_muanza">
                     <h1>Visites</h1>
 
@@ -214,10 +171,6 @@
                         </div>
                     </div>
                 </div>
-
-
-                <!-- SECTION PARAMETRES-->                
-
                 <div style="padding-left: 10px;" id="section_params"  class="section_muanza">
                     <h1>Paramètres</h1>
                     <div class="ui accordion vertical fluid following text menu">
@@ -270,8 +223,6 @@
                     </div>
                 </div>
 
-
-            <!-- SECTION POINTEUSE header-->
 
             </div>
             <div style="width: 75vw; height: 100vh; overflow-x: hidden; overflow-y: hidden; padding-top: 20px; padding-right: 0px!important;margin-right: 10px!important;">
@@ -333,7 +284,7 @@
                             console.log("AJAX stop")
                         });
                         $(window).bind('hashchange', function () {
-                            $("#chargement").fadeIn("slow", function () {
+                            $("#chargement").fadeIn("slow", function(){
                                 $("#chargement").fadeOut("slow")
                             });
                         });

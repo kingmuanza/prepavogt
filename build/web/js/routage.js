@@ -79,12 +79,6 @@ app.config(function ($routeProvider) {
             .when("/statistiques", {
                 templateUrl: UrlExists("StatistiquesServlet")
             })
-            .when("/profil", {
-                templateUrl: UrlExists("test.jsp")
-            })
-            .when("/enregistrementIndividu", {
-                templateUrl: UrlExists("enregistrementIndividuServlet")
-            })
             .otherwise({
                 redirectTo: '/'
             });
