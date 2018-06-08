@@ -12,9 +12,17 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <load-on-startup>2</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>enregistrementIndividu</servlet-name>
+        <servlet-class>vogt.prepa.servlets.EnregistrementIndividuServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>enregistrementIndividu</servlet-name>
+        <url-pattern>/enregistrementIndividu</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

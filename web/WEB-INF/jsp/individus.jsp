@@ -17,7 +17,13 @@
     </head>
     <body>
         <h1 class="titre">Liste des individus</h1>
-
+        <hr/>
+        
+        <div class="ui left floated small default labeled icon button">
+          <i class="user icon"></i><a class="item" href="#!enregistrementIndividu">Enregistrer un individu</a>
+        </div>
+        <br/><br/><br/>
+        
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
@@ -106,13 +112,7 @@
                             title: titre,
                             message: '',
                             className: 'impressionExcel'
-                        },
-                        {
-                            text: "Nouveau",
-                            title: titre,
-                            message: '',
-                            className: ' ui gris mini button'
-                        },
+                        },                        
                         {
                             extend: 'pdfHtml5',
                             text: "Exporter en PDF",
