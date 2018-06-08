@@ -22,7 +22,7 @@ public class AnneeScolairesServlet extends HttpServlet {
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
             request.setAttribute("anneeScolaires", anneeScolaireDAO.getall());
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/anneeacademique.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/anneeacademiques.jsp").forward(request, response);
         }else{
             response.sendRedirect("index.htm");
         }
