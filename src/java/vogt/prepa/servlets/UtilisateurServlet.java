@@ -33,8 +33,14 @@ public class UtilisateurServlet extends HttpServlet {
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         
         if (utilisateur != null) {
-            request.setAttribute("utilisateurs", utilisateurDAO.getall());
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/utilisateurs.jsp")
+            String id = request.getParameter("id");
+            if (id != null && !id.isEmpty()) {
+                int i = Integer.parseInt(id);
+                Utilisateur utilisateurr = utilisateurDAO.get(i);
+                request.setAttribute("utilisateur", utilisateurr);
+
+            }
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/utilisateur.jsp")
                     .forward(request, response);
         }else{
             response.sendRedirect("index.htm");
