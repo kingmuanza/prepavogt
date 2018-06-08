@@ -62,10 +62,10 @@ public class EdgarServiceImpl implements EdgarService {
 
     @Override
     public boolean JourDeClasse(Date dateDuJour) {
-        boolean dim = false;
+        boolean dim = true;
         String nomJour = new SimpleDateFormat("EEEE").format(dateDuJour);
         if (nomJour.equals("dimanche")){
-            dim = true;
+            dim = false;
         }        
         return dim;
     }
