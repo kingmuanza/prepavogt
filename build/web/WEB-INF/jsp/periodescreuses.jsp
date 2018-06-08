@@ -16,15 +16,13 @@
 
     </head>
     <body>
-        <h1 class="titre">Liste des periodes creuses</h1>
+        <h1 class="titre">Liste des périodes creuses</h1>
 
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Periode Creuses</th>
-                    <th>Code</th>
-                    <th>Libelle</th>
-                    <th>Date Debut</th>
+                    <th>Période Creuses</th>
+                    <th>Date Début</th>
                     <th>Date Fin</th>                
                 </tr>
             </thead>
@@ -44,10 +42,12 @@
                             </div>
                         </h4>
                     </td>
-                    <td>${periodeCreuse.code}</td>
-                    <td>${periodeCreuse.libelle}</td>
-                    <td>${periodeCreuse.dateDebut}</td>
-                    <td>${periodeCreuse.dateFin}</td>
+                    <td>
+                        <fmt:formatDate value="${periodeCreuse.dateDebut}" pattern="yyyy-MM-dd"/>
+                    </td>
+                    <td>
+                        <fmt:formatDate value="${periodeCreuse.dateFin}" pattern="yyyy-MM-dd"/>
+                    </td>
                 </tr>
                 </c:forEach>
 
@@ -75,6 +75,9 @@
         <script>
             var titre = 'Bonjour';
             $(document).ready(function () {
+                
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "periodescreuses");
+                
                 $('#dataTableUtilisateur').DataTable({
                     dom: '<"top"fB>rt<"bottom"lp><"clear">',
                     buttons: [

@@ -22,9 +22,7 @@
             <thead>
                 <tr>
                     <th>Cours</th>
-                    <th>Matiere</th>
-                    <th>Filiere</th>
-                    <th>Niveau</th>
+                    <th>Classe</th>
                     <th>Enseignant</th>                   
                 </tr>
             </thead>
@@ -35,7 +33,6 @@
                     <tr>
                         <td>
                             <h4 class="ui image header">
-                                <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
                                 <div class="content">
                                     ${cour.matiere.code}
                                     <div class="sub header">
@@ -44,9 +41,16 @@
                                 </div>
                             </h4>
                         </td>
-                        <td>${cour.matiere.libelle}</td>
-                        <td>${cour.filiere.libelle}</td>
-                        <td>${cour.niveauEtude.libelle}</td>
+                        <td>
+                            <h4 class="ui image header">
+                                <div class="content">
+                                    ${cour.niveauEtude.code} ${cour.filiere.libelle}
+                                    <div class="sub header">
+                                        ${cour.matiere.libelle}
+                                    </div>
+                                </div>
+                            </h4>
+                        </td>
                         <td>
                             <c:forEach items="${cour.coursEnseignants}" var="cce">
                                 ${cce.enseignant.individu.noms}
@@ -79,6 +83,9 @@
         <script>
             var titre = 'Bonjour';
             $(document).ready(function () {
+                
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "coursall");
+                
                 $('#dataTableUtilisateur').DataTable({
                     dom: '<"top"fB>rt<"bottom"lp><"clear">',
                     buttons: [

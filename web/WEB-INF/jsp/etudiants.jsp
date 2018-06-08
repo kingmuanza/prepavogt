@@ -16,15 +16,13 @@
 
     </head>
     <body>
-        <h1 class="titre">Liste des etudiants</h1>
+        <h1 class="titre">Liste des étudiants</h1>
 
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
                     <th>Etudiants</th>
-                    <th>Niveau</th>
-                    <th>Filiere</th>                    
-                    <th>Année Scolaire</th>                    
+                    <th>Filiere/Niveau</th>                    
                 </tr>
             </thead>
 
@@ -43,9 +41,16 @@
                             </div>
                         </h4>
                     </td>
-                    <td>${etudiant.niveauEtude.code}</td>
-                    <td>${etudiant.filiere.code}</td>
-                    <td>${etudiant.anneeScolaire.dateDebut}</td>
+                    <td>
+                        <h4 class="ui image header">
+                            <div class="content">
+                                ${etudiant.filiere.libelle}
+                                <div class="sub header">
+                                    ${etudiant.niveauEtude.libelle}
+                                </div>
+                            </div>
+                        </h4>
+                    </td>
                 </tr>
                 </c:forEach>
 
@@ -74,7 +79,7 @@
             var titre = 'Bonjour';
             $(document).ready(function () {
                 
-                ouvrirMenuCorrespondant("#section_params", "bouton_params", "postes");
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "etudiants");
                 
                 $('#dataTableUtilisateur').DataTable({
                     dom: '<"top"fB>rt<"bottom"lp><"clear">',

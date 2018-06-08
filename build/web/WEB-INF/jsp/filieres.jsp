@@ -16,17 +16,13 @@
 
     </head>
     <body>
-        <h1 class="titre">Liste des filieres</h1>
+        <h1 class="titre">Liste des filières</h1>
 
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Filieres</th>
-                    <th>Code</th>
-                    <th>Libelle</th>
-                    <th>Etudiant</th>
-                    <th>Cours</th>
-                    <th>Utilisateur Profil Filieres</th>                 
+                    <th>Filières</th>
+                    <th>Etudiants</th>             
                 </tr>
             </thead>
 
@@ -36,47 +32,18 @@
                     <tr>
                         <td>
                             <h4 class="ui image header">
-                                <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
                                 <div class="content">
-                                    ${filiere.code}
+                                    ${filiere.libelle}
                                     <div class="sub header">
-                                        ${filiere.libelle}
-                                    </div>
-                                </div>
-                            </h4>
-                        </td>
-                        <td>${filiere.code}</td>
-                        <td>${filiere.libelle}</td>
-                        <td>
-                            <h4 class="ui image header">
-                                <div class="content">
-                                    <c:forEach items="${filiere.etudiants}" var="etudiant">
-                                        ${etudiant.individu.noms}
-                                    </c:forEach>
-                                    <div class="sub header">
-                                        <c:forEach items="${filiere.etudiants}" var="etudiant">
-                                            ${etudiant.individu.prenoms}
-                                        </c:forEach>
+                                        ${filiere.code}
                                     </div>
                                 </div>
                             </h4>
                         </td>
                         <td>
-                            <c:forEach items="${filiere.courses}" var="cour">
-                                ${cour.matiere.libelle}
-                            </c:forEach>
-                        </td>
-                        <td>
                             <h4 class="ui image header">
                                 <div class="content">
-                                    <c:forEach items="${filiere.utilisateurProfilFilieres}" var="utilProfile">
-                                        ${utilProfile.utilisateurProfil.code}
-                                    </c:forEach>
-                                    <div class="sub header">
-                                        <c:forEach items="${filiere.utilisateurProfilFilieres}" var="utilProfile">
-                                            ${utilProfile.utilisateurProfil.libelle}
-                                        </c:forEach>
-                                    </div>
+                                    ${filiere.etudiants.size()}
                                 </div>
                             </h4>
                         </td>
@@ -107,6 +74,9 @@
         <script>
             var titre = 'Bonjour';
             $(document).ready(function () {
+
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "filieres");
+
                 $('#dataTableUtilisateur').DataTable({
                     dom: '<"top"fB>rt<"bottom"lp><"clear">',
                     buttons: [

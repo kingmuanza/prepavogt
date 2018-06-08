@@ -16,7 +16,7 @@
 
     </head>
     <body>
-        <h1 class="titre">Liste des matieres</h1>
+        <h1 class="titre">Liste des matières</h1>
 
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
@@ -71,6 +71,9 @@
         <script>
             var titre = 'Bonjour';
             $(document).ready(function () {
+                
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "matieres");
+
                 $('#dataTableUtilisateur').DataTable({
                     dom: '<"top"fB>rt<"bottom"lp><"clear">',
                     buttons: [

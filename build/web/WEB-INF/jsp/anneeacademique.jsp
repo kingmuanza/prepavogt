@@ -16,17 +16,15 @@
 
     </head>
     <body>
-        <h1 class="titre">Liste des annees academiques</h1>
+        <h1 class="titre">Liste des années academiques</h1>
 
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
                     <th>Année Scolaire</th>
-                    <th>Code</th>
-                    <th>Libelle</th>
+                    
                     <th>Date Debut</th>
                     <th>Date Fin</th>                    
-                    <th>Etudiant</th>                    
                 </tr>
             </thead>
 
@@ -36,23 +34,21 @@
                 <tr>
                     <td>
                         <h4 class="ui image header">
-                            <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
                             <div class="content">
-                                ${anneeScolaire.idanneeScolaire}
+                                ${anneeScolaire.libelle}
                                 <div class="sub header">
                                     ${anneeScolaire.code}
                                 </div>
                             </div>
                         </h4>
                     </td>
-                    <td>${anneeScolaire.code}</td>
-                    <td>${anneeScolaire.libelle}</td>
-                    <td>${anneeScolaire.dateDebut}</td>
-                    <td>${anneeScolaire.dateFin}</td>
                     <td>
-                        <c:forEach items="${anneeScolaire.etudiants}" var="etu">
-                        ${etu.individu.noms}</td>
-                        </c:forEach>
+                        <fmt:formatDate value="${anneeScolaire.dateDebut}" pattern="yyyy-MM-dd"/>
+                    </td>
+                    <td>
+                        <fmt:formatDate value="${anneeScolaire.dateFin}" pattern="yyyy-MM-dd"/>
+                    </td>
+                    
                 </tr>
                 </c:forEach>
 
@@ -80,7 +76,11 @@
         <script>
             var titre = 'Bonjour';
             $(document).ready(function () {
+                
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "anneeacademique");
+                
                 $('#dataTableUtilisateur').DataTable({
+                    
                     dom: '<"top"fB>rt<"bottom"lp><"clear">',
                     buttons: [
                         {
