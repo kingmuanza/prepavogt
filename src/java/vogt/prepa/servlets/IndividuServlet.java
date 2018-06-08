@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import vogt.prepa.dao.IndividuDAO;
+import vogt.prepa.entities.Individu;
 import vogt.prepa.entities.Utilisateur;
 
 /**
@@ -31,10 +32,16 @@ public class IndividuServlet extends HttpServlet {
         HttpSession httpSession = request.getSession();
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
-//            request.setAttribute("individus", individuDAO.getall());
-//            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/individus.jsp").forward(request, response);
+            String id = request.getParameter("id");
+            if (id != null && !id.isEmpty()) {
+                int i = Integer.parseInt(id);
+                Individu individu = individuDAO.get(i);
+                request.setAttribute("individu", individu);
+
+            }
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/individu.jsp").forward(request, response);
         } else {
-//            response.sendRedirect("index.htm");
+            response.sendRedirect("index.htm");
         }
     }
 

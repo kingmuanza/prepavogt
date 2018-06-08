@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import vogt.prepa.dao.NiveauEtudeDAO;
+import vogt.prepa.entities.NiveauEtude;
 import vogt.prepa.entities.Utilisateur;
 
 /**
@@ -31,10 +32,16 @@ public class NiveauEtudeServlet extends HttpServlet {
         HttpSession httpSession = request.getSession();
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
-//            request.setAttribute("niveauEtudes", niveauEtudeDAO.getall());
-//            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/niveaux.jsp").forward(request, response);
+            String id = request.getParameter("id");
+            if (id != null && !id.isEmpty()) {
+                int i = Integer.parseInt(id);
+                NiveauEtude niveauEtude = niveauEtudeDAO.get(i);
+                request.setAttribute("niveauEtude", niveauEtude);
+
+            }
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/niveau.jsp").forward(request, response);
         } else {
-//            response.sendRedirect("index.htm");
+            response.sendRedirect("index.htm");
         }
     }
 

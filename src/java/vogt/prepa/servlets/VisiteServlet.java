@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import vogt.prepa.dao.VisiteDAO;
 import vogt.prepa.entities.Utilisateur;
+import vogt.prepa.entities.Visite;
 
 /**
  *
@@ -31,8 +32,14 @@ public class VisiteServlet extends HttpServlet {
         HttpSession httpSession = request.getSession();
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
-            request.setAttribute("visites", visiteDAO.getall());
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/visites.jsp").forward(request, response);
+            String id = request.getParameter("id");
+            if (id != null && !id.isEmpty()) {
+                int i = Integer.parseInt(id);
+                Visite visite = visiteDAO.get(i);
+                request.setAttribute("visite", visite);
+
+            }
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/visite.jsp").forward(request, response);
         }else{
             response.sendRedirect("index.htm");
         }

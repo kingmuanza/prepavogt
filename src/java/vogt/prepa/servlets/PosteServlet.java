@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import vogt.prepa.dao.PosteDAO;
+import vogt.prepa.entities.Poste;
 import vogt.prepa.entities.Utilisateur;
 
 /**
@@ -31,8 +32,14 @@ public class PosteServlet extends HttpServlet {
         HttpSession httpSession = request.getSession();
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
-//            request.setAttribute("postes", posteDAO.getall());
-//            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/postes.jsp").forward(request, response);
+           String id = request.getParameter("id");
+            if (id != null && !id.isEmpty()) {
+                int i = Integer.parseInt(id);
+                Poste poste = posteDAO.get(i);
+                request.setAttribute("poste", poste);
+
+            }
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/poste.jsp").forward(request, response);
         }else{
 //            response.sendRedirect("index.htm");
         }

@@ -36,7 +36,7 @@ public class CoursEnseignantServlet extends HttpServlet {
             if (id != null && !id.isEmpty()) {
                 int i = Integer.parseInt(id);
                 CoursEnseignant coursEnseignant = coursEnseignantDAO.get(i);
-                request.setAttribute("courEnseignant", coursEnseignant);
+                request.setAttribute("coursEnseignant", coursEnseignant);
 
             }
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/CoursEnseignant.jsp").forward(request, response);

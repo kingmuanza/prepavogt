@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import vogt.prepa.dao.MatiereDAO;
+import vogt.prepa.entities.Matiere;
 import vogt.prepa.entities.Utilisateur;
 
 /**
@@ -31,10 +32,16 @@ public class MatiereServlet extends HttpServlet {
         HttpSession httpSession = request.getSession();
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
-//            request.setAttribute("matieres", matiereDAO.getall());
-//            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/matieres.jsp").forward(request, response);
+            String id = request.getParameter("id");
+            if (id != null && !id.isEmpty()) {
+                int i = Integer.parseInt(id);
+                Matiere matiere = matiereDAO.get(i);
+                request.setAttribute("matiere", matiere);
+
+            }
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/matiere.jsp").forward(request, response);
         }else{
-//            response.sendRedirect("index.htm");
+            response.sendRedirect("index.htm");
         }
     } 
 

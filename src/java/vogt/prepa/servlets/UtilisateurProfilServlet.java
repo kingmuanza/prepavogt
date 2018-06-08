@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import vogt.prepa.dao.UtilisateurProfilDAO;
 import vogt.prepa.entities.Utilisateur;
+import vogt.prepa.entities.UtilisateurProfil;
 
 /**
  *
@@ -31,8 +32,14 @@ public class UtilisateurProfilServlet extends HttpServlet {
         HttpSession httpSession = request.getSession();
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
-            request.setAttribute("utilisateurProfils", utilisateurProfilDAO.getall());
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/profils.jsp").forward(request, response);
+            String id = request.getParameter("id");
+            if (id != null && !id.isEmpty()) {
+                int i = Integer.parseInt(id);
+                UtilisateurProfil utilisateurProfil = utilisateurProfilDAO.get(i);
+                request.setAttribute("utilisateurProfil", utilisateurProfil);
+
+            }
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/profil.jsp").forward(request, response);
         }else{
             response.sendRedirect("index.htm");
         }
