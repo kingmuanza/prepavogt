@@ -122,6 +122,23 @@ public class PosteDAO {
         return n;
 
     }
+    
+    public boolean supprimer(int id) {
+        Poste poste = get(id);
+        return supprimer(poste);
+    }
+    public boolean supprimer(String id) {
+        int i = Integer.parseInt(id);
+        return supprimer(i);
+    }
+    public Poste get(String id) {
+        int i = Integer.parseInt(id);
+        return get(i);
+    }
+    public Poste getLazy(String id) {
+        int i = Integer.parseInt(id);
+        return getLazy(i);
+    }
 
     public void initialiser(Poste poste) {
         Hibernate.initialize(poste.getEmployes());

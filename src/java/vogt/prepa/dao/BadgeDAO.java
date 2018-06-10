@@ -121,6 +121,23 @@ public class BadgeDAO {
         return n ;
 
     }
+    
+    public boolean supprimer(int id) {
+        Badge cours = get(id);
+        return supprimer(cours);
+    }
+    public boolean supprimer(String id) {
+        int i = Integer.parseInt(id);
+        return supprimer(i);
+    }
+    public Badge get(String id) {
+        int i = Integer.parseInt(id);
+        return get(i);
+    }
+    public Badge getLazy(String id) {
+        int i = Integer.parseInt(id);
+        return getLazy(i);
+    }
 
     public void initialiser(Badge badge) {
      Hibernate.initialize(badge.getEntrees());

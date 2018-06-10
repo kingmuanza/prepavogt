@@ -119,6 +119,23 @@ public class IndividuDAO {
         return n ;
 
     }
+    
+    public boolean supprimer(int id) {
+        Individu individu = get(id);
+        return supprimer(individu);
+    }
+    public boolean supprimer(String id) {
+        int i = Integer.parseInt(id);
+        return supprimer(i);
+    }
+    public Individu get(String id) {
+        int i = Integer.parseInt(id);
+        return get(i);
+    }
+    public Individu getLazy(String id) {
+        int i = Integer.parseInt(id);
+        return getLazy(i);
+    }
 
     public void initialiser(Individu individu) {
         

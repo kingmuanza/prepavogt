@@ -120,6 +120,23 @@ public class MatiereDAO {
         return n ;
 
     }
+    
+    public boolean supprimer(int id) {
+        Matiere matiere = get(id);
+        return supprimer(matiere);
+    }
+    public boolean supprimer(String id) {
+        int i = Integer.parseInt(id);
+        return supprimer(i);
+    }
+    public Matiere get(String id) {
+        int i = Integer.parseInt(id);
+        return get(i);
+    }
+    public Matiere getLazy(String id) {
+        int i = Integer.parseInt(id);
+        return getLazy(i);
+    }
 
     public void initialiser(Matiere matiere) {
         Hibernate.initialize(matiere.getCourses());

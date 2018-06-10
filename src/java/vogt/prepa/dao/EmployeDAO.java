@@ -120,6 +120,23 @@ public class EmployeDAO {
         return n ;
 
     }
+    
+    public boolean supprimer(int id) {
+        Employe employe = get(id);
+        return supprimer(employe);
+    }
+    public boolean supprimer(String id) {
+        int i = Integer.parseInt(id);
+        return supprimer(i);
+    }
+    public Employe get(String id) {
+        int i = Integer.parseInt(id);
+        return get(i);
+    }
+    public Employe getLazy(String id) {
+        int i = Integer.parseInt(id);
+        return getLazy(i);
+    }
 
     public void initialiser(Employe employe) {
         Hibernate.initialize(employe.getIndividu());

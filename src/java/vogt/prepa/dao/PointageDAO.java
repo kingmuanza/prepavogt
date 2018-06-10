@@ -119,6 +119,23 @@ public class PointageDAO {
         return n ;
 
     }
+    
+    public boolean supprimer(int id) {
+        Pointage pointage = get(id);
+        return supprimer(pointage);
+    }
+    public boolean supprimer(String id) {
+        int i = Integer.parseInt(id);
+        return supprimer(i);
+    }
+    public Pointage get(String id) {
+        int i = Integer.parseInt(id);
+        return get(i);
+    }
+    public Pointage getLazy(String id) {
+        int i = Integer.parseInt(id);
+        return getLazy(i);
+    }
 
     public void initialiser(Pointage pointage) {
         

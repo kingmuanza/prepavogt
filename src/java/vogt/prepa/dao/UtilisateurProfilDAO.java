@@ -119,6 +119,23 @@ public class UtilisateurProfilDAO {
         return n ;
 
     }
+    
+    public boolean supprimer(int id) {
+        UtilisateurProfil utilisateurProfil = get(id);
+        return supprimer(utilisateurProfil);
+    }
+    public boolean supprimer(String id) {
+        int i = Integer.parseInt(id);
+        return supprimer(i);
+    }
+    public UtilisateurProfil get(String id) {
+        int i = Integer.parseInt(id);
+        return get(i);
+    }
+    public UtilisateurProfil getLazy(String id) {
+        int i = Integer.parseInt(id);
+        return getLazy(i);
+    }
 
     public void initialiser(UtilisateurProfil utilisateurProfil) {
         

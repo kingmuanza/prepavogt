@@ -122,6 +122,23 @@ public class EnseignantDAO {
         return n;
 
     }
+    
+    public boolean supprimer(int id) {
+        Enseignant enseignant = get(id);
+        return supprimer(enseignant);
+    }
+    public boolean supprimer(String id) {
+        int i = Integer.parseInt(id);
+        return supprimer(i);
+    }
+    public Enseignant get(String id) {
+        int i = Integer.parseInt(id);
+        return get(i);
+    }
+    public Enseignant getLazy(String id) {
+        int i = Integer.parseInt(id);
+        return getLazy(i);
+    }
 
     public void initialiser(Enseignant enseignant) {
         Hibernate.initialize(enseignant.getIndividu());

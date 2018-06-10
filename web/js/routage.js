@@ -6,12 +6,12 @@ function UrlExists(url) {
     var http = new XMLHttpRequest();
     http.open('HEAD', url, false);
     http.send();
-    if (http.status !== 404 && http.status !== 500){
+    if (http.status !== 404 && http.status !== 500) {
         return url;
-    }else{
+    } else {
         return "notfound.jsp";
     }
-        
+
 }
 var app = angular.module("myApp", ["ngRoute"]);
 app.config(function ($routeProvider) {
@@ -72,6 +72,16 @@ app.config(function ($routeProvider) {
             })
             .when("/badges", {
                 templateUrl: UrlExists("BadgesServlet")
+            })
+            .when("/utilisateur", {
+                templateUrl: function (params) {
+                    return UrlExists("UtilisateurServlet")
+                }
+            })
+            .when("/utilisateur/:id", {
+                templateUrl: function (params) {
+                    return UrlExists("UtilisateurServlet")+"?id=" + params.id
+                }
             })
             .when("/utilisateurs", {
                 templateUrl: UrlExists("UtilisateursServlet")

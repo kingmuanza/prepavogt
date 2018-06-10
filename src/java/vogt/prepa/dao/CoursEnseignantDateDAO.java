@@ -119,6 +119,23 @@ public class CoursEnseignantDateDAO {
         return n ;
 
     }
+    
+    public boolean supprimer(int id) {
+        CoursEnseignantDate coursEnseignantDate = get(id);
+        return supprimer(coursEnseignantDate);
+    }
+    public boolean supprimer(String id) {
+        int i = Integer.parseInt(id);
+        return supprimer(i);
+    }
+    public CoursEnseignantDate get(String id) {
+        int i = Integer.parseInt(id);
+        return get(i);
+    }
+    public CoursEnseignantDate getLazy(String id) {
+        int i = Integer.parseInt(id);
+        return getLazy(i);
+    }
 
     public void initialiser(CoursEnseignantDate coursEnseignantDate) {
         

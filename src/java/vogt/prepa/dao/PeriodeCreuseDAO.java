@@ -119,6 +119,23 @@ public class PeriodeCreuseDAO {
         return n ;
 
     }
+    
+    public boolean supprimer(int id) {
+        PeriodeCreuse periodeCreuse = get(id);
+        return supprimer(periodeCreuse);
+    }
+    public boolean supprimer(String id) {
+        int i = Integer.parseInt(id);
+        return supprimer(i);
+    }
+    public PeriodeCreuse get(String id) {
+        int i = Integer.parseInt(id);
+        return get(i);
+    }
+    public PeriodeCreuse getLazy(String id) {
+        int i = Integer.parseInt(id);
+        return getLazy(i);
+    }
 
     public void initialiser(PeriodeCreuse periodeCreuse) {
         

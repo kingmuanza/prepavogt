@@ -120,6 +120,23 @@ public class CoursEnseignantDAO {
         return n ;
 
     }
+    
+    public boolean supprimer(int id) {
+        CoursEnseignant coursEnseignant = get(id);
+        return supprimer(coursEnseignant);
+    }
+    public boolean supprimer(String id) {
+        int i = Integer.parseInt(id);
+        return supprimer(i);
+    }
+    public CoursEnseignant get(String id) {
+        int i = Integer.parseInt(id);
+        return get(i);
+    }
+    public CoursEnseignant getLazy(String id) {
+        int i = Integer.parseInt(id);
+        return getLazy(i);
+    }
 
     public void initialiser(CoursEnseignant coursEnseignant) {
         Hibernate.initialize(coursEnseignant.getCours());

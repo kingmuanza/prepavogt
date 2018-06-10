@@ -121,6 +121,23 @@ public class EntreeDAO {
         return n ;
 
     }
+    
+    public boolean supprimer(int id) {
+        Entree entree = get(id);
+        return supprimer(entree);
+    }
+    public boolean supprimer(String id) {
+        int i = Integer.parseInt(id);
+        return supprimer(i);
+    }
+    public Entree get(String id) {
+        int i = Integer.parseInt(id);
+        return get(i);
+    }
+    public Entree getLazy(String id) {
+        int i = Integer.parseInt(id);
+        return getLazy(i);
+    }
 
     public void initialiser(Entree entree) {
         Hibernate.initialize(entree.getIndividu());

@@ -48,7 +48,7 @@ public class UtilisateurDAO {
         return isGood;
     }
 
-    public boolean deleteUser(Utilisateur utilisateur) {
+    public boolean supprimer(Utilisateur utilisateur) {
         boolean isGood = false;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
@@ -144,6 +144,23 @@ public class UtilisateurDAO {
 
         return n ;
 
+    }
+    
+    public boolean supprimer(int id) {
+        Utilisateur utilisateur = get(id);
+        return supprimer(utilisateur);
+    }
+    public boolean supprimer(String id) {
+        int i = Integer.parseInt(id);
+        return supprimer(i);
+    }
+    public Utilisateur get(String id) {
+        int i = Integer.parseInt(id);
+        return get(i);
+    }
+    public Utilisateur getLazy(String id) {
+        int i = Integer.parseInt(id);
+        return getLazy(i);
     }
     
     //Recupérer tous les objets associés aux clés primaires 

@@ -121,6 +121,23 @@ public class VisiteDAO {
         return n ;
 
     }
+    
+    public boolean supprimer(int id) {
+        Visite visite = get(id);
+        return supprimer(visite);
+    }
+    public boolean supprimer(String id) {
+        int i = Integer.parseInt(id);
+        return supprimer(i);
+    }
+    public Visite get(String id) {
+        int i = Integer.parseInt(id);
+        return get(i);
+    }
+    public Visite getLazy(String id) {
+        int i = Integer.parseInt(id);
+        return getLazy(i);
+    }
 
     public void initialiser(Visite visite) {
         Hibernate.initialize(visite.getIndividu());

@@ -119,6 +119,23 @@ public class NiveauEtudeDAO {
         return n ;
 
     }
+    
+    public boolean supprimer(int id) {
+        NiveauEtude niveauEtude = get(id);
+        return supprimer(niveauEtude);
+    }
+    public boolean supprimer(String id) {
+        int i = Integer.parseInt(id);
+        return supprimer(i);
+    }
+    public NiveauEtude get(String id) {
+        int i = Integer.parseInt(id);
+        return get(i);
+    }
+    public NiveauEtude getLazy(String id) {
+        int i = Integer.parseInt(id);
+        return getLazy(i);
+    }
 
     public void initialiser(NiveauEtude niveauEtude) {
         

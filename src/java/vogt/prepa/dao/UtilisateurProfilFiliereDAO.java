@@ -122,6 +122,23 @@ public class UtilisateurProfilFiliereDAO {
         return n ;
 
     }
+    
+    public boolean supprimer(int id) {
+        UtilisateurProfilFiliere utilisateurProfilFiliere = get(id);
+        return supprimer(utilisateurProfilFiliere);
+    }
+    public boolean supprimer(String id) {
+        int i = Integer.parseInt(id);
+        return supprimer(i);
+    }
+    public UtilisateurProfilFiliere get(String id) {
+        int i = Integer.parseInt(id);
+        return get(i);
+    }
+    public UtilisateurProfilFiliere getLazy(String id) {
+        int i = Integer.parseInt(id);
+        return getLazy(i);
+    }
 
     public void initialiser(UtilisateurProfilFiliere utilisateurProfilFiliere) {
         Hibernate.initialize(utilisateurProfilFiliere.getFiliere());

@@ -124,6 +124,23 @@ public class FiliereDAO {
         return n;
 
     }
+    
+    public boolean supprimer(int id) {
+        Filiere filiere = get(id);
+        return supprimer(filiere);
+    }
+    public boolean supprimer(String id) {
+        int i = Integer.parseInt(id);
+        return supprimer(i);
+    }
+    public Filiere get(String id) {
+        int i = Integer.parseInt(id);
+        return get(i);
+    }
+    public Filiere getLazy(String id) {
+        int i = Integer.parseInt(id);
+        return getLazy(i);
+    }
 
     public void initialiser(Filiere filiere) {
         Hibernate.initialize(filiere.getEtudiants());

@@ -119,6 +119,23 @@ public class IndividuPhotoDAO {
         return n ;
 
     }
+    
+    public boolean supprimer(int id) {
+        IndividuPhoto individuPhoto = get(id);
+        return supprimer(individuPhoto);
+    }
+    public boolean supprimer(String id) {
+        int i = Integer.parseInt(id);
+        return supprimer(i);
+    }
+    public IndividuPhoto get(String id) {
+        int i = Integer.parseInt(id);
+        return get(i);
+    }
+    public IndividuPhoto getLazy(String id) {
+        int i = Integer.parseInt(id);
+        return getLazy(i);
+    }
 
     public void initialiser(IndividuPhoto individuPhoto) {
         
