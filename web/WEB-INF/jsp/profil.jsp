@@ -1,3 +1,9 @@
+<%-- 
+    Document   : profil
+    Created on : 11 juin 2018, 12:51:39
+    Author     : zos hall
+--%>
+
 <%@page import="java.util.Date"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -17,7 +23,7 @@
     </head>
     <body>
         <h1 class="titre">
-            Nouveau pointage
+            Nouveau profil utilisateur
         </h1>
         <div style="padding-top: 10px;">
 

@@ -22,7 +22,7 @@ public class PointagesServlet extends HttpServlet {
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
             request.setAttribute("pointages", pointageDAO.getall());
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/pointage.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/pointages.jsp").forward(request, response);
         }else{
             response.sendRedirect("index.htm");
         }

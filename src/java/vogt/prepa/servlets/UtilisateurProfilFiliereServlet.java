@@ -41,7 +41,7 @@ public class UtilisateurProfilFiliereServlet extends HttpServlet {
             }
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/utilisateurProfilFiliere.jsp").forward(request, response);
         }else{
-//            response.sendRedirect("index.htm");
+            response.sendRedirect("index.htm");
         }
     } 
 

@@ -1,3 +1,20 @@
+<%-- 
+    Document   : etudiant
+    Created on : 11 juin 2018, 12:48:04
+    Author     : zos hall
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h1>Hello World!</h1>
+    </body>
+</html>
 <%@page import="java.util.Date"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -17,7 +34,7 @@
     </head>
     <body>
         <h1 class="titre">
-            Nouveau pointage
+            Nouvel etudiant
         </h1>
         <div style="padding-top: 10px;">
 
