@@ -17,7 +17,9 @@
     </head>
     <body>
         <h1 class="titre">
-            Nouvel utilisateur
+
+            ${empty u ? "Nouvel utilisateur":u.login} 
+
         </h1>
         <div style="padding-top: 10px;">
 
@@ -29,18 +31,16 @@
                                 <img src="img/joe.jpg">
                             </div>
                             <div class="content">
-                                <a class="header">Kristy</a>
-                                <div class="meta">
-                                    <span class="date">Joined in 2013</span>
-                                </div>
+                                <a class="header">
+                                    ${u.individu.noms} ${u.individu.prenoms}
+                                </a>
                                 <div class="description">
-                                    Kristy is an art director living in New York.
+                                    ${u.login}
                                 </div>
                             </div>
                             <div class="extra content">
                                 <a>
-                                    <i class="user icon"></i>
-                                    22 Friends
+                                    ${empty u.utilisateurProfil?"":u.utilisateurProfil.libelle}
                                 </a>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                     <div class="ten wide column">
                         <div>
                             <form class="ui form" action="UtilisateurServlet" method="post">
-                                <div class="ui message">
+                                <div class="ui error message">
                                     <div class="header">Messages à afficher en cas d'erreur</div>
                                     <ul class="list">
                                         <li>Entrez votre login</li>
@@ -57,6 +57,7 @@
                                 </div>
                                 <div class="required field">
                                     <label>Login</label>
+                                    <input type="hidden" name="id" value="${u.idutilisateur}" required>
                                     <input type="text" name="login" value="${u.login}" required>
                                 </div>
                                 <div class="two fields">
@@ -78,11 +79,26 @@
                                                 ${i.noms} ${i.prenoms}
                                             </option>
                                         </c:forEach>
-
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label>Profil</label>
+                                    <select class="ui dropdown" name="profil">
+                                        <option>Aucun profil</option>
+                                        <c:forEach items="${utilisateurProfils}" var="p">
+                                            <option value="${p.idutilisateurProfil}" ${u.utilisateurProfil.idutilisateurProfil==p.idutilisateurProfil?"selected":""}>
+                                                ${p.libelle}
+                                            </option>
+                                        </c:forEach>
                                     </select>
                                 </div>
                                 <div>
-                                    <button class="ui submit button" type="submit">Submit</button>
+                                    <button class="ui submit gris button" name="action" value="enregistrer" type="submit">
+                                        Enregistrer
+                                    </button>
+                                    <button class="ui submit red button" name="action" value="supprimer" type="submit">
+                                        Supprimer
+                                    </button>
                                 </div>
 
                             </form>
@@ -95,7 +111,7 @@
         <script>
             $(document).ready(function () {
                 ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
-
+                
             })
         </script>
     </body>

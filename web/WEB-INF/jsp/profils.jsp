@@ -40,7 +40,7 @@
             <tbody>
                 <c:forEach items="${utilisateurProfils}" var="profil">
 
-                    <tr>
+                    <tr class="pointeur" onclick="window.location.href='start#!/profil/${profil.idprofil}'">
                         <td>${profil.code}</td>
                         <td>${profil.libelle}</td>
                         <td class="center">
@@ -80,7 +80,7 @@
                             message: '',
                             className: 'ui gris mini button',
                             action: function (e, dt, node, config) {
-                                window.location.href='start'
+                                window.location.href='start#!/profil'
                             }
                         },
                         {

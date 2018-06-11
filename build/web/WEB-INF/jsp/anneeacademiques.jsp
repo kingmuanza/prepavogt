@@ -31,7 +31,7 @@
             <tbody>
                 <c:forEach items="${anneeScolaires}" var="anneeScolaire">
                     
-                <tr>
+                <tr class="pointeur" onclick="window.location.href='start#!/anneeAcademique/${anneeAcademique.idanneeAcademique}'">
                     <td>
                         <h4 class="ui image header">
                             <div class="content">
@@ -83,7 +83,7 @@
                             message: '',
                             className: 'ui gris mini button',
                             action: function (e, dt, node, config) {
-                                window.location.href='start'
+                                window.location.href='start#!/anneeAcademique'
                             }
                         },
                         {

@@ -32,7 +32,7 @@
             <tbody>
                 <c:forEach items="${badges}" var="badge">
                     
-                <tr>
+                <tr class="pointeur" onclick="window.location.href='start#!/badge/${badge.idbadge}'">
                     <td>
                         <h4 class="ui image header">
                             <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
@@ -77,7 +77,7 @@
                             message: '',
                             className: 'ui gris mini button',
                             action: function (e, dt, node, config) {
-                                window.location.href='start'
+                                window.location.href='start#!/badge'
                             }
                         },
                         {
