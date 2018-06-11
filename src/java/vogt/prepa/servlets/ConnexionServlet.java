@@ -40,6 +40,11 @@ public class ConnexionServlet extends HttpServlet {
         notif.setMessage("Vous venez de vous connecter !");
         notif.setSuccess(true);
         notifications.add(notif);
+        Notification notif2 = new Notification();
+        notif2.setTitre("Pointeuse");
+        notif2.setMessage("Echec de connexion à la pointeuse biométrique !");
+        notif2.setSuccess(false);
+        notifications.add(notif2);
 
         HttpSession httpSession = request.getSession();
         httpSession.setAttribute("utilisateur", utilisateur);

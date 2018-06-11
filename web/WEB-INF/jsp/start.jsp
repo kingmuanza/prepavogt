@@ -257,7 +257,6 @@
                     </div>
                 </div>
                 <div style="height: 90vh; overflow-y: scroll">
-                    ${notifications}
                     <div  ng-view style="min-height: 100vh; margin-top: -20px; padding-bottom: 40px;" class="espace_cotes">
 
                     </div>
@@ -280,15 +279,19 @@
         <script src="js/routage.js" type="text/javascript"></script>
         <script>
                         $(document).ready(function () {
+                            console.log("Moi je comprend pas pas");
+            <c:forEach items="${notifications}" var="n">
+
                             $.uiAlert({
-                                textHead: 'Muanza',
-                                text: 'est très beau',
-                                bgcolor: '#004d6f',
+                                textHead: "${n.titre}",
+                                text: "${n.message}",
+                                bgcolor: '${n.success ? "#004d6f":"#DB2828"} ',
                                 textcolor: '#fff',
                                 position: 'top-right', // top And bottom ||  left / center / right
                                 icon: 'checkmark box',
-                                time: 3
+                                time: 5
                             });
+            </c:forEach>
 
                         });
                         $(document).ajaxStart(function () {
