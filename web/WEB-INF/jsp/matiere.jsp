@@ -24,8 +24,8 @@
     <body>
         <h1 class="titre">
             <c:choose>
-                <c:when test="${empty matiere}">Nouvelle matiere</c:when>
-                <c:otherwise>Modifier la matiere</c:otherwise>
+                <c:when test="${empty matiere}">Nouvelle matière</c:when>
+                <c:otherwise>${matiere.libelle}</c:otherwise>
             </c:choose>
         </h1>
         <div style="padding-top: 10px;">
@@ -36,18 +36,11 @@
                         <div class="ui fluid card">
                             
                             <div class="content">
-                                <a class="header">Kristy</a>
-                                <div class="meta">
-                                    <span class="date">Joined in 2013</span>
-                                </div>
-                                <div class="description">
-                                    Kristy is an art director living in New York.
-                                </div>
+                                <a class="header">${matiere.libelle}</a>
                             </div>
                             <div class="extra content">
                                 <a>
-                                    <i class="user icon"></i>
-                                    22 Friends
+                                    ${matiere.code}
                                 </a>
                             </div>
                         </div>
