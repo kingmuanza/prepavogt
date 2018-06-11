@@ -39,7 +39,7 @@ public class EmployeServlet extends HttpServlet {
                 request.setAttribute("employe", employe);
 
             }
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/employe.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/collaborateur.jsp").forward(request, response);
         }else{
 //            response.sendRedirect("index.htm");
         }

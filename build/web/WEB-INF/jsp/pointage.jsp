@@ -16,108 +16,87 @@
 
     </head>
     <body>
-        <h1 class="titre">Liste des pointages</h1>
+        <h1 class="titre">
+            Nouveau pointage
+        </h1>
+        <div style="padding-top: 10px;">
 
-        <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Utilisateurs</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>E-mail</th>
-                    <th>Fonction</th>
-                    <th>Tel Portable</th>                    
-                    <th>Résidence</th>                    
-                </tr>
-            </thead>
-
-            <tbody>
-                <c:forEach items="${utilisateurs}" var="utilisateur">
-                    
-                <tr>
-                    <td>
-                        <h4 class="ui image header">
-                            <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
+            <div class="ui container">
+                <div class="ui grid">
+                    <div class="six wide column">
+                        <div class="ui fluid card">
+                            <div class="image">
+                                <img src="img/joe.jpg">
+                            </div>
                             <div class="content">
-                                ${utilisateur.login}
-                                <div class="sub header">
-                                    ${utilisateur.utilisateurProfil.libelle}
+                                <a class="header">Kristy</a>
+                                <div class="meta">
+                                    <span class="date">Joined in 2013</span>
+                                </div>
+                                <div class="description">
+                                    Kristy is an art director living in New York.
                                 </div>
                             </div>
-                        </h4>
-                    </td>
-                    <td>${utilisateur.individu.noms}</td>
-                    <td>${utilisateur.individu.prenoms}</td>
-                    <td>${utilisateur.individu.email}</td>
-                    <td>${utilisateur.utilisateurProfil.libelle}</td>
-                    <td>${utilisateur.individu.tel1}</td>
-                    <td>${utilisateur.individu.residence}</td>
-                </tr>
-                </c:forEach>
+                            <div class="extra content">
+                                <a>
+                                    <i class="user icon"></i>
+                                    22 Friends
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ten wide column">
+                        <div>
+                            <form class="ui form" action="UtilisateurServlet" method="post">
+                                <div class="ui message">
+                                    <div class="header">Messages à afficher en cas d'erreur</div>
+                                    <ul class="list">
+                                        <li>Entrez votre login</li>
+                                        <li>Les mots de passe ne sont pas identiques</li>
+                                    </ul>
+                                </div>
+                                <div class="required field">
+                                    <label>Login</label>
+                                    <input type="text" name="login" value="${u.login}" required>
+                                </div>
+                                <div class="two fields">
+                                    <div class="required field">
+                                        <label>Mot de passe</label>
+                                        <input type="password" name="passe" value="${u.passe}">
+                                    </div>
+                                    <div class="required field">
+                                        <label>Confirmation</label>
+                                        <input type="password" name="confirmation" value="${u.passe}">
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label>Individu</label>
+                                    <select class="ui dropdown" name="individu">
+                                        <option>Aucune personne</option>
+                                        <c:forEach items="${individus}" var="i">
+                                            <option value="${i.idindividu}" ${u.individu.idindividu==i.idindividu?"selected":""}>
+                                                ${i.noms} ${i.prenoms}
+                                            </option>
+                                        </c:forEach>
 
-            </tbody>
-        </table>
+                                    </select>
+                                </div>
+                                <div>
+                                    <button class="ui submit button" type="submit">Submit</button>
+                                </div>
 
+                            </form>
+                        </div>
 
-
-
-        <!-- Datatable -->
-        <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
-        <script src="js/jszip.js" type="text/javascript"></script>
-        <script src="js/pdf.js.js" type="text/javascript"></script>
-        <script src="js/dataTables.buttons.min.js" type="text/javascript"></script>
-        <script src="js/buttons.flash.min.js" type="text/javascript"></script>
-        <script src="js/buttons.html5.min.js" type="text/javascript"></script>
-        <script src="js/buttons.print.min.js" type="text/javascript"></script>
-        <script src="js/pdfmake.min.js" type="text/javascript"></script>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script>
-            var titre = 'Bonjour';
             $(document).ready(function () {
-                $('#dataTableUtilisateur').DataTable({
-                    dom: '<"top"fB>rt<"bottom"lp><"clear">',
-                    buttons: [
-                        {
-                            text: "Nouveau",
-                            title: titre,
-                            message: '',
-                            className: 'ui gris mini button',
-                            action: function (e, dt, node, config) {
-                                window.location.href='start'
-                            }
-                        },
-                        {
-                            extend: 'excelHtml5',
-                            text: "Exporter vers Excel",
-                            title: titre,
-                            message: '',
-                            className: 'ui gris mini basic button'
-                        },
-                        {
-                            extend: 'print',
-                            text: "Imprimer",
-                            title: titre,
-                            message: '',
-                            className: 'impression ui gris basic mini button'
-                        }
-                    ],
-                    "language": {
-                        "sEmptyTable": "Aucune donnée disponible",
-                        "sInfo": "Affiche _START_ à _END_ sur _TOTAL_ entrées",
-                        "sLengthMenu": "Afficher _MENU_ lignes par page",
-                        "sSearch": "Rechercher : ",
-                        "zeroRecords": "Aucun résultat",
-                        "info": "Page _PAGE_ sur _PAGES_",
-                        "infoEmpty": "Aucun résultat disponible",
-                        "sProcessing": "Veuillez patienter...",
-                        "infoFiltered": "(sur les _MAX_ disponibles)",
-                        "paginate": {
-                            "previous": "Précédent",
-                            "next": "Suivant"
-                        }
-                    }
-                });
-            });
-        </script>
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
 
+            })
+        </script>
     </body>
 </html>

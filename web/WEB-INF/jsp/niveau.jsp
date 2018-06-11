@@ -1,3 +1,9 @@
+<%-- 
+    Document   : niveau
+    Created on : 11 juin 2018, 12:49:22
+    Author     : zos hall
+--%>
+
 <%@page import="java.util.Date"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -17,7 +23,7 @@
     </head>
     <body>
         <h1 class="titre">
-            Nouveau pointage
+            Nouvel niveau d'étude
         </h1>
         <div style="padding-top: 10px;">
 

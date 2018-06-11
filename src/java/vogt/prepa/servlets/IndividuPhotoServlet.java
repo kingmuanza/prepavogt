@@ -41,7 +41,7 @@ public class IndividuPhotoServlet extends HttpServlet {
             }
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/individuPhoto.jsp").forward(request, response);
         }else{
-//            response.sendRedirect("index.htm");
+            response.sendRedirect("index.htm");
         }
     } 
 
