@@ -67,7 +67,6 @@ public class CoursServlet extends HttpServlet {
         //Pour supprimer l'entité
         if (action != null && !action.isEmpty() && "supprimer".equals(action)){
             String id = request.getParameter("id");
-            System.out.print("ID : " + id);
             if (id != null && !id.isEmpty()) {
                 Cours c = coursDAO.get(id);
                 if (verifierAvantSuppression(c)) {

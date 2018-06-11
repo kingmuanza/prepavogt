@@ -23,7 +23,10 @@
     </head>
     <body>
         <h1 class="titre">
-            Nouvelle filiere
+            <c:choose>
+                <c:when test="${empty filiere}">Nouvelle filiere</c:when>
+                <c:otherwise>Modifier la filiere</c:otherwise>
+            </c:choose>
         </h1>
         <div style="padding-top: 10px;">
 
@@ -31,9 +34,7 @@
                 <div class="ui grid">
                     <div class="six wide column">
                         <div class="ui fluid card">
-                            <div class="image">
-                                <img src="img/joe.jpg">
-                            </div>
+                            
                             <div class="content">
                                 <a class="header">Kristy</a>
                                 <div class="meta">
@@ -53,7 +54,7 @@
                     </div>
                     <div class="ten wide column">
                         <div>
-                            <form class="ui form" action="UtilisateurServlet" method="post">
+                            <form class="ui form" action="FiliereServlet" method="post">
                                 <div class="ui message">
                                     <div class="header">Messages à afficher en cas d'erreur</div>
                                     <ul class="list">
@@ -61,34 +62,28 @@
                                         <li>Les mots de passe ne sont pas identiques</li>
                                     </ul>
                                 </div>
+                                <input type="hidden" name="id" value="${filiere.idfiliere}" required>
                                 <div class="required field">
-                                    <label>Login</label>
-                                    <input type="text" name="login" value="${u.login}" required>
+                                    <label>Code</label>
+                                    <input type="text" name="code" value="${filiere.code}" required>
                                 </div>
-                                <div class="two fields">
-                                    <div class="required field">
-                                        <label>Mot de passe</label>
-                                        <input type="password" name="passe" value="${u.passe}">
-                                    </div>
-                                    <div class="required field">
-                                        <label>Confirmation</label>
-                                        <input type="password" name="confirmation" value="${u.passe}">
-                                    </div>
+                                <div class="required field">
+                                    <label>Libelle</label>
+                                    <input type="text" name="libelle" value="${filiere.libelle}" required>
                                 </div>
-                                <div class="field">
-                                    <label>Individu</label>
-                                    <select class="ui dropdown" name="individu">
-                                        <option>Aucune personne</option>
-                                        <c:forEach items="${individus}" var="i">
-                                            <option value="${i.idindividu}" ${u.individu.idindividu==i.idindividu?"selected":""}>
-                                                ${i.noms} ${i.prenoms}
-                                            </option>
-                                        </c:forEach>
-
-                                    </select>
-                                </div>
+                                
+                                
                                 <div>
-                                    <button class="ui submit button" type="submit">Submit</button>
+                                    <button class="ui submit gris button" name="action" value="enregistrer" type="submit">
+                                        Enregistrer
+                                    </button>
+                                    <c:if test="${!empty filiere}">
+                                        <button class="ui submit red button" name="action" value="supprimer" type="submit">
+                                            Supprimer
+                                        </button>
+                                    </c:if>
+                                    
+                                    
                                 </div>
 
                             </form>
