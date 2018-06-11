@@ -104,21 +104,14 @@
 
 
 
-
-        <!-- Fichiers js pour le dataTable-->
+        <!-- Datatable -->
         <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
-        <script src="js/dataTables.semanticui.min.js" type="text/javascript"></script>
-        <script src="js/dataTables.responsive.min.js" type="text/javascript"></script>
-        <script src="js/responsive.semanticui.min.js" type="text/javascript"></script>
-
-        <!-- Datatable utilisateur -->
-        <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="js/jszip.js" type="text/javascript"></script>
+        <script src="js/pdf.js.js" type="text/javascript"></script>
         <script src="js/dataTables.buttons.min.js" type="text/javascript"></script>
         <script src="js/buttons.flash.min.js" type="text/javascript"></script>
         <script src="js/buttons.html5.min.js" type="text/javascript"></script>
         <script src="js/buttons.print.min.js" type="text/javascript"></script>
-        <script src="js/dataTables.buttons.min.js" type="text/javascript"></script>
-        <script src="js/pdf.js.js" type="text/javascript"></script>
         <script src="js/pdfmake.min.js" type="text/javascript"></script>
 
     </body>

@@ -68,20 +68,14 @@
 
 
 
-        <!-- Fichiers js pour le dataTable-->
+        <!-- Datatable -->
         <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
-        <script src="js/dataTables.semanticui.min.js" type="text/javascript"></script>
-        <script src="js/dataTables.responsive.min.js" type="text/javascript"></script>
-        <script src="js/responsive.semanticui.min.js" type="text/javascript"></script>
-
-        <!-- Datatable utilisateur -->
-        <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="js/jszip.js" type="text/javascript"></script>
+        <script src="js/pdf.js.js" type="text/javascript"></script>
         <script src="js/dataTables.buttons.min.js" type="text/javascript"></script>
         <script src="js/buttons.flash.min.js" type="text/javascript"></script>
         <script src="js/buttons.html5.min.js" type="text/javascript"></script>
         <script src="js/buttons.print.min.js" type="text/javascript"></script>
-        <script src="js/dataTables.buttons.min.js" type="text/javascript"></script>
-        <script src="js/pdf.js.js" type="text/javascript"></script>
         <script src="js/pdfmake.min.js" type="text/javascript"></script>
         <script>
             var titre = 'Bonjour';
@@ -90,18 +84,20 @@
                     dom: '<"top"fB>rt<"bottom"lp><"clear">',
                     buttons: [
                         {
-                            extend: 'excel',
+                            text: "Nouveau",
+                            title: titre,
+                            message: '',
+                            className: 'ui gris mini button',
+                            action: function (e, dt, node, config) {
+                                window.location.href='start'
+                            }
+                        },
+                        {
+                            extend: 'excelHtml5',
                             text: "Exporter vers Excel",
                             title: titre,
                             message: '',
-                            className: 'impressionExcel'
-                        },
-                        {
-                            extend: 'pdfHtml5',
-                            text: "Exporter en PDF",
-                            title: titre,
-                            message: '',
-                            className: 'impressionPDF ui gris basic mini button'
+                            className: 'ui gris mini basic button'
                         },
                         {
                             extend: 'print',
