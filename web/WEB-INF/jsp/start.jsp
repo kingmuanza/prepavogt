@@ -13,6 +13,7 @@
         <!-- Fichiers CSS-->
         <link href="css/semantic.css" rel="stylesheet" type="text/css"/>
         <link href="css/myapp.css?id=23" rel="stylesheet" type="text/css"/>
+        <link href="css/Semantic-UI-Alert.css" rel="stylesheet" type="text/css"/>
     </head>
 
     <body ng-app="myApp" style="height: 100vh; overflow-y: hidden; ">
@@ -256,6 +257,7 @@
                     </div>
                 </div>
                 <div style="height: 90vh; overflow-y: scroll">
+                    ${notifications}
                     <div  ng-view style="min-height: 100vh; margin-top: -20px; padding-bottom: 40px;" class="espace_cotes">
 
                     </div>
@@ -271,11 +273,24 @@
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/semantic.js" type="text/javascript"></script>
         <script src="particles/particles.min.js" type="text/javascript"></script>
+        <script src="js/Semantic-UI-Alert.js" type="text/javascript"></script>
         <script src="js/angular.min.js" type="text/javascript"></script>
         <script src="js/angular-route.js" type="text/javascript"></script>
         <script src="js/myapp.js" type="text/javascript"></script>
         <script src="js/routage.js" type="text/javascript"></script>
         <script>
+                        $(document).ready(function () {
+                            $.uiAlert({
+                                textHead: 'Muanza',
+                                text: 'est très beau',
+                                bgcolor: '#004d6f',
+                                textcolor: '#fff',
+                                position: 'top-right', // top And bottom ||  left / center / right
+                                icon: 'checkmark box',
+                                time: 3
+                            });
+
+                        });
                         $(document).ajaxStart(function () {
                             console.log("AJAX started")
                         });
@@ -284,7 +299,7 @@
                             console.log("AJAX stop")
                         });
                         $(window).bind('hashchange', function () {
-                            $("#chargement").fadeIn("slow", function(){
+                            $("#chargement").fadeIn("slow", function () {
                                 $("#chargement").fadeOut("slow")
                             });
                         });

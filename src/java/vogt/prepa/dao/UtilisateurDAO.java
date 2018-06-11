@@ -33,7 +33,7 @@ public class UtilisateurDAO {
         return utilisateur;
     }
     
-    public boolean addUser(Utilisateur utilisateur) {
+    public boolean enregistrer(Utilisateur utilisateur) {
         boolean isGood = false;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();

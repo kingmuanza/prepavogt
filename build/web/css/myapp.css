@@ -9,6 +9,10 @@
 */
 
 /**/
+
+.pointeur{
+    cursor:pointer;
+}
 .section_muanza{
     display:none;
 }

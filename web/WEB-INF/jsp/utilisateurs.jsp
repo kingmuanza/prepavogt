@@ -34,7 +34,7 @@
             <tbody>
                 <c:forEach items="${utilisateurs}" var="utilisateur">
 
-                    <tr>
+                    <tr class="pointeur" onclick="window.location.href='start#!/utilisateur/${utilisateur.idutilisateur}'">
                         <td>
                             <h4 class="ui image header">
                                 <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
