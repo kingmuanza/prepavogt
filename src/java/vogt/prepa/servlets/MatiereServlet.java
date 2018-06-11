@@ -6,7 +6,7 @@
 package vogt.prepa.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import vogt.prepa.dao.MatiereDAO;
 import vogt.prepa.entities.Matiere;
 import vogt.prepa.entities.Utilisateur;
+import vogt.prepa.utils.Notification;
 
 /**
  *
@@ -48,6 +49,72 @@ public class MatiereServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
+        HttpSession httpSession = request.getSession();
+        List<Notification> notifications = (List<Notification>) httpSession.getAttribute("notifications");
+        String action = request.getParameter("action");
+        System.out.print("Action : " + action);
+        //Pour supprimer l'entité
+        if (action != null && !action.isEmpty() && "supprimer".equals(action)) {
+            String id = request.getParameter("id");
+            if (id != null && !id.isEmpty()) {
+                Matiere m = matiereDAO.get(id);
+                if (verifierAvantSuppression(m)) {
+                    matiereDAO.supprimer(m);
+                    Notification notif = new Notification();
+                    notif.setTitre("Suppression");
+                    notif.setMessage("L'élement a bien été supprimé");
+                    notif.setSuccess(true);
+                    notifications.add(notif);
+                    httpSession.setAttribute("notifications", notifications);
+                    response.sendRedirect("start#!/matieres");
+                } else {
+                    Notification notif = new Notification();
+                    notif.setTitre("Suppression");
+                    notif.setMessage("Echec de suppression !");
+                    notif.setSuccess(false);
+                    notifications.add(notif);
+                    httpSession.setAttribute("notifications", notifications);
+                }
+            }//Pour ajouter ou modifier l'entité
+        } else {
+            String id = request.getParameter("id");
+            Matiere m = null;
+            if (id != null && !id.isEmpty()) {
+                int i = Integer.parseInt(id);
+                m = matiereDAO.get(i);
+            } else {
+                m = new Matiere();
+
+            }
+            String code = request.getParameter("code");
+            String libelle = request.getParameter("libelle");
+
+            m.setCode(code);
+            m.setLibelle(libelle);
+            
+
+            if (matiereDAO.enregistrer(m)) {
+                Notification notif = new Notification();
+                notif.setTitre("Enregistrement");
+                notif.setMessage("L'élement a bien été enregistré");
+                notif.setSuccess(true);
+                notifications.add(notif);
+                httpSession.setAttribute("notifications", notifications);
+            } else {
+                Notification notif = new Notification();
+                notif.setTitre("Enregistrement");
+                notif.setMessage("Echec d'enregistrement");
+                notif.setSuccess(true);
+                notifications.add(notif);
+                httpSession.setAttribute("notifications", notifications);
+            }
+            response.sendRedirect("start#!/matiere/" + m.getIdmatiere());
+        }
+    }
+    
+    public boolean verifierAvantSuppression(Matiere m) {
+        return true;
     }
 }
+        
+

@@ -82,8 +82,6 @@
                                             Supprimer
                                         </button>
                                     </c:if>
-                                    
-                                    
                                 </div>
 
                             </form>
