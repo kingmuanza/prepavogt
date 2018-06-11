@@ -113,7 +113,7 @@ public class UtilisateurServlet extends HttpServlet {
                 notifications.add(notif);
                 httpSession.setAttribute("notifications", notifications);
             }
-
+            response.sendRedirect("start#!/utilisateur/"+u.getIdutilisateur());
         }
     }
 
