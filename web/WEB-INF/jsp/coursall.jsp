@@ -30,7 +30,7 @@
             <tbody>
                 <c:forEach items="${courss}" var="cour">
 
-                    <tr>
+                    <tr class="pointeur" onclick="window.location.href='start#!/cours/${cour.idcours}'">
                         <td>
                             <h4 class="ui image header">
                                 <div class="content">
@@ -88,7 +88,7 @@
                             message: '',
                             className: 'ui gris mini button',
                             action: function (e, dt, node, config) {
-                                window.location.href='start'
+                                window.location.href='start#!/cours'
                             }
                         },
                         {
