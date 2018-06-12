@@ -97,57 +97,45 @@ public class AnneeScolaireServlet extends HttpServlet {
             } else {
                 annee = new AnneeScolaire();
             }
-            
+
             String code = request.getParameter("code");
-            annee.setCode (code);
+            annee.setCode(code);
             String libelle = request.getParameter("libelle");
-            annee.setLibelle (libelle);
-            try{
+            annee.setLibelle(libelle);
+            try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String debut = request.getParameter("dateDebut");
                 Date dateDebut = sdf.parse(debut);
-                annee.setDateDebut (dateDebut);
-            }catch(ParseException el){
+                annee.setDateDebut(dateDebut);
+            } catch (ParseException el) {
                 System.out.println("la date entrée est fausse, retapez la date");
-            }  
-            try{
+            }
+            try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String fin = request.getParameter("dateDebut");
                 Date dateFin = sdf.parse(fin);
-                annee.setDateFin (dateFin);
-            }catch(ParseException el){
+                annee.setDateFin(dateFin);
+            } catch (ParseException el) {
                 System.out.println("la date final entrée est fausse, retapez la date");
-            } 
-            try{
-                String idetudia = request.getParameter("idetudiant");
-                int idetudiant = Integer.parseInt(idetudia);
-                List<Etudiant> etudiants = etudiantDAO.getall();
-                annee.setEtudiants ((Set<Etudiant>) etudiants);
-            }catch(Exception el){
-                System.out.println("l'entier entrée est fausse, retapez l'id");
-            } 
-            
-    if (anneeScolaireDAO.enregistrer (annee) 
-        ) {
-                Notification notif = new Notification();
-        notif.setTitre("Enregistrement");
-        notif.setMessage("L'élement a bien été enregistré");
-        notif.setSuccess(true);
-        notifications.add(notif);
-        httpSession.setAttribute("notifications", notifications);
-    }
+            }
 
-    
-        else {
+            if (anneeScolaireDAO.enregistrer(annee)) {
                 Notification notif = new Notification();
-        notif.setTitre("Enregistrement");
-        notif.setMessage("Echec d'enregistrement");
-        notif.setSuccess(true);
-        notifications.add(notif);
-        httpSession.setAttribute("notifications", notifications);
-    }
+                notif.setTitre("Enregistrement");
+                notif.setMessage("L'élement a bien été enregistré");
+                notif.setSuccess(true);
+                notifications.add(notif);
+                httpSession.setAttribute("notifications", notifications);
+            } else {
+                Notification notif = new Notification();
+                notif.setTitre("Enregistrement");
+                notif.setMessage("Echec d'enregistrement");
+                notif.setSuccess(true);
+                notifications.add(notif);
+                httpSession.setAttribute("notifications", notifications);
+            }
 
-    response.sendRedirect ("start#!/anneeacademique/" + annee.getIdanneeScolaire());
+            response.sendRedirect("start#!/anneeacademique/" + annee.getIdanneeScolaire());
         }
     }
 

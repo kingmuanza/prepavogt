@@ -41,11 +41,8 @@
                                     </ul>
                                 </div>
                                 <div class="required field">
-                                    <label>ID</label>
-                                    <input type="text" name="id" value="${anneeScolaire.idanneeScolaire}" readonly required>
-                                </div>
-                                <div class="required field">
                                     <label>Code</label>
+                                    <input type="hidden" name="id" value="${anneeScolaire.idanneeScolaire}" readonly>
                                     <input type="text" name="code" value="${anneeScolaire.code}" required>
                                 </div>
                                 <div class="required field">
@@ -61,18 +58,6 @@
                                         <label>Date Fin</label>
                                         <input type="text" name="dateFin" value="${anneeScolaire.dateFin}">
                                     </div>
-                                </div>
-                                <div class="field">
-                                    <label>Etudiant</label>
-                                    <select class="ui dropdown" name="individu">
-                                        <option>Aucune personne</option>
-                                        <c:forEach items="${etudiants}" var="e">
-                                            <option value="${e.idetudiant}" >
-                                                ${e.individu.noms} ${e.individu.prenoms}
-                                            </option>
-                                        </c:forEach>
-
-                                    </select>
                                 </div>
                                 <div>
                                     <button class="ui submit gris button" name="action" value="enregistrer" type="submit">
