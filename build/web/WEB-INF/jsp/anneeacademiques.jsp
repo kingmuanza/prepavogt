@@ -31,7 +31,7 @@
             <tbody>
                 <c:forEach items="${anneeScolaires}" var="anneeScolaire">
                     
-                <tr class="pointeur" onclick="window.location.href='start#!/anneeAcademique/${anneeAcademique.idanneeAcademique}'">
+                <tr class="pointeur" onclick="window.location.href='start#!/anneeacademique/${anneeScolaire.idanneeScolaire}'">
                     <td>
                         <h4 class="ui image header">
                             <div class="content">
