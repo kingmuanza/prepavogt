@@ -13,6 +13,10 @@
 .pointeur{
     cursor:pointer;
 }
+.pointeur:hover{
+    opacity:0.9!important;
+    background-color: #efefff!important;
+}
 .section_muanza{
     display:none;
 }

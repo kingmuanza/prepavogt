@@ -33,7 +33,6 @@
                 <tr class="pointeur" onclick="window.location.href='start#!/matiere/${matiere.idmatiere}'">
                     <td>
                         <h4 class="ui image header">
-                            <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
                             <div class="content">
                                 ${matiere.code}
                                 <div class="sub header">
