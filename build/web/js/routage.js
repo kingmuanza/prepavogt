@@ -56,7 +56,7 @@ app.config(function ($routeProvider) {
             })
             .when("/profil", {
                 templateUrl: function (params) {
-                    return UrlExists("ProfilServlet")
+                    return UrlExists("UtilisateurProfilServlet")
                 }
             })
             .when("/profil/:id", {

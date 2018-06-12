@@ -1,6 +1,7 @@
 package vogt.prepa.dao;
 
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
@@ -138,6 +139,5 @@ public class UtilisateurProfilDAO {
     }
 
     public void initialiser(UtilisateurProfil utilisateurProfil) {
-        
     }
 }
