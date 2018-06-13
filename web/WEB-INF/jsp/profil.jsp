@@ -61,10 +61,10 @@
                                 <div class="field">
                                     <label>Visibilité Employé</label>
                                     <select class="ui dropdown" name="employe">
-                                        <option value="${utilisateurProfil.voirEmploye}" ${utilisateurProfil.voirEmploye=="0"?"selected":""}>
+                                        <option value="0" ${utilisateurProfil.voirEmploye=="0"?"selected":""}>
                                                 NON
                                         </option>
-                                        <option value="${utilisateurProfil.voirEmploye}" ${utilisateurProfil.voirEmploye=="1"?"selected":""}>
+                                        <option value="1" ${utilisateurProfil.voirEmploye=="1"?"selected":""}>
                                                 OUI
                                         </option>
                                     </select>
@@ -72,10 +72,10 @@
                                 <div class="field">
                                     <label>Visibilité Enseignant</label>
                                     <select class="ui dropdown" name="enseignant">
-                                        <option value="${utilisateurProfil.voirEnseignant}" ${utilisateurProfil.voirEnseignant=="0"?"selected":""}>
+                                        <option value="0" ${utilisateurProfil.voirEnseignant=="0"?"selected":""}>
                                                 NON
                                         </option>
-                                        <option value="${utilisateurProfil.voirEnseignant}" ${utilisateurProfil.voirEnseignant=="1"?"selected":""}>
+                                        <option value="1" ${utilisateurProfil.voirEnseignant=="1"?"selected":""}>
                                                 OUI
                                         </option>
                                     </select>

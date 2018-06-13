@@ -88,8 +88,14 @@ public class UtilisateurServlet extends HttpServlet {
             }
             String login = request.getParameter("login");
             String passe = request.getParameter("passe");
-            String idutilisateurProfil = request.getParameter("profil");
-            UtilisateurProfil profil = utilisateurProfilDAO.get(idutilisateurProfil);
+            String idprof = request.getParameter("profil");
+            UtilisateurProfil profil = null;
+            try {
+                int idutilisateurProfil = Integer.parseInt(idprof);
+            profil = utilisateurProfilDAO.get(idutilisateurProfil);
+            } catch (Exception el) {
+                System.out.println("la date entrée est fausse, retapez la date");
+            }
             String idindividu = request.getParameter("individu");
             Individu individu = individuDAO.get(idindividu);
 
