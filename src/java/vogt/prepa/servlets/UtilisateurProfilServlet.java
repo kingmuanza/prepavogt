@@ -81,8 +81,8 @@ public class UtilisateurProfilServlet extends HttpServlet {
             String id = request.getParameter("id");
             UtilisateurProfil utilProfil = null;
             if (id != null && !id.isEmpty()) {
-                int i = Integer.parseInt(id);
-                utilProfil = utilisateurProfilDAO.get(i);
+//                int i = Integer.parseInt(id);
+                utilProfil = utilisateurProfilDAO.get(id);
             } else {
                 utilProfil = new UtilisateurProfil();
             }
