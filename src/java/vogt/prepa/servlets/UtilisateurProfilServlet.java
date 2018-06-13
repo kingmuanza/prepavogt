@@ -66,7 +66,7 @@ public class UtilisateurProfilServlet extends HttpServlet {
                     notif.setSuccess(true);
                     notifications.add(notif);
                     httpSession.setAttribute("notifications", notifications);
-                    response.sendRedirect("start#!/anneeacademiques");
+                    response.sendRedirect("start#!/profils");
                 } else {
                     Notification notif = new Notification();
                     notif.setTitre("Suppression");

@@ -41,7 +41,7 @@
                     </div>
                     <div class="ten wide column">
                         <div>
-                            <form class="ui form" action="UtilisateurServlet" method="post">
+                            <form class="ui form" action="UtilisateurProfilServlet" method="post">
                                 <div class="ui message">
                                     <div class="header">Messages à afficher en cas d'erreur</div>
                                     <ul class="list">
@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="required field">
                                     <label>Code</label>
-                                    <input type="hidden" name="code" value="${utilisateurProfil.idutilisateurProfil}">
+                                    <input type="hidden" name="id" value="${utilisateurProfil.idutilisateurProfil}">
                                     <input type="text" name="code" value="${utilisateurProfil.code}" required>
                                 </div>
                                 <div class="required field">

@@ -96,8 +96,15 @@ public class UtilisateurServlet extends HttpServlet {
             } catch (Exception el) {
                 System.out.println("la date entrée est fausse, retapez la date");
             }
-            String idindividu = request.getParameter("individu");
-            Individu individu = individuDAO.get(idindividu);
+            String idind = request.getParameter("individu");
+            Individu individu = null;
+            try {
+                int idindividu = Integer.parseInt(idind);
+                individu = individuDAO.get(idindividu);
+            } catch (Exception el) {
+                System.out.println("la date entrée est fausse, retapez la date");
+            }
+            
 
             u.setLogin(login);
             u.setPasse(passe);
