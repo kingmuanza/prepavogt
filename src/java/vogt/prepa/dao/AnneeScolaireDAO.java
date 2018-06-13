@@ -49,18 +49,8 @@ public class AnneeScolaireDAO {
         int i = Integer.parseInt(id);
         return supprimer(i);
     }
-    public AnneeScolaire get(String id) {
-        int i = Integer.parseInt(id);
-        return get(i);
-    }
-    public AnneeScolaire getLazy(String id) {
-        int i = Integer.parseInt(id);
-        return getLazy(i);
-    }
     
-    
-
-    public AnneeScolaire get(int id) {
+        public AnneeScolaire get(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
@@ -76,6 +66,18 @@ public class AnneeScolaireDAO {
 
         return anneeScolaire;
     }
+    
+    public AnneeScolaire get(String id) {
+        int i = Integer.parseInt(id);
+        return get(i);
+    }
+    public AnneeScolaire getLazy(String id) {
+        int i = Integer.parseInt(id);
+        return getLazy(i);
+    }
+    
+    
+
     
     public AnneeScolaire getLazy(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
