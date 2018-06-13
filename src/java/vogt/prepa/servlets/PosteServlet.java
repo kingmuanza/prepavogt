@@ -6,7 +6,7 @@
 package vogt.prepa.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import vogt.prepa.dao.PosteDAO;
 import vogt.prepa.entities.Poste;
 import vogt.prepa.entities.Utilisateur;
+import vogt.prepa.utils.Notification;
 
 /**
  *
@@ -48,6 +49,71 @@ public class PosteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
+        HttpSession httpSession = request.getSession();
+        List<Notification> notifications = (List<Notification>) httpSession.getAttribute("notifications");
+        String action = request.getParameter("action");
+        System.out.print("Action : " + action);
+        //Pour supprimer l'entité
+        if (action != null && !action.isEmpty() && "supprimer".equals(action)) {
+            String id = request.getParameter("id");
+            if (id != null && !id.isEmpty()) {
+                Poste m = posteDAO.get(id);
+                if (verifierAvantSuppression(m)) {
+                    posteDAO.supprimer(m);
+                    Notification notif = new Notification();
+                    notif.setTitre("Suppression");
+                    notif.setMessage("L'élement a bien été supprimé");
+                    notif.setSuccess(true);
+                    notifications.add(notif);
+                    httpSession.setAttribute("notifications", notifications);
+                    response.sendRedirect("start#!/postes");
+                } else {
+                    Notification notif = new Notification();
+                    notif.setTitre("Suppression");
+                    notif.setMessage("Echec de suppression !");
+                    notif.setSuccess(false);
+                    notifications.add(notif);
+                    httpSession.setAttribute("notifications", notifications);
+                }
+            }//Pour ajouter ou modifier l'entité
+        } else {
+            String id = request.getParameter("id");
+            Poste p = null;
+            if (id != null && !id.isEmpty()) {
+                int i = Integer.parseInt(id);
+                p = posteDAO.get(i);
+            } else {
+                p = new Poste();
+
+            }
+            String code = request.getParameter("code");
+            String libelle = request.getParameter("libelle");
+
+            p.setCode(code);
+            p.setLibelle(libelle);
+            
+            
+
+            if (posteDAO.enregistrer(p)) {
+                Notification notif = new Notification();
+                notif.setTitre("Enregistrement");
+                notif.setMessage("L'élement a bien été enregistré");
+                notif.setSuccess(true);
+                notifications.add(notif);
+                httpSession.setAttribute("notifications", notifications);
+            } else {
+                Notification notif = new Notification();
+                notif.setTitre("Enregistrement");
+                notif.setMessage("Echec d'enregistrement");
+                notif.setSuccess(true);
+                notifications.add(notif);
+                httpSession.setAttribute("notifications", notifications);
+            }
+            response.sendRedirect("start#!/poste/" + p.getIdposte());
+        }
+    }
+    
+    public boolean verifierAvantSuppression(Poste p) {
+        return true;
     }
 }
