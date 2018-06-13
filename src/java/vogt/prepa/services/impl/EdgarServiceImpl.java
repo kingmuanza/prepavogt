@@ -23,10 +23,10 @@ import vogt.prepa.utils.HibernateUtil;
  * @author 12Lions
  */
 public class EdgarServiceImpl implements EdgarService {
-    
+
     /*
     *   Retoure uniquement la partie heure (En String)
-    */
+     */
     @Override
     public String ExtraireHeure(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
@@ -36,7 +36,7 @@ public class EdgarServiceImpl implements EdgarService {
 
     /*
     *   Retoure uniquement la partie date (En String)
-    */
+     */
     @Override
     public String ExtraireDate(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -46,7 +46,7 @@ public class EdgarServiceImpl implements EdgarService {
 
     /*
     *   Reset la partie heure à 00h:00m:00s
-    */
+     */
     @Override
     public Date getDebutdeJournee(Date journee) {
         Calendar calendar = Calendar.getInstance();
@@ -60,7 +60,7 @@ public class EdgarServiceImpl implements EdgarService {
 
     /*
     *   Modifie la partie heure à 23h:59m:00s
-    */
+     */
     @Override
     public Date getFindeJournee(Date journee) {
         Calendar calendar = Calendar.getInstance();
@@ -74,7 +74,7 @@ public class EdgarServiceImpl implements EdgarService {
 
     /*
     *  h1 >= h2 ? renvoie true si oui false sinon
-    */
+     */
     @Override
     public boolean ComparerHeure(String heure1, String heure2) {
         boolean plusGrandouEgal = false;
@@ -86,7 +86,7 @@ public class EdgarServiceImpl implements EdgarService {
 
     /*
     *  renvoie false si on est dimanche
-    */
+     */
     @Override
     public boolean JourDeClasse(Date dateDuJour) {
         boolean dim = true;
@@ -96,42 +96,87 @@ public class EdgarServiceImpl implements EdgarService {
         }
         return dim;
     }
-    
+
     /*
     *  renvoie la liste des pointage d'un jour precis
-    */
+     */
     @Override
     public List<Pointage> PointagesDUnJour(Date dateDuJour) {
-        
+
         Date debutJournee = getDebutdeJournee(dateDuJour);
-        Date finJournee = getFindeJournee(dateDuJour); 
+        Date finJournee = getFindeJournee(dateDuJour);
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.getTransaction().begin();
+
+        List<Pointage> pointagesJour = session.createCriteria(Pointage.class)
+                .add(Restrictions.between("heure", debutJournee, finJournee))
+                .list();
+
+        session.getTransaction().commit();
+        session.close();
+
+        return pointagesJour;
+    }
+    
+    //***********************************************ODAY
+    @Override
+    public List<Pointage> PointagesEntreDeuxDates(Date dateDebut, Date dateFin) {  
+        
+        Date commencementJour1 = getDebutdeJournee(dateDebut);
+        Date finJour2 = getFindeJournee(dateFin);
         
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
-        
+
         List<Pointage> pointagesJour = session.createCriteria(Pointage.class)
-                .add(Restrictions.between("heure", debutJournee, finJournee))
-                    .list();
-        
+                .add(Restrictions.between("heure", commencementJour1, finJour2))
+                .list();
+
         session.getTransaction().commit();
         session.close();
-        
+
         return pointagesJour;
     }
 
     @Override
-    public List<Pointage> PointagesEntreDeuxDates(Date dateDebut, Date dateFin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public List<Pointage> PointagesDUnJourPourUnMatricule(String matricule, Date dateDuJour) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        Date debutJournee = getDebutdeJournee(dateDuJour);
+        Date finJournee = getFindeJournee(dateDuJour);
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.getTransaction().begin();
+
+        List<Pointage> pointagesJour = session.createCriteria(Pointage.class)
+                .add(Restrictions.eq("matricule", matricule))
+                .add(Restrictions.between("heure", debutJournee, finJournee))
+                .list();
+
+        session.getTransaction().commit();
+        session.close();
+
+        return pointagesJour;
     }
 
     @Override
     public List<Pointage> PointagesEntreDeuxDatesPourUnMatricule(String matricule, Date dateDebut, Date dateFin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        Date commencementJour1 = getDebutdeJournee(dateDebut);
+        Date finJour2 = getFindeJournee(dateFin);
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.getTransaction().begin();
+
+        List<Pointage> pointagesJour = session.createCriteria(Pointage.class)
+                .add(Restrictions.eq("matricule", matricule))
+                .add(Restrictions.between("heure", commencementJour1, finJour2))
+                .list();
+
+        session.getTransaction().commit();
+        session.close();
+
+        return pointagesJour;
     }
 
     @Override
