@@ -3,13 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/zos%20hall/Documents/NetBeansProjects/prepavogt/prepavogt/web/WEB-INF/jsp/utilisateur.jsp</file>
-            <file>file:/C:/Users/zos%20hall/Documents/NetBeansProjects/prepavogt/prepavogt/src/java/vogt/prepa/dao/AnneeScolaireDAO.java</file>
-            <file>file:/C:/Users/zos%20hall/Documents/NetBeansProjects/prepavogt/prepavogt/web/WEB-INF/jsp/anneeacademiques.jsp</file>
-            <file>file:/C:/Users/zos%20hall/Documents/NetBeansProjects/prepavogt/prepavogt/src/java/hibernate.cfg.xml</file>
-            <file>file:/C:/Users/zos%20hall/Documents/NetBeansProjects/prepavogt/prepavogt/src/java/vogt/prepa/servlets/AnneeScolaireServlet.java</file>
-            <file>file:/C:/Users/zos%20hall/Documents/NetBeansProjects/prepavogt/prepavogt/web/WEB-INF/jsp/anneeacademique.jsp</file>
-            <file>file:/C:/Users/zos%20hall/Documents/NetBeansProjects/prepavogt/prepavogt/src/java/vogt/prepa/servlets/AnneeScolairesServlet.java</file>
+            <file>file:/C:/Users/12Lions/Documents/NetBeansProjects/Prepavogt/prepavogt/src/java/vogt/prepa/entities/Pointage.java</file>
+            <file>file:/C:/Users/12Lions/Documents/NetBeansProjects/Prepavogt/prepavogt/src/java/vogt/prepa/services/EdgarService.java</file>
+            <file>file:/C:/Users/12Lions/Documents/NetBeansProjects/Prepavogt/prepavogt/src/java/vogt/prepa/services/impl/EdgarServiceImplTest.java</file>
+            <file>file:/C:/Users/12Lions/Documents/NetBeansProjects/Prepavogt/prepavogt/src/java/vogt/prepa/dao/PointageDAO.java</file>
+            <file>file:/C:/Users/12Lions/Documents/NetBeansProjects/Prepavogt/prepavogt/src/java/vogt/prepa/services/impl/EdgarServiceImpl.java</file>
         </group>
     </open-files>
 </project-private>

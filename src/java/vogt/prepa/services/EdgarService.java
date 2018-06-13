@@ -28,6 +28,8 @@ public interface EdgarService {
     */
     //Obtenir l'heure d'une date
     public String ExtraireHeure(Date date);
+    //Obtenir l'heure d'une date
+    public String ExtraireDate(Date date);
     //Obtenir la date de début de la journée
     public Date getDebutdeJournee(Date journee);
     //Obtenir la date de fin de la journée
