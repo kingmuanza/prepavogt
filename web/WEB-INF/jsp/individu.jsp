@@ -79,7 +79,7 @@
                                     </div>
                                     <div class="required field">
                                         <label>Genre</label>
-                                        <select class="ui dropdown" name="matiere">
+                                        <select class="ui dropdown" name="genre">
                                             <option value="true" ${individu.genre?"selected":""}>Femme</option>
                                             <option value="false" ${!individu.genre?"selected":""}>Homme</option>
                                         </select>

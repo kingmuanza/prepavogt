@@ -120,7 +120,7 @@
                                                 </div>
                                                 <div class="required field">
                                                     <label>Genre</label>
-                                                    <select class="ui dropdown" name="matiere">
+                                                    <select class="ui dropdown" name="genre">
                                                         <option value="true" >Femme</option>
                                                         <option value="false">Homme</option>
                                                     </select>
