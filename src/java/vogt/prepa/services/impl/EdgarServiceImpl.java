@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -118,14 +119,13 @@ public class EdgarServiceImpl implements EdgarService {
 
         return pointagesJour;
     }
-    
-    
+
     @Override
-    public List<Pointage> PointagesEntreDeuxDates(Date dateDebut, Date dateFin) {  
-        
+    public List<Pointage> PointagesEntreDeuxDates(Date dateDebut, Date dateFin) {
+
         Date commencementJour1 = getDebutdeJournee(dateDebut);
         Date finJour2 = getFindeJournee(dateFin);
-        
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
@@ -141,10 +141,10 @@ public class EdgarServiceImpl implements EdgarService {
 
     @Override
     public List<Pointage> PointagesDUnJourPourUnMatricule(String matricule, Date dateDuJour) {
-        
+
         Date debutJournee = getDebutdeJournee(dateDuJour);
         Date finJournee = getFindeJournee(dateDuJour);
-        
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
@@ -161,10 +161,10 @@ public class EdgarServiceImpl implements EdgarService {
 
     @Override
     public List<Pointage> PointagesEntreDeuxDatesPourUnMatricule(String matricule, Date dateDebut, Date dateFin) {
-        
+
         Date commencementJour1 = getDebutdeJournee(dateDebut);
         Date finJour2 = getFindeJournee(dateFin);
-        
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
@@ -178,55 +178,73 @@ public class EdgarServiceImpl implements EdgarService {
 
         return pointagesJour;
     }
-    
-    //***********************************************ODAY
+
     @Override
     public List<Pointage> PointagesDUnJourPourUnIndividu(Individu individu, Date dateDuJour) {
-        
+
         Date debutJournée = getDebutdeJournee(dateDuJour);
         Date finJournée = getFindeJournee(dateDuJour);
-        
+
         String matriculeIndiv = individu.getMatricule();
-        
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
-        
+
         List<Pointage> pointagesJour = session.createCriteria(Pointage.class)
                 .add(Restrictions.eq("matricule", matriculeIndiv))
                 .add(Restrictions.between("heure", debutJournée, finJournée))
                 .list();
-        
+
         session.getTransaction().commit();
         session.close();
-        
+
         return pointagesJour;
     }
 
     @Override
     public List<Pointage> PointagesEntreDeuxDatesPourUnIndividu(Individu individu, Date dateDebut, Date dateFin) {
-        
+
         Date commencementJour1 = getDebutdeJournee(dateDebut);
         Date finJour2 = getFindeJournee(dateFin);
-        
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
-        
+
         String matriculeIndiv = individu.getMatricule();
-        
+
         List<Pointage> pointagesJours = session.createCriteria(Pointage.class)
                 .add(Restrictions.eq("matricule", matriculeIndiv))
                 .add(Restrictions.between("heure", commencementJour1, finJour2))
                 .list();
-        
+
         session.getTransaction().commit();
         session.close();
-        
+
         return pointagesJours;
     }
 
+    //***********************************************ODAY
     @Override
     public Pointage premierPointage(String matricule, Date jourLa) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        Boolean trouve = false;
+        Pointage pointage;
+        Pointage p = null;
+
+        List<Pointage> pointagesJour = PointagesDUnJour(jourLa);
+
+        if (pointagesJour != null) {
+            ListIterator<Pointage> it = pointagesJour.listIterator();
+            
+            while (it.hasNext() && trouve == false) {
+                pointage = it.next();
+                if (pointage.getMatricule().equals(matricule)) {
+                    p = pointage;
+                    trouve = true;
+                }
+            }
+        }
+        return p;
     }
 
     @Override

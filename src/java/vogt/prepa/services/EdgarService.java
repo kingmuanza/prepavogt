@@ -21,7 +21,7 @@ import vogt.prepa.entities.Pointage;
 
 */
 public interface EdgarService {
-    public static final String HEURE_ARRIVEE = "08:00" ;
+    public static final String HEURE_ARRIVEE = "08:00:00" ;
     
     /*
         QUELQUES FONCTIONS QUE JE PENSE UTILES
