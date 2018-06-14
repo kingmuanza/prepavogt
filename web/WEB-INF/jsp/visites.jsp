@@ -89,7 +89,7 @@
                             message: '',
                             className: 'ui gris mini button',
                             action: function (e, dt, node, config) {
-                                window.location.href='start#!/utilisateur'
+                                window.location.href='start#!/visite'
                             }
                         },
                         {
