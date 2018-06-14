@@ -23,7 +23,10 @@
     </head>
     <body>
         <h1 class="titre">
-            Nouvel entree
+            <c:choose>
+                <c:when test="${empty visite}">Nouvelle Visite</c:when>
+                <c:otherwise>Modifier / Supprimer une Visite</c:otherwise>
+            </c:choose>
         </h1>
         <div style="padding-top: 10px;">
 
@@ -35,60 +38,94 @@
                                 <img src="img/joe.jpg">
                             </div>
                             <div class="content">
-                                <a class="header">Kristy</a>
+                                <a class="header">${visite.individu.noms} ${visite.individu.prenoms}</a>
                                 <div class="meta">
-                                    <span class="date">Joined in 2013</span>
+                                    <span class="date">${visite.motif}</span>
                                 </div>
                                 <div class="description">
-                                    Kristy is an art director living in New York.
+                                    ${visite.commentaire}
                                 </div>
-                            </div>
-                            <div class="extra content">
-                                <a>
-                                    <i class="user icon"></i>
-                                    22 Friends
-                                </a>
                             </div>
                         </div>
                     </div>
                     <div class="ten wide column">
                         <div>
-                            <form class="ui form" action="UtilisateurServlet" method="post">
-                                <div class="ui message">
-                                    <div class="header">Messages à afficher en cas d'erreur</div>
-                                    <ul class="list">
-                                        <li>Entrez votre login</li>
-                                        <li>Les mots de passe ne sont pas identiques</li>
-                                    </ul>
-                                </div>
-                                <div class="required field">
-                                    <label>Login</label>
-                                    <input type="text" name="login" value="${u.login}" required>
-                                </div>
-                                <div class="two fields">
-                                    <div class="required field">
-                                        <label>Mot de passe</label>
-                                        <input type="password" name="passe" value="${u.passe}">
+                            <form class="ui form" action="EntreeServlet" method="post">
+                                <c:if test="${!empty erreurs}">
+                                    <div class="ui message">
+                                        <div class="header">Messages à afficher en cas d'erreur</div>
+                                        <ul class="list">
+                                            <li>Entrez vos paramettre</li>
+                                            <li>Les champs en (*) sont obligatoires !</li>
+                                        </ul>
                                     </div>
-                                    <div class="required field">
-                                        <label>Confirmation</label>
-                                        <input type="password" name="confirmation" value="${u.passe}">
-                                    </div>
-                                </div>
+                                </c:if>
+                                <input type="hidden" name="id" value="${entree.identree}"/>
                                 <div class="field">
                                     <label>Individu</label>
-                                    <select class="ui dropdown" name="individu">
-                                        <option>Aucune personne</option>
-                                        <c:forEach items="${individus}" var="i">
-                                            <option value="${i.idindividu}" ${u.individu.idindividu==i.idindividu?"selected":""}>
-                                                ${i.noms} ${i.prenoms}
+                                    <select class="ui dropdown" name="indiv">
+                                        <option>Aucun individu</option>
+                                        <c:forEach items="${individus}" var="ind">
+                                            <option value="${ind.idindividu}" ${visite.individu.idindividu==ind.idindividu?"selected":""}>
+                                                ${ind.noms} ${ind.prenoms}
                                             </option>
                                         </c:forEach>
-
                                     </select>
                                 </div>
+                                <div class="field">
+                                    <label>Badge</label>
+                                    <select class="ui dropdown" name="badg">
+                                        <option>Aucun badge</option>
+                                        <c:forEach items="${badges}" var="badge">
+                                            <option value="${badge.idbadge}" ${entree.badge.idbadge==badge.idbadge?"selected":""}>
+                                                ${badge.code} : ${badge.libelle}
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label>Visite</label>
+                                    <select class="ui dropdown" name="visite">
+                                        <option>Aucune visite</option>
+                                        <c:forEach items="${visites}" var="visit">
+                                            <option value="${visit.idvisite}" ${entree.visite.idvisite==visit.idvisite?"selected":""}>
+                                                ${visit.motif}
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label>Nom Complet</label>
+                                    <input type="text" name="nomComplet" value="${entree.nomComplet}" required>
+                                </div>
+                                
+                                <div class="field">
+                                    <label>Motif</label>
+                                    <input type="text" name="motif" value="${entree.motif}" required>
+                                </div>
+                                
+                                <div class="field">
+                                    <label>commentaire</label>
+                                    <input type="text" name="commentaire" value="${entree.commentaire}" required>
+                                </div>
+                                <div class="field">
+                                    <label>Date Entree</label><label>${entree.dateEntree}</label>
+                                    <input type="date" name="dateEntree" value="" required>
+                                </div>
+                                <div class="field">
+                                    <label>Date Sortie</label><label>${entree.dateSortie}</label>
+                                    <input type="date" name="dateSortie" value="" required>
+                                </div>
+                                
                                 <div>
-                                    <button class="ui submit button" type="submit">Submit</button>
+                                    <button class="ui submit gris button" name="action" value="enregistrer" type="submit">
+                                        Enregistrer
+                                    </button>
+                                    <c:if test="${!empty entree}">
+                                        <button class="ui submit red button" name="action" value="supprimer" type="submit">
+                                            Supprimer
+                                        </button>
+                                    </c:if>
                                 </div>
 
                             </form>

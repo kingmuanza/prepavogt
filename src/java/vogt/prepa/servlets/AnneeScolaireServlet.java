@@ -112,7 +112,7 @@ public class AnneeScolaireServlet extends HttpServlet {
             }
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                String fin = request.getParameter("dateDebut");
+                String fin = request.getParameter("dateFin");
                 Date dateFin = sdf.parse(fin);
                 annee.setDateFin(dateFin);
             } catch (ParseException el) {
