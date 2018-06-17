@@ -24,8 +24,8 @@
     <body>
         <h1 class="titre">
             <c:choose>
-                <c:when test="${empty badge}">Nouveau Badge</c:when>
-                <c:otherwise>Modifier / Supprimer un Badge</c:otherwise>
+                <c:when test="${empty badge}">Nouveau badge</c:when>
+                <c:otherwise>${badge.libelle}</c:otherwise>
             </c:choose>
         </h1>
         <div style="padding-top: 10px;">
@@ -81,7 +81,7 @@
         </div>
         <script>
             $(document).ready(function () {
-                ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "badges");
 
             })
         </script>

@@ -23,7 +23,8 @@
     </head>
     <body>
         <h1 class="titre">
-            Nouvel niveau d'étude
+            ${empty niveauEtude ? "Nouveau niveau d'étude": niveauEtude.libelle}
+            
         </h1>
         <div style="padding-top: 10px;">
 
@@ -84,7 +85,7 @@
         </div>
         <script>
             $(document).ready(function () {
-                ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "niveaux");
 
             })
         </script>

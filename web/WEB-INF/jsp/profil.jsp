@@ -23,7 +23,7 @@
     </head>
     <body>
         <h1 class="titre">
-            Nouveau Profil utilisateur
+            ${empty utilisateurProfil ? "Nouveau profil utilisateur":utilisateurProfil.libelle}
         </h1>
         <div style="padding-top: 10px;">
 
@@ -61,22 +61,22 @@
                                 <div class="field">
                                     <label>Visibilité Employé</label>
                                     <select class="ui dropdown" name="employe">
-                                        <option value="0" ${utilisateurProfil.voirEmploye=="0"?"selected":""}>
-                                                NON
+                                        <option value="0" ${!utilisateurProfil.voirEmploye?"selected":""}>
+                                                Non
                                         </option>
-                                        <option value="1" ${utilisateurProfil.voirEmploye=="1"?"selected":""}>
-                                                OUI
+                                        <option value="1" ${utilisateurProfil.voirEmploye?"selected":""}>
+                                                Oui
                                         </option>
                                     </select>
                                 </div>
                                 <div class="field">
                                     <label>Visibilité Enseignant</label>
                                     <select class="ui dropdown" name="enseignant">
-                                        <option value="0" ${utilisateurProfil.voirEnseignant=="0"?"selected":""}>
-                                                NON
+                                        <option value="0" ${!utilisateurProfil.voirEnseignant?"selected":""}>
+                                                Non
                                         </option>
-                                        <option value="1" ${utilisateurProfil.voirEnseignant=="1"?"selected":""}>
-                                                OUI
+                                        <option value="1" ${utilisateurProfil.voirEnseignant?"selected":""}>
+                                                Oui
                                         </option>
                                     </select>
                                 </div>

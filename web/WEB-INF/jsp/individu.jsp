@@ -25,7 +25,7 @@
         <h1 class="titre">
             <c:choose>
                 <c:when test="${empty individu}">Nouvel individu</c:when>
-                <c:otherwise>Modifier / Supprimer un individu</c:otherwise>
+                <c:otherwise>${individu.prenoms} ${individu.noms}</c:otherwise>
             </c:choose>
         </h1>
         <div style="padding-top: 10px;">
@@ -41,7 +41,12 @@
                                 <a class="header">${individu.prenoms} ${individu.noms}</a>
 
                                 <div class="meta">
-                                    <span class="date"><c:if test="${!empty individu}">Née le ${individu.datenaiss}</c:if></span>
+                                    <span class="date">
+                                        <c:if test="${!empty individu}">
+                                            Né le ${individu.datenaiss}
+                                            à ${individu.lieunaiss}
+                                        </c:if>
+                                    </span>
                                     </div>
                                     <div class="description">
                                     <c:if test="${!empty individu}">Réside à ${individu.residence}</c:if>
@@ -74,7 +79,7 @@
                                 </div>
                                 <div class="two fields">
                                     <div class="required field">
-                                        <label>Civilite</label>
+                                        <label>Civilité</label>
                                         <input type="text" name="civilite" value="${individu.civilite}" required>
                                     </div>
                                     <div class="required field">
@@ -91,7 +96,7 @@
                                         <input type="text" name="noms" value="${individu.noms}" required>
                                     </div>
                                     <div class="required field">
-                                        <label>Prenoms</label>
+                                        <label>Prénoms</label>
                                         <input type="text" name="prenoms" value="${individu.prenoms}" required>
                                     </div>
                                 </div>
@@ -106,22 +111,22 @@
                                     </div>
                                 </div>
                                 <div class="two fields">
-                                    <div class="required field">
-                                        <label>Residence</label>
-                                        <input type="text" name="residence" value="${individu.residence}" required>
+                                    <div class=" field">
+                                        <label>Résidence</label>
+                                        <input type="text" name="residence" value="${individu.residence}">
                                     </div>
-                                    <div class="required field">
+                                    <div class=" field">
                                         <label>Adresse mail</label>
-                                        <input type="text" name="email" value="${individu.email}" required>
+                                        <input type="text" name="email" value="${individu.email}">
                                     </div>
                                 </div>
                                 <div class="two fields">
                                     <div class="required field">
-                                        <label>Telephone 1</label>
+                                        <label>Télephone 1</label>
                                         <input type="text" name="telephone1" value="${individu.tel1}" required>
                                     </div>
                                     <div class="field">
-                                        <label>Telephone 2</label>
+                                        <label>Télephone 2</label>
                                         <input type="text" name="telephone2" value="${individu.tel2}">
                                     </div>
                                 </div>
@@ -146,7 +151,7 @@
         </div>
         <script>
             $(document).ready(function () {
-                ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "individus");
 
             })
         </script>

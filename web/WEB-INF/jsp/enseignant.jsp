@@ -25,7 +25,9 @@
         <h1 class="titre">
             <c:choose>
                 <c:when test="${empty enseignant}">Nouvel enseignant</c:when>
-                <c:otherwise>Modifier / Supprimer un enseignant</c:otherwise>
+                <c:otherwise>
+                    ${enseignant.individu.noms} ${enseignant.individu.prenoms}
+                </c:otherwise>
             </c:choose>
         </h1>
         <div style="padding-top: 10px;">
@@ -43,9 +45,13 @@
                                     <span class="date">${enseignant.individu.datenaiss}</span>
                                 </div>
                                 <div class="description">
-                                    <c:if test="${!empty enseignant.individu.residence}">
-                                        Lieu de résidence : ${enseignant.individu.residence}
-                                    </c:if>
+                                    <c:forEach items="${enseignant.coursEnseignants}" var="courEn">
+                                        <span>
+                                            <b>${courEn.cours.matiere.libelle}&nbsp;</b>
+                                            ${courEn.cours.niveauEtude.code} ${courEn.cours.filiere.libelle}&nbsp;
+                                        </span>
+                                        <br>
+                                    </c:forEach>
                                 </div>
                             </div>
                             <div class="extra content">
@@ -70,98 +76,18 @@
                                 </c:if>
                                 <input type="hidden" name="id" value="${enseignant.idenseignant}"/>
 
-                                <div class="ui styled accordion">
-                                    <div class="active title">
+                                <div class="field required">
+                                    <label>Individu</label>
+                                    <select class="ui dropdown" name="individu" required>
+                                        <option>Aucun individu</option>
+                                        <c:forEach items="${individus}" var="i">
+                                            <option value="${i.idindividu}" ${enseignant.individu.idindividu==i.idindividu?"selected":""}>
+                                                ${i.noms} ${i.prenoms}
+                                            </option>
+                                        </c:forEach>
 
-                                        <span style="color: black"><i class="dropdown icon"></i>Choisir l'individu</span>
-                                    </div>
-                                    <div class="active content">
-                                        <p>
-                                        <div class="field">
-                                            <label>Individu</label>
-                                            <select class="ui dropdown" name="individu">
-                                                <option>Aucun individu</option>
-                                                <c:forEach items="${individus}" var="i">
-                                                    <option value="${i.idindividu}" ${enseignant.individu.idindividu==i.idindividu?"selected":""}>
-                                                        ${i.noms} ${i.prenoms}
-                                                    </option>
-                                                </c:forEach>
-
-                                            </select>
-                                        </div>
-                                        </p>
-                                    </div>
-                                    <c:if test="${empty enseignant}">
-                                        <div class="title">
-                                            <span style="color: black">
-                                                <i class="dropdown icon"></i>
-                                                Enregistrer l'individu
-                                            </span>
-                                        </div>
-                                        <div class="content">
-                                            <p>
-                                            <div class="required field">
-                                                <label>Matricule</label>
-                                                <input type="text" name="matricule" value="" required>
-                                            </div>
-                                            <div class="two fields">
-                                                <div class="required field">
-                                                    <label>Civilite</label>
-                                                    <input type="text" name="civilite" value="" required>
-                                                </div>
-                                                <div class="required field">
-                                                    <label>Genre</label>
-                                                    <select class="ui dropdown" name="genre">
-                                                        <option value="true" >Femme</option>
-                                                        <option value="false">Homme</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="two fields">
-                                                <div class="required field">
-                                                    <label>Noms</label>
-                                                    <input type="text" name="noms" value="" required>
-                                                </div>
-                                                <div class="required field">
-                                                    <label>Prenoms</label>
-                                                    <input type="text" name="prenoms" value="" required>
-                                                </div>
-                                            </div>
-                                            <div class="two fields">
-                                                <div class="required field">
-                                                    <label>Date de naissance</label>
-                                                    <input type="date" name="dateNaissance" value="" >
-                                                </div>
-                                                <div class="required field">
-                                                    <label>Lieu de naissance</label>
-                                                    <input type="text" name="lieuNaissance" value="" >
-                                                </div>
-                                            </div>
-                                            <div class="two fields">
-                                                <div class="required field">
-                                                    <label>Residence</label>
-                                                    <input type="text" name="residence" value="" >
-                                                </div>
-                                                <div class="required field">
-                                                    <label>Adresse mail</label>
-                                                    <input type="text" name="email" value="" >
-                                                </div>
-                                            </div>
-                                            <div class="two fields">
-                                                <div class="required field">
-                                                    <label>Telephone 1</label>
-                                                    <input type="text" name="telephone1" value="" >
-                                                </div>
-                                                <div class="field">
-                                                    <label>Telephone 2</label>
-                                                    <input type="text" name="telephone2" value="">
-                                                </div>
-                                            </div>
-                                            </p>
-                                        </div>
-                                    </c:if>
+                                    </select>
                                 </div>
-
 
                                 <div>
                                     <button class="ui submit gris button" name="action" value="enregistrer" type="submit">
@@ -183,7 +109,7 @@
         </div>
         <script>
             $(document).ready(function () {
-                ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "enseignants");
 
             })
         </script>

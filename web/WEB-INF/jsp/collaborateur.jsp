@@ -25,7 +25,9 @@
         <h1 class="titre">
             <c:choose>
                 <c:when test="${empty employe}">Nouveau collaborateur</c:when>
-                <c:otherwise>Modifier / Supprimer un collaborateur</c:otherwise>
+                <c:otherwise>
+                    ${employe.individu.noms} ${employe.individu.prenoms} 
+                </c:otherwise>
             </c:choose>
         </h1>
         <div style="padding-top: 10px;">
@@ -38,12 +40,14 @@
                                 <img src="img/joe.jpg">
                             </div>
                             <div class="content">
-                                <a class="header">${employe.poste.code}</a>
+                                <a class="header">
+                                    ${employe.poste.libelle}
+                                </a>
                                 <div class="meta">
                                     <span class="date"></span>
                                 </div>
                                 <div class="description">
-                                    ${employe.poste.libelle}
+                                    ${employe.poste.code}
                                 </div>
                             </div>
                             <div class="extra content">
@@ -67,110 +71,30 @@
                                     </div>
                                 </c:if>
                                 <input type="hidden" name="id" value="${employe.idemploye}"/>
-                                <div class="field">
+                                <div class="field required">
                                     <label>Poste</label>
-                                    <select class="ui dropdown" name="poste">
+                                    <select class="ui dropdown" name="poste" required>
                                         <option>Aucun poste</option>
                                         <c:forEach items="${postes}" var="p">
                                             <option value="${p.idposte}" ${employe.poste.idposte==p.idposte?"selected":""}>
-                                                ${p.code} ${p.libelle}
+                                                ${p.libelle}
                                             </option>
                                         </c:forEach>
 
                                     </select>
                                 </div>
-                                <div class="ui styled accordion">
-                                    <div class="active title">
+                                <div class="field required">
+                                    <label>Individu</label>
+                                    <select class="ui dropdown" name="individu" required>
+                                        <option>Aucun individu</option>
+                                        <c:forEach items="${individus}" var="i">
+                                            <option value="${i.idindividu}" ${employe.individu.idindividu==i.idindividu?"selected":""}>
+                                                ${i.noms} ${i.prenoms}
+                                            </option>
+                                        </c:forEach>
 
-                                        <span style="color: black"><i class="dropdown icon"></i>Choisir l'individu</span>
-                                    </div>
-                                    <div class="active content">
-                                        <p>
-                                        <div class="field">
-                                            <label>Individu</label>
-                                            <select class="ui dropdown" name="individu">
-                                                <option>Aucun individu</option>
-                                                <c:forEach items="${individus}" var="i">
-                                                    <option value="${i.idindividu}" ${employe.individu.idindividu==i.idindividu?"selected":""}>
-                                                        ${i.noms} ${i.prenoms}
-                                                    </option>
-                                                </c:forEach>
-
-                                            </select>
-                                        </div>
-                                        </p>
-                                    </div>
-                                    <c:if test="${empty employe}">
-                                        <div class="title">
-                                            <span style="color: black">
-                                                <i class="dropdown icon"></i>
-                                                Enregistrer l'individu
-                                            </span>
-                                        </div>
-                                        <div class="content">
-                                            <p>
-                                            <div class="required field">
-                                                <label>Matricule</label>
-                                                <input type="text" name="matricule" value="" required>
-                                            </div>
-                                            <div class="two fields">
-                                                <div class="required field">
-                                                    <label>Civilite</label>
-                                                    <input type="text" name="civilite" value="" required>
-                                                </div>
-                                                <div class="required field">
-                                                    <label>Genre</label>
-                                                    <select class="ui dropdown" name="genre">
-                                                        <option value="true" >Femme</option>
-                                                        <option value="false">Homme</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="two fields">
-                                                <div class="required field">
-                                                    <label>Noms</label>
-                                                    <input type="text" name="noms" value="" required>
-                                                </div>
-                                                <div class="required field">
-                                                    <label>Prenoms</label>
-                                                    <input type="text" name="prenoms" value="" required>
-                                                </div>
-                                            </div>
-                                            <div class="two fields">
-                                                <div class="required field">
-                                                    <label>Date de naissance</label>
-                                                    <input type="date" name="dateNaissance" value="" >
-                                                </div>
-                                                <div class="required field">
-                                                    <label>Lieu de naissance</label>
-                                                    <input type="text" name="lieuNaissance" value="" >
-                                                </div>
-                                            </div>
-                                            <div class="two fields">
-                                                <div class="required field">
-                                                    <label>Residence</label>
-                                                    <input type="text" name="residence" value="" >
-                                                </div>
-                                                <div class="required field">
-                                                    <label>Adresse mail</label>
-                                                    <input type="text" name="email" value="" >
-                                                </div>
-                                            </div>
-                                            <div class="two fields">
-                                                <div class="required field">
-                                                    <label>Telephone 1</label>
-                                                    <input type="text" name="telephone1" value="" >
-                                                </div>
-                                                <div class="field">
-                                                    <label>Telephone 2</label>
-                                                    <input type="text" name="telephone2" value="">
-                                                </div>
-                                            </div>
-                                            </p>
-                                        </div>
-                                    </c:if>
+                                    </select>
                                 </div>
-
                                 <div>
                                     <button class="ui submit gris button" name="action" value="enregistrer" type="submit">
                                         Enregistrer
@@ -191,7 +115,7 @@
         </div>
         <script>
             $(document).ready(function () {
-                ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "collaborateurs");
 
             })
         </script>

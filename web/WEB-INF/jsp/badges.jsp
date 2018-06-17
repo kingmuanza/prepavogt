@@ -16,7 +16,7 @@
 
     </head>
     <body>
-        <h1 class="titre">Liste des Badges</h1>
+        <h1 class="titre">Liste des badges</h1>
 
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
@@ -65,7 +65,7 @@
             var titre = 'Bonjour';
             $(document).ready(function () {
                 
-                ouvrirMenuCorrespondant("#section_params", "bouton_params", "etudiants");
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "badges");
                 
                 $('#dataTableUtilisateur').DataTable({
                     dom: '<"top"fB>rt<"bottom"lp><"clear">',

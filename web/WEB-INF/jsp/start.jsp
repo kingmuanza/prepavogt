@@ -175,13 +175,12 @@
                 <div style="padding-left: 10px;" id="section_params"  class="section_muanza">
                     <h1>Paramètres</h1>
                     <div class="ui accordion vertical fluid following text menu">
-                        <div class="item active">
+                        <div class="item">
                             <a class="title">
                                 <i class="dropdown icon"></i> <b>Gestions des utilisateurs</b>
                             </a>
                             <div class="content menu">
-                                <!-- Routage utilisateur OK-->
-                                <a class="item active" href="#!utilisateurs">Utilisateurs</a>
+                                <a class="item" href="#!utilisateurs">Utilisateurs</a>
                                 <a class="item" href="#!profils">Profils utilisateurs</a>
                             </div>
                         </div>

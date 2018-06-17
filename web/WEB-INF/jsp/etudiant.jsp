@@ -5,16 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
 <%@page import="java.util.Date"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -35,7 +25,9 @@
         <h1 class="titre">
             <c:choose>
                 <c:when test="${empty etudiant}">Nouvel Etudiant</c:when>
-                <c:otherwise>Modifier / Supprimer un Etudiant</c:otherwise>
+                <c:otherwise>
+                    ${etudiant.individu.noms} ${etudiant.individu.prenoms}
+                </c:otherwise>
             </c:choose>
         </h1>
         <div style="padding-top: 10px;">
@@ -50,16 +42,17 @@
                             <div class="content">
                                 <a class="header">${etudiant.individu.noms} ${etudiant.individu.prenoms}</a>
                                 <div class="meta">
-                                    <span class="date">${etudiant.filiere.idfiliere}</span>
+                                    Né le ${etudiant.individu.datenaiss}
+                                    à ${etudiant.individu.lieunaiss}
                                 </div>
                                 <div class="description">
-                                    ${etudiant.niveauEtude.code} / ${etudiant.niveauEtude.code}
+                                    <span class="date">${etudiant.niveauEtude.code} ${etudiant.filiere.libelle}</span>
                                 </div>
                             </div>
                             <div class="extra content">
                                 <a>
                                     <i class="user icon"></i>
-                                    ${etudiant.anneeScolaire.dateDebut} / ${etudiant.anneeScolaire.dateFin}
+                                    ${etudiant.anneeScolaire.libelle}
                                 </a>
                             </div>
                         </div>
@@ -83,7 +76,7 @@
                                         <option>Aucune annee</option>
                                         <c:forEach items="${anneeScolaires}" var="annee">
                                             <option value="${annee.idanneeScolaire}" ${etudiant.anneeScolaire.idanneeScolaire==annee.idanneeScolaire?"selected":""}>
-                                                ${annee.dateDebut}/${annee.dateFin}
+                                                ${annee.libelle}
                                             </option>
                                         </c:forEach>
                                     </select>
@@ -112,97 +105,17 @@
 
                                     </select>
                                 </div>
-                                <label>Individu</label>
-                                <div class="ui styled accordion">
-                                    <div class="active title">
+                                <div class="field">
+                                    <label>Individu</label>
+                                    <select class="ui dropdown" name="individu">
+                                        <option>Aucun individu</option>
+                                        <c:forEach items="${individus}" var="i">
+                                            <option value="${i.idindividu}" ${etudiant.individu.idindividu==i.idindividu?"selected":""}>
+                                                ${i.noms} ${i.prenoms}
+                                            </option>
+                                        </c:forEach>
 
-                                        <span style="color: black"><i class="dropdown icon"></i>Choisir l'individu</span>
-                                    </div>
-                                    <div class="active content">
-                                        <p>
-                                        <div class="field">
-                                            <label>Individu</label>
-                                            <select class="ui dropdown" name="individu">
-                                                <option>Aucun individu</option>
-                                                <c:forEach items="${individus}" var="i">
-                                                    <option value="${i.idindividu}" ${etudiant.individu.idindividu==i.idindividu?"selected":""}>
-                                                        ${i.noms} ${i.prenoms}
-                                                    </option>
-                                                </c:forEach>
-
-                                            </select>
-                                        </div>
-                                        </p>
-                                    </div>
-                                    <c:if test="${empty etudiant}">
-                                        <div class="title">
-                                            <span style="color: black">
-                                                <i class="dropdown icon"></i>
-                                                Enregistrer l'individu
-                                            </span>
-                                        </div>
-                                        <div class="content">
-                                            <p>
-                                            <div class="required field">
-                                                <label>Matricule</label>
-                                                <input type="text" name="matricule" value="" required>
-                                            </div>
-                                            <div class="two fields">
-                                                <div class="required field">
-                                                    <label>Civilite</label>
-                                                    <input type="text" name="civilite" value="" required>
-                                                </div>
-                                                <div class="required field">
-                                                    <label>Genre</label>
-                                                    <select class="ui dropdown" name="matiere">
-                                                        <option value="true" >Femme</option>
-                                                        <option value="false">Homme</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="two fields">
-                                                <div class="required field">
-                                                    <label>Noms</label>
-                                                    <input type="text" name="noms" value="" required>
-                                                </div>
-                                                <div class="required field">
-                                                    <label>Prenoms</label>
-                                                    <input type="text" name="prenoms" value="" required>
-                                                </div>
-                                            </div>
-                                            <div class="two fields">
-                                                <div class="required field">
-                                                    <label>Date de naissance</label>
-                                                    <input type="date" name="dateNaissance" value="" >
-                                                </div>
-                                                <div class="required field">
-                                                    <label>Lieu de naissance</label>
-                                                    <input type="text" name="lieuNaissance" value="" >
-                                                </div>
-                                            </div>
-                                            <div class="two fields">
-                                                <div class="required field">
-                                                    <label>Residence</label>
-                                                    <input type="text" name="residence" value="" >
-                                                </div>
-                                                <div class="required field">
-                                                    <label>Adresse mail</label>
-                                                    <input type="text" name="email" value="" >
-                                                </div>
-                                            </div>
-                                            <div class="two fields">
-                                                <div class="required field">
-                                                    <label>Telephone 1</label>
-                                                    <input type="text" name="telephone1" value="" >
-                                                </div>
-                                                <div class="field">
-                                                    <label>Telephone 2</label>
-                                                    <input type="text" name="telephone2" value="">
-                                                </div>
-                                            </div>
-                                            </p>
-                                        </div>
-                                    </c:if>
+                                    </select>
                                 </div>
 
                                 <div>
@@ -225,7 +138,7 @@
         </div>
         <script>
             $(document).ready(function () {
-                ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "etudiants");
 
             })
         </script>

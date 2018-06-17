@@ -25,7 +25,9 @@
         <h1 class="titre">
             <c:choose>
                 <c:when test="${empty poste}">Nouveau poste</c:when>
-                <c:otherwise>Modifier / Supprimer un poste</c:otherwise>
+                <c:otherwise>
+                    ${poste.libelle}
+                </c:otherwise>
             </c:choose>
         </h1>
         <div style="padding-top: 10px;">
@@ -34,9 +36,6 @@
                 <div class="ui grid">
                     <div class="six wide column">
                         <div class="ui fluid card">
-                            <div class="image">
-                                <img src="img/joe.jpg">
-                            </div>
                             <div class="content">
                                 <a class="header">${poste.code}</a>
                                 <div class="meta">
@@ -94,9 +93,9 @@
         </div>
         <script>
             $(document).ready(function () {
-                ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "postes");
 
-            })
+            });
         </script>
     </body>
 </html>

@@ -23,7 +23,8 @@
     </head>
     <body>
         <h1 class="titre">
-            Nouvel periode creuse
+            ${empty periodeCreuse ? "Nouvelle période creuse":periodeCreuse.libelle}
+            
         </h1>
         <div style="padding-top: 10px;">
 
@@ -89,7 +90,7 @@
         </div>
         <script>
             $(document).ready(function () {
-                ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "periodescreuses");
 
             })
         </script>

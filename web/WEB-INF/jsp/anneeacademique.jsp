@@ -23,7 +23,8 @@
     </head>
     <body>
         <h1 class="titre">
-            Nouvelle Année Académique
+            ${empty anneeScolaire ? "Nouvelle année académique":anneeScolaire.libelle}
+            
         </h1>
         <div style="padding-top: 10px;">
 
@@ -88,7 +89,7 @@
         </div>
         <script>
             $(document).ready(function () {
-                ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "anneeacademiques");
 
             })
         </script>
