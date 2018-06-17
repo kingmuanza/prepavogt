@@ -98,8 +98,17 @@
                             </a>
                             <div class="active content menu">
                                 <a class="item active" href="#!tempsreel">Suivre en temps réel </a>
-                                <a class="item active" href="#!tempsreel">Exporter les données </a>
-                                <a class="item active" href="#!tempsreel">Configuration </a>
+                                <a class="item active" href="#!pointages">Historique des pointages </a>
+                                <a class="item active" href="#!configuration">Configuration </a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <a class="title">
+                                <b>Import / Export</b>
+                            </a>
+                            <div class="active content menu">
+                                <a class="item active" href="#!export">Exporter les données </a>
+                                <a class="item active" href="#!importer">Importer des données </a>
                             </div>
                         </div>
                     </div>
@@ -167,7 +176,7 @@
                                 <b>Statistiques</b>
                             </a>
                             <div class="content menu">
-                                <a class="item" href="#!statistiques">Par personne</a>
+                                <a class="item" href="#!statsentrees">Par personne</a>
                             </div>
                         </div>
                     </div>

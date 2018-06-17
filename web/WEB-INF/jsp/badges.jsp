@@ -32,9 +32,8 @@
                 <tr class="pointeur" onclick="window.location.href='start#!/badge/${badge.idbadge}'">
                     <td>
                         <h4 class="ui image header">
-                            <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
                             <div class="content">
-                                ${badge.idbadge}
+                                ${badge.libelle}
                                 <div class="sub header">
                                     ${badge.code}
                                 </div>
