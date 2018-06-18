@@ -13,8 +13,8 @@ $.uiAlert = function(options) {
 
     var ui_alert = 'ui-alert-content';
       ui_alert += '-' + setUI.position;
-      setUI.bgcolors ='style="background-color: '+setUI.bgcolor+';   box-shadow: 0 0 0 1px rgba(255,255,255,.5) inset,0 0 0 0 transparent;"';
-      if(setUI.bgcolors === '') setUI.bgcolors ='style="background-color: ; box-shadow: 0 0 0 1px rgba(255,255,255,.5) inset,0 0 0 0 transparent;"';
+      setUI.bgcolors ='style="background-color: '+setUI.bgcolor+';   box-shadow: 0 0 0 0px rgba(255,255,255,.5) inset,0 0 0 0 transparent;"';
+      if(setUI.bgcolors === '') setUI.bgcolors ='style="background-color: ; box-shadow: 0 0 0 0px rgba(255,255,255,.5) inset,0 0 0 0 transparent;"';
     if(!$('body > .' + ui_alert).length) {
       $('body').append('<div class="ui-alert-content ' + ui_alert + '" style="width: inherit;"></div>');
     }

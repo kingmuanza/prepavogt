@@ -98,8 +98,17 @@
                             </a>
                             <div class="active content menu">
                                 <a class="item active" href="#!tempsreel">Suivre en temps réel </a>
-                                <a class="item active" href="#!tempsreel">Exporter les données </a>
-                                <a class="item active" href="#!tempsreel">Configuration </a>
+                                <a class="item active" href="#!pointages">Historique des pointages </a>
+                                <a class="item active" href="#!configuration">Configuration </a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <a class="title">
+                                <b>Import / Export</b>
+                            </a>
+                            <div class="active content menu">
+                                <a class="item active" href="#!export">Exporter les données </a>
+                                <a class="item active" href="#!importer">Importer des données </a>
                             </div>
                         </div>
                     </div>
@@ -167,7 +176,7 @@
                                 <b>Statistiques</b>
                             </a>
                             <div class="content menu">
-                                <a class="item" href="#!statistiques">Par personne</a>
+                                <a class="item" href="#!statsentrees">Par personne</a>
                             </div>
                         </div>
                     </div>
@@ -175,13 +184,12 @@
                 <div style="padding-left: 10px;" id="section_params"  class="section_muanza">
                     <h1>Paramètres</h1>
                     <div class="ui accordion vertical fluid following text menu">
-                        <div class="item active">
+                        <div class="item">
                             <a class="title">
                                 <i class="dropdown icon"></i> <b>Gestions des utilisateurs</b>
                             </a>
                             <div class="content menu">
-                                <!-- Routage utilisateur OK-->
-                                <a class="item active" href="#!utilisateurs">Utilisateurs</a>
+                                <a class="item" href="#!utilisateurs">Utilisateurs</a>
                                 <a class="item" href="#!profils">Profils utilisateurs</a>
                             </div>
                         </div>
@@ -204,7 +212,7 @@
                                 <b>Paramètres académiques</b>
                             </a>
                             <div class="content menu">
-                                <a class="item" href="#!anneeacademique">Années académiques</a>
+                                <a class="item" href="#!anneeacademiques">Années académiques</a>
                                 <a class="item" href="#!filieres">Filières</a>
                                 <a class="item" href="#!matieres">Matières</a>
                                 <a class="item" href="#!coursall">Cours</a>

@@ -81,7 +81,7 @@
                             message: '',
                             className: 'ui gris mini button',
                             action: function (e, dt, node, config) {
-                                window.location.href='start#!/periodeCreuse'
+                                window.location.href='start#!/periodecreuse'
                             }
                         },
                         {

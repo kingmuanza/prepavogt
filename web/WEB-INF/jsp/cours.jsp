@@ -25,7 +25,10 @@
         <h1 class="titre">
             <c:choose>
                 <c:when test="${empty cours}">Nouveau cours</c:when>
-                <c:otherwise>Modifier le cours</c:otherwise>
+                <c:otherwise>
+                    ${cours.matiere.libelle}
+                    ${cours.niveauEtude.code} ${cours.filiere.libelle}
+                </c:otherwise>
             </c:choose>
 
         </h1>
@@ -35,20 +38,17 @@
                 <div class="ui grid">
                     <div class="six wide column">
                         <div class="ui fluid card">
-                            <div class="image">
-                                <img src="#" alt="une image">
-                            </div>
                             <div class="content">
                                 <a class="header">
-                                    ${cours.niveauEtude.code} ${cours.filiere.libelle}
+                                    ${cours.matiere.libelle}
                                 </a>
                                 <div class="description">
-                                    ${cours.matiere.code}
+                                    ${cours.niveauEtude.code} ${cours.filiere.libelle}
                                 </div>
                             </div>
                             <div class="extra content">
                                 <a>
-                                    ${empty u.utilisateurProfil?"":u.utilisateurProfil.libelle}
+                                    ${cours.matiere.code}
                                 </a>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                     <div class="ten wide column">
                         <div>
                             <form class="ui form" action="CoursServlet" method="post">
-                                <div class="ui message">
+                                <div class="ui error message">
                                     <div class="header">Messages à afficher en cas d'erreur</div>
                                     <ul class="list">
                                         <li>Entrez votre login</li>
@@ -122,7 +122,7 @@
         </div>
         <script>
             $(document).ready(function () {
-                ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "coursall");
 
             })
         </script>

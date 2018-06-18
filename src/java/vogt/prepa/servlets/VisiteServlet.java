@@ -7,15 +7,23 @@ package vogt.prepa.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import vogt.prepa.dao.IndividuDAO;
 import vogt.prepa.dao.VisiteDAO;
+import vogt.prepa.entities.Etudiant;
+import vogt.prepa.entities.Individu;
 import vogt.prepa.entities.Utilisateur;
 import vogt.prepa.entities.Visite;
+import vogt.prepa.utils.Notification;
 
 /**
  *
@@ -25,6 +33,7 @@ import vogt.prepa.entities.Visite;
 public class VisiteServlet extends HttpServlet {
 
     VisiteDAO visiteDAO = new VisiteDAO();
+    IndividuDAO individuDAO = new IndividuDAO();
    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -39,6 +48,7 @@ public class VisiteServlet extends HttpServlet {
                 request.setAttribute("visite", visite);
 
             }
+            request.setAttribute("individus", individuDAO.getall());
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/visite.jsp").forward(request, response);
         }else{
             response.sendRedirect("index.htm");
@@ -48,6 +58,74 @@ public class VisiteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
+        HttpSession httpSession = request.getSession();
+        List<Notification> notifications = (List<Notification>) httpSession.getAttribute("notifications");
+        String action = request.getParameter("action");
+        System.out.print("Action : " + action);
+        //Pour supprimer l'entité
+        if (action != null && !action.isEmpty() && "supprimer".equals(action)) {
+            String id = request.getParameter("id");
+            if (id != null && !id.isEmpty()) {
+                Visite v = visiteDAO.get(id);
+                if (verifierAvantSuppression(v)) {
+                    visiteDAO.supprimer(v);
+                    Notification notif = new Notification();
+                    notif.setTitre("Suppression");
+                    notif.setMessage("L'élement a bien été supprimé");
+                    notif.setSuccess(true);
+                    notifications.add(notif);
+                    httpSession.setAttribute("notifications", notifications);
+                    response.sendRedirect("start#!/visites");
+                } else {
+                    Notification notif = new Notification();
+                    notif.setTitre("Suppression");
+                    notif.setMessage("Echec de suppression !");
+                    notif.setSuccess(false);
+                    notifications.add(notif);
+                    httpSession.setAttribute("notifications", notifications);
+                }
+            }//Pour ajouter ou modifier l'entité
+        } else {
+            String id = request.getParameter("id");
+            Visite v = null;
+            if (id != null && !id.isEmpty()) {
+                int i = Integer.parseInt(id);
+                v = visiteDAO.get(i);
+            } else {
+                v = new Visite();
+
+            }
+            String nomComplet = request.getParameter("nomComplet");
+            v.setNomComplet(nomComplet);
+            String motif = request.getParameter("motif");
+            v.setMotif(motif);
+            String commentaire = request.getParameter("commentaire");
+            v.setCommentaire(commentaire);
+            
+            String individu = request.getParameter("indiv");
+            v.setIndividu(individuDAO.get(individu));
+            
+
+            if (visiteDAO.enregistrer(v)) {
+                Notification notif = new Notification();
+                notif.setTitre("Enregistrement");
+                notif.setMessage("L'élement a bien été enregistré");
+                notif.setSuccess(true);
+                notifications.add(notif);
+                httpSession.setAttribute("notifications", notifications);
+            } else {
+                Notification notif = new Notification();
+                notif.setTitre("Enregistrement");
+                notif.setMessage("Echec d'enregistrement");
+                notif.setSuccess(true);
+                notifications.add(notif);
+                httpSession.setAttribute("notifications", notifications);
+            }
+            response.sendRedirect("start#!/visite/" + v.getIdvisite());
+        }
+    }
+
+    public boolean verifierAvantSuppression(Visite v) {
+        return true;
     }
 }

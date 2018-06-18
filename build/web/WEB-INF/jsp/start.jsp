@@ -204,7 +204,7 @@
                                 <b>Paramètres académiques</b>
                             </a>
                             <div class="content menu">
-                                <a class="item" href="#!anneeacademique">Années académiques</a>
+                                <a class="item" href="#!anneeacademiques">Années académiques</a>
                                 <a class="item" href="#!filieres">Filières</a>
                                 <a class="item" href="#!matieres">Matières</a>
                                 <a class="item" href="#!coursall">Cours</a>

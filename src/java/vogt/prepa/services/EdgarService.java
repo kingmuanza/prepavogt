@@ -21,13 +21,15 @@ import vogt.prepa.entities.Pointage;
 
 */
 public interface EdgarService {
-    public static final String HEURE_ARRIVEE = "08:00" ;
+    public static final String HEURE_ARRIVEE = "08:00:00" ;
     
     /*
         QUELQUES FONCTIONS QUE JE PENSE UTILES
     */
     //Obtenir l'heure d'une date
     public String ExtraireHeure(Date date);
+    //Obtenir l'heure d'une date
+    public String ExtraireDate(Date date);
     //Obtenir la date de début de la journée
     public Date getDebutdeJournee(Date journee);
     //Obtenir la date de fin de la journée

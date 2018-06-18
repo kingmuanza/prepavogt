@@ -5,20 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
 <%@page import="java.util.Date"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,7 +23,12 @@
     </head>
     <body>
         <h1 class="titre">
-            Nouvel etudiant
+            <c:choose>
+                <c:when test="${empty etudiant}">Nouvel Etudiant</c:when>
+                <c:otherwise>
+                    ${etudiant.individu.noms} ${etudiant.individu.prenoms}
+                </c:otherwise>
+            </c:choose>
         </h1>
         <div style="padding-top: 10px;">
 
@@ -46,60 +40,93 @@
                                 <img src="img/joe.jpg">
                             </div>
                             <div class="content">
-                                <a class="header">Kristy</a>
+                                <a class="header">${etudiant.individu.noms} ${etudiant.individu.prenoms}</a>
                                 <div class="meta">
-                                    <span class="date">Joined in 2013</span>
+                                    Né le ${etudiant.individu.datenaiss}
+                                    à ${etudiant.individu.lieunaiss}
                                 </div>
                                 <div class="description">
-                                    Kristy is an art director living in New York.
+                                    <span class="date">${etudiant.niveauEtude.code} ${etudiant.filiere.libelle}</span>
                                 </div>
                             </div>
                             <div class="extra content">
                                 <a>
                                     <i class="user icon"></i>
-                                    22 Friends
+                                    ${etudiant.anneeScolaire.libelle}
                                 </a>
                             </div>
                         </div>
                     </div>
                     <div class="ten wide column">
                         <div>
-                            <form class="ui form" action="UtilisateurServlet" method="post">
-                                <div class="ui message">
-                                    <div class="header">Messages à afficher en cas d'erreur</div>
-                                    <ul class="list">
-                                        <li>Entrez votre login</li>
-                                        <li>Les mots de passe ne sont pas identiques</li>
-                                    </ul>
-                                </div>
-                                <div class="required field">
-                                    <label>Login</label>
-                                    <input type="text" name="login" value="${u.login}" required>
-                                </div>
-                                <div class="two fields">
-                                    <div class="required field">
-                                        <label>Mot de passe</label>
-                                        <input type="password" name="passe" value="${u.passe}">
+                            <form class="ui form" action="EtudiantServlet" method="post">
+                                <c:if test="${!empty erreurs}">
+                                    <div class="ui message">
+                                        <div class="header">Messages à afficher en cas d'erreur</div>
+                                        <ul class="list">
+                                            <li>Entrez votre login</li>
+                                            <li>Les mots de passe ne sont pas identiques</li>
+                                        </ul>
                                     </div>
-                                    <div class="required field">
-                                        <label>Confirmation</label>
-                                        <input type="password" name="confirmation" value="${u.passe}">
-                                    </div>
+                                </c:if>
+                                <input type="hidden" name="id" value="${etudiant.idetudiant}"/>
+                                <div class="field">
+                                    <label>Année Academique</label>
+                                    <select class="ui dropdown" name="anneeSco">
+                                        <option>Aucune annee</option>
+                                        <c:forEach items="${anneeScolaires}" var="annee">
+                                            <option value="${annee.idanneeScolaire}" ${etudiant.anneeScolaire.idanneeScolaire==annee.idanneeScolaire?"selected":""}>
+                                                ${annee.libelle}
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label>Niveau d'Etude</label>
+                                    <select class="ui dropdown" name="niveau">
+                                        <option>Aucun Niveau d'Etude</option>
+                                        <c:forEach items="${niveauEtudes}" var="niv">
+                                            <option value="${niv.idniveauEtude}" ${etudiant.niveauEtude.idniveauEtude==niv.idniveauEtude?"selected":""}>
+                                                ${niv.code} ${niv.libelle}
+                                            </option>
+                                        </c:forEach>
+
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label>Filiere</label>
+                                    <select class="ui dropdown" name="filiere">
+                                        <option>Aucune Filiere</option>
+                                        <c:forEach items="${filieres}" var="f">
+                                            <option value="${f.idfiliere}" ${etudiant.filiere.idfiliere==f.idfiliere?"selected":""}>
+                                                ${f.code} ${f.libelle}
+                                            </option>
+                                        </c:forEach>
+
+                                    </select>
                                 </div>
                                 <div class="field">
                                     <label>Individu</label>
                                     <select class="ui dropdown" name="individu">
-                                        <option>Aucune personne</option>
+                                        <option>Aucun individu</option>
                                         <c:forEach items="${individus}" var="i">
-                                            <option value="${i.idindividu}" ${u.individu.idindividu==i.idindividu?"selected":""}>
+                                            <option value="${i.idindividu}" ${etudiant.individu.idindividu==i.idindividu?"selected":""}>
                                                 ${i.noms} ${i.prenoms}
                                             </option>
                                         </c:forEach>
 
                                     </select>
                                 </div>
+
                                 <div>
-                                    <button class="ui submit button" type="submit">Submit</button>
+                                    <button class="ui submit gris button" name="action" value="enregistrer" type="submit">
+                                        Enregistrer
+                                    </button>
+                                    <c:if test="${!empty etudiant}">
+                                        <button class="ui submit red button" name="action" value="supprimer" type="submit">
+                                            Supprimer
+                                        </button>
+                                    </c:if>
                                 </div>
 
                             </form>
@@ -111,7 +138,7 @@
         </div>
         <script>
             $(document).ready(function () {
-                ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "etudiants");
 
             })
         </script>

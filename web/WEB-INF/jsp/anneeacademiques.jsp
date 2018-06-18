@@ -1,3 +1,4 @@
+
 <%@page import="java.util.Date"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -31,7 +32,7 @@
             <tbody>
                 <c:forEach items="${anneeScolaires}" var="anneeScolaire">
                     
-                <tr class="pointeur" onclick="window.location.href='start#!/anneeAcademique/${anneeScolaire.idanneeScolaire}'">
+                <tr class="pointeur" onclick="window.location.href='start#!/anneeacademique/${anneeScolaire.idanneeScolaire}'">
                     <td>
                         <h4 class="ui image header">
                             <div class="content">
@@ -83,7 +84,7 @@
                             message: '',
                             className: 'ui gris mini button',
                             action: function (e, dt, node, config) {
-                                window.location.href='start#!/anneeAcademique'
+                                window.location.href='start#!/anneeacademique'
                             }
                         },
                         {

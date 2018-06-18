@@ -23,7 +23,10 @@
     </head>
     <body>
         <h1 class="titre">
-            Nouveau Badge
+            <c:choose>
+                <c:when test="${empty badge}">Nouveau Badge</c:when>
+                <c:otherwise>Modifier / Supprimer un Badge</c:otherwise>
+            </c:choose>
         </h1>
         <div style="padding-top: 10px;">
 
@@ -31,64 +34,42 @@
                 <div class="ui grid">
                     <div class="six wide column">
                         <div class="ui fluid card">
-                            <div class="image">
-                                <img src="img/joe.jpg">
-                            </div>
                             <div class="content">
-                                <a class="header">Kristy</a>
+                                <a class="header">${badge.code}</a>
                                 <div class="meta">
-                                    <span class="date">Joined in 2013</span>
+                                    <span class="date">${badge.libelle}</span>
                                 </div>
-                                <div class="description">
-                                    Kristy is an art director living in New York.
-                                </div>
-                            </div>
-                            <div class="extra content">
-                                <a>
-                                    <i class="user icon"></i>
-                                    22 Friends
-                                </a>
                             </div>
                         </div>
                     </div>
                     <div class="ten wide column">
                         <div>
-                            <form class="ui form" action="UtilisateurServlet" method="post">
+                            <form class="ui form" action="BadgeServlet" method="post">
                                 <div class="ui message">
                                     <div class="header">Messages à afficher en cas d'erreur</div>
                                     <ul class="list">
-                                        <li>Entrez votre login</li>
-                                        <li>Les mots de passe ne sont pas identiques</li>
+                                        <li>Entrez vos paramettres</li>
+                                        <li>Les champs contenant les (*) sont obligatoire</li>
                                     </ul>
                                 </div>
                                 <div class="required field">
-                                    <label>Login</label>
-                                    <input type="text" name="login" value="${u.login}" required>
-                                </div>
-                                <div class="two fields">
-                                    <div class="required field">
-                                        <label>Mot de passe</label>
-                                        <input type="password" name="passe" value="${u.passe}">
-                                    </div>
-                                    <div class="required field">
-                                        <label>Confirmation</label>
-                                        <input type="password" name="confirmation" value="${u.passe}">
-                                    </div>
+                                    <label>Code</label>
+                                    <input type="hidden" name="id" value="${badge.idbadge}">
+                                    <input type="text" name="code" value="${badge.code}" required>
                                 </div>
                                 <div class="field">
-                                    <label>Individu</label>
-                                    <select class="ui dropdown" name="individu">
-                                        <option>Aucune personne</option>
-                                        <c:forEach items="${individus}" var="i">
-                                            <option value="${i.idindividu}" ${u.individu.idindividu==i.idindividu?"selected":""}>
-                                                ${i.noms} ${i.prenoms}
-                                            </option>
-                                        </c:forEach>
-
-                                    </select>
+                                    <label>Libelle</label>
+                                    <input type="text" name="libelle" value="${badge.libelle}" required>
                                 </div>
                                 <div>
-                                    <button class="ui submit button" type="submit">Submit</button>
+                                    <button class="ui submit gris button" name="action" value="enregistrer" type="submit">
+                                        Enregistrer
+                                    </button>
+                                    <c:if test="${!empty badge}">
+                                        <button class="ui submit red button" name="action" value="supprimer" type="submit">
+                                            Supprimer
+                                        </button>
+                                    </c:if>
                                 </div>
 
                             </form>

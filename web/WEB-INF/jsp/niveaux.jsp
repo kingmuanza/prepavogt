@@ -31,7 +31,7 @@
             <tbody>
                 <c:forEach items="${niveauEtudes}" var="niveauEtude">
                     
-                <tr class="pointeur" onclick="window.location.href='start#!/niveau/${niveau.idniveau}'">
+                <tr class="pointeur" onclick="window.location.href='start#!/niveau/${niveauEtude.idniveauEtude}'">
                     <td>
                         <h4 class="ui image header">
                             <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">

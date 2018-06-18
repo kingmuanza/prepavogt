@@ -16,7 +16,7 @@
 
     </head>
     <body>
-        <h1 class="titre">Liste des profils</h1>
+        <h1 class="titre">Liste de profils</h1>
         <div class="ui message info">
             <div class="header">
                 Important
@@ -38,15 +38,14 @@
             </thead>
 
             <tbody>
-                <c:forEach items="${utilisateurProfils}" var="profil">
-
-                    <tr class="pointeur" onclick="window.location.href='start#!/profil/${profil.idprofil}'">
-                        <td>${profil.code}</td>
-                        <td>${profil.libelle}</td>
+                <c:forEach items="${utilisateurProfils}" var="profilU">
+                    <tr class="pointeur" onclick="window.location.href='start#!/profil/${profilU.idutilisateurProfil}'">
+                        <td>${profilU.code}</td>
+                        <td>${profilU.libelle}</td>
                         <td class="center">
-                            ${profil.voirEmploye? "<i class='check titre icon'></i>":""}
+                            ${profilU.voirEmploye? "<i class='check titre icon'></i>":""}
                         </td>
-                        <td class="center">${profil.voirEnseignant? "<i class='check titre icon'></i>":""}</td>
+                        <td class="center">${profilU.voirEnseignant? "<i class='check titre icon'></i>":""}</td>
                     </tr>
                 </c:forEach>
 
