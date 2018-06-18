@@ -21,23 +21,19 @@
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Utilisateurs</th>
-                    <th>Idbadge</th>
+                    <th>Badges</th>
                     <th>Code</th>
-                    <th>Libelle</th>
-                    <th>Entrees</th>                   
+                    <th>Libelle</th>              
                 </tr>
             </thead>
 
             <tbody>
                 <c:forEach items="${badges}" var="badge">
-                    
                 <tr class="pointeur" onclick="window.location.href='start#!/badge/${badge.idbadge}'">
                     <td>
                         <h4 class="ui image header">
-                            <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
                             <div class="content">
-                                ${badge.idbadge}
+                                ${badge.libelle}
                                 <div class="sub header">
                                     ${badge.code}
                                 </div>
@@ -46,7 +42,6 @@
                     </td>
                     <td>${badge.code}</td>
                     <td>${badge.libelle}</td>
-                    <td>David</td>
                 </tr>
                 </c:forEach>
 
@@ -68,6 +63,9 @@
         <script>
             var titre = 'Bonjour';
             $(document).ready(function () {
+                
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "badges");
+                
                 $('#dataTableUtilisateur').DataTable({
                     dom: '<"top"fB>rt<"bottom"lp><"clear">',
                     buttons: [
