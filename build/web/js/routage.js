@@ -17,6 +17,18 @@ var app = angular.module("myApp", ["ngRoute"]);
 app.config(function ($routeProvider) {
     $routeProvider
             .when("/", {
+                templateUrl: UrlExists("AujourdhuiServlet")
+            })
+            .when("/statsentrees", {
+                templateUrl: UrlExists("StatsEntreesServlet")
+            })
+            .when("/configuration", {
+                templateUrl: UrlExists("ConfigurationServlet")
+            })
+            .when("/importer", {
+                templateUrl: UrlExists("ImporterServlet")
+            })
+            .when("/exporter", {
                 templateUrl: UrlExists("TempsReelServlet")
             })
             .when("/tempsreel", {
@@ -25,7 +37,7 @@ app.config(function ($routeProvider) {
             .when("/test", {
                 templateUrl: UrlExists("TempsReelServlet")
             })
-            .when("/pointage", {
+            .when("/pointages", {
                 templateUrl: UrlExists("PointagesServlet")
             })
             .when("/entree", {
