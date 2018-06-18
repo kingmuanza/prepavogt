@@ -331,7 +331,6 @@ public class EdgarServiceImpl implements EdgarService {
         return matriculeEnRetards;
     }
 
-    //***********************************************ODAY
     @Override
     public List<Individu> retardsIndividuDUnJourLa(Date jourLa) {
 
@@ -395,12 +394,36 @@ public class EdgarServiceImpl implements EdgarService {
         }
         return matriculesRetards;
     }
-
+    
+    
     @Override
     public List<Individu> retardsIndividuEntreDeuxDates(Date dateDebut, Date dateFin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.getTransaction().begin();
 
+        List<Individu> individusEnRetardDeuxDate = new ArrayList<>();
+
+        List<String> matriculesIndividusEnRetardDeuxDates = retardsMatriculeEntreDeuxDates(dateDebut, dateFin);
+
+        if (matriculesIndividusEnRetardDeuxDates != null) {
+            ListIterator<String> it = matriculesIndividusEnRetardDeuxDates.listIterator();
+
+            while (it.hasNext()) {
+                String matricule = it.next();
+                List<Individu> individu = session.createCriteria(Individu.class)
+                        .add(Restrictions.eq("matricule", matricule))
+                        .list();
+                individusEnRetardDeuxDate.add(individu.get(0));
+            }
+        }
+        
+        session.getTransaction().commit();
+        session.close();
+        
+        return individusEnRetardDeuxDate;
+    }
+    
+    //***********************************************ODAY
     @Override
     public List<Pointage> retardsPointagesEntreDeuxDates(String matricule, Date dateDebut, Date dateFin) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
