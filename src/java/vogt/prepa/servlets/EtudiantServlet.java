@@ -59,6 +59,15 @@ public class EtudiantServlet extends HttpServlet {
             request.setAttribute("filieres", filiereDAO.getall());
             request.setAttribute("niveauEtudes", niveauEtudeDAO.getall());
             request.setAttribute("anneeScolaires", anneeScolaireDAO.getall());
+            Individu ind = (Individu) httpSession.getAttribute("nouvelIndividu");
+            if (ind != null) {
+                request.setAttribute("nouvelIndividu", ind);
+            }
+            if ((Integer) httpSession.getAttribute("countDown") != null && (Integer) httpSession.getAttribute("countDown") == 1) {
+                httpSession.setAttribute("nouvelIndividu", null);
+            } else {
+                httpSession.setAttribute("countDown", 1);
+            }
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/etudiant.jsp").forward(request, response);
         } else {
             response.sendRedirect("index.htm");
@@ -70,86 +79,40 @@ public class EtudiantServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession httpSession = request.getSession();
         List<Notification> notifications = (List<Notification>) httpSession.getAttribute("notifications");
-        String action = request.getParameter("action");
-        System.out.print("Action : " + action);
-        //Pour supprimer l'entité
-        if (action != null && !action.isEmpty() && "supprimer".equals(action)) {
-            String id = request.getParameter("id");
-            if (id != null && !id.isEmpty()) {
-                Etudiant e = etudiantDAO.get(id);
-                if (verifierAvantSuppression(e)) {
-                    etudiantDAO.supprimer(e);
-                    Notification notif = new Notification();
-                    notif.setTitre("Suppression");
-                    notif.setMessage("L'élement a bien été supprimé");
-                    notif.setSuccess(true);
-                    notifications.add(notif);
-                    httpSession.setAttribute("notifications", notifications);
-                    response.sendRedirect("start#!/etudiants");
-                } else {
-                    Notification notif = new Notification();
-                    notif.setTitre("Suppression");
-                    notif.setMessage("Echec de suppression !");
-                    notif.setSuccess(false);
-                    notifications.add(notif);
-                    httpSession.setAttribute("notifications", notifications);
-                }
-            }//Pour ajouter ou modifier l'entité
-        } else {
-            String id = request.getParameter("id");
-            Etudiant e = null;
-            if (id != null && !id.isEmpty()) {
-                int i = Integer.parseInt(id);
-                e = etudiantDAO.get(i);
-            } else {
-                e = new Etudiant();
-
+        //pur créer un individu depuis le formulaire de la fenetre modale
+        String newIndividu = request.getParameter("newIndividu");
+        if (newIndividu != null && !newIndividu.isEmpty()) {
+            Individu ind = new Individu();
+            String civilite = request.getParameter("civilite");
+            ind.setCivilite(civilite);
+            String dateNaissance = request.getParameter("dateNaissance");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                ind.setDatenaiss(sdf.parse(dateNaissance));
+            } catch (ParseException ex) {
+                ind.setDatenaiss(new Date());
             }
-            String filiere = request.getParameter("filiere");
-            e.setFiliere(filiereDAO.get(filiere));
-            String niveau = request.getParameter("niveau");
-            e.setNiveauEtude(niveauEtudeDAO.get(niveau));
-            String anneeSco = request.getParameter("anneeSco");
-            System.out.println("anneeSco "+anneeSco);
-            e.setAnneeScolaire(anneeScolaireDAO.get(anneeSco));
-            
-            String individu = request.getParameter("individu");
-            if (!individu.equals("Aucun individu")) {
-                e.setIndividu(individuDAO.get(individu));
-            } else {
-                Individu ind = new Individu();
-                String civilite = request.getParameter("civilite");
-                ind.setCivilite(civilite);
-                String dateNaissance = request.getParameter("dateNaissance");
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                try {
-                    ind.setDatenaiss(sdf.parse(dateNaissance));
-                } catch (ParseException ex) {
-                    ind.setDatenaiss(new Date());
-                }
-                String email = request.getParameter("email");
-                ind.setEmail(email);
-                String genre = request.getParameter("genre");
-                ind.setGenre(Boolean.parseBoolean(genre));
-                String lieuNaissance = request.getParameter("lieuNaissance");
-                ind.setLieunaiss(lieuNaissance);
-                String matricule = request.getParameter("matricule");
-                ind.setMatricule(matricule);
-                String noms = request.getParameter("noms");
-                ind.setNoms(noms);
-                String prenoms = request.getParameter("prenoms");
-                ind.setPrenoms(prenoms);
-                String residence = request.getParameter("residence");
-                ind.setResidence(residence);
-                String telephone1 = request.getParameter("telephone1");
-                ind.setTel1(telephone1);
-                String telephone2 = request.getParameter("telephone2");
-                ind.setTel2(telephone2);
-                individuDAO.enregistrer(ind);
-                e.setIndividu(ind);
-            }
-
-            if (etudiantDAO.enregistrer(e)) {
+            String email = request.getParameter("email");
+            ind.setEmail(email);
+            String genre = request.getParameter("genre");
+            ind.setGenre(Boolean.parseBoolean(genre));
+            String lieuNaissance = request.getParameter("lieuNaissance");
+            ind.setLieunaiss(lieuNaissance);
+            String matricule = request.getParameter("matricule");
+            ind.setMatricule(matricule);
+            String noms = request.getParameter("noms");
+            ind.setNoms(noms);
+            String prenoms = request.getParameter("prenoms");
+            ind.setPrenoms(prenoms);
+            String residence = request.getParameter("residence");
+            ind.setResidence(residence);
+            String telephone1 = request.getParameter("telephone1");
+            ind.setTel1(telephone1);
+            String telephone2 = request.getParameter("telephone2");
+            ind.setTel2(telephone2);
+            if (individuDAO.enregistrer(ind)) {
+                httpSession.setAttribute("nouvelIndividu", ind);
+                httpSession.setAttribute("countDown", 2);
                 Notification notif = new Notification();
                 notif.setTitre("Enregistrement");
                 notif.setMessage("L'élement a bien été enregistré");
@@ -164,7 +127,112 @@ public class EtudiantServlet extends HttpServlet {
                 notifications.add(notif);
                 httpSession.setAttribute("notifications", notifications);
             }
-            response.sendRedirect("start#!/etudiant/" + e.getIdetudiant());
+            response.sendRedirect("start#!/" + newIndividu);
+            System.out.println("On a tenté quelquechose en studio !");
+            PrintWriter pw = response.getWriter();
+            String e = "{"
+                    + "\"id\":\"" + ind.getIdindividu() + "\","
+                    + "\"noms\":\"" + ind.getNoms() + "\","
+                    + "\"prenoms\":\"" + ind.getPrenoms() + "\""
+                    + "}";
+            pw.println(e);
+
+        } else {
+            String action = request.getParameter("action");
+            //Pour supprimer l'entité
+            if (action != null && !action.isEmpty() && "supprimer".equals(action)) {
+                String id = request.getParameter("id");
+                if (id != null && !id.isEmpty()) {
+                    Etudiant e = etudiantDAO.get(id);
+                    if (verifierAvantSuppression(e)) {
+                        etudiantDAO.supprimer(e);
+                        Notification notif = new Notification();
+                        notif.setTitre("Suppression");
+                        notif.setMessage("L'élement a bien été supprimé");
+                        notif.setSuccess(true);
+                        notifications.add(notif);
+                        httpSession.setAttribute("notifications", notifications);
+                        response.sendRedirect("start#!/etudiants");
+                    } else {
+                        Notification notif = new Notification();
+                        notif.setTitre("Suppression");
+                        notif.setMessage("Echec de suppression !");
+                        notif.setSuccess(false);
+                        notifications.add(notif);
+                        httpSession.setAttribute("notifications", notifications);
+                    }
+                }//Pour ajouter ou modifier l'entité
+            } else {
+                String id = request.getParameter("id");
+                Etudiant e = null;
+                if (id != null && !id.isEmpty()) {
+                    int i = Integer.parseInt(id);
+                    e = etudiantDAO.get(i);
+                } else {
+                    e = new Etudiant();
+
+                }
+                String filiere = request.getParameter("filiere");
+                e.setFiliere(filiereDAO.get(filiere));
+                String niveau = request.getParameter("niveau");
+                e.setNiveauEtude(niveauEtudeDAO.get(niveau));
+                String anneeSco = request.getParameter("anneeSco");
+                System.out.println("anneeSco " + anneeSco);
+                e.setAnneeScolaire(anneeScolaireDAO.get(anneeSco));
+
+                String individu = request.getParameter("individu");
+                if (!individu.equals("Aucun individu")) {
+                    e.setIndividu(individuDAO.get(individu));
+                } else {
+                    Individu ind = new Individu();
+                    String civilite = request.getParameter("civilite");
+                    ind.setCivilite(civilite);
+                    String dateNaissance = request.getParameter("dateNaissance");
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    try {
+                        ind.setDatenaiss(sdf.parse(dateNaissance));
+                    } catch (ParseException ex) {
+                        ind.setDatenaiss(new Date());
+                    }
+                    String email = request.getParameter("email");
+                    ind.setEmail(email);
+                    String genre = request.getParameter("genre");
+                    ind.setGenre(Boolean.parseBoolean(genre));
+                    String lieuNaissance = request.getParameter("lieuNaissance");
+                    ind.setLieunaiss(lieuNaissance);
+                    String matricule = request.getParameter("matricule");
+                    ind.setMatricule(matricule);
+                    String noms = request.getParameter("noms");
+                    ind.setNoms(noms);
+                    String prenoms = request.getParameter("prenoms");
+                    ind.setPrenoms(prenoms);
+                    String residence = request.getParameter("residence");
+                    ind.setResidence(residence);
+                    String telephone1 = request.getParameter("telephone1");
+                    ind.setTel1(telephone1);
+                    String telephone2 = request.getParameter("telephone2");
+                    ind.setTel2(telephone2);
+                    individuDAO.enregistrer(ind);
+                    e.setIndividu(ind);
+                }
+
+                if (etudiantDAO.enregistrer(e)) {
+                    Notification notif = new Notification();
+                    notif.setTitre("Enregistrement");
+                    notif.setMessage("L'élement a bien été enregistré");
+                    notif.setSuccess(true);
+                    notifications.add(notif);
+                    httpSession.setAttribute("notifications", notifications);
+                } else {
+                    Notification notif = new Notification();
+                    notif.setTitre("Enregistrement");
+                    notif.setMessage("Echec d'enregistrement");
+                    notif.setSuccess(true);
+                    notifications.add(notif);
+                    httpSession.setAttribute("notifications", notifications);
+                }
+                response.sendRedirect("start#!/etudiant/" + e.getIdetudiant());
+            }
         }
     }
 

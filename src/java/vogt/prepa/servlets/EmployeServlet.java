@@ -6,6 +6,7 @@
 package vogt.prepa.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,7 +22,6 @@ import vogt.prepa.dao.IndividuDAO;
 import vogt.prepa.dao.PosteDAO;
 import vogt.prepa.entities.Employe;
 import vogt.prepa.entities.Individu;
-import vogt.prepa.entities.Poste;
 import vogt.prepa.entities.Utilisateur;
 import vogt.prepa.utils.Notification;
 
@@ -119,7 +119,14 @@ public class EmployeServlet extends HttpServlet {
                 httpSession.setAttribute("notifications", notifications);
             }
             response.sendRedirect("start#!/"+newIndividu);
-            
+            System.out.println("On a tenté quelquechose en studio !");
+            PrintWriter pw = response.getWriter();
+            String e = "{"
+                    + "\"id\":\"" + ind.getIdindividu() + "\","
+                    + "\"noms\":\"" + ind.getNoms() + "\","
+                    + "\"prenoms\":\"" + ind.getPrenoms() + "\""
+                    + "}";
+            pw.println(e);
 
         } else {
             String action = request.getParameter("action");
