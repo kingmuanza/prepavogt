@@ -92,15 +92,29 @@
                                         Enregistrer
                                     </button>
                                     <c:if test="${!empty visite}">
-                                        <button class="ui submit red button" name="action" value="supprimer" type="submit">
+                                        <div class="ui red button" id="supModal">
                                             Supprimer
-                                        </button>
+                                        </div>
                                     </c:if>
                                 </div>
-
                             </form>
+                            <div class="ui basic modal">
+                                <div class="ui icon header">
+                                    <form class="ui form" action="VisiteServlet" method="post">
+                                        <p>Veuillez confirmer la suppression ?</p>
+                                        <input type="hidden" name="id" value="${visite.idvisite}">
+                                        <div >
+                                            <button class="ui submit gris button" >
+                                                Annuler
+                                            </button>
+                                            <button class="ui submit red button" name="action" value="supprimer" type="submit">
+                                                Supprimer
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -110,6 +124,11 @@
                 ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
 
             })
+        </script>
+        <script>
+            $("#supModal").click(function () {
+                $('.ui.modal.basic').modal('show');
+            });
         </script>
     </body>
 </html>
