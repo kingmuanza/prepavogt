@@ -102,6 +102,22 @@
                                 </div>
 
                             </form>
+                            <div class="ui basic modal">
+                                <div class="ui icon header">
+                                    <form class="ui form" action="UtilisateurServlet" method="post">
+                                        <p>Veuillez confirmer la suppression ?</p>
+                                        <input type="hidden" name="id" value="${utilisateur.idutilisateur}">
+                                        <div >
+                                            <button class="ui cancel gris button" >
+                                                Annuler
+                                            </button>
+                                            <button class="ui submit red button" name="action" value="supprimer" type="submit">
+                                                Supprimer
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
