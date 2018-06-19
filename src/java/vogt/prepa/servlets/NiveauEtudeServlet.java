@@ -37,9 +37,9 @@ public class NiveauEtudeServlet extends HttpServlet {
         if (utilisateur != null) {
             String id = request.getParameter("id");
             if (id != null && !id.isEmpty()) {
-                int i = Integer.parseInt(id);
-                NiveauEtude niveauEtude = niveauEtudeDAO.get(i);
-                request.setAttribute("niveauEtude", niveauEtude);
+                
+                
+                request.setAttribute("niveauEtude", niveauEtudeDAO.get(id));
             }
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/niveau.jsp").forward(request, response);
         } else {
