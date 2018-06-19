@@ -109,7 +109,7 @@
                                         <p>Veuillez confirmer la suppression ?</p>
                                         <input type="hidden" name="id" value="${utilisateur.idutilisateur}">
                                         <div >
-                                            <button class="ui submit gris button" >
+                                            <button class="ui cancel gris button" >
                                                 Annuler
                                             </button>
                                             <button class="ui submit red button" name="action" value="supprimer" type="submit">
