@@ -55,7 +55,7 @@
                                         <li>Les mots de passe ne sont pas identiques</li>
                                     </ul>
                                 </div>
-                                <input type="hidden" name="id" value="${matiere.idmatiere}">
+                                <input type="hidden" name="id" value="${matiere.idmatiere}" required>
                                 <div class="required field">
                                     <label>Code</label>
                                     <input type="text" name="code" value="${matiere.code}" required>
@@ -69,29 +69,15 @@
                                         Enregistrer
                                     </button>
                                     <c:if test="${!empty matiere}">
-                                        <div class="ui red button" id="supModal">
+                                        <button class="ui submit red button" name="action" value="supprimer" type="submit">
                                             Supprimer
-                                        </div>
+                                        </button>
                                     </c:if>
                                 </div>
+
                             </form>
-                            <div class="ui basic modal">
-                                <div class="ui icon header">
-                                    <form class="ui form" action="MatiereServlet" method="post">
-                                        <p>Veuillez confirmer la suppression ?</p>
-                                        <input type="hidden" name="id" value="${matiere.idmatiere}">
-                                        <div >
-                                            <button class="ui submit gris button" >
-                                                Annuler
-                                            </button>
-                                            <button class="ui submit red button" name="action" value="supprimer" type="submit">
-                                                Supprimer
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -101,11 +87,6 @@
                 ouvrirMenuCorrespondant("#section_params", "bouton_params", "matieres");
 
             })
-        </script>
-        <script>
-            $("#supModal").click(function () {
-                $('.ui.modal.basic').modal('show');
-            });
         </script>
     </body>
 </html>

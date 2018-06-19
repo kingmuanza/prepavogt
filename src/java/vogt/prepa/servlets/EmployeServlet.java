@@ -10,7 +10,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,14 +52,13 @@ public class EmployeServlet extends HttpServlet {
             request.setAttribute("postes", posteDAO.getall());
             request.setAttribute("individus", individuDAO.getall());
             Individu ind = (Individu) httpSession.getAttribute("nouvelIndividu");
-            if (ind != null) {
+            if(ind != null){
                 request.setAttribute("nouvelIndividu", ind);
             }
-            if ((Integer) httpSession.getAttribute("countDown") != null && (Integer) httpSession.getAttribute("countDown") == 1) {
+            if((Integer) httpSession.getAttribute("countDown")!=null && (Integer) httpSession.getAttribute("countDown")==1)
                 httpSession.setAttribute("nouvelIndividu", null);
-            } else {
+            else
                 httpSession.setAttribute("countDown", 1);
-            }
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/collaborateur.jsp").forward(request, response);
         } else {
 //            response.sendRedirect("index.htm");
@@ -70,7 +68,6 @@ public class EmployeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("On tente quelquechose en studio !");
         HttpSession httpSession = request.getSession();
         List<Notification> notifications = (List<Notification>) httpSession.getAttribute("notifications");
         //pur créer un individu depuis le formulaire de la fenetre modale
@@ -104,8 +101,7 @@ public class EmployeServlet extends HttpServlet {
             ind.setTel1(telephone1);
             String telephone2 = request.getParameter("telephone2");
             ind.setTel2(telephone2);
-            boolean teste = individuDAO.enregistrer(ind);
-            if (true) {
+            if (individuDAO.enregistrer(ind)) {
                 httpSession.setAttribute("nouvelIndividu", ind);
                 httpSession.setAttribute("countDown", 2);
                 Notification notif = new Notification();
@@ -122,14 +118,8 @@ public class EmployeServlet extends HttpServlet {
                 notifications.add(notif);
                 httpSession.setAttribute("notifications", notifications);
             }
-            System.out.println("On a tenté quelquechose en studio !");
-            PrintWriter pw = response.getWriter();
-            String e = "{"
-                    + "\"id\":\"" + ind.getIdindividu() + "\","
-                    + "\"noms\":\"" + ind.getNoms() + "\","
-                    + "\"prenoms\":\"" + ind.getPrenoms() + "\""
-                    + "}";
-            pw.println(e);
+            response.sendRedirect("start#!/"+newIndividu);
+            
 
         } else {
             String action = request.getParameter("action");

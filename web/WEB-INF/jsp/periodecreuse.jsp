@@ -24,7 +24,7 @@
     <body>
         <h1 class="titre">
             ${empty periodeCreuse ? "Nouvelle période creuse":periodeCreuse.libelle}
-
+            
         </h1>
         <div style="padding-top: 10px;">
 
@@ -76,31 +76,14 @@
                                     <button class="ui submit gris button" name="action" value="enregistrer" type="submit">
                                         Enregistrer
                                     </button>
-                                    <c:if test="${!empty periodeCreuse}">
-                                        <div class="ui red button" id="supModal">
-                                            Supprimer
-                                        </div>
-                                    </c:if>
+                                    <button class="ui submit red button" name="action" value="supprimer" type="submit">
+                                        Supprimer
+                                    </button>
                                 </div>
+
                             </form>
-                            <div class="ui basic modal">
-                                <div class="ui icon header">
-                                    <form class="ui form" action="PeriodeCreuseServlet" method="post">
-                                        <p>Veuillez confirmer la suppression ?</p>
-                                        <input type="hidden" name="id" value="${periodeCreuse.idperiodeCreuse}">
-                                        <div >
-                                            <button class="ui submit gris button" >
-                                                Annuler
-                                            </button>
-                                            <button class="ui submit red button" name="action" value="supprimer" type="submit">
-                                                Supprimer
-                                            </button>
-                                        </div>
-                                    </form>
-                                    
-                                </div>
-                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -110,11 +93,6 @@
                 ouvrirMenuCorrespondant("#section_params", "bouton_params", "periodescreuses");
 
             })
-        </script>
-        <script>
-            $("#supModal").click(function () {
-                $('.ui.modal.basic').modal('show');
-            });
         </script>
     </body>
 </html>

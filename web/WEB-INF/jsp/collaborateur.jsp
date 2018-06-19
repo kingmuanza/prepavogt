@@ -118,88 +118,92 @@
                         </div>
                         <!-- MODAL  -->
                         <div class="ui modal">
-                            <div class="header titre">
+                            <i class="close icon"></i>
+                            <div class="header">
                                 Nouvel individu
                             </div>
                             <div class="image content">
                                 <div class="ui medium image" style="cursor: pointer">
-                                    <img src="img/joe.jpg" style="width: 100%;">
+                                    <img src="img/joe.jpg">
                                 </div>
+                                <div class="description">
+                                    <div class="ui header">Choisir une photo de profil.</div>
 
-                                <form style="width: 100%" class="ui form description" action="EmployeServlet" method="post">
-                                    <input type="hidden" name="newIndividu" value="collaborateur/${employe.individu.idindividu}"/>
-                                    <div class="required field">
-                                        <label>Matricule</label>
-                                        <input type="text" name="matricule" value="" required>
+                                </div>
+                            </div>
+                            <div style="padding: 30px">
+                                <form class="ui form" action="EmployeServlet" method="post">
+                                    <div class="content">
+                                        <input type="hidden" name="newIndividu" value="collaborateur/${employe.individu.idindividu}"/>
+                                        <div class="required field">
+                                            <label>Matricule</label>
+                                            <input type="text" name="matricule" value="" required>
+                                        </div>
+                                        <div class="two fields">
+                                            <div class="required field">
+                                                <label>Civilité</label>
+                                                <input type="text" name="civilite" value="" required>
+                                            </div>
+                                            <div class="required field">
+                                                <label>Genre</label>
+                                                <select class="ui dropdown" name="genre">
+                                                    <option value="true" >Femme</option>
+                                                    <option value="false" >Homme</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="two fields">
+                                            <div class="required field">
+                                                <label>Noms</label>
+                                                <input type="text" name="noms" value="" required>
+                                            </div>
+                                            <div class="required field">
+                                                <label>Prénoms</label>
+                                                <input type="text" name="prenoms" value="" required>
+                                            </div>
+                                        </div>
+                                        <div class="two fields">
+                                            <div class="required field">
+                                                <label>Date de naissance</label>
+                                                <input type="date" name="dateNaissance" value="" required>
+                                            </div>
+                                            <div class="required field">
+                                                <label>Lieu de naissance</label>
+                                                <input type="text" name="lieuNaissance" value="" required>
+                                            </div>
+                                        </div>
+                                        <div class="two fields">
+                                            <div class=" field">
+                                                <label>Résidence</label>
+                                                <input type="text" name="residence" value="">
+                                            </div>
+                                            <div class=" field">
+                                                <label>Adresse mail</label>
+                                                <input type="text" name="email" value="">
+                                            </div>
+                                        </div>
+                                        <div class="two fields">
+                                            <div class="required field">
+                                                <label>Télephone 1</label>
+                                                <input type="text" name="telephone1" value="" required>
+                                            </div>
+                                            <div class="field">
+                                                <label>Télephone 2</label>
+                                                <input type="text" name="telephone2" value="">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="two fields">
-                                        <div class="required field">
-                                            <label>Civilité</label>
-                                            <input type="text" name="civilite" value="" required>
+                                    <div class="actions">
+                                        <div class="ui black deny button">
+                                            Annuler
                                         </div>
-                                        <div class="required field">
-                                            <label>Genre</label>
-                                            <select class="ui dropdown" name="genre">
-                                                <option value="true" >Femme</option>
-                                                <option value="false" >Homme</option>
-                                            </select>
-                                        </div>
+                                        <button  type="submit" class="ui positive right labeled icon button">
+                                            Enregistrer
+                                            <i class="checkmark icon"></i>
+                                        </button>
                                     </div>
-                                    <div class="two fields">
-                                        <div class="required field">
-                                            <label>Noms</label>
-                                            <input type="text" name="noms" value="" required>
-                                        </div>
-                                        <div class="required field">
-                                            <label>Prénoms</label>
-                                            <input type="text" name="prenoms" value="" required>
-                                        </div>
-                                    </div>
-                                    <div class="two fields">
-                                        <div class="required field">
-                                            <label>Date de naissance</label>
-                                            <input type="date" name="dateNaissance" value="" required>
-                                        </div>
-                                        <div class="required field">
-                                            <label>Lieu de naissance</label>
-                                            <input type="text" name="lieuNaissance" value="" required>
-                                        </div>
-                                    </div>
-                                    <div class="two fields">
-                                        <div class=" field">
-                                            <label>Résidence</label>
-                                            <input type="text" name="residence" value="">
-                                        </div>
-                                        <div class=" field">
-                                            <label>Adresse mail</label>
-                                            <input type="text" name="email" value="">
-                                        </div>
-                                    </div>
-                                    <div class="two fields">
-                                        <div class="required field">
-                                            <label>Télephone 1</label>
-                                            <input type="text" name="telephone1" value="" required>
-                                        </div>
-                                        <div class="field">
-                                            <label>Télephone 2</label>
-                                            <input type="text" name="telephone2" value="">
-                                        </div>
-                                    </div>
-
-
                                 </form>
-
                             </div>
-                            <div class="actions">
-                                <div class="ui black deny button">
-                                    Annuler
-                                </div>
-                                <button id="ajax_submit" class="ui gris right labeled icon button">
-                                    Enregistrer
-                                    <i class="checkmark icon"></i>
-                                </button>
-                            </div>
-
                         </div>
 
                         <!-- MODAL  -->
@@ -209,45 +213,41 @@
         </div>
         <script>
             $(document).ready(function () {
-                ouvrirMenuCorrespondant("#section_params", "bouton_params", "collaborateurs");
-                $("#new_individu").click(function () {
-                    $('.ui.modal').modal('show');
-                });
-                $("#ajax_submit").click(function () {
-                    var data = {
-                        newIndividu: $("[name='newIndividu']").val(),
-                        matricule: $("[name='matricule']").val(),
-                        civilite: $("[name='civilite']").val(),
-                        genre: $("[name='genre']").val(),
-                        noms: $("[name='noms']").val(),
-                        prenoms: $("[name='prenoms']").val(),
-                        dateNaissance: $("[name='dateNaissance']").val(),
-                        lieuNaissance: $("[name='lieuNaissance']").val(),
-                        residence: $("[name='residence']").val(),
-                        email: $("[name='email']").val(),
-                        telephone1: $("[name='telephone1']").val(),
-                        telephone2: $("[name='telephone2']").val()
-                    };
-                    console.log(data);
-                    $.ajax({
-                        type: "POST",
+            ouvrirMenuCorrespondant("#section_params", "bouton_params", "collaborateurs");
+            $("#new_individu").click(function () {
+                $('.ui.modal').modal('show');
+            });
+            $("#ajax_submit").click(function () {
+                $.ajax({
+                type: "POST",
                         url: "EmployeServlet",
-                        data: data,
-                        success: function (data) {
-                            console.log(data);
-                            var donnees = JSON.parse(data);
-                            $("[name='individu']").html("<option value='" + donnees.id + "'>"+donnees.noms+" "+ donnees.prenoms+"</option>");
+                        data: {
+                                newIndividu: $("[name='newIndividu']").val(),
+                                matricule: $("[name='matricule']").val(),
+                                civilite: $("[name='civilite']").val(),
+                                genre: $("[name='genre']").val(),
+                                noms: $("[name='noms']").val(),
+                                prenoms: $("[name='prenoms']").val(),
+                                dateNaissance: $("[name='dateNaissance']").val(),
+                                lieuNaissance: $("[name='lieuNaissance']").val(),
+                                residence: $("[name='residence']").val(),
+                                email: $("[name='email']").val(),
+                                telephone1: $("[name='telephone1']").val(),
+                                telephone2: $("[name='telephone2']").val()
                         },
-                        error: function (xhr, str) {
-
+                        success: function(data) {
+                            
+                        },
+                        error:  function(xhr, str){
+                            
                         }
-                    }).done(function () {
-                        console.log("Fin de la fonction");
+                }).done(function() {
+                        
                     });
                 });
             });
-
-
+            
+            
         </script>
     </body>
 </html>

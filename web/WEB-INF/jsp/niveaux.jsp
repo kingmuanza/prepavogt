@@ -29,23 +29,23 @@
             </thead>
 
             <tbody>
-                <c:forEach items="${niveauEtudes}" var="niveauEtud">
+                <c:forEach items="${niveauEtudes}" var="niveauEtude">
                     
-                <tr class="pointeur" onclick="window.location.href='start#!/niveau/${niveauEtud.idniveauEtude}'">
+                <tr class="pointeur" onclick="window.location.href='start#!/niveau/${niveauEtude.idniveauEtude}'">
                     <td>
                         <h4 class="ui image header">
                             <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
                             <div class="content">
-                                ${niveauEtud.code}
+                                ${niveauEtude.code}
                                 <div class="sub header">
-                                    ${niveauEtud.libelle}
+                                    ${niveauEtude.libelle}
                                 </div>
                             </div>
                         </h4>
                     </td>
-                    <td>${niveauEtud.code}</td>
-                    <td>${niveauEtud.libelle}</td>
-                    <td>${niveauEtud.valeur}</td>
+                    <td>${niveauEtude.code}</td>
+                    <td>${niveauEtude.libelle}</td>
+                    <td>${niveauEtude.valeur}</td>
                 </tr>
                 </c:forEach>
 

@@ -59,7 +59,7 @@ public class UtilisateurServlet extends HttpServlet {
             if (id != null && !id.isEmpty()) {
                 Utilisateur u = utilisateurDAO.get(id);
                 if (verifierAvantSuppression(u)) {
-                    utilisateurDAO.supprimer(u);
+                    //utilisateurDAO.supprimer(u);
                     Notification notif = new Notification();
                     notif.setTitre("Suppression");
                     notif.setMessage("L'élement a bien été supprimé");

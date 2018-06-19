@@ -74,7 +74,6 @@ public class EntreeServlet extends HttpServlet {
                 Entree e = entreeDAO.get(id);
                 if (verifierAvantSuppression(e)) {
                     entreeDAO.supprimer(e);
-                    System.out.println("Supprimé");
                     Notification notif = new Notification();
                     notif.setTitre("Suppression");
                     notif.setMessage("L'élement a bien été supprimé");
