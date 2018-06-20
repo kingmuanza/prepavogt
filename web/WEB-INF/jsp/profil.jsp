@@ -62,10 +62,10 @@
                                     <label>Visibilité Employé</label>
                                     <select class="ui dropdown" name="employe">
                                         <option value="0" ${!utilisateurProfil.voirEmploye?"selected":""}>
-                                                Non
+                                            Non
                                         </option>
                                         <option value="1" ${utilisateurProfil.voirEmploye?"selected":""}>
-                                                Oui
+                                            Oui
                                         </option>
                                     </select>
                                 </div>
@@ -73,12 +73,25 @@
                                     <label>Visibilité Enseignant</label>
                                     <select class="ui dropdown" name="enseignant">
                                         <option value="0" ${!utilisateurProfil.voirEnseignant?"selected":""}>
-                                                Non
+                                            Non
                                         </option>
                                         <option value="1" ${utilisateurProfil.voirEnseignant?"selected":""}>
-                                                Oui
+                                            Oui
                                         </option>
                                     </select>
+                                </div>
+                                <div class="ui form">
+                                    <div class="field">
+                                        <label>Country</label>
+                                        <select name="filieres[]" multiple="" class="ui fluid dropdown">
+                                            <option value="">Selectionner vos filiere</option>
+                                            <c:forEach items="${filieres}" var="filiere">
+                                                <option value="${filiere.idfiliere}">
+                                                    ${filiere.libelle}
+                                                </option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div>
                                     <button class="ui submit gris button" name="action" value="enregistrer" type="submit">

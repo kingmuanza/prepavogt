@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import vogt.prepa.dao.FiliereDAO;
 import vogt.prepa.dao.UtilisateurProfilDAO;
 import vogt.prepa.entities.Utilisateur;
 import vogt.prepa.entities.UtilisateurProfil;
@@ -27,6 +28,7 @@ import vogt.prepa.utils.Notification;
 public class UtilisateurProfilServlet extends HttpServlet {
 
     UtilisateurProfilDAO utilisateurProfilDAO = new UtilisateurProfilDAO();
+    FiliereDAO filiereDAO = new FiliereDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -38,6 +40,7 @@ public class UtilisateurProfilServlet extends HttpServlet {
             if (id != null && !id.isEmpty()) {
                 UtilisateurProfil utilisateurProfil = utilisateurProfilDAO.get(id);
                 request.setAttribute("utilisateurProfil", utilisateurProfil);
+                request.setAttribute("filieres", filiereDAO.getall());
 
             }
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/profil.jsp").forward(request, response);
