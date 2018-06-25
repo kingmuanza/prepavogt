@@ -9,6 +9,15 @@
 */
 
 /**/
+.fg-grey{
+    color:#aaa;
+}
+.fg-teal{
+    color: #00B5AD;
+}
+.bg-red{
+    background-color: #DB2828!important;
+}
 
 .pointeur{
     cursor:pointer;
@@ -102,6 +111,10 @@ a.paginate_button.current{
     border-radius: 50%;
     border: 4px solid #00B5AD;
 }
+.rond.error{
+    border-radius: 50%;
+    border: 4px solid #aaa;
+}
 
 .moyen{
     height: 100px!important;
@@ -123,11 +136,6 @@ a.paginate_button.current{
 .gris{
     background-color: #004d6f;
     color: white!important;
-}
-
-.rond{
-    border-radius: 50%;
-    border: 4px solid #00B5AD;
 }
 
 .moyen{

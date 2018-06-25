@@ -45,7 +45,6 @@
                                 <div class="content">
                                     ${enseignant.individu.noms} ${enseignant.individu.prenoms}
                                     <div class="sub header">
-                                        <b>${enseignant.individu.matricule}</b>
                                         ${enseignant.individu.genre ? "Femme":"Homme"}
                                     </div>
                                 </div>
@@ -63,7 +62,8 @@
                                     <div class="sub header">
                                         <c:forEach items="${enseignant.coursEnseignants}" var="courEn">
                                             <span>
-                                                ${courEn.cours.niveauEtude.code} ${courEn.cours.filiere.libelle}&nbsp;
+                                                ${courEn.cours.classe.niveauEtude.code} 
+                                                ${courEn.cours.classe.filiere.libelle}&nbsp;
                                             </span>
                                         </c:forEach>
                                     </div>

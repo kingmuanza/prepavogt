@@ -19,7 +19,7 @@
     <body ng-app="myApp" style="height: 100vh; overflow-y: hidden; ">
 
         <div class="ui grid">
-            <div class="noir" style="width: 5vw; height: 110vh; margin: 0px!important; padding: 0px;important">
+            <div class="noir" style="width: 6vw; height: 110vh; margin: 0px!important; padding: 0px;important">
                 <div style="padding-top: 5vw;">
                     <div id="bouton_profil" onclick="gestionnaireSections('#section_profil', this)" class="section_bouton">
                         <div style="position: relative;top: 50%; left: 30%;transform: translateY(-50%);">
@@ -56,7 +56,7 @@
                 </div>
             </div>
 
-            <div class="gris" style="width: 20vw; height: 110vh; padding-top: 25px;">
+            <div class="gris" style="width: 18vw; height: 110vh; padding-top: 25px;">
                 <div style="padding-left: 10px;" id="section_accueil" class="section_muanza">
                     <h1>Accueil</h1>
                     <p>Cette section regroupe les informations de la journée</p>
@@ -98,14 +98,37 @@
                             </a>
                             <div class="active content menu">
                                 <a class="item active" href="#!tempsreel">Suivre en temps réel </a>
-                                <a class="item active" href="#!tempsreel">Exporter les données </a>
-                                <a class="item active" href="#!tempsreel">Configuration </a>
+                                <a class="item active" href="#!pointages">Historique des pointages </a>
+                                <a class="item active" href="#!configuration">Configuration </a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <a class="title">
+                                <b>Import / Export</b>
+                            </a>
+                            <div class="active content menu">
+                                <a class="item active" href="#!export">Exporter les données </a>
+                                <a class="item active" href="#!importer">Importer des données </a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div style="padding-left: 10px;" id="section_profil"  class="section_muanza">
+                <div style="padding-left: 10px; padding-right : 10px;" id="section_profil"  class="section_muanza">
                     <h1>Mon profil</h1>
+                    <h3 class="fg-white" style="line-height: 0">
+                        ${empty sessionScope.utilisateur.individu.noms ? sessionScope.utilisateur.login:""}
+                        ${sessionScope.utilisateur.individu.noms}
+                        ${sessionScope.utilisateur.individu.prenoms}
+                    </h3>
+
+                    <img src="img/joe.jpg" alt="" style="width: 100%"/>
+                    <h3 class="fg-white" style="line-height: 0">
+                        ${sessionScope.utilisateur.utilisateurProfil.libelle}
+                        
+                    </h3>
+                    <a class="fg-white">
+                        @${sessionScope.utilisateur.login}
+                    </a>
 
                 </div>
                 <div style="padding-left: 10px;" id="section_stats"  class="section_muanza">
@@ -167,7 +190,7 @@
                                 <b>Statistiques</b>
                             </a>
                             <div class="content menu">
-                                <a class="item" href="#!statistiques">Par personne</a>
+                                <a class="item" href="#!statsentrees">Par personne</a>
                             </div>
                         </div>
                     </div>
@@ -175,13 +198,12 @@
                 <div style="padding-left: 10px;" id="section_params"  class="section_muanza">
                     <h1>Paramètres</h1>
                     <div class="ui accordion vertical fluid following text menu">
-                        <div class="item active">
+                        <div class="item">
                             <a class="title">
                                 <i class="dropdown icon"></i> <b>Gestions des utilisateurs</b>
                             </a>
                             <div class="content menu">
-                                <!-- Routage utilisateur OK-->
-                                <a class="item active" href="#!utilisateurs">Utilisateurs</a>
+                                <a class="item" href="#!utilisateurs">Utilisateurs</a>
                                 <a class="item" href="#!profils">Profils utilisateurs</a>
                             </div>
                         </div>
@@ -226,7 +248,7 @@
 
 
             </div>
-            <div style="width: 75vw; height: 100vh; overflow-x: hidden; overflow-y: hidden; padding-top: 20px; padding-right: 0px!important;margin-right: 10px!important;">
+            <div style="width: 75vw; height: 100vh; overflow-x: hidden; overflow-y: hidden; padding-top: 20px; padding-right: 5px!important;margin-right: 10px!important;">
                 <div class="ui secondary  menu">
                     <a class="item teal">
                         <i class="circle loading icon titre"></i>
@@ -249,11 +271,15 @@
                                 <i class="search link icon"></i>
                             </div>
                         </div>
-                        <a class="ui item">
+                        <div class="ui item dropdown">
                             ${empty sessionScope.utilisateur.individu.noms ? sessionScope.utilisateur.login:""}
                             ${sessionScope.utilisateur.individu.noms}
                             ${sessionScope.utilisateur.individu.prenoms}
-                        </a>
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <a href="DeconnexionServlet" class="item">Déconnexion</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div style="height: 90vh; overflow-y: scroll">
@@ -276,9 +302,10 @@
         <script src="js/angular.min.js" type="text/javascript"></script>
         <script src="js/angular-route.js" type="text/javascript"></script>
         <script src="js/myapp.js" type="text/javascript"></script>
-        <script src="js/routage.js" type="text/javascript"></script>
+        <script src="js/routage.js?id=12325" type="text/javascript"></script>
         <script>
                         $(document).ready(function () {
+                            $('.ui.dropdown').dropdown();
                             console.log("Moi je comprend pas pas");
             <c:forEach items="${notifications}" var="n">
 

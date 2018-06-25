@@ -16,13 +16,13 @@
 
     </head>
     <body>
-        <h1 class="titre">Liste des étudiants</h1>
+        <h1 class="titre">Liste des Etudiants</h1>
 
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
                     <th>Etudiants</th>
-                    <th>Filiere/Niveau</th>                    
+                    <th>Classe</th>                    
                 </tr>
             </thead>
 
@@ -44,9 +44,9 @@
                     <td>
                         <h4 class="ui image header">
                             <div class="content">
-                                ${etudiant.filiere.libelle}
+                                ${etudiant.classe.filiere.libelle}
                                 <div class="sub header">
-                                    ${etudiant.niveauEtude.libelle}
+                                    ${etudiant.classe.niveauEtude.libelle}
                                 </div>
                             </div>
                         </h4>
