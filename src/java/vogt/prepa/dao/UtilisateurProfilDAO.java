@@ -6,6 +6,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import vogt.prepa.entities.UtilisateurProfil;
+import vogt.prepa.entities.UtilisateurProfilFiliere;
 import vogt.prepa.utils.HibernateUtil;
 
 public class UtilisateurProfilDAO {
@@ -139,5 +140,9 @@ public class UtilisateurProfilDAO {
     }
 
     public void initialiser(UtilisateurProfil utilisateurProfil) {
+        Hibernate.initialize(utilisateurProfil.getUtilisateurProfilFilieres());
+        for(UtilisateurProfilFiliere upf : utilisateurProfil.getUtilisateurProfilFilieres()){
+            Hibernate.initialize(upf.getFiliere());
+        }
     }
 }

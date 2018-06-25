@@ -42,7 +42,7 @@
                     <div class="ten wide column">
                         <div>
                             <form class="ui form" action="UtilisateurProfilServlet" method="post">
-                                <div class="ui message">
+                                <div class="ui error message">
                                     <div class="header">Messages à afficher en cas d'erreur</div>
                                     <ul class="list">
                                         <li>Entrez vos nouvelles paramettres</li>
@@ -80,20 +80,23 @@
                                         </option>
                                     </select>
                                 </div>
-                                <div class="ui form">
-                                    <div class="field">
-                                        <label>Country</label>
-                                        <select name="filieres[]" multiple="" class="ui fluid dropdown">
-                                            <option value="">Selectionner vos filiere</option>
+                                <div class="field">
+                                    <label>Filières</label>
+                                    <div class="ui dropdown selection multiple">
+                                        <i class="dropdown icon"></i>
+                                        <div class="default text">Sélectionnez vos filières</div>
+                                        <select id="multi-select" name="filieres" multiple>
+                                            <option value="">Sélectionnez vos filières</option>
                                             <c:forEach items="${filieres}" var="filiere">
-                                                <option value="${filiere.idfiliere}">
+                                                <option value="${filiere.idfiliere}" ${filiereUtil.isIn(filiere, utilisateurProfil)?"selected":""}>
                                                     ${filiere.libelle}
                                                 </option>
                                             </c:forEach>
                                         </select>
                                     </div>
                                 </div>
-                                <div>
+
+                                <div style="padding-top: 20px;">
                                     <button class="ui submit gris button" name="action" value="enregistrer" type="submit">
                                         Enregistrer
                                     </button>
@@ -112,7 +115,7 @@
         <script>
             $(document).ready(function () {
                 ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
-
+                $("#multi-select").dropdown("get value") ;
             })
         </script>
     </body>

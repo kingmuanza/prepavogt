@@ -19,7 +19,7 @@
     <body ng-app="myApp" style="height: 100vh; overflow-y: hidden; ">
 
         <div class="ui grid">
-            <div class="noir" style="width: 5vw; height: 110vh; margin: 0px!important; padding: 0px;important">
+            <div class="noir" style="width: 6vw; height: 110vh; margin: 0px!important; padding: 0px;important">
                 <div style="padding-top: 5vw;">
                     <div id="bouton_profil" onclick="gestionnaireSections('#section_profil', this)" class="section_bouton">
                         <div style="position: relative;top: 50%; left: 30%;transform: translateY(-50%);">
@@ -56,7 +56,7 @@
                 </div>
             </div>
 
-            <div class="gris" style="width: 20vw; height: 110vh; padding-top: 25px;">
+            <div class="gris" style="width: 18vw; height: 110vh; padding-top: 25px;">
                 <div style="padding-left: 10px;" id="section_accueil" class="section_muanza">
                     <h1>Accueil</h1>
                     <p>Cette section regroupe les informations de la journée</p>

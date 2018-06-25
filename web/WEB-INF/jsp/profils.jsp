@@ -16,7 +16,7 @@
 
     </head>
     <body>
-        <h1 class="titre">Liste de profils</h1>
+        <h1 class="titre">Liste des profils</h1>
         <div class="ui message info">
             <div class="header">
                 Important
@@ -32,8 +32,9 @@
                 <tr>
                     <th>Code</th>
                     <th>Libelle</th>
-                    <th>Employés</th>
+                    <th>Filières</th>
                     <th>Enseignants</th>                  
+                    <th>Employés</th>
                 </tr>
             </thead>
 
@@ -42,10 +43,15 @@
                     <tr class="pointeur" onclick="window.location.href='start#!/profil/${profilU.idutilisateurProfil}'">
                         <td>${profilU.code}</td>
                         <td>${profilU.libelle}</td>
+                        <td>
+                            <c:forEach items="${profilU.utilisateurProfilFilieres}" var="pf">
+                                ${pf.filiere.libelle}<br>
+                            </c:forEach>
+                        </td>
+                        <td class="center">${profilU.voirEnseignant? "<i class='check titre icon'></i>":""}</td>
                         <td class="center">
                             ${profilU.voirEmploye? "<i class='check titre icon'></i>":""}
                         </td>
-                        <td class="center">${profilU.voirEnseignant? "<i class='check titre icon'></i>":""}</td>
                     </tr>
                 </c:forEach>
 
