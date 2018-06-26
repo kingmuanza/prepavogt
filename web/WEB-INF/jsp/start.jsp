@@ -113,8 +113,22 @@
                         </div>
                     </div>
                 </div>
-                <div style="padding-left: 10px;" id="section_profil"  class="section_muanza">
+                <div style="padding-left: 10px; padding-right : 10px;" id="section_profil"  class="section_muanza">
                     <h1>Mon profil</h1>
+                    <h3 class="fg-white" style="line-height: 0">
+                        ${empty sessionScope.utilisateur.individu.noms ? sessionScope.utilisateur.login:""}
+                        ${sessionScope.utilisateur.individu.noms}
+                        ${sessionScope.utilisateur.individu.prenoms}
+                    </h3>
+
+                    <img src="img/joe.jpg" alt="" style="width: 100%"/>
+                    <h3 class="fg-white" style="line-height: 0">
+                        ${sessionScope.utilisateur.utilisateurProfil.libelle}
+                        
+                    </h3>
+                    <a class="fg-white">
+                        @${sessionScope.utilisateur.login}
+                    </a>
 
                 </div>
                 <div style="padding-left: 10px;" id="section_stats"  class="section_muanza">
@@ -234,7 +248,7 @@
 
 
             </div>
-            <div style="width: 75vw; height: 100vh; overflow-x: hidden; overflow-y: hidden; padding-top: 20px; padding-right: 0px!important;margin-right: 10px!important;">
+            <div style="width: 75vw; height: 100vh; overflow-x: hidden; overflow-y: hidden; padding-top: 20px; padding-right: 5px!important;margin-right: 10px!important;">
                 <div class="ui secondary  menu">
                     <a class="item teal">
                         <i class="circle loading icon titre"></i>
@@ -257,11 +271,15 @@
                                 <i class="search link icon"></i>
                             </div>
                         </div>
-                        <a class="ui item">
+                        <div class="ui item dropdown">
                             ${empty sessionScope.utilisateur.individu.noms ? sessionScope.utilisateur.login:""}
                             ${sessionScope.utilisateur.individu.noms}
                             ${sessionScope.utilisateur.individu.prenoms}
-                        </a>
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <a href="DeconnexionServlet" class="item">Déconnexion</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div style="height: 90vh; overflow-y: scroll">
@@ -287,6 +305,7 @@
         <script src="js/routage.js" type="text/javascript"></script>
         <script>
                         $(document).ready(function () {
+                            $('.ui.dropdown').dropdown();
                             console.log("Moi je comprend pas pas");
             <c:forEach items="${notifications}" var="n">
 
