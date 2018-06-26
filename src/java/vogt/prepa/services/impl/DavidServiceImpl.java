@@ -67,46 +67,4 @@ public class DavidServiceImpl implements DavidService {
         }
         return pList;
     }
-    public static void main(String[] args) {
-        String chemin = "C:\\Users\\zos hall\\Documents\\SIA\\220180625.txt";
-        List<Pointage> pList = new ArrayList<Pointage>();
-        System.out.println("chemin"+chemin);
-        try {
-            Scanner scanner = new Scanner("C:\\Users\\zos hall\\Documents\\SIA\\220180625.txt");
-            Pointage point = new Pointage();
-            
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-            while (true) {
-                //Utilisation de la methode scanner pour recuperer les lignes de pointages
-                try {
-                    point.setMatricule(scanner.next());
-                    String name = scanner.next();
-                    String heur = scanner.next();
-                    try {
-                        point.setHeure(sdf.parse(heur)) ;
-
-                    } catch (Exception except) {
-                        System.out.println("Parse Exception");
-                    }
-                    String verify = scanner.next();
-                    point.setMode(scanner.next());
-                    point.setMachine(scanner.next());
-                    String exception = scanner.next();
-                    String checktype = scanner.next();
-                    point.setNumero(scanner.next());
-                    point.setIomd(scanner.next());
-                    String sDate = scanner.next();
-                    //Ajout du pointage recuperer dans la liste des pointages
-                    pList.add(point);
-                    System.out.println(point.getNumero() + "|" + point.getMachine() + "|" + point.getMatricule() + "|" + point.getMode() + "|" + point.getIomd() + "|" + point.getHeure());
-                    
-                } catch (Exception exception) {
-                    break;
-                }
-            }
-            scanner.close();
-        } catch (Exception fnfe) {
-            System.out.println("Le fichier n'a pas été trouvé");
-        }
-    }
 }
