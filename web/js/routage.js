@@ -5,10 +5,11 @@
 function UrlExists(url) {
     var http = new XMLHttpRequest();
     http.open('HEAD', url, false);
-    try{
-        http.send();
+    http.send();
+    console.log(http.status);
+    if(http.status==200){
         return url;
-    }catch(e){
+    }else{
         return "notfound.jsp";
     }
 

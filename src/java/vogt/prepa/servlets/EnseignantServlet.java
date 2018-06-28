@@ -17,11 +17,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import vogt.prepa.dao.CoursDAO;
+import vogt.prepa.dao.CoursEnseignantDAO;
 import vogt.prepa.dao.EnseignantDAO;
 import vogt.prepa.dao.IndividuDAO;
+import vogt.prepa.entities.Cours;
+import vogt.prepa.entities.CoursEnseignant;
 import vogt.prepa.entities.Enseignant;
 import vogt.prepa.entities.Individu;
 import vogt.prepa.entities.Utilisateur;
+import vogt.prepa.utils.CoursUtil;
 import vogt.prepa.utils.Notification;
 
 /**
@@ -33,12 +38,16 @@ public class EnseignantServlet extends HttpServlet {
 
     EnseignantDAO enseignantDAO = new EnseignantDAO();
     IndividuDAO individuDAO = new IndividuDAO();
+    CoursDAO coursDAO = new CoursDAO();
+    CoursEnseignantDAO coursEnseignantDAO = new CoursEnseignantDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession httpSession = request.getSession();
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
+
+        CoursUtil coursUtil = new CoursUtil();
         if (utilisateur != null) {
             String id = request.getParameter("id");
             if (id != null && !id.isEmpty()) {
@@ -47,16 +56,10 @@ public class EnseignantServlet extends HttpServlet {
                 request.setAttribute("enseignant", enseignant);
 
             }
+            request.setAttribute("coursUtil", coursUtil);
             request.setAttribute("individus", individuDAO.getall());
-            Individu ind = (Individu) httpSession.getAttribute("nouvelIndividu");
-            if (ind != null) {
-                request.setAttribute("nouvelIndividu", ind);
-            }
-            if ((Integer) httpSession.getAttribute("countDown") != null && (Integer) httpSession.getAttribute("countDown") == 1) {
-                httpSession.setAttribute("nouvelIndividu", null);
-            } else {
-                httpSession.setAttribute("countDown", 1);
-            }
+            request.setAttribute("courses", coursDAO.getall());
+
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/enseignant.jsp").forward(request, response);
         } else {
 //            response.sendRedirect("index.htm");
@@ -166,36 +169,7 @@ public class EnseignantServlet extends HttpServlet {
                 if (!individu.equals("Aucun individu")) {
                     ens.setIndividu(individuDAO.get(individu));
                 } else {
-                    Individu ind = new Individu();
-                    String civilite = request.getParameter("civilite");
-                    ind.setCivilite(civilite);
-                    String dateNaissance = request.getParameter("dateNaissance");
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    try {
-                        ind.setDatenaiss(sdf.parse(dateNaissance));
-                    } catch (ParseException ex) {
-                        ind.setDatenaiss(new Date());
-                    }
-                    String email = request.getParameter("email");
-                    ind.setEmail(email);
-                    String genre = request.getParameter("genre");
-                    ind.setGenre(Boolean.parseBoolean(genre));
-                    String lieuNaissance = request.getParameter("lieuNaissance");
-                    ind.setLieunaiss(lieuNaissance);
-                    String matricule = request.getParameter("matricule");
-                    ind.setMatricule(matricule);
-                    String noms = request.getParameter("noms");
-                    ind.setNoms(noms);
-                    String prenoms = request.getParameter("prenoms");
-                    ind.setPrenoms(prenoms);
-                    String residence = request.getParameter("residence");
-                    ind.setResidence(residence);
-                    String telephone1 = request.getParameter("telephone1");
-                    ind.setTel1(telephone1);
-                    String telephone2 = request.getParameter("telephone2");
-                    ind.setTel2(telephone2);
-                    individuDAO.enregistrer(ind);
-                    ens.setIndividu(ind);
+
                 }
 
                 if (enseignantDAO.enregistrer(ens)) {
@@ -205,6 +179,10 @@ public class EnseignantServlet extends HttpServlet {
                     notif.setSuccess(true);
                     notifications.add(notif);
                     httpSession.setAttribute("notifications", notifications);
+                    String[] courses = request.getParameterValues("courses");
+                    System.out.println(courses.toString());
+                    deleteCourses(ens);
+                    SaveCourses(ens, courses);
                 } else {
                     Notification notif = new Notification();
                     notif.setTitre("Enregistrement");
@@ -220,5 +198,21 @@ public class EnseignantServlet extends HttpServlet {
 
     public boolean verifierAvantSuppression(Enseignant i) {
         return true;
+    }
+
+    public void SaveCourses(Enseignant enseignant, String[] courses) {
+        for (String f : courses) {
+            Cours cours = coursDAO.get(f);
+            CoursEnseignant ce = new CoursEnseignant();
+            ce.setCours(cours);
+            ce.setEnseignant(enseignant);
+            coursEnseignantDAO.enregistrer(ce);
+        }
+    }
+
+    public void deleteCourses(Enseignant enseignant) {
+        for (CoursEnseignant ce : enseignant.getCoursEnseignants()) {
+            coursEnseignantDAO.supprimer(ce);
+        }
     }
 }

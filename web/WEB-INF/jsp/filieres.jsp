@@ -22,7 +22,7 @@
             <thead>
                 <tr>
                     <th>Filières</th>
-                    <th>Etudiants</th>             
+                    <th>Classes</th>             
                 </tr>
             </thead>
 
@@ -43,7 +43,7 @@
                         <td>
                             <h4 class="ui image header">
                                 <div class="content">
-                                    ${filiere.etudiants.size()}
+                                    ${filiere.classes.size()}
                                 </div>
                             </h4>
                         </td>

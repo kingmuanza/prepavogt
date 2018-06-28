@@ -22,7 +22,7 @@
             <thead>
                 <tr>
                     <th>Etudiants</th>
-                    <th>Filiere/Niveau</th>                    
+                    <th>Classe</th>                    
                 </tr>
             </thead>
 
