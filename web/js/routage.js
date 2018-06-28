@@ -5,10 +5,10 @@
 function UrlExists(url) {
     var http = new XMLHttpRequest();
     http.open('HEAD', url, false);
-    http.send();
-    if (http.status !== 404 && http.status !== 500) {
+    try{
+        http.send();
         return url;
-    } else {
+    }catch(e){
         return "notfound.jsp";
     }
 
@@ -83,7 +83,7 @@ app.config(function ($routeProvider) {
             })
             .when("/profil/:id", {
                 templateUrl: function (params) {
-                    return UrlExists("UtilisateurProfilServlet")+"?id=" + params.id
+                    return UrlExists("UtilisateurProfilServlet?id=" + params.id)
                 }
             })
             .when("/profils", {

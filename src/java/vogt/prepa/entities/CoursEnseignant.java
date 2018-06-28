@@ -1,5 +1,5 @@
 package vogt.prepa.entities;
-// Generated 6 juin 2018 13:00:00 by Hibernate Tools 4.3.1
+// Generated 28 juin 2018 13:23:20 by Hibernate Tools 4.3.1
 
 
 import javax.persistence.Column;

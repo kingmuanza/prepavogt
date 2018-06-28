@@ -5,19 +5,18 @@ import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
-import vogt.prepa.entities.Filiere;
-import vogt.prepa.entities.UtilisateurProfil;
-import vogt.prepa.entities.UtilisateurProfilFiliere;
+import vogt.prepa.entities.Employe;
+import vogt.prepa.entities.Classe;
 import vogt.prepa.utils.HibernateUtil;
 
-public class UtilisateurProfilFiliereDAO {
-    
-    public boolean enregistrer(UtilisateurProfilFiliere utilisateurProfilFiliere) {
+public class ClasseDAO {
+
+    public boolean enregistrer(Classe classe) {
         boolean isGood = false;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
         try {
-            session.saveOrUpdate(utilisateurProfilFiliere);
+            session.saveOrUpdate(classe);
             isGood = true;
         } catch (HibernateException e) {
             session.getTransaction().rollback();
@@ -27,12 +26,12 @@ public class UtilisateurProfilFiliereDAO {
         return isGood;
     }
 
-    public boolean supprimer(UtilisateurProfilFiliere utilisateurProfilFiliere) {
+    public boolean supprimer(Classe classe) {
         boolean isGood = false;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
         try {
-            session.delete(utilisateurProfilFiliere);
+            session.delete(classe);
             isGood = true;
         } catch (HibernateException e) {
             session.getTransaction().rollback();
@@ -42,106 +41,107 @@ public class UtilisateurProfilFiliereDAO {
         return isGood;
     }
 
-    public UtilisateurProfilFiliere get(int id) {
+    public Classe get(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
-        UtilisateurProfilFiliere utilisateurProfilFiliere = (UtilisateurProfilFiliere) session.get(UtilisateurProfilFiliere.class, id);
-        if (utilisateurProfilFiliere == null) {
+        Classe classe = (Classe) session.get(Classe.class, id);
+        if (classe == null) {
             throw new RuntimeException();
         } else {
-            initialiser(utilisateurProfilFiliere);
+            initialiser(classe);
         }
 
         session.getTransaction().commit();
         session.close();
 
-        return utilisateurProfilFiliere;
+        return classe;
     }
-    
-    public UtilisateurProfilFiliere getLazy(int id) {
+
+    public Classe getLazy(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
-        UtilisateurProfilFiliere utilisateurProfilFiliere = (UtilisateurProfilFiliere) session.get(UtilisateurProfilFiliere.class, id);
-        if (utilisateurProfilFiliere == null) {
+        Classe classe = (Classe) session.get(Classe.class, id);
+        if (classe == null) {
             throw new RuntimeException();
         } else {
-            
+
         }
 
         session.getTransaction().commit();
         session.close();
 
-        return utilisateurProfilFiliere;
+        return classe;
     }
-    
-    public List<UtilisateurProfilFiliere> getall() {
-        
+
+    public List<Classe> getall() {
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
-        List<UtilisateurProfilFiliere> utilisateurProfilFilieres = session.createCriteria(UtilisateurProfilFiliere.class).list();
-        utilisateurProfilFilieres.forEach((utilisateurProfilFiliere) -> {
-            initialiser(utilisateurProfilFiliere);
+        List<Classe> classes = session.createCriteria(Classe.class).list();
+        classes.forEach((classe) -> {
+            initialiser(classe);
         });
 
         session.getTransaction().commit();
         session.close();
 
-        return utilisateurProfilFilieres;
+        return classes;
 
     }
-    public List<UtilisateurProfilFiliere> getAllLazy() {
-        
+
+    public List<Classe> getAllLazy() {
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
-        List<UtilisateurProfilFiliere> utilisateurProfilFilieres = session.createCriteria(UtilisateurProfilFiliere.class).list();
-        utilisateurProfilFilieres.forEach((utilisateurProfilFiliere) -> {
-            initialiser(utilisateurProfilFiliere);
+        List<Classe> classes = session.createCriteria(Classe.class).list();
+        classes.forEach((classe) -> {
+            initialiser(classe);
         });
 
         session.getTransaction().commit();
         session.close();
 
-        return utilisateurProfilFilieres;
+        return classes;
 
     }
-    
+
     public Number getNumber() {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
-        Number n = (Number) session.createCriteria(UtilisateurProfilFiliere.class).setProjection(Projections.rowCount()).uniqueResult() ;
-        
+        Number n = (Number) session.createCriteria(Classe.class).setProjection(Projections.rowCount()).uniqueResult();
+
         session.getTransaction().commit();
         session.close();
 
-        return n ;
+        return n;
 
     }
     
     public boolean supprimer(int id) {
-        UtilisateurProfilFiliere utilisateurProfilFiliere = get(id);
-        return supprimer(utilisateurProfilFiliere);
+        Classe classe = get(id);
+        return supprimer(classe);
     }
     public boolean supprimer(String id) {
         int i = Integer.parseInt(id);
         return supprimer(i);
     }
-    public UtilisateurProfilFiliere get(String id) {
+    public Classe get(String id) {
         int i = Integer.parseInt(id);
         return get(i);
     }
-    public UtilisateurProfilFiliere getLazy(String id) {
+    public Classe getLazy(String id) {
         int i = Integer.parseInt(id);
         return getLazy(i);
     }
 
-    public void initialiser(UtilisateurProfilFiliere utilisateurProfilFiliere) {
-        Hibernate.initialize(utilisateurProfilFiliere.getFiliere());
-        Hibernate.initialize(utilisateurProfilFiliere.getUtilisateurProfil());
+    public void initialiser(Classe classe) {
+        Hibernate.initialize(classe.getFiliere());
+        Hibernate.initialize(classe.getNiveauEtude());
     }
 }

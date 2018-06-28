@@ -122,19 +122,22 @@ public class EnseignantDAO {
         return n;
 
     }
-    
+
     public boolean supprimer(int id) {
         Enseignant enseignant = get(id);
         return supprimer(enseignant);
     }
+
     public boolean supprimer(String id) {
         int i = Integer.parseInt(id);
         return supprimer(i);
     }
+
     public Enseignant get(String id) {
         int i = Integer.parseInt(id);
         return get(i);
     }
+
     public Enseignant getLazy(String id) {
         int i = Integer.parseInt(id);
         return getLazy(i);
@@ -147,8 +150,11 @@ public class EnseignantDAO {
             Hibernate.initialize(ce.getCours());
             if (ce.getCours() != null) {
                 Hibernate.initialize(ce.getCours().getMatiere());
-                Hibernate.initialize(ce.getCours().getFiliere());
-                Hibernate.initialize(ce.getCours().getNiveauEtude());
+                Hibernate.initialize(ce.getCours().getClasse());
+                if (ce.getCours().getClasse() != null) {
+                    Hibernate.initialize(ce.getCours().getClasse().getFiliere());
+                    Hibernate.initialize(ce.getCours().getClasse().getNiveauEtude());
+                }
             }
 
         }

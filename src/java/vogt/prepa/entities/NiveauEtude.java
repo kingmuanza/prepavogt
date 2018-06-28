@@ -1,5 +1,5 @@
 package vogt.prepa.entities;
-// Generated 6 juin 2018 13:00:00 by Hibernate Tools 4.3.1
+// Generated 28 juin 2018 13:23:20 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -27,18 +27,16 @@ public class NiveauEtude  implements java.io.Serializable {
      private String code;
      private String libelle;
      private Integer valeur;
-     private Set<Cours> courses = new HashSet<Cours>(0);
-     private Set<Etudiant> etudiants = new HashSet<Etudiant>(0);
+     private Set<Classe> classes = new HashSet<Classe>(0);
 
     public NiveauEtude() {
     }
 
-    public NiveauEtude(String code, String libelle, Integer valeur, Set<Cours> courses, Set<Etudiant> etudiants) {
+    public NiveauEtude(String code, String libelle, Integer valeur, Set<Classe> classes) {
        this.code = code;
        this.libelle = libelle;
        this.valeur = valeur;
-       this.courses = courses;
-       this.etudiants = etudiants;
+       this.classes = classes;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -84,21 +82,12 @@ public class NiveauEtude  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="niveauEtude")
-    public Set<Cours> getCourses() {
-        return this.courses;
+    public Set<Classe> getClasses() {
+        return this.classes;
     }
     
-    public void setCourses(Set<Cours> courses) {
-        this.courses = courses;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="niveauEtude")
-    public Set<Etudiant> getEtudiants() {
-        return this.etudiants;
-    }
-    
-    public void setEtudiants(Set<Etudiant> etudiants) {
-        this.etudiants = etudiants;
+    public void setClasses(Set<Classe> classes) {
+        this.classes = classes;
     }
 
 

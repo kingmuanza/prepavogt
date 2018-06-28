@@ -32,7 +32,7 @@
                 <tr>
                     <th>Code</th>
                     <th>Libelle</th>
-                    <th>Filières</th>
+                    <th>Classes</th>
                     <th>Enseignants</th>                  
                     <th>Employés</th>
                 </tr>
@@ -44,8 +44,8 @@
                         <td>${profilU.code}</td>
                         <td>${profilU.libelle}</td>
                         <td>
-                            <c:forEach items="${profilU.utilisateurProfilFilieres}" var="pf">
-                                ${pf.filiere.libelle}<br>
+                            <c:forEach items="${profilU.utilisateurProfilClasses}" var="pc">
+                                ${pc.classe.niveauEtude.code} ${pc.classe.filiere.libelle}<br>
                             </c:forEach>
                         </td>
                         <td class="center">${profilU.voirEnseignant? "<i class='check titre icon'></i>":""}</td>

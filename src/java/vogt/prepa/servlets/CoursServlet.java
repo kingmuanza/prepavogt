@@ -13,10 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import vogt.prepa.dao.ClasseDAO;
 import vogt.prepa.dao.CoursDAO;
 import vogt.prepa.dao.FiliereDAO;
 import vogt.prepa.dao.MatiereDAO;
 import vogt.prepa.dao.NiveauEtudeDAO;
+import vogt.prepa.entities.Classe;
 import vogt.prepa.entities.Cours;
 import vogt.prepa.entities.Filiere;
 import vogt.prepa.entities.Matiere;
@@ -32,9 +34,8 @@ import vogt.prepa.utils.Notification;
 public class CoursServlet extends HttpServlet {
 
     CoursDAO coursDAO = new CoursDAO();
-    FiliereDAO filiereDAO = new FiliereDAO();
+    ClasseDAO classeDAO = new ClasseDAO();
     MatiereDAO matiereDAO = new MatiereDAO();
-    NiveauEtudeDAO niveauEtudeDAO = new NiveauEtudeDAO();
    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -48,9 +49,8 @@ public class CoursServlet extends HttpServlet {
                 Cours cours = coursDAO.get(i);
                 request.setAttribute("cours", cours);
             }
-            request.setAttribute("filieres", filiereDAO.getall());
+            request.setAttribute("classes", classeDAO.getall());
             request.setAttribute("matieres", matiereDAO.getall());
-            request.setAttribute("niveauEtudes", niveauEtudeDAO.getall());
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/cours.jsp").forward(request, response);
         }else{
             response.sendRedirect("index.htm");
@@ -98,16 +98,14 @@ public class CoursServlet extends HttpServlet {
                 c = new Cours();
                 
             }
-            String idfiliere = request.getParameter("filiere");
             String idmatiere = request.getParameter("matiere");
-            String idniveauEtude = request.getParameter("niveauEtude");
-            Filiere filiere = filiereDAO.get(idfiliere);
+            String idclasse = request.getParameter("classe");
+            Classe classe = classeDAO.get(idclasse);
             Matiere matiere = matiereDAO.get(idmatiere);
-            NiveauEtude niveauEtude = niveauEtudeDAO.get(idniveauEtude);
             
-            c.setFiliere(filiere);
+            
+            c.setClasse(classe);
             c.setMatiere(matiere);
-            c.setNiveauEtude(niveauEtude);
 
             if (coursDAO.enregistrer(c)) {
                 Notification notif = new Notification();

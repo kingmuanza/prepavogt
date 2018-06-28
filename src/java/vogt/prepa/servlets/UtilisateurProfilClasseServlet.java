@@ -13,18 +13,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import vogt.prepa.dao.UtilisateurProfilFiliereDAO;
+import vogt.prepa.dao.UtilisateurProfilClasseDAO;
 import vogt.prepa.entities.Utilisateur;
-import vogt.prepa.entities.UtilisateurProfilFiliere;
+import vogt.prepa.entities.UtilisateurProfilClasse;
 
 /**
  *
  * @author zos hall
  */
-@WebServlet(name = "UtilisateurProfilFiliereServlet", urlPatterns = {"/UtilisateurProfilFiliereServlet"})
-public class UtilisateurProfilFiliereServlet extends HttpServlet {
+@WebServlet(name = "UtilisateurProfilClasseServlet", urlPatterns = {"/UtilisateurProfilClasseServlet"})
+public class UtilisateurProfilClasseServlet extends HttpServlet {
 
-    UtilisateurProfilFiliereDAO utilisateurProfilFiliereDAO = new UtilisateurProfilFiliereDAO();
+    UtilisateurProfilClasseDAO utilisateurProfilClasseDAO = new UtilisateurProfilClasseDAO();
    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -35,8 +35,8 @@ public class UtilisateurProfilFiliereServlet extends HttpServlet {
             String id = request.getParameter("id");
             if (id != null && !id.isEmpty()) {
                 int i = Integer.parseInt(id);
-                UtilisateurProfilFiliere utilisateurProfilFiliere = utilisateurProfilFiliereDAO.get(i);
-                request.setAttribute("utilisateurProfilFiliere", utilisateurProfilFiliere);
+                UtilisateurProfilClasse utilisateurProfilClasse = utilisateurProfilClasseDAO.get(i);
+                request.setAttribute("utilisateurProfilClasse", utilisateurProfilClasse);
 
             }
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/utilisateurProfilFiliere.jsp").forward(request, response);

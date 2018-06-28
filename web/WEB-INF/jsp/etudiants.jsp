@@ -44,9 +44,9 @@
                     <td>
                         <h4 class="ui image header">
                             <div class="content">
-                                ${etudiant.filiere.libelle}
+                                ${etudiant.classe.filiere.libelle}
                                 <div class="sub header">
-                                    ${etudiant.niveauEtude.libelle}
+                                    ${etudiant.classe.niveauEtude.libelle}
                                 </div>
                             </div>
                         </h4>
