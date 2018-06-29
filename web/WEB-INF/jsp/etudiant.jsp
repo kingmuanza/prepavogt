@@ -46,13 +46,16 @@
                                     à ${etudiant.individu.lieunaiss}
                                 </div>
                                 <div class="description">
-                                    <span class="date">${etudiant.niveauEtude.code} ${etudiant.filiere.libelle}</span>
+                                    <span class="date">
+                                        ${etudiant.classe.niveauEtude.code} 
+                                        ${etudiant.classe.filiere.libelle}
+                                    </span>
                                 </div>
                             </div>
                             <div class="extra content">
                                 <a>
-                                    <i class="user icon"></i>
-                                    ${etudiant.anneeScolaire.libelle}
+                                    ${etudiant.classe.niveauEtude.code}
+                                    ${etudiant.classe.filiere.libelle}
                                 </a>
                             </div>
                         </div>
@@ -73,7 +76,7 @@
                                 <div class="field">
                                     <label>Année Academique</label>
                                     <select class="ui dropdown" name="anneeSco">
-                                        <option>Aucune annee</option>
+                                        <option>Aucune année</option>
                                         <c:forEach items="${anneeScolaires}" var="annee">
                                             <option value="${annee.idanneeScolaire}" ${etudiant.anneeScolaire.idanneeScolaire==annee.idanneeScolaire?"selected":""}>
                                                 ${annee.libelle}
@@ -82,24 +85,12 @@
                                     </select>
                                 </div>
                                 <div class="field">
-                                    <label>Niveau d'Etude</label>
-                                    <select class="ui dropdown" name="niveau">
-                                        <option>Aucun Niveau d'Etude</option>
-                                        <c:forEach items="${niveauEtudes}" var="niv">
-                                            <option value="${niv.idniveauEtude}" ${etudiant.niveauEtude.idniveauEtude==niv.idniveauEtude?"selected":""}>
-                                                ${niv.code} ${niv.libelle}
-                                            </option>
-                                        </c:forEach>
-
-                                    </select>
-                                </div>
-                                <div class="field">
-                                    <label>Filiere</label>
+                                    <label>Classe</label>
                                     <select class="ui dropdown" name="filiere">
-                                        <option>Aucune Filiere</option>
-                                        <c:forEach items="${filieres}" var="f">
-                                            <option value="${f.idfiliere}" ${etudiant.filiere.idfiliere==f.idfiliere?"selected":""}>
-                                                ${f.code} ${f.libelle}
+                                        <option>Aucune classe</option>
+                                        <c:forEach items="${classes}" var="c">
+                                            <option value="${c.idclasse}" ${etudiant.classe.idclasse==c.idclasse?"selected":""}>
+                                                ${c.niveauEtude.code} ${c.filiere.libelle}
                                             </option>
                                         </c:forEach>
 

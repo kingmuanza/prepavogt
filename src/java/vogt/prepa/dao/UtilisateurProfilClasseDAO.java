@@ -5,19 +5,19 @@ import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
-import vogt.prepa.entities.Utilisateur;
+import vogt.prepa.entities.Filiere;
 import vogt.prepa.entities.UtilisateurProfil;
 import vogt.prepa.entities.UtilisateurProfilClasse;
 import vogt.prepa.utils.HibernateUtil;
 
-public class UtilisateurProfilDAO {
+public class UtilisateurProfilClasseDAO {
     
-    public boolean enregistrer(UtilisateurProfil utilisateurProfil) {
+    public boolean enregistrer(UtilisateurProfilClasse utilisateurProfilFiliere) {
         boolean isGood = false;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
         try {
-            session.saveOrUpdate(utilisateurProfil);
+            session.saveOrUpdate(utilisateurProfilFiliere);
             isGood = true;
         } catch (HibernateException e) {
             session.getTransaction().rollback();
@@ -27,12 +27,12 @@ public class UtilisateurProfilDAO {
         return isGood;
     }
 
-    public boolean supprimer(UtilisateurProfil utilisateurProfil) {
+    public boolean supprimer(UtilisateurProfilClasse utilisateurProfilFiliere) {
         boolean isGood = false;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
         try {
-            session.delete(utilisateurProfil);
+            session.delete(utilisateurProfilFiliere);
             isGood = true;
         } catch (HibernateException e) {
             session.getTransaction().rollback();
@@ -42,29 +42,29 @@ public class UtilisateurProfilDAO {
         return isGood;
     }
 
-    public UtilisateurProfil get(int id) {
+    public UtilisateurProfilClasse get(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
-        UtilisateurProfil utilisateurProfil = (UtilisateurProfil) session.get(UtilisateurProfil.class, id);
-        if (utilisateurProfil == null) {
+        UtilisateurProfilClasse utilisateurProfilFiliere = (UtilisateurProfilClasse) session.get(UtilisateurProfilClasse.class, id);
+        if (utilisateurProfilFiliere == null) {
             throw new RuntimeException();
         } else {
-            initialiser(utilisateurProfil);
+            initialiser(utilisateurProfilFiliere);
         }
 
         session.getTransaction().commit();
         session.close();
 
-        return utilisateurProfil;
+        return utilisateurProfilFiliere;
     }
     
-    public UtilisateurProfil getLazy(int id) {
+    public UtilisateurProfilClasse getLazy(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
-        UtilisateurProfil utilisateurProfil = (UtilisateurProfil) session.get(UtilisateurProfil.class, id);
-        if (utilisateurProfil == null) {
+        UtilisateurProfilClasse utilisateurProfilFiliere = (UtilisateurProfilClasse) session.get(UtilisateurProfilClasse.class, id);
+        if (utilisateurProfilFiliere == null) {
             throw new RuntimeException();
         } else {
             
@@ -73,39 +73,39 @@ public class UtilisateurProfilDAO {
         session.getTransaction().commit();
         session.close();
 
-        return utilisateurProfil;
+        return utilisateurProfilFiliere;
     }
     
-    public List<UtilisateurProfil> getall() {
+    public List<UtilisateurProfilClasse> getall() {
         
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
-        List<UtilisateurProfil> utilisateurProfils = session.createCriteria(UtilisateurProfil.class).list();
-        utilisateurProfils.forEach((utilisateurProfil) -> {
-            initialiser(utilisateurProfil);
+        List<UtilisateurProfilClasse> utilisateurProfilFilieres = session.createCriteria(UtilisateurProfilClasse.class).list();
+        utilisateurProfilFilieres.forEach((utilisateurProfilFiliere) -> {
+            initialiser(utilisateurProfilFiliere);
         });
 
         session.getTransaction().commit();
         session.close();
 
-        return utilisateurProfils;
+        return utilisateurProfilFilieres;
 
     }
-    public List<UtilisateurProfil> getAllLazy() {
+    public List<UtilisateurProfilClasse> getAllLazy() {
         
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
-        List<UtilisateurProfil> utilisateurProfils = session.createCriteria(UtilisateurProfil.class).list();
-        utilisateurProfils.forEach((utilisateurProfil) -> {
-            initialiser(utilisateurProfil);
+        List<UtilisateurProfilClasse> utilisateurProfilFilieres = session.createCriteria(UtilisateurProfilClasse.class).list();
+        utilisateurProfilFilieres.forEach((utilisateurProfilFiliere) -> {
+            initialiser(utilisateurProfilFiliere);
         });
 
         session.getTransaction().commit();
         session.close();
 
-        return utilisateurProfils;
+        return utilisateurProfilFilieres;
 
     }
     
@@ -114,7 +114,7 @@ public class UtilisateurProfilDAO {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
-        Number n = (Number) session.createCriteria(UtilisateurProfil.class).setProjection(Projections.rowCount()).uniqueResult() ;
+        Number n = (Number) session.createCriteria(UtilisateurProfilClasse.class).setProjection(Projections.rowCount()).uniqueResult() ;
         
         session.getTransaction().commit();
         session.close();
@@ -124,34 +124,28 @@ public class UtilisateurProfilDAO {
     }
     
     public boolean supprimer(int id) {
-        UtilisateurProfil utilisateurProfil = get(id);
-        return supprimer(utilisateurProfil);
+        UtilisateurProfilClasse utilisateurProfilFiliere = get(id);
+        return supprimer(utilisateurProfilFiliere);
     }
     public boolean supprimer(String id) {
         int i = Integer.parseInt(id);
         return supprimer(i);
     }
-    public UtilisateurProfil get(String id) {
+    public UtilisateurProfilClasse get(String id) {
         int i = Integer.parseInt(id);
         return get(i);
     }
-    public UtilisateurProfil getLazy(String id) {
+    public UtilisateurProfilClasse getLazy(String id) {
         int i = Integer.parseInt(id);
         return getLazy(i);
     }
 
-    public void initialiser(UtilisateurProfil utilisateurProfil) {
-        Hibernate.initialize(utilisateurProfil.getUtilisateurs());
-        for(Utilisateur u : utilisateurProfil.getUtilisateurs()){
-            Hibernate.initialize(u.getIndividu());
+    public void initialiser(UtilisateurProfilClasse utilisateurProfilFiliere) {
+        Hibernate.initialize(utilisateurProfilFiliere.getClasse());
+        if(utilisateurProfilFiliere.getClasse()!=null){
+            Hibernate.initialize(utilisateurProfilFiliere.getClasse().getFiliere());
+            Hibernate.initialize(utilisateurProfilFiliere.getClasse().getNiveauEtude());
         }
-        Hibernate.initialize(utilisateurProfil.getUtilisateurProfilClasses());
-        for(UtilisateurProfilClasse upf : utilisateurProfil.getUtilisateurProfilClasses()){
-            Hibernate.initialize(upf.getClasse());
-            if(upf.getClasse()!=null){
-                Hibernate.initialize(upf.getClasse().getFiliere());
-                Hibernate.initialize(upf.getClasse().getNiveauEtude());
-            }
-        }
+        Hibernate.initialize(utilisateurProfilFiliere.getUtilisateurProfil());
     }
 }

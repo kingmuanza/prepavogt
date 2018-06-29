@@ -1,5 +1,5 @@
 package vogt.prepa.entities;
-// Generated 6 juin 2018 13:00:00 by Hibernate Tools 4.3.1
+// Generated 28 juin 2018 13:23:20 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -26,18 +26,16 @@ public class Cours  implements java.io.Serializable {
 
 
      private Integer idcours;
-     private Filiere filiere;
+     private Classe classe;
      private Matiere matiere;
-     private NiveauEtude niveauEtude;
      private Set<CoursEnseignant> coursEnseignants = new HashSet<CoursEnseignant>(0);
 
     public Cours() {
     }
 
-    public Cours(Filiere filiere, Matiere matiere, NiveauEtude niveauEtude, Set<CoursEnseignant> coursEnseignants) {
-       this.filiere = filiere;
+    public Cours(Classe classe, Matiere matiere, Set<CoursEnseignant> coursEnseignants) {
+       this.classe = classe;
        this.matiere = matiere;
-       this.niveauEtude = niveauEtude;
        this.coursEnseignants = coursEnseignants;
     }
    
@@ -54,13 +52,13 @@ public class Cours  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="idfiliere")
-    public Filiere getFiliere() {
-        return this.filiere;
+    @JoinColumn(name="idclasse")
+    public Classe getClasse() {
+        return this.classe;
     }
     
-    public void setFiliere(Filiere filiere) {
-        this.filiere = filiere;
+    public void setClasse(Classe classe) {
+        this.classe = classe;
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
@@ -71,16 +69,6 @@ public class Cours  implements java.io.Serializable {
     
     public void setMatiere(Matiere matiere) {
         this.matiere = matiere;
-    }
-
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="idniveau_etude")
-    public NiveauEtude getNiveauEtude() {
-        return this.niveauEtude;
-    }
-    
-    public void setNiveauEtude(NiveauEtude niveauEtude) {
-        this.niveauEtude = niveauEtude;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="cours")

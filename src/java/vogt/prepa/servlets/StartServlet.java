@@ -22,6 +22,7 @@ public class StartServlet extends HttpServlet {
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         List<Notification> notifications = (List<Notification>) httpSession.getAttribute("notifications");
         if (utilisateur != null) {
+            httpSession.removeAttribute("connexionError");
             request.setAttribute("notifications", notifications);
             httpSession.setAttribute("notifications", new ArrayList<>());
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/start.jsp").forward(request, response);

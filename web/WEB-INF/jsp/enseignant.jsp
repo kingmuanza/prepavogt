@@ -42,13 +42,14 @@
                             <div class="content">
                                 <a class="header">${enseignant.individu.noms} ${enseignant.individu.prenoms}</a>
                                 <div class="meta">
-                                    <span class="date">${enseignant.individu.datenaiss}</span>
+                                    <span class="date">Enseignant</span>
                                 </div>
                                 <div class="description">
                                     <c:forEach items="${enseignant.coursEnseignants}" var="courEn">
                                         <span>
                                             <b>${courEn.cours.matiere.libelle}&nbsp;</b>
-                                            ${courEn.cours.niveauEtude.code} ${courEn.cours.filiere.libelle}&nbsp;
+                                            ${courEn.cours.classe.niveauEtude.code} 
+                                            ${courEn.cours.classe.filiere.libelle}&nbsp;
                                         </span>
                                         <br>
                                     </c:forEach>
@@ -93,6 +94,23 @@
                                     </select>
                                 </div>
 
+                                <div class="field">
+                                    <label>Cours dispensés</label>
+                                    <div class="ui dropdown selection multiple">
+                                        <i class="dropdown icon"></i>
+                                        <div class="default text">Sélectionnez les cours</div>
+                                        <select id="multi-select" name="courses" multiple>
+                                            <option value="">Sélectionnez les cours</option>
+                                            <c:forEach items="${courses}" var="cours">
+                                                <option value="${cours.idcours}"  ${coursUtil.isIn(cours, enseignant)? "selected":""}>
+                                                    ${cours.matiere.libelle}
+                                                    ${cours.classe.niveauEtude.code}
+                                                    ${cours.classe.filiere.libelle}
+                                                </option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div>
                                     <button class="ui submit gris button" name="action" value="enregistrer" type="submit">
                                         Enregistrer
@@ -195,6 +213,7 @@
         </div>
         <script>
             $(document).ready(function () {
+                $("#multi-select").dropdown("get value");
                 ouvrirMenuCorrespondant("#section_params", "bouton_params", "enseignants");
                 $("#new_individu").click(function () {
                     $('.ui.modal').modal('show');

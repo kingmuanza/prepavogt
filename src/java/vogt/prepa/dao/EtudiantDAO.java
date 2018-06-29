@@ -142,7 +142,10 @@ public class EtudiantDAO {
     public void initialiser(Etudiant etudiant) {
         Hibernate.initialize(etudiant.getIndividu());
         Hibernate.initialize(etudiant.getAnneeScolaire());
-        Hibernate.initialize(etudiant.getFiliere());
-        Hibernate.initialize(etudiant.getNiveauEtude());
+        Hibernate.initialize(etudiant.getClasse());
+        if(etudiant.getClasse()!=null){
+            Hibernate.initialize(etudiant.getClasse().getFiliere());
+            Hibernate.initialize(etudiant.getClasse().getNiveauEtude());
+        }
     }
 }

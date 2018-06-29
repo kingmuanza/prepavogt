@@ -36,6 +36,39 @@
                                 <div class="meta">
                                     <span class="date">${utilisateurProfil.libelle}</span>
                                 </div>
+                                <ul class="list">
+                                    <c:if test="${utilisateurProfil.voirEmploye}">
+                                        <li><b>Employés</b></li>
+                                        </c:if>
+                                        <c:if test="${utilisateurProfil.voirEnseignant}">
+                                        <li><b>Enseignants</b></li>
+                                        </c:if>
+                                        <c:forEach items="${utilisateurProfil.utilisateurProfilClasses}" var="upc">
+                                        <li>
+                                            ${upc.classe.niveauEtude.code}
+                                            ${upc.classe.filiere.libelle}
+                                        </li>
+                                    </c:forEach>                                    
+                                </ul>
+                                <div class="extra content">
+                                    <div class="ui horizontal list">
+                                        <c:forEach items="${utilisateurProfil.utilisateurs}" var="user">
+                                        <div class="item">
+                                            <img class="ui avatar image" src="img/joe.jpg">
+                                            <div class="content">
+                                                <div class="header">
+                                                    ${user.individu.noms}
+                                                    ${user.individu.prenoms}
+                                                </div>
+                                                ${user.login}
+                                            </div>
+                                        </div>
+                                        </c:forEach>
+                                    </div>
+                                    
+                                        
+                                    
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -58,38 +91,41 @@
                                     <label>Libelle</label>
                                     <input type="text" name="libelle" value="${utilisateurProfil.libelle}">
                                 </div>
-                                <div class="field">
-                                    <label>Visibilité Employé</label>
-                                    <select class="ui dropdown" name="employe">
-                                        <option value="0" ${!utilisateurProfil.voirEmploye?"selected":""}>
-                                            Non
-                                        </option>
-                                        <option value="1" ${utilisateurProfil.voirEmploye?"selected":""}>
-                                            Oui
-                                        </option>
-                                    </select>
+                                <div class="two fields">
+                                    <div class="field">
+                                        <label>Visibilité Employé</label>
+                                        <select class="ui dropdown" name="employe">
+                                            <option value="0" ${!utilisateurProfil.voirEmploye?"selected":""}>
+                                                Non
+                                            </option>
+                                            <option value="1" ${utilisateurProfil.voirEmploye?"selected":""}>
+                                                Oui
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        <label>Visibilité Enseignant</label>
+                                        <select class="ui dropdown" name="enseignant">
+                                            <option value="0" ${!utilisateurProfil.voirEnseignant?"selected":""}>
+                                                Non
+                                            </option>
+                                            <option value="1" ${utilisateurProfil.voirEnseignant?"selected":""}>
+                                                Oui
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="field">
-                                    <label>Visibilité Enseignant</label>
-                                    <select class="ui dropdown" name="enseignant">
-                                        <option value="0" ${!utilisateurProfil.voirEnseignant?"selected":""}>
-                                            Non
-                                        </option>
-                                        <option value="1" ${utilisateurProfil.voirEnseignant?"selected":""}>
-                                            Oui
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="field">
-                                    <label>Filières</label>
+                                    <label>Classes </label>
                                     <div class="ui dropdown selection multiple">
                                         <i class="dropdown icon"></i>
                                         <div class="default text">Sélectionnez vos filières</div>
-                                        <select id="multi-select" name="filieres" multiple>
-                                            <option value="">Sélectionnez vos filières</option>
-                                            <c:forEach items="${filieres}" var="filiere">
-                                                <option value="${filiere.idfiliere}" ${filiereUtil.isIn(filiere, utilisateurProfil)?"selected":""}>
-                                                    ${filiere.libelle}
+                                        <select id="multi-select" name="classes" multiple>
+                                            <option value="">Sélectionnez les classes</option>
+                                            <c:forEach items="${classes}" var="classe">
+                                                <option value="${classe.idclasse}" ${filiereUtil.isIn(classe, utilisateurProfil)? "selected":""}>
+                                                    ${classe.niveauEtude.code}
+                                                    ${classe.filiere.libelle}
                                                 </option>
                                             </c:forEach>
                                         </select>
@@ -115,7 +151,7 @@
         <script>
             $(document).ready(function () {
                 ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
-                $("#multi-select").dropdown("get value") ;
+                $("#multi-select").dropdown("get value");
             })
         </script>
     </body>

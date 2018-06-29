@@ -18,10 +18,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import vogt.prepa.dao.AnneeScolaireDAO;
+import vogt.prepa.dao.ClasseDAO;
 import vogt.prepa.dao.EtudiantDAO;
 import vogt.prepa.dao.FiliereDAO;
 import vogt.prepa.dao.IndividuDAO;
 import vogt.prepa.dao.NiveauEtudeDAO;
+import vogt.prepa.entities.Classe;
 import vogt.prepa.entities.Employe;
 import vogt.prepa.entities.Etudiant;
 import vogt.prepa.entities.Filiere;
@@ -37,8 +39,7 @@ import vogt.prepa.utils.Notification;
 public class EtudiantServlet extends HttpServlet {
 
     EtudiantDAO etudiantDAO = new EtudiantDAO();
-    FiliereDAO filiereDAO = new FiliereDAO();
-    NiveauEtudeDAO niveauEtudeDAO = new NiveauEtudeDAO();
+    ClasseDAO classeDAO = new ClasseDAO();
     AnneeScolaireDAO anneeScolaireDAO = new AnneeScolaireDAO();
     IndividuDAO individuDAO = new IndividuDAO();
 
@@ -56,8 +57,7 @@ public class EtudiantServlet extends HttpServlet {
 
             }
             request.setAttribute("individus", individuDAO.getall());
-            request.setAttribute("filieres", filiereDAO.getall());
-            request.setAttribute("niveauEtudes", niveauEtudeDAO.getall());
+            request.setAttribute("classes", classeDAO.getall());
             request.setAttribute("anneeScolaires", anneeScolaireDAO.getall());
             Individu ind = (Individu) httpSession.getAttribute("nouvelIndividu");
             if (ind != null) {
@@ -172,10 +172,9 @@ public class EtudiantServlet extends HttpServlet {
                     e = new Etudiant();
 
                 }
-                String filiere = request.getParameter("filiere");
-                e.setFiliere(filiereDAO.get(filiere));
-                String niveau = request.getParameter("niveau");
-                e.setNiveauEtude(niveauEtudeDAO.get(niveau));
+                String idclasse = request.getParameter("classe");
+                Classe classe = classeDAO.get(idclasse);
+                e.setClasse(classe);
                 String anneeSco = request.getParameter("anneeSco");
                 System.out.println("anneeSco " + anneeSco);
                 e.setAnneeScolaire(anneeScolaireDAO.get(anneeSco));
