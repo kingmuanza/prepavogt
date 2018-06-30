@@ -36,7 +36,10 @@ table td.center {
 thead tr th{
     color : #004d6f!important ;
 }
-
+.ui.ribbon.label.gris{
+    background-color: #004d6f!important;
+    color: #FFFFFF;
+}
 .ui.gris.button {
   background-color: #004d6f;
   color: #FFFFFF;

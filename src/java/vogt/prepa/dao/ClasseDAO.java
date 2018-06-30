@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import vogt.prepa.entities.Employe;
 import vogt.prepa.entities.Classe;
+import vogt.prepa.entities.Etudiant;
 import vogt.prepa.utils.HibernateUtil;
 
 public class ClasseDAO {
@@ -143,5 +144,9 @@ public class ClasseDAO {
     public void initialiser(Classe classe) {
         Hibernate.initialize(classe.getFiliere());
         Hibernate.initialize(classe.getNiveauEtude());
+        Hibernate.initialize(classe.getEtudiants());
+        for(Etudiant e : classe.getEtudiants()){
+            Hibernate.initialize(e.getIndividu());
+        }
     }
 }

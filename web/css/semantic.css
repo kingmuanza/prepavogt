@@ -15625,19 +15625,19 @@ a.ui.black.label:hover {
 .ui.black.corner.label:hover {
   background-color: transparent !important;
 }
-
+ 
 /* Ribbon */
 
 .ui.black.ribbon.label {
-  border-color: #805031 !important;
+  border-color: #001122 !important;
 }
 
 /* Basic */
 
 .ui.basic.black.label {
   background-color: #FFFFFF !important;
-  color: #1B1C1D !important;
-  border-color: #1B1C1D !important;
+  color: #004d6f !important;
+  border-color: #004d6f !important;
 }
 
 .ui.basic.black.labels a.label:hover,

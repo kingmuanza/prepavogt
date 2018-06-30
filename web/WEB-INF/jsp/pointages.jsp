@@ -22,42 +22,32 @@
 
     </head>
     <body>
-        <h1 class="titre">Liste des pointages</h1>
+        <h1 class="titre">Historique des pointages</h1>
 
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Pointages</th>
+                    <th>Heure</th>                    
                     <th>Numero</th>
-                    <th>Machine</th>
                     <th>Matricule</th>
+                    <th>Individu</th>
                     <th>Mode</th>
                     <th>I/O MD</th>                    
-                    <th>Heure</th>                    
                 </tr>
             </thead>
 
             <tbody>
                 <c:forEach items="${pointages}" var="pointage">
                     <tr class = "pointeur" onclick="window.location.href = 'start#!/pointage/${pointage.idpointage}'">
-                        <td>
-                            <h4 class="ui image header">
-                                <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
-                                <div class="content">
-                                    ${pointage.numero}
-
-                                </div>
-                                <div class="sub header">
-                                    ${pointage.machine}
-                                </div>
-                            </h4>
-                        </td>
+                        <td>${pointage.heure}</td>
                         <td>${pointage.numero}</td>
-                        <td>${pointage.matricule}</td>
                         <td>${pointage.machine}</td>
+                        <td>
+                            ${individuDAO.getByMatricule(pointage.machine).getNoms()}
+                            ${individuDAO.getByMatricule(pointage.machine).getPrenoms()}
+                        </td>
                         <td>${pointage.mode}</td>
                         <td>${pointage.iomd}</td>
-                        <td>${pointage.heure}</td>
                     </tr>
                 </c:forEach>
 
@@ -81,6 +71,7 @@
                         $(document).ready(function () {
                             $('#dataTableUtilisateur').DataTable({
                                 dom: '<"top"fB>rt<"bottom"lp><"clear">',
+                                "order": [[ 0, "desc" ]],
                                 buttons: [
                                     {
                                         text: "Nouveau",

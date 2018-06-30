@@ -4,6 +4,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import vogt.prepa.entities.Individu;
 import vogt.prepa.utils.HibernateUtil;
 
@@ -71,6 +72,31 @@ public class IndividuDAO {
         session.close();
 
         return individu;
+    }
+
+    public Individu getByMatricule(String matricule) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.getTransaction().begin();
+
+        List<Individu> individus = session.createCriteria(Individu.class)
+                .add(Restrictions.eq("matricule", matricule))
+                .list();
+        individus.forEach((individu) -> {
+            initialiser(individu);
+        });
+
+        session.getTransaction().commit();
+        session.close();
+        if(individus.size()>0){
+            System.out.println("     "+individus.get(0).getNoms()+" "+individus.get(0).getPrenoms());
+            return individus.get(0);
+        }else{
+            return null;
+        }
+
+        
+
     }
 
     public List<Individu> getall() {

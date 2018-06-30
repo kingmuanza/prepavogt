@@ -11,7 +11,7 @@
         <title>PREPA VOGT</title>
 
         <!-- Fichiers CSS-->
-        <link href="css/semantic.css" rel="stylesheet" type="text/css"/>
+        <link href="css/semantic.css?if=5558" rel="stylesheet" type="text/css"/>
         <link href="css/myapp.css?id=23" rel="stylesheet" type="text/css"/>
         <link href="css/Semantic-UI-Alert.css" rel="stylesheet" type="text/css"/>
     </head>
@@ -230,6 +230,7 @@
                                 <a class="item" href="#!filieres">Filières</a>
                                 <a class="item" href="#!matieres">Matières</a>
                                 <a class="item" href="#!coursall">Cours</a>
+                                <a class="item" href="#!classes">Classes</a>
                                 <a class="item" href="#!niveaux">Niveaux d'étude</a>
                                 <a class="item" href="#!periodescreuses">Périodes creuses</a>
                             </div>
