@@ -45,7 +45,7 @@ Contributor(s):
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/prepa?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">zos12345</property>
+    <property name="hibernate.connection.password"</property>
     <mapping class="vogt.prepa.entities.Visite"/>
     <mapping class="vogt.prepa.entities.Filiere"/>
     <mapping class="vogt.prepa.entities.Entree"/>

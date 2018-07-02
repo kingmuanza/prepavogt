@@ -426,12 +426,39 @@ public class EdgarServiceImpl implements EdgarService {
     //***********************************************ODAY
     @Override
     public List<Pointage> retardsPointagesEntreDeuxDates(String matricule, Date dateDebut, Date dateFin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Pointage> retardsPointageByMatricule = new ArrayList<>();        
+        List<Pointage> retardsPointagesDeuxDates = retardsPointagesEntreDeuxDates(dateDebut, dateFin);
+        
+        if (retardsPointagesDeuxDates != null){
+            ListIterator<Pointage> it = retardsPointagesDeuxDates.listIterator();
+            
+            while (it.hasNext()) {
+                Pointage p = it.next();
+                if(p.getMatricule().equals(matricule)){
+                    retardsPointageByMatricule.add(p);
+                }                
+            }
+        } 
+        return retardsPointageByMatricule;
     }
 
     @Override
     public List<Pointage> retardsPointagesEntreDeuxDates(Individu individu, Date dateDebut, Date dateFin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        List<Pointage> retardsPointageByMatriculeIndiv = new ArrayList<>();
+        List<Pointage> retardsPointagesDeuxDates = retardsPointagesEntreDeuxDates(dateDebut, dateFin);
+        
+        if(retardsPointagesDeuxDates != null){
+            ListIterator<Pointage> it = retardsPointagesDeuxDates.listIterator();
+            
+            while (it.hasNext()) {
+                Pointage p = it.next();
+                if(p.getMatricule().equals(individu.getMatricule())){
+                    retardsPointageByMatriculeIndiv.add(p);
+                }     
+            }
+        }
+        return retardsPointageByMatriculeIndiv;
     }
 
     @Override
