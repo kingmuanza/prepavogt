@@ -21,12 +21,10 @@
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Visites</th>
                     <th>Nom complet</th>
                     <th>Motif</th>
                     <th>Commentaire</th>                   
-                    <th>Heure d'entrée</th>
-                    <th>Heure de sortie</th>                   
+                                       
                 </tr>
             </thead>
 
@@ -34,31 +32,10 @@
                 <c:forEach items="${visites}" var="visite">
                     
                 <tr class="pointeur" onclick="window.location.href='start#!/visite/${visite.idvisite}'">
-                    <td>
-                        <h4 class="ui image header">
-                            <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
-                            <div class="content">
-                                ${visite.individu.noms}
-                                <div class="sub header">
-                                    ${visite.individu.prenoms}
-                                </div>
-                            </div>
-                        </h4>
-                    </td>
                     <td>${visite.nomComplet}</td>
                     <td>${visite.motif}</td>
                     <td>${visite.commentaire}</td>
-                    <td>
-                        <c:forEach items="${visite.entrees}" var="visiteHeure">
-                            ${visiteHeure.dateEntree}
-                        </c:forEach>
-                        
-                    </td>
-                    <td>
-                        <c:forEach items="${visite.entrees}" var="visiteHeure">
-                            ${visiteHeure.dateSortie}
-                        </c:forEach>
-                    </td>
+                    
                 </tr>
                 </c:forEach>
 
@@ -80,6 +57,7 @@
         <script>
             var titre = 'Bonjour';
             $(document).ready(function () {
+                ouvrirMenuCorrespondant("#section_visites", "bouton_visites", "visites");
                 $('#dataTableUtilisateur').DataTable({
                     dom: '<"top"fB>rt<"bottom"lp><"clear">',
                     buttons: [

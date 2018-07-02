@@ -24,8 +24,8 @@
     <body>
         <h1 class="titre">
             <c:choose>
-                <c:when test="${empty visite}">Nouvelle Visite</c:when>
-                <c:otherwise>Modifier / Supprimer une Visite</c:otherwise>
+                <c:when test="${empty visite}">Nouvelle visite</c:when>
+                <c:otherwise>${visite.nomComplet}</c:otherwise>
             </c:choose>
         </h1>
         <div style="padding-top: 10px;">
@@ -34,19 +34,29 @@
                 <div class="ui grid">
                     <div class="six wide column">
                         <div class="ui fluid card">
-                            <div class="image">
-                                <img src="img/joe.jpg">
-                            </div>
                             <div class="content">
                                 <a class="header">${visite.individu.noms} ${visite.individu.prenoms}</a>
                                 <div class="meta">
-                                    <span class="date">${visite.motif}</span>
+                                    <span class="date">
+                                        ${empty visite.motif ? "Aucun motif":visite.motif}
+                                    </span>
                                 </div>
                                 <div class="description">
                                     ${visite.commentaire}
                                 </div>
                             </div>
                         </div>
+                        <form class="ui form" action="VisiteServlet" method="post">
+
+                            <input type="hidden" name="id" value="${visite.idvisite}"/>
+
+                            <c:if test="${empty visite.entrees}">
+                                <button class="ui fluid submit gris button" name="action" value="entree" type="submit" >
+                                    La personne vient d'arriver
+                                </button>
+                            </c:if>
+
+                        </form>
                     </div>
                     <div class="ten wide column">
                         <div>
@@ -62,20 +72,20 @@
                                 </c:if>
                                 <input type="hidden" name="id" value="${visite.idvisite}"/>
                                 <div class="field">
-                                    <label>Nom Complet</label>
+                                    <label>Nom complet</label>
                                     <input type="text" name="nomComplet" value="${visite.nomComplet}" required>
                                 </div>
-                                
+
                                 <div class="field">
-                                    <label>motif</label>
+                                    <label>Motif</label>
                                     <input type="text" name="motif" value="${visite.motif}" required>
                                 </div>
-                                
+
                                 <div class="field">
-                                    <label>commentaire</label>
-                                    <input type="text" name="commentaire" value="${visite.commentaire}" required>
+                                    <label>Commentaire</label>
+                                    <textarea name="commentaire" rows="2">${visite.commentaire}</textarea>
                                 </div>
-                                
+
                                 <div>
                                     <button class="ui submit gris button" name="action" value="enregistrer" type="submit">
                                         Enregistrer
@@ -96,7 +106,7 @@
         </div>
         <script>
             $(document).ready(function () {
-                ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
+                ouvrirMenuCorrespondant("#section_visites", "bouton_visites", "visites");
 
             })
         </script>

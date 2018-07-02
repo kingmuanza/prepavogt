@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import vogt.prepa.dao.IndividuDAO;
 import vogt.prepa.dao.PointageDAO;
 import vogt.prepa.entities.Pointage;
 import vogt.prepa.entities.Utilisateur;
@@ -33,17 +34,19 @@ public class PointageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        IndividuDAO individuDAO = new IndividuDAO(); 
         HttpSession httpSession = request.getSession();
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
             String id = request.getParameter("id");
             if (id != null && !id.isEmpty()) {
                 int i = Integer.parseInt(id);
-                Pointage pointage = pointageDAO.get(i);
-                request.setAttribute("pointage", pointage);
-
+                List<Pointage> pointages  = pointageDAO.getall(id);
+                request.setAttribute("pointages", pointages);
+                request.setAttribute("individuDAO", individuDAO);
+                request.setAttribute("individu", individuDAO.getByMatricule(id));
             }
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/pointage.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/pointages.jsp").forward(request, response);
         }else{
             response.sendRedirect("index.htm");
         }

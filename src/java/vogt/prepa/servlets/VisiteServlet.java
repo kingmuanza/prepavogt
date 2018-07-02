@@ -6,6 +6,7 @@
 package vogt.prepa.servlets;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import vogt.prepa.dao.EntreeDAO;
 import vogt.prepa.dao.VisiteDAO;
+import vogt.prepa.entities.Entree;
 import vogt.prepa.entities.Utilisateur;
 import vogt.prepa.entities.Visite;
 import vogt.prepa.utils.Notification;
@@ -26,6 +29,7 @@ import vogt.prepa.utils.Notification;
 public class VisiteServlet extends HttpServlet {
 
     VisiteDAO visiteDAO = new VisiteDAO();
+    EntreeDAO entreeDAO = new EntreeDAO();
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -76,7 +80,24 @@ public class VisiteServlet extends HttpServlet {
                     httpSession.setAttribute("notifications", notifications);
                 }
             }//Pour ajouter ou modifier l'entité
-        } else {
+        } else if (action != null && !action.isEmpty() && "entree".equals(action)) {
+            
+            String id = request.getParameter("id");
+            Visite v = null;
+            if (id != null && !id.isEmpty()) {
+                int i = Integer.parseInt(id);
+                v = visiteDAO.get(i);
+            }
+            
+            Entree entree = new Entree();
+            entree.setNomComplet(v.getNomComplet());
+            entree.setMotif(v.getMotif());
+            entree.setDateEntree(new Date());
+            entreeDAO.enregistrer(entree);
+            response.sendRedirect("start#!/entrees");
+            
+            
+        }else {
             String id = request.getParameter("id");
             Visite v = null;
             if (id != null && !id.isEmpty()) {

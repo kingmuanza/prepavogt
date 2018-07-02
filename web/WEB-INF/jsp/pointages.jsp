@@ -23,7 +23,7 @@
     </head>
     <body>
         <h1 class="titre">Historique des pointages</h1>
-
+        <h4 style="margin-top: -10px; opacity: 0.5">${individu.noms} ${individu.prenoms}</h4>
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
@@ -38,7 +38,7 @@
 
             <tbody>
                 <c:forEach items="${pointages}" var="pointage">
-                    <tr class = "pointeur" onclick="window.location.href = 'start#!/pointage/${pointage.idpointage}'">
+                    <tr class = "pointeur" onclick="window.location.href = 'start#!/pointage/${pointage.machine}'">
                         <td>${pointage.heure}</td>
                         <td>${pointage.numero}</td>
                         <td>${pointage.machine}</td>

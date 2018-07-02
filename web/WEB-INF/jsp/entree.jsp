@@ -18,8 +18,8 @@
     <body>
         <h1 class="titre">
             <c:choose>
-                <c:when test="${empty visite}">Nouvelle Entree</c:when>
-                <c:otherwise>Modifier / Supprimer une Entree</c:otherwise>
+                <c:when test="${empty entree}">Nouvelle entrée</c:when>
+                <c:otherwise>${entree.nomComplet}</c:otherwise>
             </c:choose>
         </h1>
         <div style="padding-top: 10px;">
@@ -29,33 +29,31 @@
                     <div class="six wide column">
                         <div class="ui fluid card">
                             <div class="content">
-                                <a class="header">${entree.motif}</a>
+                                <a class="header">${empty entree.motif ? "Aucun motif":entree.motif}</a>
                                 <div class="description">
-                                    ${entree.commentaire}
+                                    ${empty entree.commentaire ? "Aucun motif":entree.commentaire}
                                 </div>
                             </div>
                             <div class="content">
-                                ${entree.dateEntree}
+                                <fmt:formatDate type = "date" value = "${entree.dateEntree}" />
                                 <div class="sub header">
-                                    ${entree.dateSortie}
+                                    <fmt:formatDate type = "time" timeStyle = "short" value = "${entree.dateEntree}" />
+                                    -
+                                    <fmt:formatDate type = "time" timeStyle = "short" value = "${entree.dateSortie}" />
                                 </div>
                             </div>
                         </div>
-                        <h4 class="ui image header">
-                            <form class="ui form" action="EntreeServlet" method="post">
+                        <form class="ui form" action="EntreeServlet" method="post">
 
-                                <input type="hidden" name="id" value="${entree.identree}"/>
+                            <input type="hidden" name="id" value="${entree.identree}"/>
 
-                                <div class="ui fluid card">
-                                    <c:if test="${empty entree.dateSortie}">
-                                        <button class="ui fluid submit gris button" name="action" value="sortir" type="submit" >
-                                            Sortir
-                                        </button>
-                                    </c:if>
-                                </div>
-                                
-                            </form>
-                        </h4>
+                            <c:if test="${!empty entree && empty entree.dateSortie}">
+                                <button class="ui fluid submit gris button" name="action" value="sortir" type="submit" >
+                                    Sortir
+                                </button>
+                            </c:if>
+
+                        </form>
                     </div>
                     <div class="ten wide column">
                         <div>
@@ -87,6 +85,16 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="field">
+                                    <label>Personne à voir</label>
+                                    <select class="ui dropdown" name="individu">
+                                        <c:forEach items="${badges}" var="badge">
+                                            <option value="${badge.idbadge}" ${entree.badge.idbadge==badge.idbadge?"selected":""}>
+                                                ${badge.libelle}
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
 
 
                                 <div class="field">
@@ -96,9 +104,7 @@
 
                                 <div class="field">
                                     <label>Commentaire</label>
-                                    <textarea name="commentaire" rows="2">
-                                        ${entree.commentaire}
-                                    </textarea>
+                                    <textarea name="commentaire" rows="2">${entree.commentaire}</textarea>
                                 </div>
 
                                 <div>
@@ -120,7 +126,7 @@
         </div>
         <script>
             $(document).ready(function () {
-                ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
+                ouvrirMenuCorrespondant("#section_visites", "bouton_visites", "entrees");
 
             })
         </script>

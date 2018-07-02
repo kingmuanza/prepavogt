@@ -156,12 +156,14 @@
                             </a>
                             <div class="active content menu">
                                 <c:forEach items="${entrees}" var="entree">
+                                    <c:if test="${empty entree.dateSortie}">
                                     <a class="item active" href="#!entree/${entree.identree}">
                                         ${entree.nomComplet}
                                     </a>
+                                    </c:if>
                                 </c:forEach>
                                 
-                                <a class="item" href="#!entrees">Personne 2</a>
+                                <a class="item" href="#!entrees">Tous</a>
                             </div>
                         </div>
                         <div class="item">
@@ -170,7 +172,14 @@
                                 <b>Personnes attendues</b>
                             </a>
                             <div class="content menu">
-                                <a class="item" href="#!visites">Personne 3</a>
+                                <c:forEach items="${visites}" var="visite">
+                                    <c:if test="${empty visite.entrees}">
+                                    <a class="item active" href="#!visite/${visite.idvisite}">
+                                        ${visite.nomComplet}
+                                    </a>
+                                    </c:if>
+                                </c:forEach>
+                                <a class="item" href="#!visites">Tous</a>
                             </div>
                         </div>
                         <div class="item">

@@ -91,6 +91,24 @@ public class PointageDAO {
         return pointages;
 
     }
+    public List<Pointage> getall(String matricule) {
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.getTransaction().begin();
+
+        List<Pointage> pointages = session.createCriteria(Pointage.class)
+                .add(Restrictions.eq("machine", matricule))
+                .list();
+        pointages.forEach((pointage) -> {
+            initialiser(pointage);
+        });
+
+        session.getTransaction().commit();
+        session.close();
+
+        return pointages;
+
+    }
     public List<Pointage> getAllLazy() {
         
         Session session = HibernateUtil.getSessionFactory().openSession();

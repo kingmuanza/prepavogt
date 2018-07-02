@@ -38,6 +38,7 @@ public class EntreeServlet extends HttpServlet {
     EntreeDAO entreeDAO = new EntreeDAO();
     BadgeDAO badgeDAO = new BadgeDAO();
     VisiteDAO visiteDAO = new VisiteDAO();
+    
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
