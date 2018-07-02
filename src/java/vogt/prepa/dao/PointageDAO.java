@@ -1,9 +1,11 @@
 package vogt.prepa.dao;
 
+import java.util.Date;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import vogt.prepa.entities.Pointage;
 import vogt.prepa.utils.HibernateUtil;
 
@@ -143,5 +145,25 @@ public class PointageDAO {
     
     public boolean verifierAvantEnregistrement(Pointage p){
         return true ;
+    }
+    
+    /*
+    methodes ajoutées N9-T
+    */
+    public List<Pointage> getByDate(Date date) {
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.getTransaction().begin();
+
+        List<Pointage> pointages = session.createCriteria(Pointage.class).add(Restrictions.between("heure", new Date("2018/07/02 00:00:00"),new Date("2018/07/02 23:59:59"))).list();
+        pointages.forEach((pointage) -> {
+            initialiser(pointage);
+        });
+
+        session.getTransaction().commit();
+        session.close();
+
+        return pointages;
+
     }
 }

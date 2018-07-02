@@ -20,8 +20,8 @@ public interface TonyService {
     //Une entite STATISTIQUE a été créée dans le package util
     //Tu peux t'inspirer de EdgarService pour récupérer les absences et les retards par jour
     public Statistique statistiques(Classe classe, Date date);
-    public Statistique statistiquesDesEmployes();
-    public Statistique statistiquesDesEnseignants();
+    public Statistique statistiquesDesEmployes(Date date);
+    public Statistique statistiquesDesEnseignants(Date date);
     
     
     
