@@ -62,17 +62,6 @@
                                 </c:if>
                                 <input type="hidden" name="id" value="${visite.idvisite}"/>
                                 <div class="field">
-                                    <label>Individu</label>
-                                    <select class="ui dropdown" name="indiv">
-                                        <option>Aucun individu</option>
-                                        <c:forEach items="${individus}" var="ind">
-                                            <option value="${ind.idindividu}" ${visite.individu.idindividu==ind.idindividu?"selected":""}>
-                                                ${ind.noms} ${ind.prenoms}
-                                            </option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
-                                <div class="field">
                                     <label>Nom Complet</label>
                                     <input type="text" name="nomComplet" value="${visite.nomComplet}" required>
                                 </div>

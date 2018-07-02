@@ -6,10 +6,6 @@
 package vogt.prepa.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,10 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import vogt.prepa.dao.IndividuDAO;
 import vogt.prepa.dao.VisiteDAO;
-import vogt.prepa.entities.Etudiant;
-import vogt.prepa.entities.Individu;
 import vogt.prepa.entities.Utilisateur;
 import vogt.prepa.entities.Visite;
 import vogt.prepa.utils.Notification;
@@ -33,8 +26,7 @@ import vogt.prepa.utils.Notification;
 public class VisiteServlet extends HttpServlet {
 
     VisiteDAO visiteDAO = new VisiteDAO();
-    IndividuDAO individuDAO = new IndividuDAO();
-   
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
@@ -48,7 +40,6 @@ public class VisiteServlet extends HttpServlet {
                 request.setAttribute("visite", visite);
 
             }
-            request.setAttribute("individus", individuDAO.getall());
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/visite.jsp").forward(request, response);
         }else{
             response.sendRedirect("index.htm");
@@ -101,11 +92,7 @@ public class VisiteServlet extends HttpServlet {
             v.setMotif(motif);
             String commentaire = request.getParameter("commentaire");
             v.setCommentaire(commentaire);
-            
-            String individu = request.getParameter("indiv");
-            v.setIndividu(individuDAO.get(individu));
-            
-
+    
             if (visiteDAO.enregistrer(v)) {
                 Notification notif = new Notification();
                 notif.setTitre("Enregistrement");

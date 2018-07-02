@@ -6,9 +6,12 @@
 package vogt.prepa.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -19,7 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import vogt.prepa.dao.BadgeDAO;
 import vogt.prepa.dao.EntreeDAO;
-import vogt.prepa.dao.IndividuDAO;
 import vogt.prepa.dao.VisiteDAO;
 import vogt.prepa.entities.Entree;
 import vogt.prepa.entities.Utilisateur;
@@ -35,12 +37,11 @@ public class EntreeServlet extends HttpServlet {
 
     EntreeDAO entreeDAO = new EntreeDAO();
     BadgeDAO badgeDAO = new BadgeDAO();
-    IndividuDAO individuDAO = new IndividuDAO();
     VisiteDAO visiteDAO = new VisiteDAO();
-   
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         HttpSession httpSession = request.getSession();
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
@@ -52,17 +53,16 @@ public class EntreeServlet extends HttpServlet {
 
             }
             request.setAttribute("visites", visiteDAO.getall());
-            request.setAttribute("individus", individuDAO.getall());
             request.setAttribute("badges", badgeDAO.getall());
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/entree.jsp").forward(request, response);
         } else {
             response.sendRedirect("index.htm");
         }
-    } 
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         HttpSession httpSession = request.getSession();
         List<Notification> notifications = (List<Notification>) httpSession.getAttribute("notifications");
         String action = request.getParameter("action");
@@ -90,6 +90,45 @@ public class EntreeServlet extends HttpServlet {
                     httpSession.setAttribute("notifications", notifications);
                 }
             }//Pour ajouter ou modifier l'entité
+        } else if (action != null && !action.isEmpty() && "sortir".equals(action)) {
+            String id = request.getParameter("id");
+            if (id != null && !id.isEmpty()) {
+                Entree e = entreeDAO.get(id);
+                DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                Calendar cal = Calendar.getInstance();
+                String dateee = sdf.format(cal.getTime());
+                System.out.println(sdf.format(cal.getTime()));
+
+                Date dateSortie = new Date();
+
+                try {
+
+                    dateSortie = sdf.parse(dateee);
+
+                } catch (ParseException el) {
+                    System.out.println("la date final entrée est fausse, retapez la date");
+                }
+
+                e.setDateSortie(dateSortie);
+
+                if (verifierAvantSuppression(e)) {
+                    entreeDAO.enregistrer(e);
+                    Notification notif = new Notification();
+                    notif.setTitre("Sortie");
+                    notif.setMessage("Date de sorti mise à jour avec succès");
+                    notif.setSuccess(true);
+                    notifications.add(notif);
+                    httpSession.setAttribute("notifications", notifications);
+                    response.sendRedirect("start#!/entrees");
+                } else {
+                    Notification notif = new Notification();
+                    notif.setTitre("Sortie");
+                    notif.setMessage("Echec de mise à jour de la date de sortie !");
+                    notif.setSuccess(false);
+                    notifications.add(notif);
+                    httpSession.setAttribute("notifications", notifications);
+                }
+            }
         } else {
             String id = request.getParameter("id");
             Entree e = null;
@@ -100,44 +139,32 @@ public class EntreeServlet extends HttpServlet {
                 e = new Entree();
 
             }
-            String individu = request.getParameter("indiv");
-            if(individu!=null && !individu.isEmpty()){
-                e.setIndividu(individuDAO.get(individu));
-            }
-            
-            String visite = request.getParameter("visite");
-            e.setVisite(visiteDAO.get(visite));
             String badge = request.getParameter("badg");
             e.setBadge(badgeDAO.get(badge));
-            
+
             String nomComplet = request.getParameter("nomComplet");
             e.setNomComplet(nomComplet);
             String motif = request.getParameter("motif");
             e.setMotif(motif);
             String commentaire = request.getParameter("commentaire");
             e.setCommentaire(commentaire);
-            
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String debut = request.getParameter("dateEntree");
-            String fin = request.getParameter("dateSortie");
-            Date dateEntree = null;
-            Date dateSortie = null;
+
+            DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Calendar cal = Calendar.getInstance();
+            String dateee = sdf.format(cal.getTime());
+            System.out.println(sdf.format(cal.getTime()));
+
+            Date dateEntree = new Date();
+
             try {
-                
-                
-                dateEntree = sdf.parse(debut);
-                
-            } catch (ParseException el) {
-                System.out.println("la date entrée est fausse, retapez la date");
-            }
-            e.setDateEntree(dateEntree);
-            try {
-                 dateSortie = sdf.parse(fin);
-                
+
+                dateEntree = sdf.parse(dateee);
+
             } catch (ParseException el) {
                 System.out.println("la date final entrée est fausse, retapez la date");
             }
-            e.setDateSortie(dateSortie);
+
+            e.setDateEntree(dateEntree);
 
             if (entreeDAO.enregistrer(e)) {
                 Notification notif = new Notification();

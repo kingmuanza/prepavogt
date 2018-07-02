@@ -54,6 +54,16 @@ app.config(function ($routeProvider) {
             .when("/pointages", {
                 templateUrl: UrlExists("PointagesServlet")
             })
+            .when("/motDePasse", {
+                templateUrl: function (params) {
+                    return UrlExists("MotDePasseServlet")
+                }
+            })
+            .when("/motDePasse/:id", {
+                templateUrl: function (params) {
+                    return UrlExists("MotDePasseServlet")+"?id=" + params.id
+                }
+            })
             .when("/classe", {
                 templateUrl: function (params) {
                     return UrlExists("ClasseServlet")

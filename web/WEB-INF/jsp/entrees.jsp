@@ -22,9 +22,8 @@
             <thead>
                 <tr>
                     <th>Entrées</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Motif de la visite</th>
+                    <th>Nom Complet</th>
+                    <th>Motif</th>
                     <th>Commentaire</th>
                     <th>Badge</th>                    
                 </tr>
@@ -45,9 +44,8 @@
                                 </div>
                             </h4>
                         </td>
-                        <td>${entree.individu.noms}</td>
-                        <td>${entree.individu.prenoms}</td>
-                        <td>${entree.visite.motif}</td>
+                        <td>${entree.nomComplet}</td>
+                        <td>${entree.motif}</td>
                         <td>${entree.commentaire}</td>
                         <td>${entree.badge.code}</td>
                     </tr>
