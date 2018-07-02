@@ -18,8 +18,8 @@
     <body>
         <h1 class="titre">
             <c:choose>
-                <c:when test="${empty visite}">Nouvelle Visite</c:when>
-                <c:otherwise>Modifier / Supprimer une Visite</c:otherwise>
+                <c:when test="${empty visite}">Nouvelle Entree</c:when>
+                <c:otherwise>Modifier / Supprimer une Entree</c:otherwise>
             </c:choose>
         </h1>
         <div style="padding-top: 10px;">
@@ -28,19 +28,34 @@
                 <div class="ui grid">
                     <div class="six wide column">
                         <div class="ui fluid card">
-                            <div class="image">
-                                <img src="img/joe.jpg">
+                            <div class="content">
+                                <a class="header">${entree.motif}</a>
+                                <div class="description">
+                                    ${entree.commentaire}
+                                </div>
                             </div>
                             <div class="content">
-                                <a class="header">${visite.individu.noms} ${visite.individu.prenoms}</a>
-                                <div class="meta">
-                                    <span class="date">${visite.motif}</span>
-                                </div>
-                                <div class="description">
-                                    ${visite.commentaire}
+                                ${entree.dateEntree}
+                                <div class="sub header">
+                                    ${entree.dateSortie}
                                 </div>
                             </div>
                         </div>
+                        <h4 class="ui image header">
+                            <form class="ui form" action="EntreeServlet" method="post">
+
+                                <input type="hidden" name="id" value="${entree.identree}"/>
+
+                                <div class="ui fluid card">
+                                    <c:if test="${empty entree.dateSortie}">
+                                        <button class="ui fluid submit gris button" name="action" value="sortir" type="submit" >
+                                            Sortir
+                                        </button>
+                                    </c:if>
+                                </div>
+                                
+                            </form>
+                        </h4>
                     </div>
                     <div class="ten wide column">
                         <div>
@@ -96,7 +111,6 @@
                                         </button>
                                     </c:if>
                                 </div>
-
                             </form>
                         </div>
 

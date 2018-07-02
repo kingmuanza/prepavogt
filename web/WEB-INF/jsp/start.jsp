@@ -267,6 +267,7 @@
                             ${sessionScope.utilisateur.individu.prenoms}
                             <i class="dropdown icon"></i>
                             <div class="menu">
+                                <a href="start#!/motDePasse/${sessionScope.utilisateur.idutilisateur}" class="item">Modifier Mot de passe</a>
                                 <a href="DeconnexionServlet" class="item">Déconnexion</a>
                             </div>
                         </div>

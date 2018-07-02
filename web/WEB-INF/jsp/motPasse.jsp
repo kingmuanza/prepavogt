@@ -1,3 +1,9 @@
+<%-- 
+    Document   : motPasse
+    Created on : 2 juil. 2018, 13:32:44
+    Author     : zos hall
+--%>
+
 <%@page import="java.util.Date"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -17,9 +23,7 @@
     </head>
     <body>
         <h1 class="titre">
-
-            ${empty u ? "Nouvel utilisateur":u.login} 
-
+            Voulez-vous changer votre mot de passe utilisateur ?
         </h1>
         <div style="padding-top: 10px;">
 
@@ -47,7 +51,7 @@
                     </div>
                     <div class="ten wide column">
                         <div>
-                            <form class="ui form" action="UtilisateurServlet" method="post">
+                            <form class="ui form" action="MotDePasseServlet" method="post">
                                 <div class="ui error message">
                                     <div class="header">Messages à afficher en cas d'erreur</div>
                                     <ul class="list">
@@ -57,44 +61,28 @@
                                 </div>
                                 <div class="required field">
                                     <label>Login</label>
-                                    <input type="hidden" name="id" value="${u.idutilisateur}" required>
-                                    <input type="text" name="login" value="${u.login}" required>
+                                    <input type="hidden" name="id" value="${sessionScope.utilisateur.idutilisateur}" required>
+                                    <input type="text" name="login" value="${sessionScope.utilisateur.login}" required>
+                                </div>
+                                <div class="field">
+                                    <div class="required field">
+                                        <label>Veuillez renseigner l'ancien Mot de passe</label>
+                                        <input type="password" name="ancien" value="${sessionScope.utilisateur.passe}">
+                                    </div>
                                 </div>
                                 <div class="two fields">
                                     <div class="required field">
-                                        <label>Mot de passe</label>
-                                        <input type="password" name="passe" value="${u.passe}">
+                                        <label>Nouveau Mot de passe</label>
+                                        <input type="password" name="nouveau1" >
                                     </div>
                                     <div class="required field">
-                                        <label>Confirmation</label>
-                                        <input type="password" name="confirmation" value="${u.passe}">
+                                        <label>Confirmer nouveau Mot de passe</label>
+                                        <input type="password" name="nouveau2" >
                                     </div>
                                 </div>
-                                <div class="field">
-                                    <label>Individu</label>
-                                    <select class="ui dropdown" name="individu">
-                                        <option>Aucune personne</option>
-                                        <c:forEach items="${individus}" var="i">
-                                            <option value="${i.idindividu}" ${u.individu.idindividu==i.idindividu?"selected":""}>
-                                                ${i.noms} ${i.prenoms}
-                                            </option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
-                                <div class="field">
-                                    <label>Profil</label>
-                                    <select class="ui dropdown" name="profil">
-                                        <option>Aucun profil</option>
-                                        <c:forEach items="${utilisateurProfils}" var="p">
-                                            <option value="${p.idutilisateurProfil}" ${u.utilisateurProfil.idutilisateurProfil==p.idutilisateurProfil?"selected":""}>
-                                                ${p.libelle}
-                                            </option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
                                 <div>
-                                    <button class="ui submit gris button" name="action" value="enregistrer" type="submit">
-                                        Enregistrer
+                                    <button class="ui submit gris button" name="action" value="modifier" type="submit">
+                                        Modifier
                                     </button>
                                     <button class="ui submit red button" name="action" value="supprimer" type="submit">
                                         Supprimer
@@ -104,15 +92,15 @@
                             </form>
                             <div class="ui basic modal">
                                 <div class="ui icon header">
-                                    <form class="ui form" action="UtilisateurServlet" method="post">
-                                        <p>Veuillez confirmer la suppression ?</p>
-                                        <input type="hidden" name="id" value="${utilisateur.idutilisateur}">
+                                    <form class="ui form" action="MotDePasseServlet" method="post">
+                                        <p>Veuillez confirmer le changement de mot de passe ?</p>
+                                        <input type="hidden" name="id" value="${sessionScope.utilisateur.idutilisateur}">
                                         <div >
                                             <button class="ui cancel gris button" >
                                                 Annuler
                                             </button>
-                                            <button class="ui submit red button" name="action" value="supprimer" type="submit">
-                                                Supprimer
+                                            <button class="ui submit red button" name="action" value="modifier" type="submit">
+                                                Confirmer
                                             </button>
                                         </div>
                                     </form>
