@@ -62,29 +62,13 @@
                     <p>Cette section regroupe les informations de la journée</p>
 
                     <div class="ui accordion vertical fluid following text menu">
-                        <div class="item">
-                            <a class="title">
-                                <b>Tableau de bord</b>
-                            </a>
-                        </div>
                         <div class="item active">
                             <a class="active title">
-                                <i class="dropdown icon"></i> <b>Discpline</b>
+                                <i class="dropdown icon"></i> <b>Ajourd'hui</b>
                             </a>
                             <div class="active content menu">
-                                <a class="item" href="#!pointage">Abscences</a>
-                                <a class="item" href="#!pointage">Retards</a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <a class="title">
-                                <i class="dropdown icon"></i> 
-                                <b>Arrivées</b>
-                            </a>
-                            <div class="content menu">
-                                <a class="item" href="#!pointage">Elèves</a>
-                                <a class="item" href="#!pointage">Enseignants</a>
-                                <a class="item" href="#!pointage">Collaborateurs</a>
+                                <a class="item" href="#!aujourdhui">Statistiques</a>
+                                <a class="item" href="#!tempsreel">Temps réel</a>
                             </div>
                         </div>
                     </div>
@@ -171,7 +155,12 @@
                                 <i class="dropdown icon"></i> <b>Actuellement dans nos locaux</b>
                             </a>
                             <div class="active content menu">
-                                <a class="item active" href="#!entrees">Personne 1</a>
+                                <c:forEach items="${entrees}" var="entree">
+                                    <a class="item active" href="#!entree/${entree.identree}">
+                                        ${entree.nomComplet}
+                                    </a>
+                                </c:forEach>
+                                
                                 <a class="item" href="#!entrees">Personne 2</a>
                             </div>
                         </div>

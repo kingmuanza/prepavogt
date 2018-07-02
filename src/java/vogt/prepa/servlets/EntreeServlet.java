@@ -101,7 +101,10 @@ public class EntreeServlet extends HttpServlet {
 
             }
             String individu = request.getParameter("indiv");
-            e.setIndividu(individuDAO.get(individu));
+            if(individu!=null && !individu.isEmpty()){
+                e.setIndividu(individuDAO.get(individu));
+            }
+            
             String visite = request.getParameter("visite");
             e.setVisite(visiteDAO.get(visite));
             String badge = request.getParameter("badg");

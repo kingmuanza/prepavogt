@@ -1,9 +1,3 @@
-<%-- 
-    Document   : entree
-    Created on : 11 juin 2018, 12:47:09
-    Author     : zos hall
---%>
-
 <%@page import="java.util.Date"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -61,62 +55,37 @@
                                     </div>
                                 </c:if>
                                 <input type="hidden" name="id" value="${entree.identree}"/>
-                                <div class="field">
-                                    <label>Individu</label>
-                                    <select class="ui dropdown" name="indiv">
-                                        <option>Aucun individu</option>
-                                        <c:forEach items="${individus}" var="ind">
-                                            <option value="${ind.idindividu}" ${visite.individu.idindividu==ind.idindividu?"selected":""}>
-                                                ${ind.noms} ${ind.prenoms}
-                                            </option>
-                                        </c:forEach>
-                                    </select>
+                                <div class="fields">
+                                    <div class="twelve wide field">
+                                        <label>Nom complet</label>
+                                        <input type="text" name="nomComplet" value="${entree.nomComplet}" required>
+                                    </div>
+                                    <div class="four wide field">
+                                        <label>Badge</label>
+                                        <select class="ui dropdown" name="badg">
+                                            <option>Aucun badge</option>
+                                            <c:forEach items="${badges}" var="badge">
+                                                <option value="${badge.idbadge}" ${entree.badge.idbadge==badge.idbadge?"selected":""}>
+                                                    ${badge.libelle}
+                                                </option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="field">
-                                    <label>Badge</label>
-                                    <select class="ui dropdown" name="badg">
-                                        <option>Aucun badge</option>
-                                        <c:forEach items="${badges}" var="badge">
-                                            <option value="${badge.idbadge}" ${entree.badge.idbadge==badge.idbadge?"selected":""}>
-                                                ${badge.code} : ${badge.libelle}
-                                            </option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
-                                <div class="field">
-                                    <label>Visite</label>
-                                    <select class="ui dropdown" name="visite">
-                                        <option>Aucune visite</option>
-                                        <c:forEach items="${visites}" var="visit">
-                                            <option value="${visit.idvisite}" ${entree.visite.idvisite==visit.idvisite?"selected":""}>
-                                                ${visit.motif}
-                                            </option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
-                                <div class="field">
-                                    <label>Nom Complet</label>
-                                    <input type="text" name="nomComplet" value="${entree.nomComplet}" required>
-                                </div>
-                                
+
+
                                 <div class="field">
                                     <label>Motif</label>
                                     <input type="text" name="motif" value="${entree.motif}" required>
                                 </div>
-                                
+
                                 <div class="field">
-                                    <label>commentaire</label>
-                                    <input type="text" name="commentaire" value="${entree.commentaire}" required>
+                                    <label>Commentaire</label>
+                                    <textarea name="commentaire" rows="2">
+                                        ${entree.commentaire}
+                                    </textarea>
                                 </div>
-                                <div class="field">
-                                    <label>Date Entree</label><label>${entree.dateEntree}</label>
-                                    <input type="date" name="dateEntree" value="" required>
-                                </div>
-                                <div class="field">
-                                    <label>Date Sortie</label><label>${entree.dateSortie}</label>
-                                    <input type="date" name="dateSortie" value="" required>
-                                </div>
-                                
+
                                 <div>
                                     <button class="ui submit gris button" name="action" value="enregistrer" type="submit">
                                         Enregistrer

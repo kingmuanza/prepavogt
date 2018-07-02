@@ -9,11 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import vogt.prepa.dao.EntreeDAO;
+import vogt.prepa.dao.VisiteDAO;
 import vogt.prepa.entities.Utilisateur;
 import vogt.prepa.utils.Notification;
 
 @WebServlet(name="StartServlet", urlPatterns={"/start"})
 public class StartServlet extends HttpServlet {
+    
+    VisiteDAO visiteDAO = new VisiteDAO();
+    EntreeDAO entreeDAO = new EntreeDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -23,8 +28,9 @@ public class StartServlet extends HttpServlet {
         List<Notification> notifications = (List<Notification>) httpSession.getAttribute("notifications");
         if (utilisateur != null) {
             httpSession.removeAttribute("connexionError");
-            request.setAttribute("notifications", notifications);
             httpSession.setAttribute("notifications", new ArrayList<>());
+            request.setAttribute("visites", visiteDAO.getall());
+            request.setAttribute("entrees", entreeDAO.getall());
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/start.jsp").forward(request, response);
         }else{
             response.sendRedirect("index.htm");
