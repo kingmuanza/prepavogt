@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import vogt.prepa.entities.Individu;
@@ -352,10 +353,10 @@ public class EdgarServiceImpl implements EdgarService {
                 individusEnRetardL.add(individu.get(0));
             }
         }
-        
+
         session.getTransaction().commit();
         session.close();
-        
+
         return individusEnRetardL;
     }
 
@@ -366,11 +367,11 @@ public class EdgarServiceImpl implements EdgarService {
 
         if (pointagesDeuxDates != null) {
             ListIterator<Pointage> it = pointagesDeuxDates.listIterator();
-            
-            while(it.hasNext()){
+
+            while (it.hasNext()) {
                 Pointage pointage = it.next();
                 String heurePointage = ExtraireHeure(pointage.getHeure());
-                
+
                 if (ComparerHeure(HEURE_ARRIVEE, heurePointage) == false) {
                     enRetards.add(pointage);
                 }
@@ -383,19 +384,18 @@ public class EdgarServiceImpl implements EdgarService {
     public List<String> retardsMatriculeEntreDeuxDates(Date dateDebut, Date dateFin) {
         List<String> matriculesRetards = new ArrayList<>();
         List<Pointage> pointageRetardsDeuxDates = retardsPointagesEntreDeuxDates(dateDebut, dateFin);
-        
-        if(pointageRetardsDeuxDates != null){
+
+        if (pointageRetardsDeuxDates != null) {
             ListIterator<Pointage> it = pointageRetardsDeuxDates.listIterator();
-            
-            while(it.hasNext()){
+
+            while (it.hasNext()) {
                 Pointage p = it.next();
                 matriculesRetards.add(p.getMatricule());
             }
         }
         return matriculesRetards;
     }
-    
-    
+
     @Override
     public List<Individu> retardsIndividuEntreDeuxDates(Date dateDebut, Date dateFin) {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -416,49 +416,56 @@ public class EdgarServiceImpl implements EdgarService {
                 individusEnRetardDeuxDate.add(individu.get(0));
             }
         }
-        
+
         session.getTransaction().commit();
         session.close();
-        
+
         return individusEnRetardDeuxDate;
     }
-    
-    //***********************************************ODAY
+
     @Override
     public List<Pointage> retardsPointagesEntreDeuxDates(String matricule, Date dateDebut, Date dateFin) {
-        List<Pointage> retardsPointageByMatricule = new ArrayList<>();        
+        List<Pointage> retardsPointageByMatricule = new ArrayList<>();
         List<Pointage> retardsPointagesDeuxDates = retardsPointagesEntreDeuxDates(dateDebut, dateFin);
-        
-        if (retardsPointagesDeuxDates != null){
+
+        if (retardsPointagesDeuxDates != null) {
             ListIterator<Pointage> it = retardsPointagesDeuxDates.listIterator();
-            
+
             while (it.hasNext()) {
                 Pointage p = it.next();
-                if(p.getMatricule().equals(matricule)){
+                if (p.getMatricule().equals(matricule)) {
                     retardsPointageByMatricule.add(p);
-                }                
+                }
             }
-        } 
+        }
         return retardsPointageByMatricule;
     }
 
     @Override
     public List<Pointage> retardsPointagesEntreDeuxDates(Individu individu, Date dateDebut, Date dateFin) {
-        
+
         List<Pointage> retardsPointageByMatriculeIndiv = new ArrayList<>();
         List<Pointage> retardsPointagesDeuxDates = retardsPointagesEntreDeuxDates(dateDebut, dateFin);
-        
-        if(retardsPointagesDeuxDates != null){
+
+        if (retardsPointagesDeuxDates != null) {
             ListIterator<Pointage> it = retardsPointagesDeuxDates.listIterator();
-            
+
             while (it.hasNext()) {
                 Pointage p = it.next();
-                if(p.getMatricule().equals(individu.getMatricule())){
+                if (p.getMatricule().equals(individu.getMatricule())) {
                     retardsPointageByMatriculeIndiv.add(p);
-                }     
+                }
             }
         }
         return retardsPointageByMatriculeIndiv;
+    }
+
+    //***********************************************ODAY
+    
+    @Override
+    public long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
+        long diffInMillies = date2.getTime() - date1.getTime();
+        return timeUnit.convert(diffInMillies, TimeUnit.MILLISECONDS);
     }
 
     @Override
