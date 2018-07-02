@@ -140,4 +140,8 @@ public class PointageDAO {
     public void initialiser(Pointage pointage) {
         
     }
+    
+    public boolean verifierAvantEnregistrement(Pointage p){
+        return true ;
+    }
 }

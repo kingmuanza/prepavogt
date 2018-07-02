@@ -6,9 +6,10 @@ function UrlExists(url) {
     var http = new XMLHttpRequest();
     http.open('HEAD', url, false);
     http.send();
-    if (http.status !== 404 && http.status !== 500) {
+    console.log(http.status);
+    if(http.status==200){
         return url;
-    } else {
+    }else{
         return "notfound.jsp";
     }
 
@@ -17,6 +18,9 @@ var app = angular.module("myApp", ["ngRoute"]);
 app.config(function ($routeProvider) {
     $routeProvider
             .when("/", {
+                templateUrl: UrlExists("AujourdhuiServlet")
+            })
+            .when("/aujourdhui", {
                 templateUrl: UrlExists("AujourdhuiServlet")
             })
             .when("/statsentrees", {
@@ -37,8 +41,31 @@ app.config(function ($routeProvider) {
             .when("/test", {
                 templateUrl: UrlExists("TempsReelServlet")
             })
+            .when("/pointage", {
+                templateUrl: function (params) {
+                    return UrlExists("PointageServlet")
+                }
+            })
+            .when("/pointage/:id", {
+                templateUrl: function (params) {
+                    return UrlExists("PointageServlet")+"?id=" + params.id
+                }
+            })
             .when("/pointages", {
                 templateUrl: UrlExists("PointagesServlet")
+            })
+            .when("/classe", {
+                templateUrl: function (params) {
+                    return UrlExists("ClasseServlet")
+                }
+            })
+            .when("/classe/:id", {
+                templateUrl: function (params) {
+                    return UrlExists("ClasseServlet")+"?id=" + params.id
+                }
+            })
+            .when("/classes", {
+                templateUrl: UrlExists("ClassesServlet")
             })
             .when("/entree", {
                 templateUrl: function (params) {
@@ -73,7 +100,7 @@ app.config(function ($routeProvider) {
             })
             .when("/profil/:id", {
                 templateUrl: function (params) {
-                    return UrlExists("UtilisateurProfilServlet")+"?id=" + params.id
+                    return UrlExists("UtilisateurProfilServlet?id=" + params.id)
                 }
             })
             .when("/profils", {

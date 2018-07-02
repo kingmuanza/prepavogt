@@ -1,9 +1,3 @@
-<%-- 
-    Document   : collaborateur
-    Created on : 11 juin 2018, 12:45:45
-    Author     : zos hall
---%>
-
 <%@page import="java.util.Date"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -13,13 +7,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>PREPA VOGT</title>
-
         <!-- Fichiers CSS pour le dataTable-->
         <link href="css/dataTables.semanticui.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/responsive.semanticui.min.css" rel="stylesheet" type="text/css"/>        
         <link href="css/buttons.dataTables.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
-
     </head>
     <body>
         <h1 class="titre">
@@ -31,7 +23,6 @@
             </c:choose>
         </h1>
         <div style="padding-top: 10px;">
-
             <div class="ui container">
                 <div class="ui grid">
                     <div class="six wide column">
@@ -80,19 +71,26 @@
                                                 ${p.libelle}
                                             </option>
                                         </c:forEach>
-
                                     </select>
                                 </div>
                                 <div class="field required">
-                                    <label>Individu</label>
+                                    <label>Individu
+                                        <span id="new_individu" style="float: right; cursor: pointer">
+                                            <i class="plus icon"/>
+                                        </span>
+                                    </label>
                                     <select class="ui dropdown" name="individu" required>
                                         <option>Aucun individu</option>
                                         <c:forEach items="${individus}" var="i">
-                                            <option value="${i.idindividu}" ${employe.individu.idindividu==i.idindividu?"selected":""}>
+                                            <option value="${i.idindividu}" 
+                                                    <c:choose>
+                                                        <c:when test="${employe.individu.idindividu==i.idindividu}">selected</c:when>
+                                                        <c:when test="${requestScope.nouvelIndividu.idindividu==i.idindividu}">selected</c:when>
+                                                    </c:choose>
+                                                    >
                                                 ${i.noms} ${i.prenoms}
                                             </option>
                                         </c:forEach>
-
                                     </select>
                                 </div>
                                 <div>
@@ -105,10 +103,89 @@
                                         </button>
                                     </c:if>
                                 </div>
-
                             </form>
                         </div>
-
+                        <!-- MODAL  -->
+                        <div class="ui modal">
+                            <div class="header titre">
+                                Nouvel individu
+                            </div>
+                            <div class="image content">
+                                <div class="ui medium image" style="cursor: pointer">
+                                    <img src="img/joe.jpg" style="width: 100%;">
+                                </div>
+                                <form style="width: 100%" class="ui form description" action="EmployeServlet" method="post">
+                                    <input type="hidden" name="newIndividu" value="collaborateur/${employe.individu.idindividu}"/>
+                                    <div class="required field">
+                                        <label>Matricule</label>
+                                        <input type="text" name="matricule" value="" required>
+                                    </div>
+                                    <div class="two fields">
+                                        <div class="required field">
+                                            <label>Civilité</label>
+                                            <input type="text" name="civilite" value="" required>
+                                        </div>
+                                        <div class="required field">
+                                            <label>Genre</label>
+                                            <select class="ui dropdown" name="genre">
+                                                <option value="true" >Femme</option>
+                                                <option value="false" >Homme</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="two fields">
+                                        <div class="required field">
+                                            <label>Noms</label>
+                                            <input type="text" name="noms" value="" required>
+                                        </div>
+                                        <div class="required field">
+                                            <label>Prénoms</label>
+                                            <input type="text" name="prenoms" value="" required>
+                                        </div>
+                                    </div>
+                                    <div class="two fields">
+                                        <div class="required field">
+                                            <label>Date de naissance</label>
+                                            <input type="date" name="dateNaissance" value="" required>
+                                        </div>
+                                        <div class="required field">
+                                            <label>Lieu de naissance</label>
+                                            <input type="text" name="lieuNaissance" value="" required>
+                                        </div>
+                                    </div>
+                                    <div class="two fields">
+                                        <div class=" field">
+                                            <label>Résidence</label>
+                                            <input type="text" name="residence" value="">
+                                        </div>
+                                        <div class=" field">
+                                            <label>Adresse mail</label>
+                                            <input type="text" name="email" value="">
+                                        </div>
+                                    </div>
+                                    <div class="two fields">
+                                        <div class="required field">
+                                            <label>Télephone 1</label>
+                                            <input type="text" name="telephone1" value="" required>
+                                        </div>
+                                        <div class="field">
+                                            <label>Télephone 2</label>
+                                            <input type="text" name="telephone2" value="">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="actions">
+                                <div class="ui black deny button">
+                                    Annuler
+                                </div>
+                                <button id="ajax_submit" class="ui gris right labeled icon button">
+                                    Enregistrer
+                                    <i class="checkmark icon"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- MODAL  -->
                     </div>
                 </div>
             </div>
@@ -116,9 +193,45 @@
         <script>
             $(document).ready(function () {
                 ouvrirMenuCorrespondant("#section_params", "bouton_params", "collaborateurs");
-
-            })
+                $("#new_individu").click(function () {
+                    $('.ui.modal').modal('show');
+                });
+                $("#ajax_submit").click(function () {
+                    var data = {
+                        newIndividu: $("[name='newIndividu']").val(),
+                        matricule: $("[name='matricule']").val(),
+                        civilite: $("[name='civilite']").val(),
+                        genre: $("[name='genre']").val(),
+                        noms: $("[name='noms']").val(),
+                        prenoms: $("[name='prenoms']").val(),
+                        dateNaissance: $("[name='dateNaissance']").val(),
+                        lieuNaissance: $("[name='lieuNaissance']").val(),
+                        residence: $("[name='residence']").val(),
+                        email: $("[name='email']").val(),
+                        telephone1: $("[name='telephone1']").val(),
+                        telephone2: $("[name='telephone2']").val()
+                    };
+                    console.log(data);
+                    $.ajax({
+                        type: "POST",
+                        url: "EmployeServlet",
+                        data: data,
+                        success: function (data) {
+                            $('.ui.modal').modal('hide');
+                            console.log(data);
+                            var donnees = JSON.parse(data);
+                            $("[name='individu']").html("<option value='" + donnees.id + "'>"+donnees.noms+" "+ donnees.prenoms+"</option>");
+                        },
+                        error: function (xhr, str) {
+                        }
+                    }).done(function () {
+                        console.log("Fin de la fonction");
+                    });
+                });
+            });
         </script>
     </body>
 </html>
 
+
+Ajouter un commentaireRéduire 

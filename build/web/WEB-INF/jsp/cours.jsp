@@ -27,7 +27,7 @@
                 <c:when test="${empty cours}">Nouveau cours</c:when>
                 <c:otherwise>
                     ${cours.matiere.libelle}
-                    ${cours.niveauEtude.code} ${cours.filiere.libelle}
+                    ${cours.classe.niveauEtude.code} ${cours.classe.filiere.libelle}
                 </c:otherwise>
             </c:choose>
 
@@ -43,7 +43,7 @@
                                     ${cours.matiere.libelle}
                                 </a>
                                 <div class="description">
-                                    ${cours.niveauEtude.code} ${cours.filiere.libelle}
+                                    ${cours.classe.niveauEtude.code} ${cours.classe.filiere.libelle}
                                 </div>
                             </div>
                             <div class="extra content">
@@ -65,39 +65,25 @@
                                 </div>
                                 <input type="hidden" name="id" value="${cours.idcours}" required>
                                 <div class="required field">
-                                    <label>Matiere</label>
+                                    <label>Matière</label>
                                     <select class="ui dropdown" name="matiere">
                                         <option>Aucune matiere</option>
                                         <c:forEach items="${matieres}" var="m">
                                             <option value="${m.idmatiere}" ${cours.matiere.idmatiere==m.idmatiere?"selected":""}>
-                                                ${m.code} - ${m.libelle}
+                                                ${m.libelle}
                                             </option>
                                         </c:forEach>
-
                                     </select>
                                 </div>
-                                <div class="required field">
-                                    <label>Filiere</label>
-                                    <select class="ui dropdown" name="filiere">
-                                        <option>Aucune filiere</option>
-                                        <c:forEach items="${filieres}" var="f">
-                                            <option value="${f.idfiliere}" ${cours.filiere.idfiliere==f.idfiliere?"selected":""}>
-                                                ${f.code} - ${f.libelle}
+                                <div class="field">
+                                    <label>Classe</label>
+                                    <select class="ui dropdown" name="classe">
+                                        <option>Aucune classe</option>
+                                        <c:forEach items="${classes}" var="c">
+                                            <option value="${c.idclasse}" ${cours.classe.idclasse==c.idclasse?"selected":""}>
+                                                ${c.niveauEtude.code} ${c.filiere.libelle}
                                             </option>
                                         </c:forEach>
-
-                                    </select>
-                                </div>
-                                <div class="required field">
-                                    <label>Niveau d'etude</label>
-                                    <select class="ui dropdown" name="niveauEtude">
-                                        <option>Aucune niveau</option>
-                                        <c:forEach items="${niveauEtudes}" var="n">
-                                            <option value="${n.idniveauEtude}" ${cours.niveauEtude.idniveauEtude==n.idniveauEtude?"selected":""}>
-                                                ${n.code} - ${n.libelle}
-                                            </option>
-                                        </c:forEach>
-
                                     </select>
                                 </div>
                                 <div>
@@ -122,7 +108,7 @@
         </div>
         <script>
             $(document).ready(function () {
-                ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "coursall");
 
             })
         </script>

@@ -22,43 +22,33 @@
 
     </head>
     <body>
-        <h1 class="titre">Liste des pointages</h1>
+        <h1 class="titre">Historique des pointages</h1>
 
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Utilisateurs</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>E-mail</th>
-                    <th>Fonction</th>
-                    <th>Tel Portable</th>                    
-                    <th>Résidence</th>                    
+                    <th>Heure</th>                    
+                    <th>Numero</th>
+                    <th>Matricule</th>
+                    <th>Individu</th>
+                    <th>Mode</th>
+                    <th>I/O MD</th>                    
                 </tr>
             </thead>
 
             <tbody>
-                <c:forEach items="${utilisateurs}" var="utilisateur">
-                    
-                <tr>
-                    <td>
-                        <h4 class="ui image header">
-                            <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
-                            <div class="content">
-                                ${utilisateur.login}
-                                <div class="sub header">
-                                    ${utilisateur.utilisateurProfil.libelle}
-                                </div>
-                            </div>
-                        </h4>
-                    </td>
-                    <td>${utilisateur.individu.noms}</td>
-                    <td>${utilisateur.individu.prenoms}</td>
-                    <td>${utilisateur.individu.email}</td>
-                    <td>${utilisateur.utilisateurProfil.libelle}</td>
-                    <td>${utilisateur.individu.tel1}</td>
-                    <td>${utilisateur.individu.residence}</td>
-                </tr>
+                <c:forEach items="${pointages}" var="pointage">
+                    <tr class = "pointeur" onclick="window.location.href = 'start#!/pointage/${pointage.idpointage}'">
+                        <td>${pointage.heure}</td>
+                        <td>${pointage.numero}</td>
+                        <td>${pointage.machine}</td>
+                        <td>
+                            ${individuDAO.getByMatricule(pointage.machine).getNoms()}
+                            ${individuDAO.getByMatricule(pointage.machine).getPrenoms()}
+                        </td>
+                        <td>${pointage.mode}</td>
+                        <td>${pointage.iomd}</td>
+                    </tr>
                 </c:forEach>
 
             </tbody>
@@ -77,52 +67,53 @@
         <script src="js/buttons.print.min.js" type="text/javascript"></script>
         <script src="js/pdfmake.min.js" type="text/javascript"></script>
         <script>
-            var titre = 'Bonjour';
-            $(document).ready(function () {
-                $('#dataTableUtilisateur').DataTable({
-                    dom: '<"top"fB>rt<"bottom"lp><"clear">',
-                    buttons: [
-                        {
-                            text: "Nouveau",
-                            title: titre,
-                            message: '',
-                            className: 'ui gris mini button',
-                            action: function (e, dt, node, config) {
-                                window.location.href='start'
-                            }
-                        },
-                        {
-                            extend: 'excelHtml5',
-                            text: "Exporter vers Excel",
-                            title: titre,
-                            message: '',
-                            className: 'ui gris mini basic button'
-                        },
-                        {
-                            extend: 'print',
-                            text: "Imprimer",
-                            title: titre,
-                            message: '',
-                            className: 'impression ui gris basic mini button'
-                        }
-                    ],
-                    "language": {
-                        "sEmptyTable": "Aucune donnée disponible",
-                        "sInfo": "Affiche _START_ à _END_ sur _TOTAL_ entrées",
-                        "sLengthMenu": "Afficher _MENU_ lignes par page",
-                        "sSearch": "Rechercher : ",
-                        "zeroRecords": "Aucun résultat",
-                        "info": "Page _PAGE_ sur _PAGES_",
-                        "infoEmpty": "Aucun résultat disponible",
-                        "sProcessing": "Veuillez patienter...",
-                        "infoFiltered": "(sur les _MAX_ disponibles)",
-                        "paginate": {
-                            "previous": "Précédent",
-                            "next": "Suivant"
-                        }
-                    }
-                });
-            });
+                        var titre = 'Bonjour';
+                        $(document).ready(function () {
+                            $('#dataTableUtilisateur').DataTable({
+                                dom: '<"top"fB>rt<"bottom"lp><"clear">',
+                                "order": [[ 0, "desc" ]],
+                                buttons: [
+                                    {
+                                        text: "Nouveau",
+                                        title: titre,
+                                        message: '',
+                                        className: 'ui gris mini button',
+                                        action: function (e, dt, node, config) {
+                                            window.location.href = 'start#!/pointage'
+                                        }
+                                    },
+                                    {
+                                        extend: 'excelHtml5',
+                                        text: "Exporter vers Excel",
+                                        title: titre,
+                                        message: '',
+                                        className: 'ui gris mini basic button'
+                                    },
+                                    {
+                                        extend: 'print',
+                                        text: "Imprimer",
+                                        title: titre,
+                                        message: '',
+                                        className: 'impression ui gris basic mini button'
+                                    }
+                                ],
+                                "language": {
+                                    "sEmptyTable": "Aucune donnée disponible",
+                                    "sInfo": "Affiche _START_ à _END_ sur _TOTAL_ entrées",
+                                    "sLengthMenu": "Afficher _MENU_ lignes par page",
+                                    "sSearch": "Rechercher : ",
+                                    "zeroRecords": "Aucun résultat",
+                                    "info": "Page _PAGE_ sur _PAGES_",
+                                    "infoEmpty": "Aucun résultat disponible",
+                                    "sProcessing": "Veuillez patienter...",
+                                    "infoFiltered": "(sur les _MAX_ disponibles)",
+                                    "paginate": {
+                                        "previous": "Précédent",
+                                        "next": "Suivant"
+                                    }
+                                }
+                            });
+                        });
         </script>
 
     </body>

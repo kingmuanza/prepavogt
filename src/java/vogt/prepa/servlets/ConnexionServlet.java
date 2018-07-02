@@ -34,25 +34,32 @@ public class ConnexionServlet extends HttpServlet {
         UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
 
         Utilisateur utilisateur = utilisateurDAO.getUserLoginInformations(login, passe);
-        List<Notification> notifications = new ArrayList<>();
-        Notification notif = new Notification();
-        notif.setTitre("Connexion");
-        notif.setMessage("Vous venez de vous connecter !");
-        notif.setSuccess(true);
-        notifications.add(notif);
-        Notification notif2 = new Notification();
-        notif2.setTitre("Pointeuse");
-        notif2.setMessage("Echec de connexion à la pointeuse biométrique !");
-        notif2.setSuccess(false);
-        notifications.add(notif2);
 
-        HttpSession httpSession = request.getSession();
-        httpSession.setAttribute("utilisateur", utilisateur);
-        httpSession.setAttribute("notifications", notifications);
+        if (utilisateur != null) {
+            List<Notification> notifications = new ArrayList<>();
+//            Notification notif = new Notification();
+//            notif.setTitre("Connexion");
+//            notif.setMessage("Vous venez de vous connecter !");
+//            notif.setSuccess(true);
+//            notifications.add(notif);
+//            Notification notif2 = new Notification();
+//            notif2.setTitre("Pointeuse");
+//            notif2.setMessage("Echec de connexion à la pointeuse biométrique !");
+//            notif2.setSuccess(false);
+//            notifications.add(notif2);
 
-        System.out.println(utilisateur.getIdutilisateur());
+            HttpSession httpSession = request.getSession();
+            httpSession.setAttribute("utilisateur", utilisateur);
+            httpSession.setAttribute("notifications", notifications);
 
-        response.sendRedirect("start");
+            System.out.println(utilisateur.getIdutilisateur());
+
+            response.sendRedirect("start");
+        }else{
+            HttpSession httpSession = request.getSession();
+            httpSession.setAttribute("connexionError", "Login ou mot de passe incorrect");
+            response.sendRedirect("index.htm");
+        }
 
     }
 

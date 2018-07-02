@@ -45,27 +45,28 @@ Contributor(s):
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/prepa?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password"></property>
+    <property name="hibernate.connection.password">zos12345</property>
+    <mapping class="vogt.prepa.entities.Visite"/>
+    <mapping class="vogt.prepa.entities.Filiere"/>
+    <mapping class="vogt.prepa.entities.Entree"/>
+    <mapping class="vogt.prepa.entities.Employe"/>
+    <mapping class="vogt.prepa.entities.Utilisateur"/>
+    <mapping class="vogt.prepa.entities.Matiere"/>
     <mapping class="vogt.prepa.entities.PeriodeCreuse"/>
+    <mapping class="vogt.prepa.entities.AnneeScolaire"/>
+    <mapping class="vogt.prepa.entities.Cours"/>
     <mapping class="vogt.prepa.entities.CoursEnseignant"/>
+    <mapping class="vogt.prepa.entities.CoursEnseignantDate"/>
+    <mapping class="vogt.prepa.entities.Enseignant"/>
     <mapping class="vogt.prepa.entities.IndividuPhoto"/>
     <mapping class="vogt.prepa.entities.UtilisateurProfil"/>
-    <mapping class="vogt.prepa.entities.Filiere"/>
-    <mapping class="vogt.prepa.entities.CoursEnseignantDate"/>
-    <mapping class="vogt.prepa.entities.AnneeScolaire"/>
-    <mapping class="vogt.prepa.entities.Pointage"/>
-    <mapping class="vogt.prepa.entities.Utilisateur"/>
-    <mapping class="vogt.prepa.entities.Poste"/>
-    <mapping class="vogt.prepa.entities.Individu"/>
-    <mapping class="vogt.prepa.entities.Cours"/>
     <mapping class="vogt.prepa.entities.Badge"/>
-    <mapping class="vogt.prepa.entities.Enseignant"/>
-    <mapping class="vogt.prepa.entities.NiveauEtude"/>
-    <mapping class="vogt.prepa.entities.Matiere"/>
-    <mapping class="vogt.prepa.entities.UtilisateurProfilFiliere"/>
-    <mapping class="vogt.prepa.entities.Employe"/>
-    <mapping class="vogt.prepa.entities.Entree"/>
-    <mapping class="vogt.prepa.entities.Visite"/>
+    <mapping class="vogt.prepa.entities.Pointage"/>
+    <mapping class="vogt.prepa.entities.Classe"/>
     <mapping class="vogt.prepa.entities.Etudiant"/>
+    <mapping class="vogt.prepa.entities.Poste"/>
+    <mapping class="vogt.prepa.entities.UtilisateurProfilClasse"/>
+    <mapping class="vogt.prepa.entities.NiveauEtude"/>
+    <mapping class="vogt.prepa.entities.Individu"/>
   </session-factory>
 </hibernate-configuration>

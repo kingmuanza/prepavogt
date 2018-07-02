@@ -41,25 +41,26 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="prepa"/>
-  <table-filter match-name="utilisateur_profil"/>
-  <table-filter match-name="entree"/>
-  <table-filter match-name="utilisateur_profil_filiere"/>
   <table-filter match-name="individu"/>
-  <table-filter match-name="etudiant"/>
-  <table-filter match-name="poste"/>
-  <table-filter match-name="enseignant"/>
-  <table-filter match-name="pointage"/>
-  <table-filter match-name="utilisateur"/>
-  <table-filter match-name="periode_creuse"/>
-  <table-filter match-name="cours"/>
-  <table-filter match-name="cours_enseignant"/>
   <table-filter match-name="employe"/>
-  <table-filter match-name="individu_photo"/>
-  <table-filter match-name="matiere"/>
-  <table-filter match-name="niveau_etude"/>
-  <table-filter match-name="visite"/>
+  <table-filter match-name="poste"/>
   <table-filter match-name="annee_scolaire"/>
-  <table-filter match-name="cours_enseignant_date"/>
+  <table-filter match-name="utilisateur_profil_classe"/>
+  <table-filter match-name="enseignant"/>
+  <table-filter match-name="cours"/>
   <table-filter match-name="filiere"/>
+  <table-filter match-name="etudiant"/>
+  <table-filter match-name="visite"/>
+  <table-filter match-name="pointage"/>
+  <table-filter match-name="entree"/>
+  <table-filter match-name="matiere"/>
+  <table-filter match-name="cours_enseignant_date"/>
+  <table-filter match-name="periode_creuse"/>
   <table-filter match-name="badge"/>
+  <table-filter match-name="niveau_etude"/>
+  <table-filter match-name="cours_enseignant"/>
+  <table-filter match-name="classe"/>
+  <table-filter match-name="individu_photo"/>
+  <table-filter match-name="utilisateur_profil"/>
+  <table-filter match-name="utilisateur"/>
 </hibernate-reverse-engineering>

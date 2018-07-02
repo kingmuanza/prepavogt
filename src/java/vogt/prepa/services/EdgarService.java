@@ -89,7 +89,7 @@ public interface EdgarService {
     //Avoir la liste des matricules en retard un jour là
     public List<String> retardsMatriculeDUnJourLa(Date jourLa);
     //Avoir la liste des individus en retard un jour là
-    public List<Individu> retardsIndividuDUnJourLa(Date jourLa);
+    public List<Individu> retardsIndividuDUnJourLa(Date jourLa);    
     
     
     //Avoir la liste des pointages en retard entre deux dates

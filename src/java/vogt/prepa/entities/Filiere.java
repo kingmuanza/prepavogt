@@ -1,5 +1,5 @@
 package vogt.prepa.entities;
-// Generated 6 juin 2018 13:00:00 by Hibernate Tools 4.3.1
+// Generated 29 juin 2018 14:01:25 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -26,19 +26,15 @@ public class Filiere  implements java.io.Serializable {
      private Integer idfiliere;
      private String code;
      private String libelle;
-     private Set<Etudiant> etudiants = new HashSet<Etudiant>(0);
-     private Set<Cours> courses = new HashSet<Cours>(0);
-     private Set<UtilisateurProfilFiliere> utilisateurProfilFilieres = new HashSet<UtilisateurProfilFiliere>(0);
+     private Set<Classe> classes = new HashSet<Classe>(0);
 
     public Filiere() {
     }
 
-    public Filiere(String code, String libelle, Set<Etudiant> etudiants, Set<Cours> courses, Set<UtilisateurProfilFiliere> utilisateurProfilFilieres) {
+    public Filiere(String code, String libelle, Set<Classe> classes) {
        this.code = code;
        this.libelle = libelle;
-       this.etudiants = etudiants;
-       this.courses = courses;
-       this.utilisateurProfilFilieres = utilisateurProfilFilieres;
+       this.classes = classes;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -74,30 +70,12 @@ public class Filiere  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="filiere")
-    public Set<Etudiant> getEtudiants() {
-        return this.etudiants;
+    public Set<Classe> getClasses() {
+        return this.classes;
     }
     
-    public void setEtudiants(Set<Etudiant> etudiants) {
-        this.etudiants = etudiants;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="filiere")
-    public Set<Cours> getCourses() {
-        return this.courses;
-    }
-    
-    public void setCourses(Set<Cours> courses) {
-        this.courses = courses;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="filiere")
-    public Set<UtilisateurProfilFiliere> getUtilisateurProfilFilieres() {
-        return this.utilisateurProfilFilieres;
-    }
-    
-    public void setUtilisateurProfilFilieres(Set<UtilisateurProfilFiliere> utilisateurProfilFilieres) {
-        this.utilisateurProfilFilieres = utilisateurProfilFilieres;
+    public void setClasses(Set<Classe> classes) {
+        this.classes = classes;
     }
 
 

@@ -24,8 +24,8 @@
     <body>
         <h1 class="titre">
             <c:choose>
-                <c:when test="${empty badge}">Nouveau Badge</c:when>
-                <c:otherwise>Modifier / Supprimer un Badge</c:otherwise>
+                <c:when test="${empty badge}">Nouveau badge</c:when>
+                <c:otherwise>${badge.libelle}</c:otherwise>
             </c:choose>
         </h1>
         <div style="padding-top: 10px;">
@@ -66,24 +66,44 @@
                                         Enregistrer
                                     </button>
                                     <c:if test="${!empty badge}">
-                                        <button class="ui submit red button" name="action" value="supprimer" type="submit">
+                                        <div class="ui red button" id="supModal">
                                             Supprimer
-                                        </button>
+                                        </div>
                                     </c:if>
                                 </div>
-
                             </form>
-                        </div>
 
+                            <div class="ui basic modal">
+                                <div class="ui icon header">
+                                    <form class="ui form" action="BadgeServlet" method="post">
+                                        <p>Veuillez confirmer la suppression ?</p>
+                                        <input type="hidden" name="id" value="${badge.idbadge}">
+                                        <div >
+                                            <button class="ui submit gris button" >
+                                                Annuler
+                                            </button>
+                                            <button class="ui submit red button" name="action" value="supprimer" type="submit">
+                                                Supprimer
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <script>
             $(document).ready(function () {
-                ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "badges");
 
             })
+        </script>
+        <script>
+            $("#supModal").click(function () {
+                $('.ui.modal.basic').modal('show');
+            });
         </script>
     </body>
 </html>

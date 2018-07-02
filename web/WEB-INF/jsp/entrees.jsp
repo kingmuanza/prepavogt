@@ -16,17 +16,17 @@
 
     </head>
     <body>
-        <h1 class="titre">Liste des entrees</h1>
+        <h1 class="titre">Liste des entrées</h1>
 
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Entrees</th>
+                    <th>Entrées</th>
                     <th>Nom</th>
-                    <th>Prenom</th>
-                    <th>Motif Visite</th>
+                    <th>Prénom</th>
+                    <th>Motif de la visite</th>
                     <th>Commentaire</th>
-                    <th>Code Badge</th>                    
+                    <th>Badge</th>                    
                 </tr>
             </thead>
 
@@ -69,7 +69,11 @@
         <script>
             var titre = 'Bonjour';
             $(document).ready(function () {
+                ouvrirMenuCorrespondant("#section_visites", "bouton_visites", "entrees");
                 $('#dataTableUtilisateur').DataTable({
+                    
+                    
+                    
                     dom: '<"top"fB>rt<"bottom"lp><"clear">',
                     buttons: [
                         {

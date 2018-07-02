@@ -1,5 +1,5 @@
 package vogt.prepa.entities;
-// Generated 6 juin 2018 13:00:00 by Hibernate Tools 4.3.1
+// Generated 29 juin 2018 14:01:25 by Hibernate Tools 4.3.1
 
 
 import javax.persistence.Column;
@@ -24,18 +24,16 @@ public class Etudiant  implements java.io.Serializable {
 
      private Integer idetudiant;
      private AnneeScolaire anneeScolaire;
-     private Filiere filiere;
+     private Classe classe;
      private Individu individu;
-     private NiveauEtude niveauEtude;
 
     public Etudiant() {
     }
 
-    public Etudiant(AnneeScolaire anneeScolaire, Filiere filiere, Individu individu, NiveauEtude niveauEtude) {
+    public Etudiant(AnneeScolaire anneeScolaire, Classe classe, Individu individu) {
        this.anneeScolaire = anneeScolaire;
-       this.filiere = filiere;
+       this.classe = classe;
        this.individu = individu;
-       this.niveauEtude = niveauEtude;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -61,13 +59,13 @@ public class Etudiant  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="idfiliere")
-    public Filiere getFiliere() {
-        return this.filiere;
+    @JoinColumn(name="idclasse")
+    public Classe getClasse() {
+        return this.classe;
     }
     
-    public void setFiliere(Filiere filiere) {
-        this.filiere = filiere;
+    public void setClasse(Classe classe) {
+        this.classe = classe;
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
@@ -78,16 +76,6 @@ public class Etudiant  implements java.io.Serializable {
     
     public void setIndividu(Individu individu) {
         this.individu = individu;
-    }
-
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="idniveau_etude")
-    public NiveauEtude getNiveauEtude() {
-        return this.niveauEtude;
-    }
-    
-    public void setNiveauEtude(NiveauEtude niveauEtude) {
-        this.niveauEtude = niveauEtude;
     }
 
 

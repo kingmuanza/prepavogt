@@ -11,7 +11,7 @@
         <title>PREPA VOGT</title>
 
         <!-- Fichiers CSS-->
-        <link href="css/semantic.css" rel="stylesheet" type="text/css"/>
+        <link href="css/semantic.css?if=5558" rel="stylesheet" type="text/css"/>
         <link href="css/myapp.css?id=23" rel="stylesheet" type="text/css"/>
         <link href="css/Semantic-UI-Alert.css" rel="stylesheet" type="text/css"/>
     </head>
@@ -19,7 +19,7 @@
     <body ng-app="myApp" style="height: 100vh; overflow-y: hidden; ">
 
         <div class="ui grid">
-            <div class="noir" style="width: 5vw; height: 110vh; margin: 0px!important; padding: 0px;important">
+            <div class="noir" style="width: 6vw; height: 110vh; margin: 0px!important; padding: 0px;important">
                 <div style="padding-top: 5vw;">
                     <div id="bouton_profil" onclick="gestionnaireSections('#section_profil', this)" class="section_bouton">
                         <div style="position: relative;top: 50%; left: 30%;transform: translateY(-50%);">
@@ -56,35 +56,19 @@
                 </div>
             </div>
 
-            <div class="gris" style="width: 20vw; height: 110vh; padding-top: 25px;">
+            <div class="gris" style="width: 18vw; height: 110vh; padding-top: 25px;">
                 <div style="padding-left: 10px;" id="section_accueil" class="section_muanza">
                     <h1>Accueil</h1>
                     <p>Cette section regroupe les informations de la journée</p>
 
                     <div class="ui accordion vertical fluid following text menu">
-                        <div class="item">
-                            <a class="title">
-                                <b>Tableau de bord</b>
-                            </a>
-                        </div>
                         <div class="item active">
                             <a class="active title">
-                                <i class="dropdown icon"></i> <b>Discpline</b>
+                                <i class="dropdown icon"></i> <b>Ajourd'hui</b>
                             </a>
                             <div class="active content menu">
-                                <a class="item" href="#!pointage">Abscences</a>
-                                <a class="item" href="#!pointage">Retards</a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <a class="title">
-                                <i class="dropdown icon"></i> 
-                                <b>Arrivées</b>
-                            </a>
-                            <div class="content menu">
-                                <a class="item" href="#!pointage">Elèves</a>
-                                <a class="item" href="#!pointage">Enseignants</a>
-                                <a class="item" href="#!pointage">Collaborateurs</a>
+                                <a class="item" href="#!aujourdhui">Statistiques</a>
+                                <a class="item" href="#!tempsreel">Temps réel</a>
                             </div>
                         </div>
                     </div>
@@ -113,8 +97,22 @@
                         </div>
                     </div>
                 </div>
-                <div style="padding-left: 10px;" id="section_profil"  class="section_muanza">
+                <div style="padding-left: 10px; padding-right : 10px;" id="section_profil"  class="section_muanza">
                     <h1>Mon profil</h1>
+                    <h3 class="fg-white" style="line-height: 0">
+                        ${empty sessionScope.utilisateur.individu.noms ? sessionScope.utilisateur.login:""}
+                        ${sessionScope.utilisateur.individu.noms}
+                        ${sessionScope.utilisateur.individu.prenoms}
+                    </h3>
+
+                    <img src="img/joe.jpg" alt="" style="width: 100%"/>
+                    <h3 class="fg-white" style="line-height: 0">
+                        ${sessionScope.utilisateur.utilisateurProfil.libelle}
+                        
+                    </h3>
+                    <a class="fg-white">
+                        @${sessionScope.utilisateur.login}
+                    </a>
 
                 </div>
                 <div style="padding-left: 10px;" id="section_stats"  class="section_muanza">
@@ -157,7 +155,12 @@
                                 <i class="dropdown icon"></i> <b>Actuellement dans nos locaux</b>
                             </a>
                             <div class="active content menu">
-                                <a class="item active" href="#!entrees">Personne 1</a>
+                                <c:forEach items="${entrees}" var="entree">
+                                    <a class="item active" href="#!entree/${entree.identree}">
+                                        ${entree.nomComplet}
+                                    </a>
+                                </c:forEach>
+                                
                                 <a class="item" href="#!entrees">Personne 2</a>
                             </div>
                         </div>
@@ -216,6 +219,7 @@
                                 <a class="item" href="#!filieres">Filières</a>
                                 <a class="item" href="#!matieres">Matières</a>
                                 <a class="item" href="#!coursall">Cours</a>
+                                <a class="item" href="#!classes">Classes</a>
                                 <a class="item" href="#!niveaux">Niveaux d'étude</a>
                                 <a class="item" href="#!periodescreuses">Périodes creuses</a>
                             </div>
@@ -234,7 +238,7 @@
 
 
             </div>
-            <div style="width: 75vw; height: 100vh; overflow-x: hidden; overflow-y: hidden; padding-top: 20px; padding-right: 0px!important;margin-right: 10px!important;">
+            <div style="width: 75vw; height: 100vh; overflow-x: hidden; overflow-y: hidden; padding-top: 20px; padding-right: 5px!important;margin-right: 10px!important;">
                 <div class="ui secondary  menu">
                     <a class="item teal">
                         <i class="circle loading icon titre"></i>
@@ -257,11 +261,15 @@
                                 <i class="search link icon"></i>
                             </div>
                         </div>
-                        <a class="ui item">
+                        <div class="ui item dropdown">
                             ${empty sessionScope.utilisateur.individu.noms ? sessionScope.utilisateur.login:""}
                             ${sessionScope.utilisateur.individu.noms}
                             ${sessionScope.utilisateur.individu.prenoms}
-                        </a>
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <a href="DeconnexionServlet" class="item">Déconnexion</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div style="height: 90vh; overflow-y: scroll">
@@ -284,9 +292,10 @@
         <script src="js/angular.min.js" type="text/javascript"></script>
         <script src="js/angular-route.js" type="text/javascript"></script>
         <script src="js/myapp.js" type="text/javascript"></script>
-        <script src="js/routage.js" type="text/javascript"></script>
+        <script src="js/routage.js?id=12325" type="text/javascript"></script>
         <script>
                         $(document).ready(function () {
+                            $('.ui.dropdown').dropdown();
                             console.log("Moi je comprend pas pas");
             <c:forEach items="${notifications}" var="n">
 

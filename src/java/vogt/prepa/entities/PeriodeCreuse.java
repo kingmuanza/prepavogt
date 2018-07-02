@@ -1,5 +1,5 @@
 package vogt.prepa.entities;
-// Generated 6 juin 2018 13:00:00 by Hibernate Tools 4.3.1
+// Generated 29 juin 2018 14:01:25 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;

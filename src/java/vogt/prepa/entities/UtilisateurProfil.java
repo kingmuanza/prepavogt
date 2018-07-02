@@ -1,5 +1,5 @@
 package vogt.prepa.entities;
-// Generated 6 juin 2018 13:00:00 by Hibernate Tools 4.3.1
+// Generated 29 juin 2018 14:01:25 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -28,19 +28,19 @@ public class UtilisateurProfil  implements java.io.Serializable {
      private String libelle;
      private Boolean voirEmploye;
      private Boolean voirEnseignant;
-     private Set<UtilisateurProfilFiliere> utilisateurProfilFilieres = new HashSet<UtilisateurProfilFiliere>(0);
      private Set<Utilisateur> utilisateurs = new HashSet<Utilisateur>(0);
+     private Set<UtilisateurProfilClasse> utilisateurProfilClasses = new HashSet<UtilisateurProfilClasse>(0);
 
     public UtilisateurProfil() {
     }
 
-    public UtilisateurProfil(String code, String libelle, Boolean voirEmploye, Boolean voirEnseignant, Set<UtilisateurProfilFiliere> utilisateurProfilFilieres, Set<Utilisateur> utilisateurs) {
+    public UtilisateurProfil(String code, String libelle, Boolean voirEmploye, Boolean voirEnseignant, Set<Utilisateur> utilisateurs, Set<UtilisateurProfilClasse> utilisateurProfilClasses) {
        this.code = code;
        this.libelle = libelle;
        this.voirEmploye = voirEmploye;
        this.voirEnseignant = voirEnseignant;
-       this.utilisateurProfilFilieres = utilisateurProfilFilieres;
        this.utilisateurs = utilisateurs;
+       this.utilisateurProfilClasses = utilisateurProfilClasses;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -96,21 +96,21 @@ public class UtilisateurProfil  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="utilisateurProfil")
-    public Set<UtilisateurProfilFiliere> getUtilisateurProfilFilieres() {
-        return this.utilisateurProfilFilieres;
-    }
-    
-    public void setUtilisateurProfilFilieres(Set<UtilisateurProfilFiliere> utilisateurProfilFilieres) {
-        this.utilisateurProfilFilieres = utilisateurProfilFilieres;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="utilisateurProfil")
     public Set<Utilisateur> getUtilisateurs() {
         return this.utilisateurs;
     }
     
     public void setUtilisateurs(Set<Utilisateur> utilisateurs) {
         this.utilisateurs = utilisateurs;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="utilisateurProfil")
+    public Set<UtilisateurProfilClasse> getUtilisateurProfilClasses() {
+        return this.utilisateurProfilClasses;
+    }
+    
+    public void setUtilisateurProfilClasses(Set<UtilisateurProfilClasse> utilisateurProfilClasses) {
+        this.utilisateurProfilClasses = utilisateurProfilClasses;
     }
 
 

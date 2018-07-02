@@ -19,11 +19,15 @@
         <h1 class="titre">
             Aujourd'hui
         </h1>
+        <div style="padding-bottom: 20px; font-size: 1.2em; opacity: 0.8; margin-top: -15px">
+            Dernière actualisation à 
+            <span id="derniereHeure">
+                <i class="spinner loading icon"></i>
+            </span> 
+        </div>
 
-        <div  style="background-color: #f8f8f8; border-radius: 5px; border: 0px solid #004d6f">
+        <div  style="background-color: #f8f8f8; border-radius: 5px; border: 1px solid #004d6f">
             <div style="padding-top: 25px; padding-bottom : 25px">
-
-
                 <div class="ui four statistics">
                     <div class="statistic">
                         <div class="value titre">
@@ -62,39 +66,54 @@
             </div>
         </div>
 
+        <div class="ui three cards" style="padding-top: 20px;">
+            <c:forEach items="${classes}" var="classe">
+                <div class="ui card">
 
-        <div style="padding-top: 20px; padding-bottom: 20px; font-size: 1.2em; opacity: 0.8">
-            Dernière actualisation à 
-            <span id="derniereHeure">
-                <i class="spinner loading icon"></i>
-            </span> 
+                    <div class="content">
+                        <div class="ui black ribbon label" style="background-color: #004d6f!important">
+                            ${classe.niveauEtude.code}
+                            ${classe.filiere.libelle}
+                        </div>
+                        <div class="header">
+                            
+                        </div>
+                        <div class="description">
+                            <p></p>
+                        </div>
+
+                        <div class="meta">
+                            <span class="right floated time">07:57</span>
+                            <span class="category">Moyenne d'arrivée</span>
+                        </div>
+                        <div class="meta">
+                            <span class="right floated time">7</span>
+                            <span class="category">Retards</span>
+                        </div>
+                        <div class="meta">
+                            <span class="right floated time">2</span>
+                            <span class="category">Absents</span>
+                        </div>
+                        <div class="meta" style="opacity: 1!important; color: #777!important">
+                            <span class="right floated time">
+                                <b>${classe.etudiants.size()}</b>
+                            </span>
+                            <span class="category"><b>Total</b></span>
+                        </div>
+
+                    </div>
+                    <div class="extra content">
+                        <div class="left floated author" style="opacity: 1!important; color: #777!important">
+                            <i class="trophy icon"></i> 
+                            ${classe.etudiants.iterator().next().getIndividu().getNoms()}
+                            ${classe.etudiants.iterator().next().getIndividu().getPrenoms()}
+                            07:25:36
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
+
         </div>
-        <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Heure</th>
-                    <th>Matricule</th>
-                    <th>Personne</th>                    
-                    <th>Entrée/Sortie</th>                    
-                </tr>
-            </thead>
-
-            <tbody>
-                <c:forEach items="${pointages}" var="p">
-
-                    <tr>
-                        <td>
-                            <fmt:formatDate value="${p.heure}" pattern="HH:mm:ss"/>
-
-                        </td>
-                        <td>${p.matricule}</td>
-                        <td>Tagne Edgar</td>
-                        <td>Entrée</td>
-                    </tr>
-                </c:forEach>
-
-            </tbody>
-        </table>
 
 
         <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
@@ -111,86 +130,7 @@
 
             var dernierIndex = 0;
             $(document).ready(function () {
-                var table = $('#dataTableUtilisateur').DataTable({
-                    ajax: {
-                        url: "ActualiserPointageServlet?id=${temps}",
-                        dataSrc: function (json) {
-                            console.log(json);
-                            return json;
-                        }
-                    },
-                    "columns": [
-                        {"data": "heure"},
-                        {"data": "matricule"},
-                        {"data": "noms"},
-                        {"data": "entree"}
-                    ],
-                    "createdRow": function (row, data, dataIndex) {
-                        if (dernierIndex < dataIndex) {
-                            $(row).addClass('positive');
-                            dernierIndex = dataIndex;
-                        }
-                        
-                    },
-                    "order": [[0, "desc"]],
-                    dom: '<"top"fB>rt<"bottom"lp><"clear">',
-                    buttons: [
-                        
-                        
-                        {
-                            text: "Actualiser",
-                            title: titre,
-                            message: '',
-                            className: 'actualiser ui gris mini button'
-                        },
-                        {
-                            extend: 'excelHtml5',
-                            text: "Exporter vers Excel",
-                            title: titre,
-                            message: '',
-                            className: 'ui gris mini basic button'
-                        },
-                        {
-                            extend: 'print',
-                            text: "Imprimer",
-                            title: titre,
-                            message: '',
-                            className: 'impression ui gris basic mini button'
-                        }
-                    ],
-                    "language": {
-                        "sEmptyTable": "Aucune donnée disponible",
-                        "sInfo": "Affiche _START_ à _END_ sur _TOTAL_ entrées",
-                        "sLengthMenu": "Afficher _MENU_ lignes par page",
-                        "sSearch": "Rechercher : ",
-                        "zeroRecords": "Aucun résultat",
-                        "info": "Page _PAGE_ sur _PAGES_",
-                        "infoEmpty": "Aucun résultat disponible",
-                        "sProcessing": "Veuillez patienter...",
-                        "infoFiltered": "(sur les _MAX_ disponibles)",
-                        "paginate": {
-                            "previous": "Précédent",
-                            "next": "Suivant"
-                        }
-                    }
-                });
 
-                table.on('xhr', function () {
-                    var json = table.ajax;
-                    //console.log(json);
-                });
-
-                setInterval(function () {
-                    table.ajax.reload();
-                    var d = new Date();
-                    $("#derniereHeure").html(d.toISOString().substr(11, 8));
-                }, 3000);
-
-                $(".actualiser").on('click', function () {
-                    table.ajax.reload();
-                    var d = new Date();
-                    $("#derniereHeure").html(d.toISOString().substr(11, 8));
-                });
 
             });
         </script>

@@ -5,7 +5,9 @@ import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
+import vogt.prepa.entities.Utilisateur;
 import vogt.prepa.entities.UtilisateurProfil;
+import vogt.prepa.entities.UtilisateurProfilClasse;
 import vogt.prepa.utils.HibernateUtil;
 
 public class UtilisateurProfilDAO {
@@ -139,5 +141,17 @@ public class UtilisateurProfilDAO {
     }
 
     public void initialiser(UtilisateurProfil utilisateurProfil) {
+        Hibernate.initialize(utilisateurProfil.getUtilisateurs());
+        for(Utilisateur u : utilisateurProfil.getUtilisateurs()){
+            Hibernate.initialize(u.getIndividu());
+        }
+        Hibernate.initialize(utilisateurProfil.getUtilisateurProfilClasses());
+        for(UtilisateurProfilClasse upf : utilisateurProfil.getUtilisateurProfilClasses()){
+            Hibernate.initialize(upf.getClasse());
+            if(upf.getClasse()!=null){
+                Hibernate.initialize(upf.getClasse().getFiliere());
+                Hibernate.initialize(upf.getClasse().getNiveauEtude());
+            }
+        }
     }
 }

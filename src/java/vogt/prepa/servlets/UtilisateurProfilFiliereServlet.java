@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import vogt.prepa.dao.UtilisateurProfilFiliereDAO;
 import vogt.prepa.entities.Utilisateur;
-import vogt.prepa.entities.UtilisateurProfilFiliere;
+import vogt.prepa.entities.UtilisateurProfilClasse;
 
 /**
  *
@@ -35,7 +35,7 @@ public class UtilisateurProfilFiliereServlet extends HttpServlet {
             String id = request.getParameter("id");
             if (id != null && !id.isEmpty()) {
                 int i = Integer.parseInt(id);
-                UtilisateurProfilFiliere utilisateurProfilFiliere = utilisateurProfilFiliereDAO.get(i);
+                UtilisateurProfilClasse utilisateurProfilFiliere = utilisateurProfilFiliereDAO.get(i);
                 request.setAttribute("utilisateurProfilFiliere", utilisateurProfilFiliere);
 
             }

@@ -22,10 +22,10 @@
             <thead>
                 <tr>
                     <th>Visites</th>
-                    <th>Nom Complet</th>
+                    <th>Nom complet</th>
                     <th>Motif</th>
                     <th>Commentaire</th>                   
-                    <th>Heure d'entree</th>
+                    <th>Heure d'entrée</th>
                     <th>Heure de sortie</th>                   
                 </tr>
             </thead>

@@ -7,13 +7,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import vogt.prepa.dao.UtilisateurProfilFiliereDAO;
+import vogt.prepa.dao.UtilisateurProfilClasseDAO;
 import vogt.prepa.entities.Utilisateur;
 
 @WebServlet(name="UtilisateurProfilFilieresServlet", urlPatterns={"/UtilisateurProfilFilieresServlet"})
 public class UtilisateurProfilFilieresServlet extends HttpServlet {
 
-    UtilisateurProfilFiliereDAO utilisateurProfilFiliereDAO = new UtilisateurProfilFiliereDAO();
+    UtilisateurProfilClasseDAO utilisateurProfilFiliereDAO = new UtilisateurProfilClasseDAO();
    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

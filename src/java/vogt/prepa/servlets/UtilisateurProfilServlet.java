@@ -14,9 +14,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import vogt.prepa.dao.ClasseDAO;
+import vogt.prepa.dao.FiliereDAO;
 import vogt.prepa.dao.UtilisateurProfilDAO;
+import vogt.prepa.dao.UtilisateurProfilClasseDAO;
+import vogt.prepa.entities.Classe;
+import vogt.prepa.entities.Filiere;
 import vogt.prepa.entities.Utilisateur;
 import vogt.prepa.entities.UtilisateurProfil;
+import vogt.prepa.entities.UtilisateurProfilClasse;
+import vogt.prepa.utils.FiliereUtil;
 import vogt.prepa.utils.Notification;
 
 /**
@@ -27,6 +34,9 @@ import vogt.prepa.utils.Notification;
 public class UtilisateurProfilServlet extends HttpServlet {
 
     UtilisateurProfilDAO utilisateurProfilDAO = new UtilisateurProfilDAO();
+    ClasseDAO classeDAO = new ClasseDAO();
+    UtilisateurProfilClasseDAO utilisateurProfilClasseDAO = new UtilisateurProfilClasseDAO();
+    FiliereUtil filiereUtil = new FiliereUtil();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -38,8 +48,10 @@ public class UtilisateurProfilServlet extends HttpServlet {
             if (id != null && !id.isEmpty()) {
                 UtilisateurProfil utilisateurProfil = utilisateurProfilDAO.get(id);
                 request.setAttribute("utilisateurProfil", utilisateurProfil);
+                request.setAttribute("filiereUtil", filiereUtil);
 
             }
+                request.setAttribute("classes", classeDAO.getall());
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/profil.jsp").forward(request, response);
         } else {
             response.sendRedirect("index.htm");
@@ -114,6 +126,10 @@ public class UtilisateurProfilServlet extends HttpServlet {
                 notif.setSuccess(true);
                 notifications.add(notif);
                 httpSession.setAttribute("notifications", notifications);
+                String[] classes = request.getParameterValues("classes");
+                System.out.println(classes.toString());
+                deleteFilieres(utilProfil);
+                SaveFilieres(utilProfil, classes);
             } else {
                 Notification notif = new Notification();
                 notif.setTitre("Enregistrement");
@@ -126,7 +142,24 @@ public class UtilisateurProfilServlet extends HttpServlet {
             response.sendRedirect("start#!/profil/" + utilProfil.getIdutilisateurProfil());
         }
     }
+
     public boolean verifierAvantSuppression(UtilisateurProfil utilProfil) {
         return true;
+    }
+
+    public void SaveFilieres(UtilisateurProfil utilProfil, String[] classes) {
+        for (String f : classes) {
+            Classe classe = classeDAO.get(f);
+            UtilisateurProfilClasse upf = new UtilisateurProfilClasse();
+            upf.setClasse(classe);
+            upf.setUtilisateurProfil(utilProfil);
+            utilisateurProfilClasseDAO.enregistrer(upf);
+        }
+    }
+    
+    public void deleteFilieres(UtilisateurProfil utilProfil) {
+        for (UtilisateurProfilClasse upf : utilProfil.getUtilisateurProfilClasses()) {
+            utilisateurProfilClasseDAO.supprimer(upf);
+        }
     }
 }
