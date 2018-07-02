@@ -463,19 +463,79 @@ public class EdgarServiceImpl implements EdgarService {
     //***********************************************ODAY
     
     @Override
-    public long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
-        long diffInMillies = date2.getTime() - date1.getTime();
-        return timeUnit.convert(diffInMillies, TimeUnit.MILLISECONDS);
+    public List<Integer> getDiffHeureMinutes(String heure1, String heure2) {
+        List<Integer> diffheureEtMinutes = new ArrayList<>();
+        
+        String[] fractions1 = heure1.split(":");
+        String[] fractions2 = heure2.split(":");
+        Integer heureDebut = Integer.parseInt(fractions1[0]);
+        Integer heureFin = Integer.parseInt(fractions2[0]);
+        Integer minutesDebut = Integer.parseInt(fractions1[1]);
+        Integer minutesFin = Integer.parseInt(fractions2[1]);
+        int heureDiff = heureFin - heureDebut;
+        int minutesDiff = minutesFin - minutesDebut;
+        
+        if (minutesDiff < 0) {
+            minutesDiff = 60 + minutesDiff;
+            heureDiff--;
+        }
+        if (heureDiff < 0) {
+            heureDiff = 24 + heureDiff;
+        }
+        
+        diffheureEtMinutes.add(heureDiff);
+        diffheureEtMinutes.add(minutesDiff);
+        
+        return diffheureEtMinutes;
     }
 
     @Override
-    public Long cummulDesRetards(String matricule, Date dateDebut, Date dateFin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Long> cummulDesRetards(String matricule, Date dateDebut, Date dateFin) {
+        
+        List<Long> differenceTemps = new ArrayList<>();
+        
+        Long heures = 0L;
+        Long minutes = 0L;
+        
+        List<Pointage> tousPointageEnRetardsMatriculeDeuxDates = retardsPointagesEntreDeuxDates(matricule, dateDebut, dateFin);        
+        
+        if(tousPointageEnRetardsMatriculeDeuxDates != null){
+            ListIterator<Pointage> it = tousPointageEnRetardsMatriculeDeuxDates.listIterator();
+            
+            while (it.hasNext()) {
+                Pointage p = it.next();                
+                heures += getDiffHeureMinutes(HEURE_ARRIVEE, ExtraireHeure(p.getHeure())).get(0);
+                minutes += getDiffHeureMinutes(HEURE_ARRIVEE, ExtraireHeure(p.getHeure())).get(1);
+            }            
+        }
+        differenceTemps.add(heures);
+        differenceTemps.add(minutes);
+        
+        return differenceTemps;
     }
 
     @Override
-    public Long cummulDesRetards(Individu individu, Date dateDebut, Date dateFin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Long> cummulDesRetards(Individu individu, Date dateDebut, Date dateFin) {
+        List<Long> differenceTempsIndiv = new ArrayList<>();
+        
+        Long heures = 0L;
+        Long minutes = 0L;
+        
+        List<Pointage> tousPointageEnRetardsIndivDeuxDates = retardsPointagesEntreDeuxDates(individu, dateDebut, dateFin);        
+        
+        if(tousPointageEnRetardsIndivDeuxDates != null){
+            ListIterator<Pointage> it = tousPointageEnRetardsIndivDeuxDates.listIterator();
+            
+            while (it.hasNext()) {
+                Pointage p = it.next();                
+                heures += getDiffHeureMinutes(HEURE_ARRIVEE, ExtraireHeure(p.getHeure())).get(0);
+                minutes += getDiffHeureMinutes(HEURE_ARRIVEE, ExtraireHeure(p.getHeure())).get(1);
+            }            
+        }
+        differenceTempsIndiv.add(heures);
+        differenceTempsIndiv.add(minutes);
+        
+        return differenceTempsIndiv;
     }
 
     @Override
@@ -532,5 +592,7 @@ public class EdgarServiceImpl implements EdgarService {
     public Map<Individu, Integer> nombreAbsencesIndividus(Date dateDebut, Date dateFin) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
 
 }

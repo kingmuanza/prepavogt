@@ -117,21 +117,15 @@ public interface EdgarService {
     //Avoir la liste des pointages en retard entre deux dates pour un individu donné
     public List<Pointage> retardsPointagesEntreDeuxDates(Individu individu, Date dateDebut, Date dateFin);
 
-    /**
-     * avoir la difference entre deux dates
-     *
-     * @param date1 ancienne date
-     * @param date2 nouvelle date
-     * @param timeUnit unité de mesure avec la quelle on veux le resultat
-     * (heure,minutesn ou secondes)
-     */
-    public long getDateDiff(Date date1, Date date2, TimeUnit timeUnit);
+    //Calcul la difference de temps entre deux heure en string et retourne le resultat sous forme d'un tableau
+    //de deux entier dont le premier est la difference d'heure et le second la difference de minutes
+    public List<Integer> getDiffHeureMinutes (String heure1, String heure2);
 
     //Avoir la somme des heures en retard entre deux dates pour un matricule donné
-    public Long cummulDesRetards(String matricule, Date dateDebut, Date dateFin);
+    public List<Long> cummulDesRetards(String matricule, Date dateDebut, Date dateFin);
 
     //Avoir la somme des heures en retard entre deux dates pour un individu donné
-    public Long cummulDesRetards(Individu individu, Date dateDebut, Date dateFin);
+    public List<Long> cummulDesRetards(Individu individu, Date dateDebut, Date dateFin);
 
     /*
         FONCTIONS POUR LES ABSENCES
