@@ -173,9 +173,10 @@
                             </a>
                             <div class="content menu">
                                 <c:forEach items="${visites}" var="visite">
-                                    <c:if test="${empty visite.entrees}">
+                                    <c:if test="${empty visite.entrees || visite.entrees.size()==0}">
                                     <a class="item active" href="#!visite/${visite.idvisite}">
                                         ${visite.nomComplet}
+                                        ${visite.entrees}
                                     </a>
                                     </c:if>
                                 </c:forEach>

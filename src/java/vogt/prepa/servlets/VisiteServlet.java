@@ -93,6 +93,7 @@ public class VisiteServlet extends HttpServlet {
             entree.setNomComplet(v.getNomComplet());
             entree.setMotif(v.getMotif());
             entree.setDateEntree(new Date());
+            entree.setVisite(v);
             entreeDAO.enregistrer(entree);
             response.sendRedirect("start#!/entrees");
             
