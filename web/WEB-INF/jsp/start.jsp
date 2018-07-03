@@ -91,7 +91,7 @@
                                 <b>Import / Export</b>
                             </a>
                             <div class="active content menu">
-                                <a class="item active" href="#!export">Exporter les données </a>
+                                <a class="item active" href="#!exporter">Exporter les données </a>
                                 <a class="item active" href="#!importer">Importer des données </a>
                             </div>
                         </div>

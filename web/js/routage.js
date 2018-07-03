@@ -33,7 +33,7 @@ app.config(function ($routeProvider) {
                 templateUrl: UrlExists("ImporterServlet")
             })
             .when("/exporter", {
-                templateUrl: UrlExists("TempsReelServlet")
+                templateUrl: UrlExists("PointagesServlet")
             })
             .when("/tempsreel", {
                 templateUrl: UrlExists("TempsReelServlet")

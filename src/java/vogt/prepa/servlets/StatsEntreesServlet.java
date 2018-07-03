@@ -20,7 +20,7 @@ public class StatsEntreesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
+        this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/statsentree.jsp").forward(request, response);
     } 
 
     @Override

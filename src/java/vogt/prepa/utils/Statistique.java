@@ -5,7 +5,9 @@
  */
 package vogt.prepa.utils;
 
+import java.util.Date;
 import java.util.List;
+import vogt.prepa.entities.Classe;
 import vogt.prepa.entities.Individu;
 import vogt.prepa.entities.Pointage;
 
@@ -19,6 +21,16 @@ public class Statistique {
     private List<Pointage> retards ; 
     private List<Individu> absents ; 
     private Individu premierArrivee ;
+    private Classe classe ;
+    private Date date ;
+    
+    public Statistique(){
+        
+    }
+    public Statistique(Classe classe, Date date){
+        this.classe=classe;
+        this.date=date;
+    }
 
     /**
      * @return the moyenneHeure
@@ -74,6 +86,34 @@ public class Statistique {
      */
     public void setPremierArrivee(Individu premierArrivee) {
         this.premierArrivee = premierArrivee;
+    }
+
+    /**
+     * @return the classe
+     */
+    public Classe getClasse() {
+        return classe;
+    }
+
+    /**
+     * @param classe the classe to set
+     */
+    public void setClasse(Classe classe) {
+        this.classe = classe;
+    }
+
+    /**
+     * @return the date
+     */
+    public Date getDate() {
+        return date;
+    }
+
+    /**
+     * @param date the date to set
+     */
+    public void setDate(Date date) {
+        this.date = date;
     }
     
     

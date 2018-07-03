@@ -45,9 +45,13 @@ public class TonyServiceImpl implements TonyService {
 
     @Override
     public Statistique statistiques(Classe classe, Date date) {
-        Statistique stat = new Statistique();
+        Statistique stat = new Statistique(classe, date);
+        
         List<Pointage> lpointage = pdao.getByDate(date);
-        stat.setPremierArrivee(findEtudiantByClasse(classe, lpointage).get(0).getIndividu());
+        if(findEtudiantByClasse(classe, lpointage).size()>0){
+            stat.setPremierArrivee(findEtudiantByClasse(classe, lpointage).get(0).getIndividu());
+        }
+        
         stat.setRetards(new EdgarServiceImpl().retardsPointagesDUnJourLa(date));
         List<Individu> lesAbsents = new ArrayList<>();
         for(Etudiant etudiant: findEtudiantAbsents(classe, lpointage))
