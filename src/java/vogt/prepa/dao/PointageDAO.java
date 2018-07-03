@@ -1,11 +1,13 @@
 package vogt.prepa.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import vogt.prepa.entities.Etudiant;
 import vogt.prepa.entities.Pointage;
 import vogt.prepa.utils.HibernateUtil;
 
@@ -184,4 +186,69 @@ public class PointageDAO {
         return pointages;
 
     }
+    
+    public List<Pointage> getEtudiantPointages(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.getTransaction().begin();
+
+        List<Pointage> pointages = session.createCriteria(Pointage.class).list();
+        pointages.forEach((pointage) -> {
+            initialiser(pointage);
+        });
+        List<Pointage> etudiants = new ArrayList<>();
+        IndividuDAO idao = new IndividuDAO();
+        for(Pointage p: pointages){
+            if (!idao.getByMatricule(p.getMatricule()).getEtudiants().isEmpty()) {
+                etudiants.add(p);
+            }
+        }
+        
+        session.getTransaction().commit();
+        session.close();
+
+        return etudiants;
+    }
+    public List<Pointage> getEnseignantPointages(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.getTransaction().begin();
+
+        List<Pointage> pointages = session.createCriteria(Pointage.class).list();
+        pointages.forEach((pointage) -> {
+            initialiser(pointage);
+        });
+        List<Pointage> enseignants = new ArrayList<>();
+        IndividuDAO idao = new IndividuDAO();
+        for(Pointage p: pointages){
+            if (!idao.getByMatricule(p.getMatricule()).getEnseignants().isEmpty()) {
+                enseignants.add(p);
+            }
+        }
+        
+        session.getTransaction().commit();
+        session.close();
+
+        return enseignants;
+    }
+    public List<Pointage> getEmployePointages(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.getTransaction().begin();
+
+        List<Pointage> pointages = session.createCriteria(Pointage.class).list();
+        pointages.forEach((pointage) -> {
+            initialiser(pointage);
+        });
+        List<Pointage> employes = new ArrayList<>();
+        IndividuDAO idao = new IndividuDAO();
+        for(Pointage p: pointages){
+            if (!idao.getByMatricule(p.getMatricule()).getEmployes().isEmpty()) {
+                employes.add(p);
+            }
+        }
+        
+        session.getTransaction().commit();
+        session.close();
+
+        return employes;
+    }
+    
 }

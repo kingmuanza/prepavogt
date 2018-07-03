@@ -1,11 +1,13 @@
 package vogt.prepa.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import vogt.prepa.entities.Individu;
+import vogt.prepa.entities.Utilisateur;
 import vogt.prepa.utils.HibernateUtil;
 
 public class IndividuDAO {
@@ -169,5 +171,24 @@ public class IndividuDAO {
 
     public void initialiser(Individu individu) {
 
+    }
+    /*
+    methodes ajoutées N9-T
+    */
+    public List<Individu> getByUtilisateur(Utilisateur utilisateur){
+        List<Individu> lesIndividus = new ArrayList<>();
+        if(utilisateur.getUtilisateurProfil().getVoirEmploye()){
+            for(Individu i:this.getall()){
+                if(!i.getEmployes().isEmpty())
+                    lesIndividus.add(i);
+            }
+        }
+        if(utilisateur.getUtilisateurProfil().getVoirEnseignant()){
+            for(Individu i:this.getall()){
+                if(!i.getEnseignants().isEmpty())
+                    lesIndividus.add(i);
+            }
+        }
+        return lesIndividus;
     }
 }
