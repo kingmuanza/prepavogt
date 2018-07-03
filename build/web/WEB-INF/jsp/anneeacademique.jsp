@@ -23,13 +23,25 @@
     </head>
     <body>
         <h1 class="titre">
-            Nouvel annee academique
+            ${empty anneeScolaire ? "Nouvelle année académique":anneeScolaire.libelle}
+            
         </h1>
         <div style="padding-top: 10px;">
 
             <div class="ui container">
                 <div class="ui grid">
-                    
+                    <div class="six wide column">
+                        <div class="ui fluid card">
+                            <div class="content">
+                                ${anneeScolaire.libelle}
+                            </div>
+                            <div class="extra content">
+                                <div class="extra content">
+                                    ${anneeScolaire.code}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="ten wide column">
                         <div>
                             <form class="ui form" action="AnneeScolaireServlet" method="post">
@@ -61,7 +73,7 @@
                                 </div>
                                 <div>
                                     <button class="ui submit gris button" name="action" value="enregistrer" type="submit">
-                                        enregistrer
+                                        Enregistrer
                                     </button>
                                     <button class="ui submit red button" name="action" value="supprimer" type="submit">
                                         Supprimer
@@ -77,7 +89,7 @@
         </div>
         <script>
             $(document).ready(function () {
-                ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
+                ouvrirMenuCorrespondant("#section_params", "bouton_params", "anneeacademiques");
 
             })
         </script>

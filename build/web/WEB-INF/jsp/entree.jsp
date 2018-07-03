@@ -1,9 +1,3 @@
-<%-- 
-    Document   : entree
-    Created on : 11 juin 2018, 12:47:09
-    Author     : zos hall
---%>
-
 <%@page import="java.util.Date"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -23,7 +17,10 @@
     </head>
     <body>
         <h1 class="titre">
-            Nouvel entree
+            <c:choose>
+                <c:when test="${empty entree}">Nouvelle entrée</c:when>
+                <c:otherwise>${entree.nomComplet}</c:otherwise>
+            </c:choose>
         </h1>
         <div style="padding-top: 10px;">
 
@@ -31,66 +28,95 @@
                 <div class="ui grid">
                     <div class="six wide column">
                         <div class="ui fluid card">
-                            <div class="image">
-                                <img src="img/joe.jpg">
+                            <div class="content">
+                                <a class="header">${empty entree.motif ? "Aucun motif":entree.motif}</a>
+                                <div class="description">
+                                    ${empty entree.commentaire ? "Aucun motif":entree.commentaire}
+                                </div>
                             </div>
                             <div class="content">
-                                <a class="header">Kristy</a>
-                                <div class="meta">
-                                    <span class="date">Joined in 2013</span>
+                                <fmt:formatDate type = "date" value = "${entree.dateEntree}" />
+                                <div class="sub header">
+                                    <fmt:formatDate type = "time" timeStyle = "short" value = "${entree.dateEntree}" />
+                                    -
+                                    <fmt:formatDate type = "time" timeStyle = "short" value = "${entree.dateSortie}" />
                                 </div>
-                                <div class="description">
-                                    Kristy is an art director living in New York.
-                                </div>
-                            </div>
-                            <div class="extra content">
-                                <a>
-                                    <i class="user icon"></i>
-                                    22 Friends
-                                </a>
                             </div>
                         </div>
+                        <form class="ui form" action="EntreeServlet" method="post">
+
+                            <input type="hidden" name="id" value="${entree.identree}"/>
+
+                            <c:if test="${!empty entree && empty entree.dateSortie}">
+                                <button class="ui fluid submit gris button" name="action" value="sortir" type="submit" >
+                                    Sortir
+                                </button>
+                            </c:if>
+
+                        </form>
                     </div>
                     <div class="ten wide column">
                         <div>
-                            <form class="ui form" action="UtilisateurServlet" method="post">
-                                <div class="ui message">
-                                    <div class="header">Messages à afficher en cas d'erreur</div>
-                                    <ul class="list">
-                                        <li>Entrez votre login</li>
-                                        <li>Les mots de passe ne sont pas identiques</li>
-                                    </ul>
-                                </div>
-                                <div class="required field">
-                                    <label>Login</label>
-                                    <input type="text" name="login" value="${u.login}" required>
-                                </div>
-                                <div class="two fields">
-                                    <div class="required field">
-                                        <label>Mot de passe</label>
-                                        <input type="password" name="passe" value="${u.passe}">
+                            <form class="ui form" action="EntreeServlet" method="post">
+                                <c:if test="${!empty erreurs}">
+                                    <div class="ui message">
+                                        <div class="header">Messages à afficher en cas d'erreur</div>
+                                        <ul class="list">
+                                            <li>Entrez vos paramettre</li>
+                                            <li>Les champs en (*) sont obligatoires !</li>
+                                        </ul>
                                     </div>
-                                    <div class="required field">
-                                        <label>Confirmation</label>
-                                        <input type="password" name="confirmation" value="${u.passe}">
+                                </c:if>
+                                <input type="hidden" name="id" value="${entree.identree}"/>
+                                <div class="fields">
+                                    <div class="twelve wide field">
+                                        <label>Nom complet</label>
+                                        <input type="text" name="nomComplet" value="${entree.nomComplet}" required>
+                                    </div>
+                                    <div class="four wide field">
+                                        <label>Badge</label>
+                                        <select class="ui dropdown" name="badg">
+                                            <option>Aucun badge</option>
+                                            <c:forEach items="${badges}" var="badge">
+                                                <option value="${badge.idbadge}" ${entree.badge.idbadge==badge.idbadge?"selected":""}>
+                                                    ${badge.libelle}
+                                                </option>
+                                            </c:forEach>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="field">
-                                    <label>Individu</label>
+                                    <label>Personne à voir</label>
                                     <select class="ui dropdown" name="individu">
-                                        <option>Aucune personne</option>
-                                        <c:forEach items="${individus}" var="i">
-                                            <option value="${i.idindividu}" ${u.individu.idindividu==i.idindividu?"selected":""}>
-                                                ${i.noms} ${i.prenoms}
+                                        <c:forEach items="${badges}" var="badge">
+                                            <option value="${badge.idbadge}" ${entree.badge.idbadge==badge.idbadge?"selected":""}>
+                                                ${badge.libelle}
                                             </option>
                                         </c:forEach>
-
                                     </select>
                                 </div>
-                                <div>
-                                    <button class="ui submit button" type="submit">Submit</button>
+
+
+                                <div class="field">
+                                    <label>Motif</label>
+                                    <input type="text" name="motif" value="${entree.motif}" required>
                                 </div>
 
+                                <div class="field">
+                                    <label>Commentaire</label>
+                                    <textarea name="commentaire" rows="2">${entree.commentaire}</textarea>
+                                </div>
+
+                                <div>
+                                    <button class="ui submit gris button" name="action" value="enregistrer" type="submit">
+                                        Enregistrer
+                                    </button>
+                                    <c:if test="${!empty entree}">
+                                        <button class="ui submit red button" name="action" value="supprimer" type="submit">
+                                            Supprimer
+                                        </button>
+                                    </c:if>
+                                </div>
                             </form>
                         </div>
 
@@ -100,7 +126,7 @@
         </div>
         <script>
             $(document).ready(function () {
-                ouvrirMenuCorrespondant("#section_params", "bouton_params", "utilisateurs");
+                ouvrirMenuCorrespondant("#section_visites", "bouton_visites", "entrees");
 
             })
         </script>

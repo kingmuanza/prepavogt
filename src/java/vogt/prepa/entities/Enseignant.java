@@ -1,5 +1,5 @@
 package vogt.prepa.entities;
-// Generated 2 juil. 2018 10:52:12 by Hibernate Tools 4.3.1
+// Generated 3 juil. 2018 16:11:02 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;

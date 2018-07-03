@@ -18,13 +18,14 @@
     <body>
         <h1 class="titre">Liste des entrées</h1>
 
-        <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
+        <table id="dataTableUtilisateur" class="ui celled table responsive" style="width:100%">
             <thead>
                 <tr>
-                    <th>Entrées</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Motif de la visite</th>
+                    <th>Date</th>
+                    <th>Entrée</th>
+                    <th>Sortie</th>
+                    <th>Nom complet</th>
+                    <th>Motif</th>
                     <th>Commentaire</th>
                     <th>Badge</th>                    
                 </tr>
@@ -35,19 +36,16 @@
 
                     <tr class="pointeur" onclick="window.location.href='start#!/entree/${entree.identree}'">
                         <td>
-                            <h4 class="ui image header">
-                                <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
-                                <div class="content">
-                                    ${entree.dateEntree}
-                                    <div class="sub header">
-                                        ${entree.dateSortie}
-                                    </div>
-                                </div>
-                            </h4>
+                            <fmt:formatDate type = "date" value = "${entree.dateEntree}" />
                         </td>
-                        <td>${entree.individu.noms}</td>
-                        <td>${entree.individu.prenoms}</td>
-                        <td>${entree.visite.motif}</td>
+                        <td>
+                            <fmt:formatDate type = "time" timeStyle = "short" value = "${entree.dateEntree}" />
+                        </td>
+                        <td>
+                            <fmt:formatDate type = "time" timeStyle = "short" value = "${entree.dateSortie}" />
+                        </td>
+                        <td>${entree.nomComplet}</td>
+                        <td>${entree.motif}</td>
                         <td>${entree.commentaire}</td>
                         <td>${entree.badge.code}</td>
                     </tr>

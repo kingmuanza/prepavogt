@@ -16,39 +16,35 @@
 
     </head>
     <body>
-        <h1 class="titre">Liste des périodes creuses</h1>
+        <h1 class="titre">Statistiques des entrées</h1>
 
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Période Creuses</th>
-                    <th>Date Début</th>
-                    <th>Date Fin</th>                
+                    <th>Individu</th>
+                    <th>Nb de visite</th>
+                    <th>Temps cumulé</th>                 
                 </tr>
             </thead>
 
             <tbody>
-                <c:forEach items="${periodeCreuses}" var="periodeCreuse">
-                    
-                <tr class="pointeur" onclick="window.location.href='start#!/periodecreuse/${periodeCreuse.idperiodeCreuse}'">
-                    <td>
-                        <h4 class="ui image header">
-                            <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
-                            <div class="content">
-                                ${periodeCreuse.code}
-                                <div class="sub header">
-                                    ${periodeCreuse.libelle}
+                <c:forEach items="${individus}" var="individu">
+
+                    <tr class="pointeur" onclick="window.location.href='start#!/individu/${individu.idindividu}'">
+                        <td>
+                            <h4 class="ui image header">
+                                <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
+                                <div class="content">
+                                    ${individu.noms} ${individu.prenoms}
+                                    <div class="sub header">
+                                        ${individu.genre ? "Femme":"Homme"}
+                                    </div>
                                 </div>
-                            </div>
-                        </h4>
-                    </td>
-                    <td>
-                        <fmt:formatDate value="${periodeCreuse.dateDebut}" pattern="yyyy-MM-dd"/>
-                    </td>
-                    <td>
-                        <fmt:formatDate value="${periodeCreuse.dateFin}" pattern="yyyy-MM-dd"/>
-                    </td>
-                </tr>
+                            </h4>
+                        </td>
+                        <td>${individu.residence}</td>
+                        <td>${individu.residence}</td>
+                    </tr>
                 </c:forEach>
 
             </tbody>
@@ -69,11 +65,12 @@
         <script>
             var titre = 'Bonjour';
             $(document).ready(function () {
-                
-                ouvrirMenuCorrespondant("#section_params", "bouton_params", "periodescreuses");
-                
+
+                ouvrirMenuCorrespondant("#section_visites", "bouton_visites", "statsentrees");
+
                 $('#dataTableUtilisateur').DataTable({
                     dom: '<"top"fB>rt<"bottom"lp><"clear">',
+                    "order": [[1, "asc"]],
                     buttons: [
                         {
                             text: "Nouveau",
@@ -81,7 +78,7 @@
                             message: '',
                             className: 'ui gris mini button',
                             action: function (e, dt, node, config) {
-                                window.location.href='start#!/periodecreuse'
+                                window.location.href='start#!/individu'
                             }
                         },
                         {
@@ -90,6 +87,13 @@
                             title: titre,
                             message: '',
                             className: 'ui gris mini basic button'
+                        },
+                        {
+                            extend: 'pdfHtml5',
+                            text: "Exporter en PDF",
+                            title: titre,
+                            message: '',
+                            className: 'impressionPDF ui gris basic mini button'
                         },
                         {
                             extend: 'print',

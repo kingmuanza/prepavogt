@@ -32,7 +32,7 @@
             <tbody>
                 <c:forEach items="${employes}" var="employe">
 
-                    <tr class="pointeur" onclick="window.location.href='start#!/collaborateur/${collaborateur.idcollaborateur}'">
+                    <tr class="pointeur" onclick="window.location.href='start#!/collaborateur/${employe.idemploye}'">
 
                         <td>
                             <h4 class="ui image header">

@@ -91,7 +91,7 @@
                                 <b>Import / Export</b>
                             </a>
                             <div class="active content menu">
-                                <a class="item active" href="#!export">Exporter les données </a>
+                                <a class="item active" href="#!exporter">Exporter les données </a>
                                 <a class="item active" href="#!importer">Importer des données </a>
                             </div>
                         </div>
@@ -156,12 +156,14 @@
                             </a>
                             <div class="active content menu">
                                 <c:forEach items="${entrees}" var="entree">
+                                    <c:if test="${empty entree.dateSortie}">
                                     <a class="item active" href="#!entree/${entree.identree}">
                                         ${entree.nomComplet}
                                     </a>
+                                    </c:if>
                                 </c:forEach>
                                 
-                                <a class="item" href="#!entrees">Personne 2</a>
+                                <a class="item" href="#!entrees">Tous</a>
                             </div>
                         </div>
                         <div class="item">
@@ -170,7 +172,15 @@
                                 <b>Personnes attendues</b>
                             </a>
                             <div class="content menu">
-                                <a class="item" href="#!visites">Personne 3</a>
+                                <c:forEach items="${visites}" var="visite">
+                                    <c:if test="${empty visite.entrees || visite.entrees.size()==0}">
+                                    <a class="item active" href="#!visite/${visite.idvisite}">
+                                        ${visite.nomComplet}
+                                        ${visite.entrees}
+                                    </a>
+                                    </c:if>
+                                </c:forEach>
+                                <a class="item" href="#!visites">Tous</a>
                             </div>
                         </div>
                         <div class="item">
@@ -267,6 +277,7 @@
                             ${sessionScope.utilisateur.individu.prenoms}
                             <i class="dropdown icon"></i>
                             <div class="menu">
+                                <a href="start#!/motDePasse/${sessionScope.utilisateur.idutilisateur}" class="item">Modifier Mot de passe</a>
                                 <a href="DeconnexionServlet" class="item">Déconnexion</a>
                             </div>
                         </div>
