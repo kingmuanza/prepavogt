@@ -48,9 +48,6 @@
                                     <button class="ui submit gris button" name="action" value="enregistrer" type="submit">
                                         Enregistrer
                                     </button>
-                                    <button class="ui submit red button" name="action" value="supprimer" type="submit">
-                                        Supprimer
-                                    </button>
                                 </div>
 
                             </form>
