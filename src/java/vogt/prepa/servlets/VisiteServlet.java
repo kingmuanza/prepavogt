@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import vogt.prepa.dao.EntreeDAO;
+import vogt.prepa.dao.IndividuDAO;
 import vogt.prepa.dao.VisiteDAO;
 import vogt.prepa.entities.Entree;
 import vogt.prepa.entities.Utilisateur;
@@ -30,6 +31,7 @@ public class VisiteServlet extends HttpServlet {
 
     VisiteDAO visiteDAO = new VisiteDAO();
     EntreeDAO entreeDAO = new EntreeDAO();
+    IndividuDAO individuDAO = new IndividuDAO();
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -42,6 +44,7 @@ public class VisiteServlet extends HttpServlet {
                 int i = Integer.parseInt(id);
                 Visite visite = visiteDAO.get(i);
                 request.setAttribute("visite", visite);
+                request.setAttribute("individus", individuDAO.getall());
 
             }
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/visite.jsp").forward(request, response);
@@ -114,6 +117,7 @@ public class VisiteServlet extends HttpServlet {
             v.setMotif(motif);
             String commentaire = request.getParameter("commentaire");
             v.setCommentaire(commentaire);
+            v.setIndividu(individuDAO.get(request.getParameter("individu")));
     
             if (visiteDAO.enregistrer(v)) {
                 Notification notif = new Notification();

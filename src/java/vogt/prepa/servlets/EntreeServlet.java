@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import vogt.prepa.dao.BadgeDAO;
 import vogt.prepa.dao.EntreeDAO;
+import vogt.prepa.dao.IndividuDAO;
 import vogt.prepa.dao.VisiteDAO;
 import vogt.prepa.entities.Entree;
 import vogt.prepa.entities.Utilisateur;
@@ -38,6 +39,7 @@ public class EntreeServlet extends HttpServlet {
     EntreeDAO entreeDAO = new EntreeDAO();
     BadgeDAO badgeDAO = new BadgeDAO();
     VisiteDAO visiteDAO = new VisiteDAO();
+    IndividuDAO individuDAO = new IndividuDAO();
     
 
     @Override
@@ -55,6 +57,7 @@ public class EntreeServlet extends HttpServlet {
             }
             request.setAttribute("visites", visiteDAO.getall());
             request.setAttribute("badges", badgeDAO.getall());
+            request.setAttribute("individus", individuDAO.getall());
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/entree.jsp").forward(request, response);
         } else {
             response.sendRedirect("index.htm");
@@ -166,6 +169,8 @@ public class EntreeServlet extends HttpServlet {
             }
 
             e.setDateEntree(dateEntree);
+            e.setIndividu(individuDAO.get(request.getParameter("individu")));
+            e.setVisite(visiteDAO.get(request.getParameter("visite")));
 
             if (entreeDAO.enregistrer(e)) {
                 Notification notif = new Notification();
