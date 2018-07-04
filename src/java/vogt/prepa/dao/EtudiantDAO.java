@@ -1,5 +1,6 @@
 package vogt.prepa.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
@@ -90,6 +91,7 @@ public class EtudiantDAO {
         return etudiants;
 
     }
+    
 
     public List<Etudiant> getAllLazy() {
 

@@ -72,28 +72,30 @@
                 <div class="ui card">
                     <div class="content">
                         <div class="ui black ribbon label" style="background-color: #004d6f!important">
-                            ${classe.niveauEtude.code}
-                            ${classe.filiere.libelle}
+                            ${stat.classe.niveauEtude.code}
+                            ${stat.classe.filiere.libelle}
                         </div>
                         <div class="header"></div>
                         <div class="description">
                             <p></p>
                         </div>
                         <div class="meta">
-                            <span class="right floated time">07:57</span>
+                            <span class="right floated time">
+                                ${stat.moyenneHeure}
+                            </span>
                             <span class="category">Moyenne d'arrivée</span>
                         </div>
                         <div class="meta">
-                            <span class="right floated time">7</span>
+                            <span class="right floated time">${stat.retards.size()}</span>
                             <span class="category">Retards</span>
                         </div>
                         <div class="meta">
-                            <span class="right floated time">2</span>
+                            <span class="right floated time">${stat.absents.size()}</span>
                             <span class="category">Absents</span>
                         </div>
                         <div class="meta" style="opacity: 1!important; color: #777!important">
                             <span class="right floated time">
-                                <b>${classe.etudiants.size()}</b>
+                                <b>${stat.classe.etudiants.size()}</b>
                             </span>
                             <span class="category"><b>Total</b></span>
                         </div>
@@ -102,55 +104,14 @@
                     <div class="extra content">
                         <div class="left floated author" style="opacity: 1!important; color: #777!important">
                             <i class="trophy icon"></i> 
-                            ${classe.etudiants.iterator().next().getIndividu().getNoms()}
-                            ${classe.etudiants.iterator().next().getIndividu().getPrenoms()}
+                            ${premierArrivee.getNoms()}
+                            ${premierArrivee.getPrenoms()}
                             07:25:36
                         </div>
                     </div>
                 </div>
             </c:forEach>
 
-            <c:forEach items="${classes}" var="classe">
-                <div class="ui card">
-                    <div class="content">
-                        <div class="ui black ribbon label" style="background-color: #004d6f!important">
-                            ${classe.niveauEtude.code}
-                            ${classe.filiere.libelle}
-                        </div>
-                        <div class="header"></div>
-                        <div class="description">
-                            <p></p>
-                        </div>
-                        <div class="meta">
-                            <span class="right floated time">07:57</span>
-                            <span class="category">Moyenne d'arrivée</span>
-                        </div>
-                        <div class="meta">
-                            <span class="right floated time">7</span>
-                            <span class="category">Retards</span>
-                        </div>
-                        <div class="meta">
-                            <span class="right floated time">2</span>
-                            <span class="category">Absents</span>
-                        </div>
-                        <div class="meta" style="opacity: 1!important; color: #777!important">
-                            <span class="right floated time">
-                                <b>${classe.etudiants.size()}</b>
-                            </span>
-                            <span class="category"><b>Total</b></span>
-                        </div>
-
-                    </div>
-                    <div class="extra content">
-                        <div class="left floated author" style="opacity: 1!important; color: #777!important">
-                            <i class="trophy icon"></i> 
-                            ${classe.etudiants.iterator().next().getIndividu().getNoms()}
-                            ${classe.etudiants.iterator().next().getIndividu().getPrenoms()}
-                            07:25:36
-                        </div>
-                    </div>
-                </div>
-            </c:forEach>
         </div>
 
 

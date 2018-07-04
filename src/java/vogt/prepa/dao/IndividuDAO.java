@@ -2,6 +2,7 @@ package vogt.prepa.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
@@ -90,14 +91,11 @@ public class IndividuDAO {
 
         session.getTransaction().commit();
         session.close();
-        if(individus.size()>0){
-            System.out.println("     "+individus.get(0).getNoms()+" "+individus.get(0).getPrenoms());
+        if (individus.size() > 0) {
             return individus.get(0);
-        }else{
+        } else {
             return null;
         }
-
-        
 
     }
 
@@ -114,6 +112,22 @@ public class IndividuDAO {
         session.getTransaction().commit();
         session.close();
 
+        return individus;
+
+    }
+
+    public List<Individu> getallUnsused() {
+
+        List<Individu> individus = new ArrayList<>();
+        for (Individu individu : getall()) {
+            if (!(individu.getEtudiants() != null && !individu.getEtudiants().isEmpty())) {
+                if (!(individu.getEmployes()!= null && !individu.getEmployes().isEmpty())) {
+                    if (!(individu.getEnseignants()!= null && !individu.getEnseignants().isEmpty())) {
+                        individus.add(individu);
+                    }
+                }
+            }
+        }
         return individus;
 
     }
@@ -170,23 +184,28 @@ public class IndividuDAO {
     }
 
     public void initialiser(Individu individu) {
-
+        Hibernate.initialize(individu.getEmployes());
+        Hibernate.initialize(individu.getEnseignants());
+        Hibernate.initialize(individu.getEtudiants());
     }
+
     /*
     methodes ajoutées N9-T
-    */
-    public List<Individu> getByUtilisateur(Utilisateur utilisateur){
+     */
+    public List<Individu> getByUtilisateur(Utilisateur utilisateur) {
         List<Individu> lesIndividus = new ArrayList<>();
-        if(utilisateur.getUtilisateurProfil().getVoirEmploye()){
-            for(Individu i:this.getall()){
-                if(!i.getEmployes().isEmpty())
+        if (utilisateur.getUtilisateurProfil().getVoirEmploye()) {
+            for (Individu i : this.getall()) {
+                if (!i.getEmployes().isEmpty()) {
                     lesIndividus.add(i);
+                }
             }
         }
-        if(utilisateur.getUtilisateurProfil().getVoirEnseignant()){
-            for(Individu i:this.getall()){
-                if(!i.getEnseignants().isEmpty())
+        if (utilisateur.getUtilisateurProfil().getVoirEnseignant()) {
+            for (Individu i : this.getall()) {
+                if (!i.getEnseignants().isEmpty()) {
                     lesIndividus.add(i);
+                }
             }
         }
         return lesIndividus;

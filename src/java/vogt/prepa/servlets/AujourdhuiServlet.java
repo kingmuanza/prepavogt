@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import vogt.prepa.dao.ClasseDAO;
 import vogt.prepa.entities.Classe;
+import vogt.prepa.entities.Pointage;
+import vogt.prepa.services.impl.EdgarServiceImpl;
 import vogt.prepa.services.impl.TonyServiceImpl;
 import vogt.prepa.utils.Statistique;
 
@@ -23,11 +25,14 @@ public class AujourdhuiServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         List<Statistique> statistiques = new ArrayList<Statistique>();
+        List<Pointage> lpointage = new EdgarServiceImpl().PointagesDUnJour(new Date("2017/5/10"));
         for(Classe c : classeDAO.getall()){
-            statistiques.add(tonyServiceImpl.statistiques(c, new Date("2017/5/12")));
+            statistiques.add(tonyServiceImpl.statistiques(c, new Date("2017/5/10")));
+            System.out.println("Nombre de pointages de la classe : "+ tonyServiceImpl.findEtudiantByClasse(c, lpointage).size());
         }
         request.setAttribute("classes", classeDAO.getall());
         request.setAttribute("statistiques", statistiques);
+        
         this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/aujourdhui.jsp").forward(request, response);
     } 
 
