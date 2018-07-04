@@ -120,7 +120,7 @@ public class EnseignantServlet extends HttpServlet {
                 httpSession.setAttribute("notifications", notifications);
             }
             response.sendRedirect("start#!/" + newIndividu);
-            System.out.println("On a tenté quelquechose en studio !");
+            //System.out.println("On a tenté quelquechose en studio !");
             PrintWriter pw = response.getWriter();
             String e = "{"
                     + "\"id\":\"" + ind.getIdindividu() + "\","
@@ -180,7 +180,7 @@ public class EnseignantServlet extends HttpServlet {
                     notifications.add(notif);
                     httpSession.setAttribute("notifications", notifications);
                     String[] courses = request.getParameterValues("courses");
-                    System.out.println(courses.toString());
+                    //System.out.println(courses.toString());
                     deleteCourses(ens);
                     SaveCourses(ens, courses);
                 } else {

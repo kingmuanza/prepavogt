@@ -28,7 +28,6 @@ public class AujourdhuiServlet extends HttpServlet {
         List<Pointage> lpointage = new EdgarServiceImpl().PointagesDUnJour(new Date("2017/5/10"));
         for(Classe c : classeDAO.getall()){
             statistiques.add(tonyServiceImpl.statistiques(c, new Date("2017/5/10")));
-            System.out.println("Nombre de pointages de la classe : "+ tonyServiceImpl.findEtudiantByClasse(c, lpointage).size());
         }
         request.setAttribute("classes", classeDAO.getall());
         request.setAttribute("statistiques", statistiques);

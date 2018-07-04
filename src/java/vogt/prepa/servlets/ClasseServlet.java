@@ -60,16 +60,16 @@ public class ClasseServlet extends HttpServlet {
         HttpSession httpSession = request.getSession();
         List<Notification> notifications = (List<Notification>) httpSession.getAttribute("notifications");
         String action = request.getParameter("action");
-        System.out.print("Action : " + action);
+        //System.out.print("Action : " + action);
         //Pour supprimer l'entité
         if (action != null && !action.isEmpty() && "supprimer".equals(action)) {
             String id = request.getParameter("id");
-            System.out.print("ID : " + id);
+            //System.out.print("ID : " + id);
             if (id != null && !id.isEmpty()) {
                 Classe c = classeDAO.get(id);
                 if (verifierAvantSuppression(c)) {
                     classeDAO.supprimer(c);
-                    System.out.println("Suppression reussie!");
+                    //System.out.println("Suppression reussie!");
                     Notification notif = new Notification();
                     notif.setTitre("Suppression");
                     notif.setMessage("L'élement a bien été supprimé");
@@ -78,7 +78,7 @@ public class ClasseServlet extends HttpServlet {
                     httpSession.setAttribute("notifications", notifications);
                     response.sendRedirect("start#!/classes");
                 } else {
-                    System.out.println("Suppression echoue!");
+                    //System.out.println("Suppression echoue!");
                     Notification notif = new Notification();
                     notif.setTitre("Suppression");
                     notif.setMessage("Echec de suppression !");

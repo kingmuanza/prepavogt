@@ -247,19 +247,19 @@ public class TonyServiceImpl implements TonyService {
        Date date = new Date();
 
        Double heur = somHeur / ldate.size();
-       System.out.println("HEURE ******" + heur+ " *****INT VALUE"+heur.intValue());
+       //System.out.println("HEURE ******" + heur+ " *****INT VALUE"+heur.intValue());
        Double min = (somMin  / (ldate.size())) + ((heur - heur.intValue()) * 60);
        if(min>=60){
            min -= 60;
            heur ++;
        }
-       System.out.println("Min ******" + min);
+       //System.out.println("Min ******" + min);
        Double sec = (somSec / (ldate.size() )) + ((min - min.intValue()) * 60);
        if(sec>=60){
            sec -= 60;
            min++;
        }
-       System.out.println("SEC ******" + sec);
+       //System.out.println("SEC ******" + sec);
        date.setHours(Integer.parseInt(String.valueOf(Math.round(heur))));
        date.setMinutes(Integer.parseInt(String.valueOf(Math.round(min))));
        date.setSeconds(Integer.parseInt(String.valueOf(Math.round(sec))));

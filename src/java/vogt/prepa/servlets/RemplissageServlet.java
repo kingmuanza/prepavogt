@@ -87,8 +87,8 @@ public class RemplissageServlet extends HttpServlet {
             "00000323", "00000337", "00000329", "00000352", "00000331",
             "00000373", "00000362", "00000340", "00000006", "00000024"};
 
-        System.out.println("Nombres de matricules : " + matricules.length);
-        System.out.println("Nombres de noms : " + noms.length);
+        //System.out.println("Nombres de matricules : " + matricules.length);
+        //System.out.println("Nombres de noms : " + noms.length);
         
         String villes[] = {"Yaoundé, Cameroun", "Douala, Cameroun", "Bafoussam, Cameroun", 
             "Kinshasa, RDC", "Paris, France",

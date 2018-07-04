@@ -20,7 +20,7 @@ public class IndividusServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession httpSession = request.getSession();
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
-        System.out.println("verify MUANZA");
+        //System.out.println("verify MUANZA");
             
         if (utilisateur != null) {
             request.setAttribute("individus", individuDAO.getall());

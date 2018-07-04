@@ -67,7 +67,7 @@ public class EntreeServlet extends HttpServlet {
         HttpSession httpSession = request.getSession();
         List<Notification> notifications = (List<Notification>) httpSession.getAttribute("notifications");
         String action = request.getParameter("action");
-        System.out.print("Action : " + action);
+        //System.out.print("Action : " + action);
         //Pour supprimer l'entité
         if (action != null && !action.isEmpty() && "supprimer".equals(action)) {
             String id = request.getParameter("id");
@@ -98,7 +98,7 @@ public class EntreeServlet extends HttpServlet {
                 DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                 Calendar cal = Calendar.getInstance();
                 String dateee = sdf.format(cal.getTime());
-                System.out.println(sdf.format(cal.getTime()));
+                //System.out.println(sdf.format(cal.getTime()));
 
                 Date dateSortie = new Date();
 
@@ -107,7 +107,7 @@ public class EntreeServlet extends HttpServlet {
                     dateSortie = sdf.parse(dateee);
 
                 } catch (ParseException el) {
-                    System.out.println("la date final entrée est fausse, retapez la date");
+                    //System.out.println("la date final entrée est fausse, retapez la date");
                 }
 
                 e.setDateSortie(dateSortie);
@@ -153,7 +153,7 @@ public class EntreeServlet extends HttpServlet {
             DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Calendar cal = Calendar.getInstance();
             String dateee = sdf.format(cal.getTime());
-            System.out.println(sdf.format(cal.getTime()));
+            //System.out.println(sdf.format(cal.getTime()));
 
             Date dateEntree = new Date();
 
@@ -162,7 +162,7 @@ public class EntreeServlet extends HttpServlet {
                 dateEntree = sdf.parse(dateee);
 
             } catch (ParseException el) {
-                System.out.println("la date final entrée est fausse, retapez la date");
+                //System.out.println("la date final entrée est fausse, retapez la date");
             }
 
             e.setDateEntree(dateEntree);

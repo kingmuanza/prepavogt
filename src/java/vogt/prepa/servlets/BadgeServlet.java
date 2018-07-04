@@ -52,16 +52,16 @@ public class BadgeServlet extends HttpServlet {
         HttpSession httpSession = request.getSession();
         List<Notification> notifications = (List<Notification>) httpSession.getAttribute("notifications");
         String action = request.getParameter("action");
-        System.out.print("Action : " + action);
+        //System.out.print("Action : " + action);
         //Pour supprimer l'entité
         if (action != null && !action.isEmpty() && "supprimer".equals(action)) {
             String id = request.getParameter("id");
-            System.out.print("ID : " + id);
+            //System.out.print("ID : " + id);
             if (id != null && !id.isEmpty()) {
                 Badge b = badgeDAO.get(id);
                 if (verifierAvantSuppression(b)) {
                     badgeDAO.supprimer(b);
-                    System.out.println("Suppression reussie!");
+                    //System.out.println("Suppression reussie!");
                     Notification notif = new Notification();
                     notif.setTitre("Suppression");
                     notif.setMessage("L'élement a bien été supprimé");
@@ -70,7 +70,7 @@ public class BadgeServlet extends HttpServlet {
                     httpSession.setAttribute("notifications", notifications);
                     response.sendRedirect("start#!/badges");
                 } else {
-                    System.out.println("Suppression echoue!");
+                    //System.out.println("Suppression echoue!");
                     Notification notif = new Notification();
                     notif.setTitre("Suppression");
                     notif.setMessage("Echec de suppression !");

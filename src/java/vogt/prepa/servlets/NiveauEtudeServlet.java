@@ -53,7 +53,7 @@ public class NiveauEtudeServlet extends HttpServlet {
         HttpSession httpSession = request.getSession();
         List<Notification> notifications = (List<Notification>) httpSession.getAttribute("notifications");
         String action = request.getParameter("action");
-        System.out.print("Action : " + action);
+        //System.out.print("Action : " + action);
         //Pour supprimer l'entité
         if (action != null && !action.isEmpty() && "supprimer".equals(action)) {
             String id = request.getParameter("id");
@@ -95,7 +95,7 @@ public class NiveauEtudeServlet extends HttpServlet {
                 valeur = Integer.parseInt(valeure);
                 niv.setValeur(valeur);
             }catch(NumberFormatException nfe){
-                System.out.println(nfe);
+                //System.out.println(nfe);
             }
             niv.setCode(code);
             niv.setLibelle(libelle);

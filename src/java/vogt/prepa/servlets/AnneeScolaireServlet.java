@@ -63,7 +63,7 @@ public class AnneeScolaireServlet extends HttpServlet {
         HttpSession httpSession = request.getSession();
         List<Notification> notifications = (List<Notification>) httpSession.getAttribute("notifications");
         String action = request.getParameter("action");
-        System.out.print("Action : " + action);
+        //System.out.print("Action : " + action);
         //Pour supprimer l'entité
         if (action != null && !action.isEmpty() && "supprimer".equals(action)) {
             String id = request.getParameter("id");
@@ -108,7 +108,7 @@ public class AnneeScolaireServlet extends HttpServlet {
                 Date dateDebut = sdf.parse(debut);
                 annee.setDateDebut(dateDebut);
             } catch (ParseException el) {
-                System.out.println("la date entrée est fausse, retapez la date");
+                //System.out.println("la date entrée est fausse, retapez la date");
             }
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -116,7 +116,7 @@ public class AnneeScolaireServlet extends HttpServlet {
                 Date dateFin = sdf.parse(fin);
                 annee.setDateFin(dateFin);
             } catch (ParseException el) {
-                System.out.println("la date final entrée est fausse, retapez la date");
+                //System.out.println("la date final entrée est fausse, retapez la date");
             }
 
             if (anneeScolaireDAO.enregistrer(annee)) {

@@ -119,7 +119,7 @@ public class EmployeServlet extends HttpServlet {
                 httpSession.setAttribute("notifications", notifications);
             }
             response.sendRedirect("start#!/"+newIndividu);
-            System.out.println("On a tenté quelquechose en studio !");
+            //System.out.println("On a tenté quelquechose en studio !");
             PrintWriter pw = response.getWriter();
             String e = "{"
                     + "\"id\":\"" + ind.getIdindividu() + "\","

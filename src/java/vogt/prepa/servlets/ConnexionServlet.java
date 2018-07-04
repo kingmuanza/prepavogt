@@ -28,8 +28,8 @@ public class ConnexionServlet extends HttpServlet {
 
         String login = request.getParameter("login");
         String passe = request.getParameter("passe");
-        System.out.println("Login :" + login);
-        System.out.println("Mot de Passe :" + passe);
+        //System.out.println("Login :" + login);
+        //System.out.println("Mot de Passe :" + passe);
 
         UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
 
@@ -52,7 +52,7 @@ public class ConnexionServlet extends HttpServlet {
             httpSession.setAttribute("utilisateur", utilisateur);
             httpSession.setAttribute("notifications", notifications);
 
-            System.out.println(utilisateur.getIdutilisateur());
+            //System.out.println(utilisateur.getIdutilisateur());
 
             response.sendRedirect("start");
         }else{

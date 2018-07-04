@@ -52,7 +52,7 @@ public class UtilisateurServlet extends HttpServlet {
         HttpSession httpSession = request.getSession();
         List<Notification> notifications = (List<Notification>) httpSession.getAttribute("notifications");
         String action = request.getParameter("action");
-        System.out.print("Action : " + action);
+        //System.out.print("Action : " + action);
         //Pour supprimer l'entité
         if (action != null && !action.isEmpty() && "supprimer".equals(action)) {
             String id = request.getParameter("id");
@@ -94,7 +94,7 @@ public class UtilisateurServlet extends HttpServlet {
                 int idutilisateurProfil = Integer.parseInt(idprof);
             profil = utilisateurProfilDAO.get(idutilisateurProfil);
             } catch (Exception el) {
-                System.out.println("la date entrée est fausse, retapez la date");
+                //System.out.println("la date entrée est fausse, retapez la date");
             }
             String idind = request.getParameter("individu");
             Individu individu = null;
@@ -102,7 +102,7 @@ public class UtilisateurServlet extends HttpServlet {
                 int idindividu = Integer.parseInt(idind);
                 individu = individuDAO.get(idindividu);
             } catch (Exception el) {
-                System.out.println("la date entrée est fausse, retapez la date");
+                //System.out.println("la date entrée est fausse, retapez la date");
             }
             
 

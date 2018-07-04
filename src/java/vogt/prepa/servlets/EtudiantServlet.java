@@ -128,7 +128,7 @@ public class EtudiantServlet extends HttpServlet {
                 httpSession.setAttribute("notifications", notifications);
             }
             response.sendRedirect("start#!/" + newIndividu);
-            System.out.println("On a tenté quelquechose en studio !");
+            //System.out.println("On a tenté quelquechose en studio !");
             PrintWriter pw = response.getWriter();
             String e = "{"
                     + "\"id\":\"" + ind.getIdindividu() + "\","
@@ -176,7 +176,7 @@ public class EtudiantServlet extends HttpServlet {
                 Classe classe = classeDAO.get(idclasse);
                 e.setClasse(classe);
                 String anneeSco = request.getParameter("anneeSco");
-                System.out.println("anneeSco " + anneeSco);
+                //System.out.println("anneeSco " + anneeSco);
                 e.setAnneeScolaire(anneeScolaireDAO.get(anneeSco));
 
                 String individu = request.getParameter("individu");

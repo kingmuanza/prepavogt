@@ -65,7 +65,7 @@
                 </div>
             </div>
         </div>
-
+        
         <div class="ui three cards" style="padding-top: 20px;">
             
             <c:forEach items="${statistiques}" var="stat">
@@ -104,8 +104,8 @@
                     <div class="extra content">
                         <div class="left floated author" style="opacity: 1!important; color: #777!important">
                             <i class="trophy icon"></i> 
-                            ${premierArrivee.getNoms()}
-                            ${premierArrivee.getPrenoms()}
+                            ${stat.premierArrivee.getNoms()}
+                            ${stat.premierArrivee.getPrenoms()}
                             07:25:36
                         </div>
                     </div>

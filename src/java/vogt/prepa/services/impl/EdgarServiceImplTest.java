@@ -23,13 +23,13 @@ public class EdgarServiceImplTest {
 //        String timeString1 = "08:00:00";
 //        String timeString2 = "13:30:50";
 //        
-//        System.out.println(getDiffHeureMinutes(timeString1, timeString2));
+//        //System.out.println(getDiffHeureMinutes(timeString1, timeString2));
 //        
 //        int a = getDiffHeureMinutes(timeString1, timeString2).get(0) + 10;
-//        System.out.println(a);
+//        //System.out.println(a);
         List<Long> difference = new ArrayList<>();
         difference.add(1L);
-        System.out.println(difference.get(0));
+        //System.out.println(difference.get(0));
     }
 
     //ExtraireHeure

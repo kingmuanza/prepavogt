@@ -64,7 +64,7 @@ public class UtilisateurProfilServlet extends HttpServlet {
         HttpSession httpSession = request.getSession();
         List<Notification> notifications = (List<Notification>) httpSession.getAttribute("notifications");
         String action = request.getParameter("action");
-        System.out.print("Action : " + action);
+        //System.out.print("Action : " + action);
         //Pour supprimer l'entité
         if (action != null && !action.isEmpty() && "supprimer".equals(action)) {
             String id = request.getParameter("id");
@@ -127,7 +127,7 @@ public class UtilisateurProfilServlet extends HttpServlet {
                 notifications.add(notif);
                 httpSession.setAttribute("notifications", notifications);
                 String[] classes = request.getParameterValues("classes");
-                System.out.println(classes.toString());
+                //System.out.println(classes.toString());
                 deleteFilieres(utilProfil);
                 SaveFilieres(utilProfil, classes);
             } else {

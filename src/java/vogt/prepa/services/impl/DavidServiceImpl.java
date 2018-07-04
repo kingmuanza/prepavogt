@@ -52,12 +52,12 @@
 //
 //                        
 //                    } catch (ParseException e) {
-//                        System.out.println("Parse Exception");
+//                        //System.out.println("Parse Exception");
 //                    }
 //                    Pointage p = new Pointage(numero, machine, matricule, mode, iomd, heure);
 //                    List<Pointage> pList = new ArrayList<Pointage>();
 //                    pList.add(p);
-//                    System.out.println(numero + "|" + machine + "|" + matricule + "|" + mode + "|" + iomd + "|" + heure);
+//                    //System.out.println(numero + "|" + machine + "|" + matricule + "|" + mode + "|" + iomd + "|" + heure);
 //                } catch (Exception exception) {
 //                    break;
 //                }
@@ -65,7 +65,7 @@
 //
 //            scanner.close();
 //        } catch (FileNotFoundException fnfe) {
-//            System.out.println("Le fichier n'a pas été trouvé");
+//            //System.out.println("Le fichier n'a pas été trouvé");
 //        }
 //        return pList;
 //    }
