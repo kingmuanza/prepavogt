@@ -20,6 +20,9 @@ app.config(function ($routeProvider) {
             .when("/", {
                 templateUrl: UrlExists("AujourdhuiServlet")
             })
+            .when("/aujourdhui", {
+                templateUrl: UrlExists("AujourdhuiServlet")
+            })
             .when("/statsentrees", {
                 templateUrl: UrlExists("StatsEntreesServlet")
             })
@@ -30,7 +33,7 @@ app.config(function ($routeProvider) {
                 templateUrl: UrlExists("ImporterServlet")
             })
             .when("/exporter", {
-                templateUrl: UrlExists("TempsReelServlet")
+                templateUrl: UrlExists("PointagesServlet")
             })
             .when("/tempsreel", {
                 templateUrl: UrlExists("TempsReelServlet")
@@ -50,6 +53,16 @@ app.config(function ($routeProvider) {
             })
             .when("/pointages", {
                 templateUrl: UrlExists("PointagesServlet")
+            })
+            .when("/motPasse", {
+                templateUrl: function (params) {
+                    return UrlExists("MotDePasseServlet")
+                }
+            })
+            .when("/motPasse/:id", {
+                templateUrl: function (params) {
+                    return UrlExists("MotDePasseServlet")+"?id=" + params.id
+                }
             })
             .when("/classe", {
                 templateUrl: function (params) {

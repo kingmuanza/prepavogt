@@ -67,7 +67,7 @@
                                 <div class="field">
                                     <div class="required field">
                                         <label>Veuillez renseigner l'ancien Mot de passe</label>
-                                        <input type="password" name="ancien" value="${sessionScope.utilisateur.passe}">
+                                        <input type="password" name="ancien" placeholder = "entrez le mot de passe que vous voulez changer !">
                                     </div>
                                 </div>
                                 <div class="two fields">

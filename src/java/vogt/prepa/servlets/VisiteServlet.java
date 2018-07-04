@@ -18,6 +18,7 @@ import vogt.prepa.dao.EntreeDAO;
 import vogt.prepa.dao.IndividuDAO;
 import vogt.prepa.dao.VisiteDAO;
 import vogt.prepa.entities.Entree;
+import vogt.prepa.entities.Individu;
 import vogt.prepa.entities.Utilisateur;
 import vogt.prepa.entities.Visite;
 import vogt.prepa.utils.Notification;
@@ -32,10 +33,10 @@ public class VisiteServlet extends HttpServlet {
     VisiteDAO visiteDAO = new VisiteDAO();
     EntreeDAO entreeDAO = new EntreeDAO();
     IndividuDAO individuDAO = new IndividuDAO();
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         HttpSession httpSession = request.getSession();
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
@@ -45,21 +46,20 @@ public class VisiteServlet extends HttpServlet {
                 Visite visite = visiteDAO.get(i);
                 request.setAttribute("visite", visite);
                 request.setAttribute("individus", individuDAO.getall());
-
             }
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/visite.jsp").forward(request, response);
-        }else{
+        } else {
             response.sendRedirect("index.htm");
         }
-    } 
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         HttpSession httpSession = request.getSession();
         List<Notification> notifications = (List<Notification>) httpSession.getAttribute("notifications");
         String action = request.getParameter("action");
-        //System.out.print("Action : " + action);
+        System.out.print("Action : " + action);
         //Pour supprimer l'entité
         if (action != null && !action.isEmpty() && "supprimer".equals(action)) {
             String id = request.getParameter("id");
@@ -84,14 +84,14 @@ public class VisiteServlet extends HttpServlet {
                 }
             }//Pour ajouter ou modifier l'entité
         } else if (action != null && !action.isEmpty() && "entree".equals(action)) {
-            
+
             String id = request.getParameter("id");
             Visite v = null;
             if (id != null && !id.isEmpty()) {
                 int i = Integer.parseInt(id);
                 v = visiteDAO.get(i);
             }
-            
+
             Entree entree = new Entree();
             entree.setNomComplet(v.getNomComplet());
             entree.setMotif(v.getMotif());
@@ -99,9 +99,8 @@ public class VisiteServlet extends HttpServlet {
             entree.setVisite(v);
             entreeDAO.enregistrer(entree);
             response.sendRedirect("start#!/entrees");
-            
-            
-        }else {
+
+        } else {
             String id = request.getParameter("id");
             Visite v = null;
             if (id != null && !id.isEmpty()) {
@@ -118,7 +117,7 @@ public class VisiteServlet extends HttpServlet {
             String commentaire = request.getParameter("commentaire");
             v.setCommentaire(commentaire);
             v.setIndividu(individuDAO.get(request.getParameter("individu")));
-    
+
             if (visiteDAO.enregistrer(v)) {
                 Notification notif = new Notification();
                 notif.setTitre("Enregistrement");

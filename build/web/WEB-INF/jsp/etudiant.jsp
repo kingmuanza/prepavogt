@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="field">
                                     <label>Classe</label>
-                                    <select class="ui dropdown" name="filiere">
+                                    <select class="ui dropdown" name="classe">
                                         <option>Aucune classe</option>
                                         <c:forEach items="${classes}" var="c">
                                             <option value="${c.idclasse}" ${etudiant.classe.idclasse==c.idclasse?"selected":""}>

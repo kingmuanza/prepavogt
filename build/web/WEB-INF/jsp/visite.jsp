@@ -71,6 +71,18 @@
                                     </div>
                                 </c:if>
                                 <input type="hidden" name="id" value="${visite.idvisite}"/>
+                                <div class="field required">
+                                    <label>Individu</label>
+                                    <select class="ui dropdown" name="individu" required>
+                                        <option>Aucun individu</option>
+                                        <c:forEach items="${individus}" var="i">
+                                            <option value="${i.idindividu}" ${visite.individu.idindividu==i.idindividu?"selected":""}>
+                                                ${i.noms} ${i.prenoms}
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                
                                 <div class="field">
                                     <label>Nom complet</label>
                                     <input type="text" name="nomComplet" value="${visite.nomComplet}" required>
@@ -100,6 +112,54 @@
                             </form>
                         </div>
 
+                        <div class="ui modal">
+                            <div class="header titre">
+                                Nouvelle entree
+                            </div>
+                            <div class="image content">
+                                <form style="width: 100%" class="ui form description" action="VisiteServlet" method="post">
+                                    <input type="hidden" name="newEntree" value="visite/${entree.visite.idvisite}"/>
+                                    <div class="field required">
+                                        <label>Individu</label>
+                                        <select class="ui dropdown" name="individu" required>
+                                            <option>Aucun individu</option>
+                                            <c:forEach items="${individus}" var="i">
+                                                <option value="${i.idindividu}" ${visite.individu.idindividu==i.idindividu?"selected":""}>
+                                                    ${i.noms} ${i.prenoms}
+                                                </option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        <label>Nom complet</label>
+                                        <input type="text" name="nomComplet" placeholder="Exemple : ${visite.nomComplet}" required>
+                                    </div>
+
+                                    <div class="field">
+                                        <label>Motif</label>
+                                        <input type="text" name="motif" placeholder="Exemple : ${visite.motif}" required>
+                                    </div>
+
+                                    <div class="field">
+                                        <label>Commentaire</label>
+                                        <textarea name="commentaire" rows="2" placeholder = "Exemple :${visite.commentaire}"></textarea>
+                                    </div>
+                                    <div>
+                                        <div class="actions">
+                                            <div class="ui black deny button">
+                                                Annuler
+                                            </div>
+                                            <button id="ajax_submit" class="ui gris right labeled icon button">
+                                                Enregistrer
+                                                <i class="checkmark icon"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                        <!-- MODAL  -->
                     </div>
                 </div>
             </div>
@@ -107,7 +167,33 @@
         <script>
             $(document).ready(function () {
                 ouvrirMenuCorrespondant("#section_visites", "bouton_visites", "visites");
-
+                $("#new_entree").click(function () {
+                    $('.ui.modal').modal('show');
+                });
+                $("#ajax_submit").click(function () {
+                    var data = {
+                        newVisite: $("[name='newEntree']").val(),
+                        nomComplet: $("[name='nomComplet']").val(),
+                        motif: $("[name='motif']").val(),
+                        commentaire: $("[name='commentaire']").val()
+                    };
+                    console.log(data);
+                    $.ajax({
+                        type: "POST",
+                        url: "VisiteServlet",
+                        data: data,
+                        success: function (data) {
+                            $('.ui.modal').modal('hide');
+                            console.log(data);
+                            var donnees = JSON.parse(data);
+                            $("[name='visite']").html("<option value='" + donnees.id + "'>" + donnees.motif + "</option>");
+                        },
+                        error: function (xhr, str) {
+                        }
+                    }).done(function () {
+                        console.log("Fin de la fonction");
+                    });
+                });
             })
         </script>
     </body>
