@@ -120,7 +120,7 @@ public class UtilisateurDAO {
 
         List<Utilisateur> utilisateurs = session.createCriteria(Utilisateur.class).list();
         utilisateurs.forEach((utilisateur) -> {
-            initialiser(utilisateur);
+//            initialiser(utilisateur);
         });
 
         session.getTransaction().commit();

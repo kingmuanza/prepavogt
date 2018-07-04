@@ -99,7 +99,7 @@ public class EnseignantDAO {
 
         List<Enseignant> enseignants = session.createCriteria(Enseignant.class).list();
         enseignants.forEach((enseignant) -> {
-            initialiser(enseignant);
+//            initialiser(enseignant);
         });
 
         session.getTransaction().commit();

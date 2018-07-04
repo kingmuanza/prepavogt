@@ -119,7 +119,7 @@ public class AnneeScolaireDAO {
 
         List<AnneeScolaire> anneeScolaires = session.createCriteria(AnneeScolaire.class).list();
         anneeScolaires.forEach((anneeScolaire) -> {
-            initialiser(anneeScolaire);
+//            initialiser(anneeScolaire);
         });
 
         session.getTransaction().commit();

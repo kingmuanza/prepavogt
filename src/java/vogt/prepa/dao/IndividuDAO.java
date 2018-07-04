@@ -139,7 +139,7 @@ public class IndividuDAO {
 
         List<Individu> individus = session.createCriteria(Individu.class).list();
         individus.forEach((individu) -> {
-            initialiser(individu);
+//            initialiser(individu);
         });
 
         session.getTransaction().commit();

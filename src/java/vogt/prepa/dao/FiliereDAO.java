@@ -98,7 +98,7 @@ public class FiliereDAO {
 
         List<Filiere> filieres = session.createCriteria(Filiere.class).list();
         filieres.forEach((filiere) -> {
-            initialiser(filiere);
+//            initialiser(filiere);
         });
 
         session.getTransaction().commit();

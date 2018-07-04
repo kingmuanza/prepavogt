@@ -98,7 +98,7 @@ public class EntreeDAO {
 
         List<Entree> entrees = session.createCriteria(Entree.class).list();
         entrees.forEach((entree) -> {
-            initialiser(entree);
+//            initialiser(entree);
         });
 
         session.getTransaction().commit();

@@ -97,7 +97,7 @@ public class MatiereDAO {
 
         List<Matiere> matieres = session.createCriteria(Matiere.class).list();
         matieres.forEach((matiere) -> {
-            initialiser(matiere);
+//            initialiser(matiere);
         });
 
         session.getTransaction().commit();

@@ -96,7 +96,7 @@ public class NiveauEtudeDAO {
 
         List<NiveauEtude> niveauEtudes = session.createCriteria(NiveauEtude.class).list();
         niveauEtudes.forEach((niveauEtude) -> {
-            initialiser(niveauEtude);
+//            initialiser(niveauEtude);
         });
 
         session.getTransaction().commit();

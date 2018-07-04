@@ -96,7 +96,7 @@ public class IndividuPhotoDAO {
 
         List<IndividuPhoto> individuPhotos = session.createCriteria(IndividuPhoto.class).list();
         individuPhotos.forEach((individuPhoto) -> {
-            initialiser(individuPhoto);
+//            initialiser(individuPhoto);
         });
 
         session.getTransaction().commit();

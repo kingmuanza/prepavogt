@@ -96,7 +96,7 @@ public class PeriodeCreuseDAO {
 
         List<PeriodeCreuse> periodeCreuses = session.createCriteria(PeriodeCreuse.class).list();
         periodeCreuses.forEach((periodeCreuse) -> {
-            initialiser(periodeCreuse);
+//            initialiser(periodeCreuse);
         });
 
         session.getTransaction().commit();

@@ -100,7 +100,7 @@ public class ClasseDAO {
 
         List<Classe> classes = session.createCriteria(Classe.class).list();
         classes.forEach((classe) -> {
-            initialiser(classe);
+//            initialiser(classe);
         });
 
         session.getTransaction().commit();

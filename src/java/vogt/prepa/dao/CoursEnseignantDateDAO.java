@@ -96,7 +96,7 @@ public class CoursEnseignantDateDAO {
 
         List<CoursEnseignantDate> coursEnseignantDates = session.createCriteria(CoursEnseignantDate.class).list();
         coursEnseignantDates.forEach((coursEnseignantDate) -> {
-            initialiser(coursEnseignantDate);
+//            initialiser(coursEnseignantDate);
         });
 
         session.getTransaction().commit();

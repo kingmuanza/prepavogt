@@ -99,7 +99,7 @@ public class PosteDAO {
 
         List<Poste> postes = session.createCriteria(Poste.class).list();
         postes.forEach((poste) -> {
-            initialiser(poste);
+//            initialiser(poste);
         });
 
         session.getTransaction().commit();

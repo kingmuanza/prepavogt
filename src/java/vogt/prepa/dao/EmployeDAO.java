@@ -97,7 +97,7 @@ public class EmployeDAO {
 
         List<Employe> employes = session.createCriteria(Employe.class).list();
         employes.forEach((employe) -> {
-            initialiser(employe);
+//            initialiser(employe);
         });
 
         session.getTransaction().commit();

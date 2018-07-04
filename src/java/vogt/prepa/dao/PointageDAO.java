@@ -118,7 +118,7 @@ public class PointageDAO {
 
         List<Pointage> pointages = session.createCriteria(Pointage.class).list();
         pointages.forEach((pointage) -> {
-            initialiser(pointage);
+//            initialiser(pointage);
         });
 
         session.getTransaction().commit();

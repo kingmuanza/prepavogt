@@ -98,7 +98,7 @@ public class VisiteDAO {
 
         List<Visite> visites = session.createCriteria(Visite.class).list();
         visites.forEach((visite) -> {
-            initialiser(visite);
+//            initialiser(visite);
         });
 
         session.getTransaction().commit();

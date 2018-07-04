@@ -97,7 +97,7 @@ public class CoursEnseignantDAO {
 
         List<CoursEnseignant> coursEnseignants = session.createCriteria(CoursEnseignant.class).list();
         coursEnseignants.forEach((coursEnseignant) -> {
-            initialiser(coursEnseignant);
+//            initialiser(coursEnseignant);
         });
 
         session.getTransaction().commit();

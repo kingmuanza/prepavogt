@@ -99,7 +99,7 @@ public class UtilisateurProfilFiliereDAO {
 
         List<UtilisateurProfilClasse> utilisateurProfilFilieres = session.createCriteria(UtilisateurProfilClasse.class).list();
         utilisateurProfilFilieres.forEach((utilisateurProfilFiliere) -> {
-            initialiser(utilisateurProfilFiliere);
+//            initialiser(utilisateurProfilFiliere);
         });
 
         session.getTransaction().commit();

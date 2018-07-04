@@ -98,7 +98,7 @@ public class BadgeDAO {
 
         List<Badge> badges = session.createCriteria(Badge.class).list();
         badges.forEach((badge) -> {
-            initialiser(badge);
+//            initialiser(badge);
         });
 
         session.getTransaction().commit();

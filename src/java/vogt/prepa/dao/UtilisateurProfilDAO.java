@@ -99,7 +99,7 @@ public class UtilisateurProfilDAO {
 
         List<UtilisateurProfil> utilisateurProfils = session.createCriteria(UtilisateurProfil.class).list();
         utilisateurProfils.forEach((utilisateurProfil) -> {
-            initialiser(utilisateurProfil);
+//            initialiser(utilisateurProfil);
         });
 
         session.getTransaction().commit();
