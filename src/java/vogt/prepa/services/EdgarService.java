@@ -3,7 +3,6 @@ package vogt.prepa.services;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 import vogt.prepa.entities.Individu;
 import vogt.prepa.entities.Pointage;
 
