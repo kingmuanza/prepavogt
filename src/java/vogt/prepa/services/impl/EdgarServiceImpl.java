@@ -542,7 +542,7 @@ public class EdgarServiceImpl implements EdgarService {
         Boolean abs = false;
         List<Pointage> pointageJournée = PointagesDUnJourPourUnIndividu(individu, jourLa);
 
-        if (pointageJournée != null && pointageJournée.isEmpty()==true) {
+        if (pointageJournée != null && pointageJournée.isEmpty() == true) {
             abs = true;
         }
         return abs;
@@ -552,42 +552,72 @@ public class EdgarServiceImpl implements EdgarService {
     public List<String> matriculesAbsentsUnJourLa(Date jourLa) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
-        
+
         Boolean trouve = false;
         Date dateDeb = getDebutdeJournee(jourLa);
         Date dateFin = getFindeJournee(jourLa);
-        
+
         List<String> matriculesAbsents = new ArrayList<>();
-        
+
         List<Individu> allIndividus = session.createCriteria(Individu.class).list();
-        
+
         List<String> ceuxQuiOntPointe = session.createCriteria(Pointage.class)
-                                          .add(Restrictions.between("heure", dateDeb, dateFin))
-                                          .setProjection(Projections.property("matricule"))
-                                          .list();
-        
-        if (allIndividus != null && ceuxQuiOntPointe != null){
+                .add(Restrictions.between("heure", dateDeb, dateFin))
+                .setProjection(Projections.property("matricule"))
+                .list();
+
+        if (allIndividus != null && ceuxQuiOntPointe != null) {
             ListIterator<Individu> it = allIndividus.listIterator();
-            
-            while (it.hasNext() && trouve==false) {
-                Individu indiv = it.next();                
-                if (ceuxQuiOntPointe.contains(indiv.getMatricule())==false){
+
+            while (it.hasNext() && trouve == false) {
+                Individu indiv = it.next();
+                if (ceuxQuiOntPointe.contains(indiv.getMatricule()) == false) {
                     matriculesAbsents.add(indiv.getMatricule());
                     trouve = true;
                 }
             }
         }
-        
+
         session.getTransaction().commit();
         session.close();
-        
+
         return matriculesAbsents;
     }
 
     @Override
     public List<Individu> individusAbsentsUnJourLa(Date jourLa) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.getTransaction().begin();
 
+        Boolean trouve = false;
+        Date dateDeb = getDebutdeJournee(jourLa);
+        Date dateFin = getFindeJournee(jourLa);
+
+        List<Individu> individusAbsents = new ArrayList<>();
+
+        List<Individu> allIndividus = session.createCriteria(Individu.class).list();
+
+        List<String> ceuxQuiOntPointe = session.createCriteria(Pointage.class)
+                .add(Restrictions.between("heure", dateDeb, dateFin))
+                .setProjection(Projections.property("matricule"))
+                .list();
+
+        if (allIndividus != null && ceuxQuiOntPointe != null) {
+            ListIterator<Individu> it = allIndividus.listIterator();
+
+            while (it.hasNext() && trouve == false) {
+                Individu indiv = it.next();
+                if (ceuxQuiOntPointe.contains(indiv.getMatricule()) == false) {
+                    individusAbsents.add(indiv);
+                    trouve = true;
+                }
+            }
+        }
+
+        session.getTransaction().commit();
+        session.close();
+
+        return individusAbsents;
     }
 
     @Override
