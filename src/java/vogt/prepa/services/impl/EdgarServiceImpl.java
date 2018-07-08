@@ -552,42 +552,72 @@ public class EdgarServiceImpl implements EdgarService {
     public List<String> matriculesAbsentsUnJourLa(Date jourLa) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
-        
+
         List<String> matriculesAbsentsJour = new ArrayList<>();
-        
-        List<Pointage> pointagesJour = PointagesDUnJour(jourLa);        
+
+        List<Pointage> pointagesJour = PointagesDUnJour(jourLa);
         List<Individu> individusList = session.createCriteria(Individu.class).list();
-        
-        if (pointagesJour != null && individusList != null){
-            
-            ListIterator<Pointage> itPointage = pointagesJour.listIterator();            
+
+        if (pointagesJour != null && individusList != null) {
+
+            ListIterator<Pointage> itPointage = pointagesJour.listIterator();
             while (itPointage.hasNext()) {
-                
+
                 ListIterator<Individu> itIndividu = individusList.listIterator();
                 while (itIndividu.hasNext()) {
-                   
+
                     Pointage p = itPointage.next();
                     Individu i = itIndividu.next();
-                    
-                    if (!i.getMatricule().equals(p.getMatricule())){
+
+                    if (!i.getMatricule().equals(p.getMatricule())) {
                         matriculesAbsentsJour.add(i.getMatricule());
                     }
-                    
+
                 }
-                
+
             }
         }
-        
+
         session.getTransaction().commit();
         session.close();
-        
+
         return matriculesAbsentsJour;
     }
 
     @Override
     public List<Individu> individusAbsentsUnJourLa(Date jourLa) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.getTransaction().begin();
 
+        List<Individu> individusAbsentsJour = new ArrayList<>();
+
+        List<Pointage> pointagesJour = PointagesDUnJour(jourLa);
+        List<Individu> individusList = session.createCriteria(Individu.class).list();
+
+        if (pointagesJour != null && individusList != null) {
+
+            ListIterator<Pointage> itPointage = pointagesJour.listIterator();
+            while (itPointage.hasNext()) {
+
+                ListIterator<Individu> itIndividu = individusList.listIterator();
+                while (itIndividu.hasNext()) {
+
+                    Pointage p = itPointage.next();
+                    Individu i = itIndividu.next();
+
+                    if (!i.getMatricule().equals(p.getMatricule())) {
+                        individusAbsentsJour.add(i);
+                    }
+
+                }
+
+            }
+        }
+
+        session.getTransaction().commit();
+        session.close();
+
+        return individusAbsentsJour;
     }
 
     @Override
