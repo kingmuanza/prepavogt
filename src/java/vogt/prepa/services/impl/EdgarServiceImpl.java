@@ -13,8 +13,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import vogt.prepa.entities.Individu;
 import vogt.prepa.entities.Pointage;
@@ -542,7 +542,7 @@ public class EdgarServiceImpl implements EdgarService {
         Boolean abs = false;
         List<Pointage> pointageJournée = PointagesDUnJourPourUnIndividu(individu, jourLa);
 
-        if (pointageJournée != null && pointageJournée.isEmpty()) {
+        if (pointageJournée != null && pointageJournée.isEmpty()==true) {
             abs = true;
         }
         return abs;
@@ -552,133 +552,60 @@ public class EdgarServiceImpl implements EdgarService {
     public List<String> matriculesAbsentsUnJourLa(Date jourLa) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
-
-        List<String> matriculesAbsentsJour = new ArrayList<>();
-
-        List<Pointage> pointagesJour = PointagesDUnJour(jourLa);
-        List<Individu> individusList = session.createCriteria(Individu.class).list();
-
-        if (pointagesJour != null && individusList != null) {
-
-            ListIterator<Pointage> itPointage = pointagesJour.listIterator();
-            while (itPointage.hasNext()) {
-
-                ListIterator<Individu> itIndividu = individusList.listIterator();
-                while (itIndividu.hasNext()) {
-
-                    Pointage p = itPointage.next();
-                    Individu i = itIndividu.next();
-
-                    if (!i.getMatricule().equals(p.getMatricule())) {
-                        matriculesAbsentsJour.add(i.getMatricule());
-                    }
-
+        
+        Boolean trouve = false;
+        Date dateDeb = getDebutdeJournee(jourLa);
+        Date dateFin = getFindeJournee(jourLa);
+        
+        List<String> matriculesAbsents = new ArrayList<>();
+        
+        List<Individu> allIndividus = session.createCriteria(Individu.class).list();
+        
+        List<String> ceuxQuiOntPointe = session.createCriteria(Pointage.class)
+                                          .add(Restrictions.between("heure", dateDeb, dateFin))
+                                          .setProjection(Projections.property("matricule"))
+                                          .list();
+        
+        if (allIndividus != null && ceuxQuiOntPointe != null){
+            ListIterator<Individu> it = allIndividus.listIterator();
+            
+            while (it.hasNext() && trouve==false) {
+                Individu indiv = it.next();                
+                if (ceuxQuiOntPointe.contains(indiv.getMatricule())==false){
+                    matriculesAbsents.add(indiv.getMatricule());
+                    trouve = true;
                 }
-
             }
         }
-
+        
         session.getTransaction().commit();
         session.close();
-
-        return matriculesAbsentsJour;
+        
+        return matriculesAbsents;
     }
 
     @Override
     public List<Individu> individusAbsentsUnJourLa(Date jourLa) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.getTransaction().begin();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
-        List<Individu> individusAbsentsJour = new ArrayList<>();
-
-        List<Pointage> pointagesJour = PointagesDUnJour(jourLa);
-        List<Individu> individusList = session.createCriteria(Individu.class).list();
-
-        if (pointagesJour != null && individusList != null) {
-
-            ListIterator<Pointage> itPointage = pointagesJour.listIterator();
-            while (itPointage.hasNext()) {
-
-                ListIterator<Individu> itIndividu = individusList.listIterator();
-                while (itIndividu.hasNext()) {
-
-                    Pointage p = itPointage.next();
-                    Individu i = itIndividu.next();
-
-                    if (!i.getMatricule().equals(p.getMatricule())) {
-                        individusAbsentsJour.add(i);
-                    }
-
-                }
-
-            }
-        }
-
-        session.getTransaction().commit();
-        session.close();
-
-        return individusAbsentsJour;
     }
 
     @Override
     public List<Date> joursAbsencesMatricule(String matricule) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.getTransaction().begin();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
-        List<Date> dateAbsenceJour = new ArrayList<>();
-        
-        List<Pointage> allPointages = session.createCriteria(Pointage.class).list();
-        
-        if (allPointages != null){
-            ListIterator<Pointage> it = allPointages.listIterator();
-            
-            while (it.hasNext()) {
-                Pointage p = it.next();
-                
-                if (!p.getMatricule().equals(matricule)){
-                    dateAbsenceJour.add(p.getHeure());
-                }
-                
-            }
-        }
-
-        session.getTransaction().commit();
-        session.close();
-
-        return dateAbsenceJour;
     }
 
     @Override
     public List<Date> joursAbsencesIndividu(Individu individu) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.getTransaction().begin();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
-        List<Date> dateAbsenceJour = new ArrayList<>();
-        
-        List<Pointage> allPointages = session.createCriteria(Pointage.class).list();
-        
-        if (allPointages != null){
-            ListIterator<Pointage> it = allPointages.listIterator();
-            
-            while (it.hasNext()) {
-                Pointage p = it.next();
-                
-                if (!p.getMatricule().equals(individu.getMatricule())){
-                    dateAbsenceJour.add(p.getHeure());
-                }
-                
-            }
-        }
-
-        session.getTransaction().commit();
-        session.close();
-
-        return dateAbsenceJour;
     }
 
     @Override
     public int nombreAbsencesMatricule(String matricule, Date dateDebut, Date dateFin) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
