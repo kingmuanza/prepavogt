@@ -622,7 +622,30 @@ public class EdgarServiceImpl implements EdgarService {
 
     @Override
     public List<Date> joursAbsencesMatricule(String matricule) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.getTransaction().begin();
+
+        List<Date> dateAbsenceJour = new ArrayList<>();
+        
+        List<Pointage> allPointages = session.createCriteria(Pointage.class).list();
+        
+        if (allPointages != null){
+            ListIterator<Pointage> it = allPointages.listIterator();
+            
+            while (it.hasNext()) {
+                Pointage p = it.next();
+                
+                if (!p.getMatricule().equals(matricule)){
+                    dateAbsenceJour.add(p.getHeure());
+                }
+                
+            }
+        }
+
+        session.getTransaction().commit();
+        session.close();
+
+        return dateAbsenceJour;
     }
 
     @Override
