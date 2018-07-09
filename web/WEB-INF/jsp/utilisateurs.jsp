@@ -25,9 +25,7 @@
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>E-mail</th>
-                    <th>Fonction</th>
-                    <th>Tel Portable</th>                    
-                    <th>Résidence</th>                    
+                    <th>Tel Portable</th>                 
                 </tr>
             </thead>
 
@@ -49,9 +47,7 @@
                         <td>${utilisateur.individu.noms}</td>
                         <td>${utilisateur.individu.prenoms}</td>
                         <td>${utilisateur.individu.email}</td>
-                        <td>${utilisateur.utilisateurProfil.libelle}</td>
                         <td>${utilisateur.individu.tel1}</td>
-                        <td>${utilisateur.individu.residence}</td>
                     </tr>
                 </c:forEach>
 

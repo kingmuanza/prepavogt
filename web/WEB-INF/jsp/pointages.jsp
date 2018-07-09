@@ -43,8 +43,8 @@
                         <td>${pointage.numero}</td>
                         <td>${pointage.machine}</td>
                         <td>
-                            ${individuDAO.getByMatricule(pointage.machine).getNoms()}
-                            ${individuDAO.getByMatricule(pointage.machine).getPrenoms()}
+                            individuDAO.getByMatricule(pointage.machine).getNoms()
+                            individuDAO.getByMatricule(pointage.machine).getPrenoms()
                         </td>
                         <td>${pointage.mode}</td>
                         <td>${pointage.iomd}</td>
