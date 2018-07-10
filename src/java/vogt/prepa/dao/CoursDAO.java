@@ -83,7 +83,7 @@ public class CoursDAO {
 
         List<Cours> courss = session.createCriteria(Cours.class).list();
         courss.forEach((cours) -> {
-//            initialiser(cours);
+            initialiser(cours);
         });
 
         session.getTransaction().commit();

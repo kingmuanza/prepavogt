@@ -46,6 +46,12 @@ thead tr th{
   text-shadow: none;
   background-image: none;
 }
+.ui.gris.label {
+  background-color: #004d6f!important;
+  color: #FFFFFF;
+  text-shadow: none;
+  background-image: none;
+}
 .espace_cotes{
    padding-left: 15px!important;
    padding-right: 15px!important;

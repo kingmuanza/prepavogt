@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import vogt.prepa.entities.Etudiant;
+import vogt.prepa.entities.Individu;
 import vogt.prepa.entities.Pointage;
 import vogt.prepa.utils.HibernateUtil;
 
@@ -99,7 +100,7 @@ public class PointageDAO {
         session.getTransaction().begin();
 
         List<Pointage> pointages = session.createCriteria(Pointage.class)
-                .add(Restrictions.eq("machine", matricule))
+                .add(Restrictions.eq("matricule", matricule))
                 .list();
         pointages.forEach((pointage) -> {
             initialiser(pointage);
@@ -198,7 +199,8 @@ public class PointageDAO {
         List<Pointage> etudiants = new ArrayList<>();
         IndividuDAO idao = new IndividuDAO();
         for(Pointage p: pointages){
-            if (!idao.getByMatricule(p.getMatricule()).getEtudiants().isEmpty()) {
+            Individu individu = idao.getByMatricule(p.getMatricule());
+            if (individu!=null && !individu.getEtudiants().isEmpty()) {
                 etudiants.add(p);
             }
         }
@@ -219,7 +221,9 @@ public class PointageDAO {
         List<Pointage> enseignants = new ArrayList<>();
         IndividuDAO idao = new IndividuDAO();
         for(Pointage p: pointages){
-            if (!idao.getByMatricule(p.getMatricule()).getEnseignants().isEmpty()) {
+            Individu individu = idao.getByMatricule(p.getMatricule());
+            
+            if (individu!=null && !individu.getEnseignants().isEmpty()) {
                 enseignants.add(p);
             }
         }
@@ -240,7 +244,8 @@ public class PointageDAO {
         List<Pointage> employes = new ArrayList<>();
         IndividuDAO idao = new IndividuDAO();
         for(Pointage p: pointages){
-            if (!idao.getByMatricule(p.getMatricule()).getEmployes().isEmpty()) {
+            Individu individu = idao.getByMatricule(p.getMatricule());
+            if (individu!=null && !individu.getEmployes().isEmpty()) {
                 employes.add(p);
             }
         }

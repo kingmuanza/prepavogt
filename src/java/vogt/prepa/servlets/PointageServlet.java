@@ -20,6 +20,7 @@ import vogt.prepa.dao.IndividuDAO;
 import vogt.prepa.dao.PointageDAO;
 import vogt.prepa.entities.Pointage;
 import vogt.prepa.entities.Utilisateur;
+import vogt.prepa.services.impl.MuanzaServiceImpl;
 import vogt.prepa.utils.Notification;
 
 /**
@@ -35,6 +36,7 @@ public class PointageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         IndividuDAO individuDAO = new IndividuDAO(); 
+        MuanzaServiceImpl muanzaServiceImpl = new MuanzaServiceImpl();
         HttpSession httpSession = request.getSession();
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
@@ -44,7 +46,9 @@ public class PointageServlet extends HttpServlet {
                 List<Pointage> pointages  = pointageDAO.getall(id);
                 request.setAttribute("pointages", pointages);
                 request.setAttribute("individuDAO", individuDAO);
+                request.setAttribute("individus", individuDAO.getAllLazy());
                 request.setAttribute("individu", individuDAO.getByMatricule(id));
+                request.setAttribute("muanzaServiceImpl", muanzaServiceImpl);
             }
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/pointages.jsp").forward(request, response);
         }else{

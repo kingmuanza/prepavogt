@@ -107,7 +107,7 @@
             </div>
             <script>
                 $(document).ready(function () {
-                    ouvrirMenuCorrespondant("#section_params", "bouton_params", "poitages");
+                    ouvrirMenuCorrespondant("#section_pointeuse", "bouton_pointeuse", "pointages");
 
                 })
             </script>

@@ -67,8 +67,16 @@
                                 <i class="dropdown icon"></i> <b>Ajourd'hui</b>
                             </a>
                             <div class="active content menu">
-                                <a class="item" href="#!aujourdhui">Statistiques</a>
+                                <a class="item" href="#!aujourdhui">Tableau de bord</a>
                                 <a class="item" href="#!tempsreel">Temps réel</a>
+                            </div>
+                        </div>
+                        <div class="item active">
+                            <a class="active title">
+                                <i class="dropdown icon"></i> <b>Suivi </b>
+                            </a>
+                            <div class="active content menu">
+                                <a class="item" href="#!arrivees">Arrivées</a>
                             </div>
                         </div>
                     </div>
@@ -78,16 +86,29 @@
                     <div class="ui accordion vertical fluid following text menu">
                         <div class="item">
                             <a class="title">
+                                <i class="dropdown icon"></i> 
+                                <b>Historique des pointages</b>
+                            </a>
+                            <div class="content menu">
+                                <a class="item active" href="#!statistiques/collaborateur">Collaborateurs </a>
+                                <a class="item active" href="#!statistiques/enseignant">Enseignants </a>
+                                <a class="item active" href="#!statistiques/etudiant">Etudiants </a>
+                                <a class="item active" href="#!pointages">Tous </a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <a class="title">
+                                <i class="dropdown icon"></i> 
                                 <b>Communication</b>
                             </a>
                             <div class="active content menu">
                                 <a class="item active" href="#!tempsreel">Suivre en temps réel </a>
-                                <a class="item active" href="#!pointages">Historique des pointages </a>
                                 <a class="item active" href="#!configuration">Configuration </a>
                             </div>
                         </div>
                         <div class="item">
                             <a class="title">
+                                <i class="dropdown icon"></i> 
                                 <b>Import / Export</b>
                             </a>
                             <div class="active content menu">
@@ -119,17 +140,7 @@
                     <h1>Statistiques</h1>
 
                     <div class="ui accordion vertical fluid following text menu">
-                        <div class="item active">
-                            <a class="active title">
-                                <i class="dropdown icon"></i> 
-                                <b>Globales</b>
-                            </a>
-                            <div class="active content menu">
-                                <a class="item active" href="#!statistiques">Collaborateurs </a>
-                                <a class="item active" href="#!statistiques">Enseignants </a>
-                                <a class="item active" href="#!statistiques">Etudiants </a>
-                            </div>
-                        </div>
+                        
                         <div class="item">
                             <a class="title">
                                 <i class="dropdown icon"></i> 
@@ -248,7 +259,7 @@
 
 
             </div>
-            <div style="width: 75vw; height: 100vh; overflow-x: hidden; overflow-y: hidden; padding-top: 20px; padding-right: 5px!important;margin-right: 10px!important;">
+            <div style="width: 76vw; height: 100vh; overflow-x: hidden; overflow-y: hidden; padding-top: 20px; padding-right: 5px!important;margin-right: 10px!important;">
                 <div class="ui secondary  menu">
                     <a class="item teal">
                         <i class="circle loading icon titre"></i>
@@ -303,7 +314,7 @@
         <script src="js/angular.min.js" type="text/javascript"></script>
         <script src="js/angular-route.js" type="text/javascript"></script>
         <script src="js/myapp.js" type="text/javascript"></script>
-        <script src="js/routage.js?id=12325" type="text/javascript"></script>
+        <script src="js/routage.js?id=15" type="text/javascript"></script>
         <script>
                         $(document).ready(function () {
                             $('.ui.dropdown').dropdown();

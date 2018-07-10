@@ -210,4 +210,14 @@ public class IndividuDAO {
         }
         return lesIndividus;
     }
+    
+    public Individu selectionnerIndividu(String matricule, List<Individu> individus){
+        for(Individu i : individus){
+            
+            if(matricule.equals(i.getMatricule())){
+                return i ;
+            }
+        }
+        return null ;
+    }
 }

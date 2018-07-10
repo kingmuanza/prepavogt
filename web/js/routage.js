@@ -51,8 +51,21 @@ app.config(function ($routeProvider) {
                     return UrlExists("PointageServlet")+"?id=" + params.id
                 }
             })
+            .when("/pointages/:dateJour", {
+                templateUrl: function (params) {
+                    return UrlExists("PointagesServlet?dateJour=" + params.dateJour)
+                }
+            })
             .when("/pointages", {
                 templateUrl: UrlExists("PointagesServlet")
+            })
+            .when("/arrivees/:dateJour", {
+                templateUrl: function (params) {
+                    return UrlExists("ArriveesServlet?dateJour=" + params.dateJour)
+                }
+            })
+            .when("/arrivees", {
+                templateUrl: UrlExists("ArriveesServlet")
             })
             .when("/motPasse", {
                 templateUrl: function (params) {
@@ -287,6 +300,11 @@ app.config(function ($routeProvider) {
             })
             .when("/statistiques", {
                 templateUrl: UrlExists("StatistiquesServlet")
+            })
+            .when("/statistiques/:type", {
+                templateUrl: function (params) {
+                    return UrlExists("StatistiquesServlet?type="+ params.type)
+                }
             })
             .otherwise({
                 redirectTo: '/'

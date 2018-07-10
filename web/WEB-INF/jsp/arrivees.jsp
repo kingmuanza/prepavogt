@@ -22,7 +22,7 @@
 
     </head>
     <body>
-        <h1 class="titre">Historique des pointages</h1>
+        <h1 class="titre">Historique des arrivées</h1>
         <c:if test="${!empty dates}">
 
             <div style="padding-bottom: 20px; line-height: normal">
@@ -32,7 +32,7 @@
                     </div>
                     <c:forEach items="${dates}" var="d">
                         <fmt:formatDate pattern="yyyyMMdd" value = "${d}" var="dateJour" />
-                        <div onclick="window.location.href = 'start#!/pointages/${dateJour}'" class="ui ${dateJour==jour?"gris":""} label" style="margin-top: 10px; cursor:pointer" >
+                        <div onclick="window.location.href = 'start#!/arrivees/${dateJour}'" class="ui ${dateJour==jour?"gris":""} label" style="margin-top: 10px; cursor:pointer" >
                             <i class="calendar alternate icon"></i> 
                             <fmt:formatDate type = "date" dateStyle = "medium" value = "${d}" />
                         </div>
@@ -89,8 +89,6 @@
         <script>
                         var titre = 'Bonjour';
                         $(document).ready(function () {
-
-                            ouvrirMenuCorrespondant("#section_pointeuse", "bouton_pointeuse", "pointages");
 
                             $('#dataTableUtilisateur').DataTable({
                                 dom: '<"top"fB>rt<"bottom"lp><"clear">',
