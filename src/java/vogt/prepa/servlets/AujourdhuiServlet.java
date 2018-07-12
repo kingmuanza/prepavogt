@@ -25,12 +25,13 @@ public class AujourdhuiServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         List<Statistique> statistiques = new ArrayList<Statistique>();
-        List<Pointage> lpointage = new EdgarServiceImpl().PointagesDUnJour(new Date("2017/5/10"));
+        List<Pointage> lpointage = new EdgarServiceImpl().PointagesDUnJour(new Date());
         for(Classe c : classeDAO.getall()){
-            statistiques.add(tonyServiceImpl.statistiques(c, new Date("2017/5/10")));
+            statistiques.add(tonyServiceImpl.statistiques(c, new Date()));
         }
         request.setAttribute("classes", classeDAO.getall());
         request.setAttribute("statistiques", statistiques);
+        request.setAttribute("aujourdhui", new Date());
         
         this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/aujourdhui.jsp").forward(request, response);
     } 

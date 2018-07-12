@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,7 +17,7 @@ import vogt.prepa.entities.Pointage;
 
 public class TempsReelService {
 
-    List<Pointage> pointages = new ArrayList<Pointage>();
+    
 
     public static final String CHEMIN = "C:\\Users\\muanz\\OneDrive\\Documents\\SIA\\";
 
@@ -29,10 +30,11 @@ public class TempsReelService {
         return randomNum;
     }
 
-    public List<Pointage> getDerniersPointages() throws IOException {
-
+    public List<Pointage> getDerniersPointages() {
+        List<Pointage> pointages = new ArrayList<Pointage>();
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         String filename = sdf.format(date) + ".csv";
         System.out.println("C:\\Users\\muanz\\OneDrive\\Documents\\SIA\\2" + filename);
         BufferedReader br = null ;
@@ -50,9 +52,16 @@ public class TempsReelService {
             while (line != null) {
                 sb.append(line);
                 String[] decoupe = line.split(",");
+                Pointage p = new Pointage();
+                p.setMatricule(decoupe[0].replace("\"", ""));
+                p.setMatricule(decoupe[0].replace("\"", ""));
+                p.setMachine(decoupe[4].replace("\"", ""));
+                Date d = sdf2.parse(decoupe[2].replace("\"", ""));
+                p.setHeure(d);
                 System.out.println(Arrays.toString(decoupe));
                 sb.append(System.lineSeparator());
                 line = br.readLine();
+                pointages.add(p);
             }
 
         } catch (FileNotFoundException ex) {
@@ -60,8 +69,17 @@ public class TempsReelService {
             return new ArrayList<Pointage>();
         } catch (IOException ex) {
             Logger.getLogger(TempsReelService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(TempsReelService.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            br.close();
+            try {
+                if(br!=null){
+                   br.close(); 
+                }
+                
+            } catch (IOException ex) {
+                System.out.println("Le fichier est introuvable");
+            }
         }
 
         return pointages;

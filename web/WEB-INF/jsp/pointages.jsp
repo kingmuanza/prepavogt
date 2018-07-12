@@ -44,20 +44,25 @@
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
+                    <th>Jour</th>                    
                     <th>Heure</th>                    
-                    <th>Numero</th>
-                    <th>Matricule</th>
+                    
+                   <th>Matricule</th>
                     <th>Individu</th>
-                    <th>Mode</th>
-                    <th>I/O MD</th>                    
+                                        
                 </tr>
             </thead>
 
             <tbody>
                 <c:forEach items="${pointages}" var="pointage">
                     <tr class = "pointeur" onclick="window.location.href = 'start#!/pointage/${pointage.matricule}'">
-                        <td>${pointage.heure}</td>
-                        <td>${pointage.numero}</td>
+                        <td>
+                            <fmt:formatDate pattern="yyyy-MM-dd" value = "${pointage.heure}" />
+                            
+                        </td>
+                        <td>
+                            <fmt:formatDate pattern="HH:mm:ss" value = "${pointage.heure}" />
+                        </td>
                         <td>
                             ${pointage.matricule}
                             
@@ -66,8 +71,6 @@
                             ${individuDAO.selectionnerIndividu(pointage.matricule, individus).getNoms()}
                             ${individuDAO.selectionnerIndividu(pointage.matricule, individus).getPrenoms()}
                         </td>
-                        <td>${pointage.mode}</td>
-                        <td>${pointage.iomd}</td>
                     </tr>
                 </c:forEach>
 

@@ -20,10 +20,7 @@
             Aujourd'hui
         </h1>
         <div style="padding-bottom: 20px; font-size: 1.2em; opacity: 0.8; margin-top: -15px">
-            Dernière actualisation à 
-            <span id="derniereHeure">
-                <i class="spinner loading icon"></i>
-            </span> 
+            Le <fmt:formatDate type = "date" dateStyle="long" value = "${aujourdhui}" /> 
         </div>
 
         <div  style="background-color: #f8f8f8; border-radius: 5px; border: 1px solid #004d6f">
@@ -31,7 +28,7 @@
                 <div class="ui four statistics">
                     <div class="statistic">
                         <div class="value titre">
-                            07:53
+                            ${statistiques.iterator().next().moyenneHeure.substring(0,5)}
                         </div>
                         <div class="label">
                             Moyenne d'arrivée
@@ -48,7 +45,7 @@
                     </div>
                     <div class="statistic">
                         <div class="value  titre">
-                            42
+                            0
                         </div>
                         <div class="label">
                             Retards
@@ -56,7 +53,7 @@
                     </div>
                     <div class="statistic">
                         <div class="value  titre">
-                            5
+                            0
                         </div>
                         <div class="label">
                             Absences

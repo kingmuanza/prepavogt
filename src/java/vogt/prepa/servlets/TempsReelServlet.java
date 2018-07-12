@@ -17,7 +17,7 @@ import vogt.prepa.services.impl.TempsReelService;
 @WebServlet(name="TempsReelServlet", urlPatterns={"/TempsReelServlet"})
 public class TempsReelServlet extends HttpServlet {
 
-    TempsReelService tempsReelService = new TempsReelService(); 
+    TempsReelService tempsReelService = new TempsReelService();  
     List<Pointage> pointages = tempsReelService.getDerniersPointages();
    
     @Override

@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import vogt.prepa.dao.IndividuDAO;
+import vogt.prepa.dao.PointageDAO;
+import vogt.prepa.entities.Individu;
 import vogt.prepa.entities.Pointage;
 import vogt.prepa.services.impl.TempsReelService;
 
@@ -21,15 +24,23 @@ public class ActualiserPointageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        IndividuDAO individuDAO = new IndividuDAO(); 
+        PointageDAO pointageDAO = new PointageDAO();
 
         String paragraphe = "";
 
         for (Pointage p : tempsReelService.getDerniersPointages()) {
+            Individu individu = individuDAO.getByMatricule(p.getMatricule());
+            pointageDAO.enregistrer(p);
+            String nom = "";
+            if(individu!=null){
+                nom = individu.getNoms()+" "+individu.getPrenoms();
+            }
             String e = "{"
                     + "\"heure\":\"" + dateFormat.format(p.getHeure()) + "\","
                     + "\"matricule\":\"" + p.getMatricule() + "\","
-                    + "\"noms\":" + "\"Personne inconnue\"" + ","
+                    + "\"noms\":\"" + nom + "\","
                     + "\"entree\":" + "true"
                     + "}";
             if (paragraphe == "") {

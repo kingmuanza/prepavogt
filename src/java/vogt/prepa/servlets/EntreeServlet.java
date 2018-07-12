@@ -170,7 +170,7 @@ public class EntreeServlet extends HttpServlet {
 
             e.setDateEntree(dateEntree);
             e.setIndividu(individuDAO.get(request.getParameter("individu")));
-            e.setVisite(visiteDAO.get(request.getParameter("visite")));
+            //e.setVisite(visiteDAO.get(request.getParameter("visite")));
 
             if (entreeDAO.enregistrer(e)) {
                 Notification notif = new Notification();

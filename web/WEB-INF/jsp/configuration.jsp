@@ -31,7 +31,7 @@
                 <div class="ui grid">
                     <div class="ten wide column">
                         <div>
-                            <form class="ui form" action="AnneeScolaireServlet" method="post">
+                            <form class="ui form">
                                 <div class="ui message">
                                     <div class="header">Dossier d'export de la pointeuse</div>
                                     <ul class="list">
@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="required field">
                                     <label>Dossier d'export</label>
-                                    <input type="text" name="code" value="C:/" required>
+                                    <input type="text" name="code" value="C:\Users\muanz\OneDrive\Documents\SIA" required>
                                 </div>
                                 
                                 <div>
@@ -59,7 +59,7 @@
         </div>
         <script>
             $(document).ready(function () {
-                ouvrirMenuCorrespondant("#section_params", "bouton_params", "anneeacademiques");
+                ouvrirMenuCorrespondant("#section_pointeuse", "bouton_pointeuse", "configuration");
 
             })
         </script>

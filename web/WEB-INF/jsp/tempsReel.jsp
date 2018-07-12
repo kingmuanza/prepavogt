@@ -32,8 +32,7 @@
                 <tr>
                     <th>Heure</th>
                     <th>Matricule</th>
-                    <th>Personne</th>                    
-                    <th>Entrée/Sortie</th>                    
+                    <th>Personne</th>                     
                 </tr>
             </thead>
 
@@ -47,7 +46,7 @@
                         </td>
                         <td>${p.matricule}</td>
                         <td>Tagne Edgar</td>
-                        <td>Entrée</td>
+                        
                     </tr>
                 </c:forEach>
 
@@ -83,8 +82,7 @@
                     "columns": [
                         {"data": "heure"},
                         {"data": "matricule"},
-                        {"data": "noms"},
-                        {"data": "entree"}
+                        {"data": "noms"}
                     ],
                     "createdRow": function (row, data, dataIndex) {
                         if (dernierIndex < dataIndex) {
