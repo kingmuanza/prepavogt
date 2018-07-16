@@ -85,34 +85,14 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="field required">
-                                    <label>Visite</label>
-                                    <select class="ui dropdown" name="visite" required>
-                                        <option>Aucune visite</option>
-                                        <c:forEach items="${visites}" var="v">
-                                            <option value="${i.idindividu}" ${entree.visite.idvisite==v.idvisite?"selected":""}>
-                                                ${v.motif}
-                                            </option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
-                                <div class="field required">
-                                    <label>Individu</label>
+                                
+                                <div class="field">
+                                    <label>Personne à voir</label>
                                     <select class="ui dropdown" name="individu" required>
                                         <option>Aucun individu</option>
                                         <c:forEach items="${individus}" var="i">
                                             <option value="${i.idindividu}" ${entree.individu.idindividu==i.idindividu?"selected":""}>
                                                 ${i.noms} ${i.prenoms}
-                                            </option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
-                                <div class="field">
-                                    <label>Personne à voir</label>
-                                    <select class="ui dropdown" name="individu">
-                                        <c:forEach items="${badges}" var="badge">
-                                            <option value="${badge.idbadge}" ${entree.badge.idbadge==badge.idbadge?"selected":""}>
-                                                ${badge.libelle}
                                             </option>
                                         </c:forEach>
                                     </select>

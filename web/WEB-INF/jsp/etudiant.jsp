@@ -105,7 +105,7 @@
                                     <select class="ui dropdown" name="individu">
                                         <option>Aucun individu</option>
                                         <c:forEach items="${individus}" var="i">
-                                            <option value="${i.idindividu}" ${etudiant.individu.idindividu==i.idindividu?"selected":""}>
+                                            <option value="${i.idindividu}" ${etudiant.individu.idindividu==i.idindividu? "selected":""}>
                                                 ${i.noms} ${i.prenoms}
                                             </option>
                                         </c:forEach>

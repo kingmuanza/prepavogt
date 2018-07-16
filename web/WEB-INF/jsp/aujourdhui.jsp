@@ -66,7 +66,7 @@
         <div class="ui three cards" style="padding-top: 20px;">
             
             <c:forEach items="${statistiques}" var="stat">
-                <div class="ui card">
+                <div class="ui card" style="cursor: pointer" onclick="window.location.href='start#!/aujourdhuiclasse/${stat.classe.idclasse}'">
                     <div class="content">
                         <div class="ui black ribbon label" style="background-color: #004d6f!important">
                             ${stat.classe.niveauEtude.code}

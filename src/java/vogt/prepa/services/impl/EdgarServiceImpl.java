@@ -231,7 +231,7 @@ public class EdgarServiceImpl implements EdgarService {
 
         List<Pointage> pointagesJourPourMatricule = PointagesDUnJourPourUnMatricule(matricule, jourLa);
 
-        if (pointagesJourPourMatricule != null) {
+        if (pointagesJourPourMatricule != null && pointagesJourPourMatricule.size()>0) {
             p = pointagesJourPourMatricule.get(0);
         }
 
@@ -257,7 +257,7 @@ public class EdgarServiceImpl implements EdgarService {
 
         List<Pointage> pointagesJour = PointagesDUnJourPourUnIndividu(individu, jourLa);
 
-        if (pointagesJour != null) {
+        if (pointagesJour != null && pointagesJour.size()>0) {
             p = pointagesJour.get(0);
         }
 

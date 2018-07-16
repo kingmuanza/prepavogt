@@ -23,6 +23,14 @@ app.config(function ($routeProvider) {
             .when("/aujourdhui", {
                 templateUrl: UrlExists("AujourdhuiServlet")
             })
+            .when("/aujourdhuiclasse", {
+                templateUrl: UrlExists("AujourdhuiClasseServlet")
+            })
+            .when("/aujourdhuiclasse/:id", {
+                templateUrl: function (params) {
+                    return UrlExists("AujourdhuiClasseServlet")+"?id=" + params.id
+                }
+            })
             .when("/statsentrees", {
                 templateUrl: UrlExists("StatsEntreesServlet")
             })

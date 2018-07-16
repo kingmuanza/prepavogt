@@ -54,9 +54,10 @@ public class EtudiantServlet extends HttpServlet {
                 int i = Integer.parseInt(id);
                 Etudiant etudiant = etudiantDAO.get(i);
                 request.setAttribute("etudiant", etudiant);
+            request.setAttribute("individus", individuDAO.getallUnsused());
 
             }
-            request.setAttribute("individus", individuDAO.getallUnsused());
+            request.setAttribute("individus", individuDAO.getall());
             request.setAttribute("classes", classeDAO.getall());
             request.setAttribute("anneeScolaires", anneeScolaireDAO.getall());
             Individu ind = (Individu) httpSession.getAttribute("nouvelIndividu");

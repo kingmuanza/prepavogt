@@ -314,7 +314,7 @@
         <script src="js/angular.min.js" type="text/javascript"></script>
         <script src="js/angular-route.js" type="text/javascript"></script>
         <script src="js/myapp.js" type="text/javascript"></script>
-        <script src="js/routage.js?id=15" type="text/javascript"></script>
+        <script src="js/routage.js?id=15741541881881" type="text/javascript"></script>
         <script>
                         $(document).ready(function () {
                             $('.ui.dropdown').dropdown();
