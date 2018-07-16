@@ -23,7 +23,7 @@
     <body>
         <h1 class="titre">
             Aujourd'hui
-            <b>${classe.niveauEtude.code} ${classe.filiere.libelle}</b>
+            <span>${classe.niveauEtude.code} ${classe.filiere.libelle}</span>
         </h1>
 
         <div  style="background-color: #f8f8f8; border-radius: 5px; border: 1px solid #004d6f">
@@ -103,7 +103,7 @@
                             <c:if test="${!empty pointage && pointage.heure>huit}">
                                 <c:set var = "r" value = "${r+1}"/>
                             </c:if>
-                            
+
                             <tr class = "pointeur ${empty pointage ?'negative':''}">
                                 <td>
                                     ${etudiant.individu.noms}
@@ -122,7 +122,7 @@
                                     </c:if>
                                 </td>
                                 <td class="${!empty pointage && pointage.heure>huit? 'negative':'positive'}">
-                                <fmt:formatDate value="${pointage.heure}" pattern="HH:mm:ss"/>
+                                    <fmt:formatDate value="${pointage.heure}" pattern="HH:mm:ss"/>
                                 </td>
 
                             </tr>
@@ -132,7 +132,10 @@
                 </table>
                 <p id="total" class="cacher">
                     <jsp:useBean id="ourDate" class="java.util.Date"/>
-                    <jsp:setProperty name="ourDate" property="time" value="${total/i}"/>
+                    <c:if test="${i>0}">
+                        <jsp:setProperty name="ourDate" property="time" value="${total/i}"/>
+                    </c:if>
+                    
                     <fmt:formatDate value="${ourDate}" pattern="HH:mm"/>
 
                 </p>
@@ -140,7 +143,13 @@
                     <fmt:formatDate value="${min}" pattern="HH:mm:ss"/>
                 </p>
                 <p id="pn" class="cacher">
-                    ${n}${p}
+                    <c:if test="${!empty n || !empty p }">
+                        ${n}${p}
+                    </c:if>
+                    <c:if test="${!(!empty n || !empty p) }">
+                        --
+                    </c:if>
+
                 </p>
                 <p id="absents" class="cacher">
                     ${classe.etudiants.size()-i}
@@ -176,14 +185,14 @@
                 $('#abs').html(absents);
                 var retards = $('#retards').html();
                 $('#ret').html(retards);
-                
+
                 ouvrirMenuCorrespondant("#section_pointeuse", "bouton_pointeuse", "pointages");
 
                 $('#dataTableUtilisateur').DataTable({
                     dom: '<"top"fB>rt<"bottom"lp><"clear">',
                     "order": [[0, "desc"]],
                     buttons: [
-                        
+
                         {
                             extend: 'excelHtml5',
                             text: "Exporter vers Excel",

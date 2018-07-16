@@ -25,7 +25,6 @@ public class AujourdhuiServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         List<Statistique> statistiques = new ArrayList<Statistique>();
-        List<Pointage> lpointage = new EdgarServiceImpl().PointagesDUnJour(new Date());
         for(Classe c : classeDAO.getall()){
             statistiques.add(tonyServiceImpl.statistiques(c, new Date()));
         }
