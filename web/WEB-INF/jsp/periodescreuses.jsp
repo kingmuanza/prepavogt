@@ -21,9 +21,9 @@
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Période Creuses</th>
-                    <th>Date Début</th>
-                    <th>Date Fin</th>                
+                    <th>Périodes creuses</th>
+                    <th>Date début</th>
+                    <th>Date fin</th>                
                 </tr>
             </thead>
 
@@ -33,7 +33,6 @@
                 <tr class="pointeur" onclick="window.location.href='start#!/periodecreuse/${periodeCreuse.idperiodeCreuse}'">
                     <td>
                         <h4 class="ui image header">
-                            <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
                             <div class="content">
                                 ${periodeCreuse.code}
                                 <div class="sub header">

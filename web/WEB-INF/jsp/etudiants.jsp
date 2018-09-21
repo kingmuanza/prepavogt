@@ -21,8 +21,11 @@
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Etudiants</th>
-                    <th>Classe</th>                    
+                    <th>Noms</th>
+                    <th>Prénoms</th>
+                    <th>Genre</th>
+                    <th>Filière</th>                    
+                    <th>Niveau</th>                    
                 </tr>
             </thead>
 
@@ -30,27 +33,11 @@
                 <c:forEach items="${etudiants}" var="etudiant">
                     
                 <tr class="pointeur" onclick="window.location.href='start#!/etudiant/${etudiant.idetudiant}'">
-                    <td>
-                        <h4 class="ui image header">
-                            <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
-                            <div class="content">
-                                ${etudiant.individu.noms} ${etudiant.individu.prenoms}
-                                <div class="sub header">
-                                    ${etudiant.individu.genre ? "Femme":"Homme"}
-                                </div>
-                            </div>
-                        </h4>
-                    </td>
-                    <td>
-                        <h4 class="ui image header">
-                            <div class="content">
-                                ${etudiant.classe.filiere.libelle}
-                                <div class="sub header">
-                                    ${etudiant.classe.niveauEtude.libelle}
-                                </div>
-                            </div>
-                        </h4>
-                    </td>
+                    <td>${etudiant.individu.noms} </td>
+                    <td>${etudiant.individu.prenoms} </td>
+                    <td>${etudiant.individu.genre ? "Femme":"Homme"}</td>
+                    <td>${etudiant.classe.filiere.libelle}</td>
+                    <td>${etudiant.classe.niveauEtude.libelle}</td>
                 </tr>
                 </c:forEach>
 

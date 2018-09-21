@@ -71,7 +71,7 @@ public class EdgarServiceImpl implements EdgarService {
         calendar.set(Calendar.MILLISECOND, 0);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MINUTE, 59);
-        calendar.set(Calendar.HOUR, 11);
+        calendar.set(Calendar.HOUR, 23);
         return calendar.getTime();
     }
 

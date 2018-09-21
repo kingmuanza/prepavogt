@@ -32,7 +32,7 @@ public class ActualiserPointageServlet extends HttpServlet {
 
         for (Pointage p : tempsReelService.getDerniersPointages()) {
             Individu individu = individuDAO.getByMatricule(p.getMatricule());
-            pointageDAO.enregistrer(p);
+            
             String nom = "";
             if(individu!=null){
                 nom = individu.getNoms()+" "+individu.getPrenoms();

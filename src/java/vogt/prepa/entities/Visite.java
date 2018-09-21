@@ -1,5 +1,5 @@
 package vogt.prepa.entities;
-// Generated 3 juil. 2018 16:11:02 by Hibernate Tools 4.3.1
+// Generated 21 sept. 2018 07:21:11 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -27,6 +27,7 @@ public class Visite  implements java.io.Serializable {
 
      private Integer idvisite;
      private Individu individu;
+     private VisiteCategorie visiteCategorie;
      private String nomComplet;
      private String motif;
      private String commentaire;
@@ -35,8 +36,9 @@ public class Visite  implements java.io.Serializable {
     public Visite() {
     }
 
-    public Visite(Individu individu, String nomComplet, String motif, String commentaire, Set<Entree> entrees) {
+    public Visite(Individu individu, VisiteCategorie visiteCategorie, String nomComplet, String motif, String commentaire, Set<Entree> entrees) {
        this.individu = individu;
+       this.visiteCategorie = visiteCategorie;
        this.nomComplet = nomComplet;
        this.motif = motif;
        this.commentaire = commentaire;
@@ -63,6 +65,16 @@ public class Visite  implements java.io.Serializable {
     
     public void setIndividu(Individu individu) {
         this.individu = individu;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="idvisite_categorie")
+    public VisiteCategorie getVisiteCategorie() {
+        return this.visiteCategorie;
+    }
+    
+    public void setVisiteCategorie(VisiteCategorie visiteCategorie) {
+        this.visiteCategorie = visiteCategorie;
     }
 
     

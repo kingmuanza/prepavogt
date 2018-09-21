@@ -121,6 +121,11 @@ app.config(function ($routeProvider) {
                     return UrlExists("VisiteServlet")+"?id=" + params.id
                 }
             })
+            .when("/categories/:id", {
+                templateUrl: function (params) {
+                    return UrlExists("CategoriesServlet")+"?id=" + params.id
+                }
+            })
             .when("/visites", {
                 templateUrl: UrlExists("VisitesServlet")
             })

@@ -17,12 +17,15 @@
     </head>
     <body>
         <h1 class="titre">Liste des visites</h1>
-
+        <h4 style="margin-top: -10px; opacity: 0.5">
+            ${libelle}
+        </h4>
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Nom complet</th>
-                    <th>Motif</th>
+                    <th>Personne et motif</th>
+                    <th>Catégorie</th>
+                    <th>Personne à voir</th>
                     <th>Commentaire</th>                   
                                        
                 </tr>
@@ -32,8 +35,32 @@
                 <c:forEach items="${visites}" var="visite">
                     
                 <tr class="pointeur" onclick="window.location.href='start#!/visite/${visite.idvisite}'">
-                    <td>${visite.nomComplet}</td>
-                    <td>${visite.motif}</td>
+                    <td>
+                        
+                        <h4 class="ui image header">
+                                <div class="content">
+                                    ${visite.nomComplet}
+                                    <div class="sub header">
+                                        ${visite.motif}
+                                    </div>
+                                </div>
+                            </h4>
+                    </td>
+                    
+                    <td>${visite.visiteCategorie.libelle}</td>
+                    <td>
+                            <h4 class="ui image header">
+                                <div class="content">
+                                    ${visite.individu.noms} ${visite.individu.prenoms}
+                                    <div class="sub header">
+                                        ${!empty visite.individu.etudiants ? "Etudiant":""}
+                                        ${!empty visite.individu.employes ? "Collaborateur":""}
+                                        ${!empty visite.individu.enseignants ? "Enseignant":""}
+                                    </div>
+                                </div>
+                            </h4>
+                            
+                        </td>
                     <td>${visite.commentaire}</td>
                     
                 </tr>

@@ -21,7 +21,7 @@
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Matieres</th>
+                    <th>Matières</th>
                     <th>Code</th>
                     <th>Libelle</th>
                 </tr>

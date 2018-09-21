@@ -48,7 +48,8 @@
                     <th>Heure</th>                    
                     
                    <th>Matricule</th>
-                    <th>Individu</th>
+                    <th>Noms</th>
+                    <th>Prénoms</th>
                                         
                 </tr>
             </thead>
@@ -69,6 +70,8 @@
                         </td>
                         <td>
                             ${individuDAO.selectionnerIndividu(pointage.matricule, individus).getNoms()}
+                        </td>
+                        <td>
                             ${individuDAO.selectionnerIndividu(pointage.matricule, individus).getPrenoms()}
                         </td>
                     </tr>

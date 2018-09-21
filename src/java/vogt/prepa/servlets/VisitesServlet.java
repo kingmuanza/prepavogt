@@ -21,7 +21,7 @@ public class VisitesServlet extends HttpServlet {
         HttpSession httpSession = request.getSession();
         Utilisateur utilisateur = (Utilisateur) httpSession.getAttribute("utilisateur");
         if (utilisateur != null) {
-            request.setAttribute("visites", visiteDAO.getall());
+            request.setAttribute("visites", visiteDAO.getallNonVenus());
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/visites.jsp").forward(request, response);
         }else{
             response.sendRedirect("index.htm");

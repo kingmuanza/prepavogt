@@ -21,10 +21,13 @@
         <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>Individu</th>
+                    <th>Noms</th>
+                    <th>Prénoms</th>
                     <th>Poste</th>
-                    <th>Date et lieu naiss.</th>
-                    <th>Contacts</th>                    
+                    <th>Date naiss.</th>
+                    <th>Lieu naiss.</th>
+                    <th>Email</th>                    
+                    <th>Tel</th>                    
                     <th>Résidence</th>                    
                 </tr>
             </thead>
@@ -34,47 +37,13 @@
 
                     <tr class="pointeur" onclick="window.location.href='start#!/collaborateur/${employe.idemploye}'">
 
-                        <td>
-                            <h4 class="ui image header">
-                                <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
-                                <div class="content">
-                                    ${employe.individu.noms} ${employe.individu.prenoms}
-                                    <div class="sub header">
-                                        ${employe.individu.genre ? "Femme":"Homme"}
-                                    </div>
-                                </div>
-                            </h4>
-                        </td>
-                        <td>
-                            <h4 class="ui image header">
-                                <div class="content">
-                                    ${employe.poste.libelle}
-                                    <div class="sub header">
-                                        ${employe.poste.code}
-                                    </div>
-                                </div>
-                            </h4>
-                        </td>
-                        <td>
-                            <h4 class="ui image header">
-                                <div class="content">
-                                    ${employe.individu.datenaiss}
-                                    <div class="sub header">
-                                        ${employe.individu.lieunaiss}
-                                    </div>
-                                </div>
-                            </h4>
-                        </td>
-                        <td>
-                            <h4 class="ui image header">
-                                <div class="content">
-                                    ${employe.individu.email}
-                                    <div class="sub header">
-                                        ${employe.individu.tel1}
-                                    </div>
-                                </div>
-                            </h4>
-                        </td>
+                        <td>${employe.individu.noms}</td>
+                        <td>${employe.individu.prenoms}</td>
+                        <td>${employe.poste.libelle}</td>
+                        <td>${employe.individu.datenaiss}</td>
+                        <td>${employe.individu.lieunaiss}</td>
+                        <td>${employe.individu.email}</td>
+                        <td>${employe.individu.tel1}</td>
                         <td>${employe.individu.residence}</td>
                     </tr>
                 </c:forEach>

@@ -125,12 +125,10 @@
                         ${sessionScope.utilisateur.individu.noms}
                         ${sessionScope.utilisateur.individu.prenoms}
                     </h3>
-
-                    <img src="img/joe.jpg" alt="" style="width: 100%"/>
-                    <h3 class="fg-white" style="line-height: 0">
+                    <h4 class="fg-teal" style="line-height: 0">
                         ${sessionScope.utilisateur.utilisateurProfil.libelle}
-                        
-                    </h3>
+
+                    </h4>
                     <a class="fg-white">
                         @${sessionScope.utilisateur.login}
                     </a>
@@ -140,7 +138,7 @@
                     <h1>Statistiques</h1>
 
                     <div class="ui accordion vertical fluid following text menu">
-                        
+
                         <div class="item">
                             <a class="title">
                                 <i class="dropdown icon"></i> 
@@ -168,28 +166,39 @@
                             <div class="active content menu">
                                 <c:forEach items="${entrees}" var="entree">
                                     <c:if test="${empty entree.dateSortie}">
-                                    <a class="item active" href="#!entree/${entree.identree}">
-                                        ${entree.nomComplet}
-                                    </a>
+                                        <a class="item active" href="#!entree/${entree.identree}">
+                                            ${entree.nomComplet}
+                                        </a>
                                     </c:if>
                                 </c:forEach>
-                                
+
                                 <a class="item" href="#!entrees">Tous</a>
                             </div>
                         </div>
-                        <div class="item">
+                        <div class="item active">
                             <a class="title">
                                 <i class="dropdown icon"></i> 
                                 <b>Personnes attendues</b>
                             </a>
                             <div class="content menu">
-                                <c:forEach items="${visites}" var="visite">
-                                    <c:if test="${empty visite.entrees || visite.entrees.size()==0}">
-                                    <a class="item active" href="#!visite/${visite.idvisite}">
-                                        ${visite.nomComplet}
-                                        ${visite.entrees}
+                                <c:forEach items="${categories}" var="categorie">
+                                    <a class="item" href="#!categories/${categorie.idvisiteCategorie}">
+                                        ${categorie.libelle}
                                     </a>
-                                    </c:if>
+                                </c:forEach>
+                                <a class="item" href="#!visites">Tous</a>
+                            </div>
+                        </div>
+                        <div class="item active">
+                            <a class="title">
+                                <i class="dropdown icon"></i> 
+                                <b>Personnes autorisées</b>
+                            </a>
+                            <div class="content menu">
+                                <c:forEach items="${autorisations}" var="autorisation">
+                                    <a class="item" href="#!autorisations/${autorisation.idautorisation}">
+                                        ${autorisation.libelle}
+                                    </a>
                                 </c:forEach>
                                 <a class="item" href="#!visites">Tous</a>
                             </div>
@@ -314,7 +323,7 @@
         <script src="js/angular.min.js" type="text/javascript"></script>
         <script src="js/angular-route.js" type="text/javascript"></script>
         <script src="js/myapp.js" type="text/javascript"></script>
-        <script src="js/routage.js?id=15741541881881" type="text/javascript"></script>
+        <script src="js/routage.js?id=15" type="text/javascript"></script>
         <script>
                         $(document).ready(function () {
                             $('.ui.dropdown').dropdown();

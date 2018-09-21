@@ -50,7 +50,7 @@
 
                             <input type="hidden" name="id" value="${visite.idvisite}"/>
 
-                            <c:if test="${empty visite.entrees}">
+                            <c:if test="${!empty visite && empty visite.entrees}">
                                 <button class="ui fluid submit gris button" name="action" value="entree" type="submit" >
                                     La personne vient d'arriver
                                 </button>
@@ -72,9 +72,9 @@
                                 </c:if>
                                 <input type="hidden" name="id" value="${visite.idvisite}"/>
                                 <div class="field required">
-                                    <label>Individu</label>
+                                    <label>Personne à voir</label>
                                     <select class="ui dropdown" name="individu" required>
-                                        <option>Aucun individu</option>
+                                        <option>Aucune personne à voir</option>
                                         <c:forEach items="${individus}" var="i">
                                             <option value="${i.idindividu}" ${visite.individu.idindividu==i.idindividu?"selected":""}>
                                                 ${i.noms} ${i.prenoms}
@@ -91,6 +91,18 @@
                                 <div class="field">
                                     <label>Motif</label>
                                     <input type="text" name="motif" value="${visite.motif}" required>
+                                </div>
+                                
+                                <div class="field required">
+                                    <label>Catégorie de la visite</label>
+                                    <select class="ui dropdown" name="categorie" required>
+                                        <option>Aucune catégorie</option>
+                                        <c:forEach items="${categories}" var="c">
+                                            <option value="${c.idvisiteCategorie}" ${visite.visiteCategorie.idvisiteCategorie==c.idvisiteCategorie?"selected":""}>
+                                                ${c.libelle}
+                                            </option>
+                                        </c:forEach>
+                                    </select>
                                 </div>
 
                                 <div class="field">

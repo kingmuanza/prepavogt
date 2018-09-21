@@ -24,9 +24,9 @@
                     <th>Date</th>
                     <th>Entrée</th>
                     <th>Sortie</th>
-                    <th>Nom complet</th>
-                    <th>Motif</th>
+                    <th>Personne et motif</th>
                     <th>Commentaire</th>
+                    <th>Personne à voir</th>
                     <th>Badge</th>                    
                 </tr>
             </thead>
@@ -34,7 +34,7 @@
             <tbody>
                 <c:forEach items="${entrees}" var="entree">
 
-                    <tr class="pointeur" onclick="window.location.href='start#!/entree/${entree.identree}'">
+                    <tr class="pointeur ${empty entree.visite ? "":"positive"}" onclick="window.location.href = 'start#!/entree/${entree.identree}'">
                         <td>
                             <fmt:formatDate type = "date" value = "${entree.dateEntree}" />
                         </td>
@@ -44,9 +44,30 @@
                         <td>
                             <fmt:formatDate type = "time" timeStyle = "short" value = "${entree.dateSortie}" />
                         </td>
-                        <td>${entree.nomComplet}</td>
-                        <td>${entree.motif}</td>
+                        <td>
+                            <h4 class="ui image header">
+                                <div class="content">
+                                    ${entree.nomComplet}
+                                    <div class="sub header">
+                                        ${entree.motif}
+                                    </div>
+                                </div>
+                            </h4>
+                        </td>
                         <td>${entree.commentaire}</td>
+                        <td>
+                            <h4 class="ui image header">
+                                <div class="content">
+                                    ${entree.individu.noms} ${entree.individu.prenoms}
+                                    <div class="sub header">
+                                        ${!empty entree.individu.etudiants ? "Etudiant":""}
+                                        ${!empty entree.individu.employes ? "Collaborateurs":""}
+                                        ${!empty entree.individu.enseignants ? "Enseignant":""}
+                                    </div>
+                                </div>
+                            </h4>
+                            
+                        </td>
                         <td>${entree.badge.code}</td>
                     </tr>
                 </c:forEach>
@@ -65,56 +86,54 @@
         <script src="js/pdfmake.min.js" type="text/javascript"></script>
 
         <script>
-            var titre = 'Bonjour';
-            $(document).ready(function () {
-                ouvrirMenuCorrespondant("#section_visites", "bouton_visites", "entrees");
-                $('#dataTableUtilisateur').DataTable({
-                    
-                    
-                    
-                    dom: '<"top"fB>rt<"bottom"lp><"clear">',
-                    buttons: [
-                        {
-                            text: "Nouveau",
-                            title: titre,
-                            message: '',
-                            className: 'ui gris mini button',
-                            action: function (e, dt, node, config) {
-                                window.location.href='start#!/entree'
-                            }
-                        },
-                        {
-                            extend: 'excelHtml5',
-                            text: "Exporter vers Excel",
-                            title: titre,
-                            message: '',
-                            className: 'ui gris mini basic button'
-                        },
-                        {
-                            extend: 'print',
-                            text: "Imprimer",
-                            title: titre,
-                            message: '',
-                            className: 'impression ui gris basic mini button'
-                        }
-                    ],
-                    "language": {
-                        "sEmptyTable": "Aucune donnée disponible",
-                        "sInfo": "Affiche _START_ à _END_ sur _TOTAL_ entrées",
-                        "sLengthMenu": "Afficher _MENU_ lignes par page",
-                        "sSearch": "Rechercher : ",
-                        "zeroRecords": "Aucun résultat",
-                        "info": "Page _PAGE_ sur _PAGES_",
-                        "infoEmpty": "Aucun résultat disponible",
-                        "sProcessing": "Veuillez patienter...",
-                        "infoFiltered": "(sur les _MAX_ disponibles)",
-                        "paginate": {
-                            "previous": "Précédent",
-                            "next": "Suivant"
-                        }
-                    }
-                });
-            });
+                        var titre = 'Bonjour';
+                        $(document).ready(function () {
+                            ouvrirMenuCorrespondant("#section_visites", "bouton_visites", "entrees");
+                            $('#dataTableUtilisateur').DataTable({
+
+                                dom: '<"top"fB>rt<"bottom"lp><"clear">',
+                                buttons: [
+                                    {
+                                        text: "Nouveau",
+                                        title: titre,
+                                        message: '',
+                                        className: 'ui gris mini button',
+                                        action: function (e, dt, node, config) {
+                                            window.location.href = 'start#!/entree'
+                                        }
+                                    },
+                                    {
+                                        extend: 'excelHtml5',
+                                        text: "Exporter vers Excel",
+                                        title: titre,
+                                        message: '',
+                                        className: 'ui gris mini basic button'
+                                    },
+                                    {
+                                        extend: 'print',
+                                        text: "Imprimer",
+                                        title: titre,
+                                        message: '',
+                                        className: 'impression ui gris basic mini button'
+                                    }
+                                ],
+                                "language": {
+                                    "sEmptyTable": "Aucune donnée disponible",
+                                    "sInfo": "Affiche _START_ à _END_ sur _TOTAL_ entrées",
+                                    "sLengthMenu": "Afficher _MENU_ lignes par page",
+                                    "sSearch": "Rechercher : ",
+                                    "zeroRecords": "Aucun résultat",
+                                    "info": "Page _PAGE_ sur _PAGES_",
+                                    "infoEmpty": "Aucun résultat disponible",
+                                    "sProcessing": "Veuillez patienter...",
+                                    "infoFiltered": "(sur les _MAX_ disponibles)",
+                                    "paginate": {
+                                        "previous": "Précédent",
+                                        "next": "Suivant"
+                                    }
+                                }
+                            });
+                        });
         </script>
 
     </body>

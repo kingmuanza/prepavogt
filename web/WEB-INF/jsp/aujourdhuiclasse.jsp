@@ -79,7 +79,8 @@
                 <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Individu</th>
+                            <th>Noms</th>
+                            <th>Prénoms</th>
                             <th>Matricule</th>
                             <th>Date</th>     
                             <th>Heure</th>     
@@ -107,6 +108,8 @@
                             <tr class = "pointeur ${empty pointage ?'negative':''}">
                                 <td>
                                     ${etudiant.individu.noms}
+                                </td>
+                                <td>
                                     ${etudiant.individu.prenoms}
                                 </td>
                                 <td>${etudiant.individu.matricule}</td>

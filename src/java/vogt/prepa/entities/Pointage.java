@@ -1,5 +1,5 @@
 package vogt.prepa.entities;
-// Generated 3 juil. 2018 16:11:02 by Hibernate Tools 4.3.1
+// Generated 21 sept. 2018 07:21:11 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -24,8 +24,8 @@ public class Pointage  implements java.io.Serializable {
 
      private Integer idpointage;
      private String numero;
-     private String machine;
      private String matricule;
+     private String machine;
      private String mode;
      private String iomd;
      private Date heure;
@@ -33,10 +33,10 @@ public class Pointage  implements java.io.Serializable {
     public Pointage() {
     }
 
-    public Pointage(String numero, String machine, String matricule, String mode, String iomd, Date heure) {
+    public Pointage(String numero, String matricule, String machine, String mode, String iomd, Date heure) {
        this.numero = numero;
-       this.machine = machine;
        this.matricule = matricule;
+       this.machine = machine;
        this.mode = mode;
        this.iomd = iomd;
        this.heure = heure;
@@ -65,16 +65,6 @@ public class Pointage  implements java.io.Serializable {
     }
 
     
-    @Column(name="machine", length=45)
-    public String getMachine() {
-        return this.machine;
-    }
-    
-    public void setMachine(String machine) {
-        this.machine = machine;
-    }
-
-    
     @Column(name="matricule", length=45)
     public String getMatricule() {
         return this.matricule;
@@ -82,6 +72,16 @@ public class Pointage  implements java.io.Serializable {
     
     public void setMatricule(String matricule) {
         this.matricule = matricule;
+    }
+
+    
+    @Column(name="machine", length=45)
+    public String getMachine() {
+        return this.machine;
+    }
+    
+    public void setMachine(String machine) {
+        this.machine = machine;
     }
 
     

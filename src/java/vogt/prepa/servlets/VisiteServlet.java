@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import vogt.prepa.dao.EntreeDAO;
 import vogt.prepa.dao.IndividuDAO;
+import vogt.prepa.dao.VisiteCategorieDAO;
 import vogt.prepa.dao.VisiteDAO;
 import vogt.prepa.entities.Entree;
 import vogt.prepa.entities.Individu;
@@ -33,6 +34,7 @@ public class VisiteServlet extends HttpServlet {
     VisiteDAO visiteDAO = new VisiteDAO();
     EntreeDAO entreeDAO = new EntreeDAO();
     IndividuDAO individuDAO = new IndividuDAO();
+    VisiteCategorieDAO visiteCategorieDAO = new VisiteCategorieDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -45,8 +47,9 @@ public class VisiteServlet extends HttpServlet {
                 int i = Integer.parseInt(id);
                 Visite visite = visiteDAO.get(i);
                 request.setAttribute("visite", visite);
-                request.setAttribute("individus", individuDAO.getall());
             }
+            request.setAttribute("individus", individuDAO.getall());
+            request.setAttribute("categories", visiteCategorieDAO.getall());
             this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/visite.jsp").forward(request, response);
         } else {
             response.sendRedirect("index.htm");
@@ -116,7 +119,15 @@ public class VisiteServlet extends HttpServlet {
             v.setMotif(motif);
             String commentaire = request.getParameter("commentaire");
             v.setCommentaire(commentaire);
-            v.setIndividu(individuDAO.get(request.getParameter("individu")));
+            String idinvididu = request.getParameter("individu");
+            if(idinvididu!=null && !idinvididu.isEmpty()){
+                v.setIndividu(individuDAO.get(idinvididu));
+            }
+            String idcategorie = request.getParameter("categorie");
+            if(idcategorie!=null && !idcategorie.isEmpty()){
+                v.setVisiteCategorie(visiteCategorieDAO.get(idcategorie));
+            }
+            
 
             if (visiteDAO.enregistrer(v)) {
                 Notification notif = new Notification();

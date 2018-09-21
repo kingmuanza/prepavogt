@@ -1,23 +1,22 @@
 package vogt.prepa.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
-import vogt.prepa.entities.Entree;
-import vogt.prepa.entities.Visite;
+import vogt.prepa.entities.PersonneAutorisee;
 import vogt.prepa.utils.HibernateUtil;
 
-public class VisiteDAO {
+public class PersonneAutoriseeDAO {
     
-    public boolean enregistrer(Visite visite) {
+    public boolean enregistrer(PersonneAutorisee personneAutorisee) {
+        
         boolean isGood = false;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
         try {
-            session.saveOrUpdate(visite);
+            session.saveOrUpdate(personneAutorisee);
             isGood = true;
         } catch (HibernateException e) {
             session.getTransaction().rollback();
@@ -27,12 +26,12 @@ public class VisiteDAO {
         return isGood;
     }
 
-    public boolean supprimer(Visite visite) {
+    public boolean supprimer(PersonneAutorisee personneAutorisee) {
         boolean isGood = false;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
         try {
-            session.delete(visite);
+            session.delete(personneAutorisee);
             isGood = true;
         } catch (HibernateException e) {
             session.getTransaction().rollback();
@@ -42,29 +41,29 @@ public class VisiteDAO {
         return isGood;
     }
 
-    public Visite get(int id) {
+    public PersonneAutorisee get(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
-        Visite visite = (Visite) session.get(Visite.class, id);
-        if (visite == null) {
+        PersonneAutorisee personneAutorisee = (PersonneAutorisee) session.get(PersonneAutorisee.class, id);
+        if (personneAutorisee == null) {
             throw new RuntimeException();
         } else {
-            initialiser(visite);
+            initialiser(personneAutorisee);
         }
 
         session.getTransaction().commit();
         session.close();
 
-        return visite;
+        return personneAutorisee;
     }
     
-    public Visite getLazy(int id) {
+    public PersonneAutorisee getLazy(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
-        Visite visite = (Visite) session.get(Visite.class, id);
-        if (visite == null) {
+        PersonneAutorisee personneAutorisee = (PersonneAutorisee) session.get(PersonneAutorisee.class, id);
+        if (personneAutorisee == null) {
             throw new RuntimeException();
         } else {
             
@@ -73,56 +72,39 @@ public class VisiteDAO {
         session.getTransaction().commit();
         session.close();
 
-        return visite;
+        return personneAutorisee;
     }
     
-    public List<Visite> getall() {
+    public List<PersonneAutorisee> getall() {
         
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
-        List<Visite> visites = session.createCriteria(Visite.class).list();
-        visites.forEach((visite) -> {
-            initialiser(visite);
+        List<PersonneAutorisee> personneAutorisees = session.createCriteria(PersonneAutorisee.class).list();
+        personneAutorisees.forEach((personneAutorisee) -> {
+            initialiser(personneAutorisee);
         });
 
         session.getTransaction().commit();
         session.close();
 
-        return visites;
+        return personneAutorisees;
 
     }
-    
-    public List<Visite> getallNonVenus() {
-        
-        List<Visite> visites = new ArrayList<Visite>();
-        for(Visite v : getall()){
-            if(v.getEntrees()!=null){
-               if(v.getEntrees().isEmpty()){
-                   visites.add(v);
-               } 
-            }else{
-                visites.add(v);
-            }
-        }
-
-        return visites;
-
-    }
-    public List<Visite> getAllLazy() {
+    public List<PersonneAutorisee> getAllLazy() {
         
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
-        List<Visite> visites = session.createCriteria(Visite.class).list();
-        visites.forEach((visite) -> {
-//            initialiser(visite);
+        List<PersonneAutorisee> personneAutorisees = session.createCriteria(PersonneAutorisee.class).list();
+        personneAutorisees.forEach((personneAutorisee) -> {
+//            initialiser(personneAutorisee);
         });
 
         session.getTransaction().commit();
         session.close();
 
-        return visites;
+        return personneAutorisees;
 
     }
     
@@ -131,7 +113,7 @@ public class VisiteDAO {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
 
-        Number n = (Number) session.createCriteria(Visite.class).setProjection(Projections.rowCount()).uniqueResult() ;
+        Number n = (Number) session.createCriteria(PersonneAutorisee.class).setProjection(Projections.rowCount()).uniqueResult() ;
         
         session.getTransaction().commit();
         session.close();
@@ -141,36 +123,24 @@ public class VisiteDAO {
     }
     
     public boolean supprimer(int id) {
-        Visite visite = get(id);
-        return supprimer(visite);
+        PersonneAutorisee cours = get(id);
+        return supprimer(cours);
     }
     public boolean supprimer(String id) {
         int i = Integer.parseInt(id);
         return supprimer(i);
     }
-    public Visite get(String id) {
+    public PersonneAutorisee get(String id) {
         int i = Integer.parseInt(id);
         return get(i);
     }
-    public Visite getLazy(String id) {
+    public PersonneAutorisee getLazy(String id) {
         int i = Integer.parseInt(id);
         return getLazy(i);
     }
 
-    public void initialiser(Visite visite) {
-        Hibernate.initialize(visite.getVisiteCategorie());
-        Hibernate.initialize(visite.getIndividu());
-        if(visite.getIndividu()!=null){
-            Hibernate.initialize(visite.getIndividu().getEmployes());
-            Hibernate.initialize(visite.getIndividu().getEtudiants());
-            Hibernate.initialize(visite.getIndividu().getEnseignants());
-        }
-        Hibernate.initialize(visite.getEntrees());
-        for (Entree e : visite.getEntrees()){
-            Hibernate.initialize(e.getBadge());
-            Hibernate.initialize(e.getIndividu());
-            Hibernate.initialize(e.getVisite());
-        }
-        
+    public void initialiser(PersonneAutorisee personneAutorisee) {
+     Hibernate.initialize(personneAutorisee.getIndividu());
+     Hibernate.initialize(personneAutorisee.getAutorisation());
     }
 }

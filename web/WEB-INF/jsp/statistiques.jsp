@@ -20,11 +20,11 @@
             Historiques de pointage ${plus}
         </h1>
 
-        <div  style="background-color: #f8f8f8; border-radius: 5px; border: 1px solid #004d6f">
+        <div  style="background-color: #f8f8f8; border-radius: 5px; border: 1px solid #004d6f; display: none;">
             <div style="padding-top: 25px; padding-bottom : 25px">
 
 
-                <div class="ui four statistics">
+                <div class="ui three statistics">
                     <div class="statistic">
                         <div class="value titre">
                             07:49
@@ -50,28 +50,21 @@
                             06:35
                         </div>
                     </div>
-                    <div class="statistic">
-                        <div class="value  titre">
-                            <img src="img/joe.jpg" class="ui circular inline image">
-                            42
-                        </div>
-                        <div class="label">
-                            Toujours ponctuels
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
 
         <div>
-            <div style="padding-top: 25px; padding-bottom : 25px">
+            <div style="padding-top: 5px; padding-bottom : 25px">
                 <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
                     <thead>
                         <tr>
+                            <th>Date</th>                    
                             <th>Heure</th>                    
-                            <th>Numero</th>
+                            <th>Numéro</th>
                             <th>Matricule</th>
-                            <th>Individu</th>
+                            <th>Noms</th>
+                            <th>Prénoms</th>
                             <th>Mode</th>
                             <th>I/O MD</th>                    
                         </tr>
@@ -80,11 +73,18 @@
                     <tbody>
                         <c:forEach items="${pointages}" var="pointage">
                             <tr class = "pointeur" onclick="window.location.href = 'start#!/pointage/${pointage.machine}'">
-                                <td>${pointage.heure}</td>
+                                <td>
+                                    <fmt:formatDate pattern="yyyy-MM-dd" value="${pointage.heure}"/> 
+                                </td>
+                                <td>
+                                    <fmt:formatDate pattern="HH:mm:ss" value="${pointage.heure}"/> 
+                                </td>
                                 <td>${pointage.numero}</td>
                                 <td>${pointage.matricule}</td>
                                 <td>
                                     ${individuDAO.selectionnerIndividu(pointage.matricule, individus).getNoms()}
+                                </td>
+                                <td>
                                     ${individuDAO.selectionnerIndividu(pointage.matricule, individus).getPrenoms()}
                                 </td>
                                 <td>${pointage.mode}</td>
@@ -118,15 +118,6 @@
                                 dom: '<"top"fB>rt<"bottom"lp><"clear">',
                                 "order": [[ 0, "desc" ]],
                                 buttons: [
-                                    {
-                                        text: "Nouveau",
-                                        title: titre,
-                                        message: '',
-                                        className: 'ui gris mini button',
-                                        action: function (e, dt, node, config) {
-                                            window.location.href = 'start#!/pointage'
-                                        }
-                                    },
                                     {
                                         extend: 'excelHtml5',
                                         text: "Exporter vers Excel",

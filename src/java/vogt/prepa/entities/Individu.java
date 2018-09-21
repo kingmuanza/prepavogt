@@ -1,5 +1,5 @@
 package vogt.prepa.entities;
-// Generated 3 juil. 2018 16:11:02 by Hibernate Tools 4.3.1
+// Generated 21 sept. 2018 07:21:11 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -45,13 +45,14 @@ public class Individu  implements java.io.Serializable {
      private Set<Utilisateur> utilisateurs = new HashSet<Utilisateur>(0);
      private Set<Entree> entrees = new HashSet<Entree>(0);
      private Set<Employe> employes = new HashSet<Employe>(0);
+     private Set<PersonneAutorisee> personneAutorisees = new HashSet<PersonneAutorisee>(0);
      private Set<Visite> visites = new HashSet<Visite>(0);
      private Set<Enseignant> enseignants = new HashSet<Enseignant>(0);
 
     public Individu() {
     }
 
-    public Individu(IndividuPhoto individuPhoto, String noms, String prenoms, Boolean genre, String civilite, Date datenaiss, String lieunaiss, String tel1, String tel2, String email, String residence, String matricule, Set<Etudiant> etudiants, Set<Utilisateur> utilisateurs, Set<Entree> entrees, Set<Employe> employes, Set<Visite> visites, Set<Enseignant> enseignants) {
+    public Individu(IndividuPhoto individuPhoto, String noms, String prenoms, Boolean genre, String civilite, Date datenaiss, String lieunaiss, String tel1, String tel2, String email, String residence, String matricule, Set<Etudiant> etudiants, Set<Utilisateur> utilisateurs, Set<Entree> entrees, Set<Employe> employes, Set<PersonneAutorisee> personneAutorisees, Set<Visite> visites, Set<Enseignant> enseignants) {
        this.individuPhoto = individuPhoto;
        this.noms = noms;
        this.prenoms = prenoms;
@@ -68,6 +69,7 @@ public class Individu  implements java.io.Serializable {
        this.utilisateurs = utilisateurs;
        this.entrees = entrees;
        this.employes = employes;
+       this.personneAutorisees = personneAutorisees;
        this.visites = visites;
        this.enseignants = enseignants;
     }
@@ -238,6 +240,15 @@ public class Individu  implements java.io.Serializable {
     
     public void setEmployes(Set<Employe> employes) {
         this.employes = employes;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="individu")
+    public Set<PersonneAutorisee> getPersonneAutorisees() {
+        return this.personneAutorisees;
+    }
+    
+    public void setPersonneAutorisees(Set<PersonneAutorisee> personneAutorisees) {
+        this.personneAutorisees = personneAutorisees;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="individu")

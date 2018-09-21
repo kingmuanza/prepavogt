@@ -31,7 +31,7 @@
             <thead>
                 <tr>
                     <th>Code</th>
-                    <th>Libelle</th>
+                    <th>Libellé</th>
                     <th>Classes</th>
                     <th>Enseignants</th>                  
                     <th>Employés</th>

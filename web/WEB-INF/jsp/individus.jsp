@@ -18,14 +18,17 @@
     <body>
         <h1 class="titre">Liste des individus</h1>
 
-        <table id="dataTableUtilisateur" class="ui celled table responsive nowrap" style="width:100%">
+        <table id="dataTableUtilisateur" class="ui celled table responsive" style="width:100%">
             <thead>
                 <tr>
                     <th>Matricule</th>
-                    <th>Individu</th>
-                    <th>Date et lieu naiss.</th>
-                    <th>Contacts</th>                    
-                    <th>Résidence</th>                    
+                    <th>Noms</th>
+                    <th>Prénoms</th>
+                    <th>Genre</th>
+                    <th>Date naiss.</th>
+                    <th>Lieu naiss.</th>
+                    <th>Email</th>                    
+                    <th>Tel</th>                   
                 </tr>
             </thead>
 
@@ -35,37 +38,18 @@
                     <tr class="pointeur" onclick="window.location.href='start#!/individu/${individu.idindividu}'">
                         <td>${individu.matricule}</td>
                         <td>
-                            <h4 class="ui image header">
-                                <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
-                                <div class="content">
-                                    ${individu.noms} ${individu.prenoms}
-                                    <div class="sub header">
-                                        ${individu.genre ? "Femme":"Homme"}
-                                    </div>
-                                </div>
-                            </h4>
+                            ${individu.noms} 
                         </td>
                         <td>
-                            <h4 class="ui image header">
-                                <div class="content">
-                                    ${individu.datenaiss}
-                                    <div class="sub header">
-                                        ${individu.lieunaiss}
-                                    </div>
-                                </div>
-                            </h4>
+                            ${individu.prenoms}
                         </td>
                         <td>
-                            <h4 class="ui image header">
-                                <div class="content">
-                                    ${individu.email}
-                                    <div class="sub header">
-                                        ${individu.tel1}
-                                    </div>
-                                </div>
-                            </h4>
+                            ${individu.genre ? "Femme":"Homme"}
                         </td>
-                        <td>${individu.residence}</td>
+                        <td>${individu.datenaiss}</td>
+                        <td>${individu.lieunaiss}</td>
+                        <td>${individu.email}</td>
+                        <td>${individu.tel1}</td>
                     </tr>
                 </c:forEach>
 

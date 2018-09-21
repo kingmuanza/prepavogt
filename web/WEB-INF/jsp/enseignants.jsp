@@ -41,7 +41,6 @@
                     <tr class="pointeur" onclick="window.location.href='start#!/enseignant/${enseignant.idenseignant}'">
                         <td>
                             <h4 class="ui image header">
-                                <img src="images/user.JPG" alt="Photo" class="ui mini rounded image">
                                 <div class="content">
                                     ${enseignant.individu.noms} ${enseignant.individu.prenoms}
                                     <div class="sub header">

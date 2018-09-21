@@ -22,8 +22,8 @@
             <thead>
                 <tr>
                     <th>Utilisateurs</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
+                    <th>Noms</th>
+                    <th>Prénoms</th>
                     <th>E-mail</th>
                     <th>Tel Portable</th>                 
                 </tr>

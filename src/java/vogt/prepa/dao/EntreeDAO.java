@@ -141,7 +141,13 @@ public class EntreeDAO {
 
     public void initialiser(Entree entree) {
         Hibernate.initialize(entree.getIndividu());
+        if(entree.getIndividu()!=null){
+            Hibernate.initialize(entree.getIndividu().getEnseignants());
+            Hibernate.initialize(entree.getIndividu().getEtudiants());
+            Hibernate.initialize(entree.getIndividu().getEmployes());
+        }
         Hibernate.initialize(entree.getVisite());
         Hibernate.initialize(entree.getBadge());
+        
     }
 }
